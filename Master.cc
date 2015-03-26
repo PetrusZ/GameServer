@@ -18,6 +18,7 @@
 
 #include "Master.h"
 #include <iostream>
+#include <signal.h>
 
 Master::Master() {
 
@@ -28,6 +29,34 @@ Master::~Master() {
 }
 
 bool Master::Run(int argc, char** argv) {
+    HookSignal();
     std::cout << "Hello Game Server From Master" << std::endl;
+    UnHookSignal();
     return true;
+}
+
+void Master::OnSignal(int signal) {
+    switch (signal) {
+        case SIGHUP:
+            break;
+        default:
+            break;
+    }
+	::signal(signal, OnSignal);
+}
+
+void Master::HookSignal() {
+    signal(SIGINT, OnSignal);
+	signal(SIGTERM, OnSignal);
+	signal(SIGABRT, OnSignal);
+	signal(SIGHUP, OnSignal);
+	signal(SIGUSR1, OnSignal);
+}
+
+void Master::UnHookSignal() {
+    signal(SIGINT, 0);
+	signal(SIGTERM, 0);
+	signal(SIGABRT, 0);
+	signal(SIGHUP, 0);
+	signal(SIGUSR1, 0);
 }

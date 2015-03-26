@@ -27,6 +27,9 @@
 *.out
 *.app
 
+# temp file
+*.swp
+
 # build dir
 bin
 build

@@ -27,6 +27,14 @@ class Master : public Singleton<Master> {
         ~Master();
 
         bool Run(int argc, char** argv);
+
+    private:
+        void HookSignal();
+        void UnHookSignal();
+
+        static void OnSignal(int signal);
 };
+
+#define sMaster Master::getSingleton()
 
 #endif /* end of include guard: MASTER_CC_XPRMPWDX */

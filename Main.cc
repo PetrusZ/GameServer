@@ -20,7 +20,9 @@
 int
 main(int argc, char *argv[])
 {
-    Master::getSingleton().Run(argc, argv);
+    sMaster.Run(argc, argv);
+
+    delete Master::getSingletonPtr();
 
     return 0;
 }
