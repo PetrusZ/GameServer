@@ -28,8 +28,8 @@ template < class type > class Singleton {
             this->singleton_ = 0;
         }
 
-        static type& getSingleton() {if(!singleton_) new type(); return *singleton_};
-        static type* getSingletonPtr() {if(!singleton_) new type(); return singleton_};
+        static type& getSingleton() {if(!singleton_) new type(); return *singleton_;}
+        static type* getSingletonPtr() {if(!singleton_) new type(); return singleton_;}
 
     protected:
 		// Constructor
@@ -39,7 +39,7 @@ template < class type > class Singleton {
         }
 
         static type* singleton_;
-}
+};
 
 template < class type > type * Singleton < type > :: singleton_ = 0;
 

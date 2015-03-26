@@ -19,12 +19,14 @@
 #ifndef MASTER_CC_XPRMPWDX
 #define MASTER_CC_XPRMPWDX
 
-class Master {
+#include "base/Singleton.hpp"
+
+class Master : public Singleton<Master> {
     public:
         Master();
+        ~Master();
 
-        virtual ~Master();
-
-}
+        bool Run(int argc, char** argv);
+};
 
 #endif /* end of include guard: MASTER_CC_XPRMPWDX */

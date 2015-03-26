@@ -15,11 +15,12 @@
  *
  * =====================================================================================
  */
-#include <cstdlib>
+#include "Master.h"
 
 int
 main(int argc, char *argv[])
 {
+    Master::getSingleton().Run(argc, argv);
 
     return 0;
 }
