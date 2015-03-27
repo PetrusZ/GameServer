@@ -18,20 +18,34 @@
 #ifndef SOCKET_H_1UEDGFJN
 #define SOCKET_H_1UEDGFJN
 
+#include <sys/types.h>
+#include <sys/socket.h>
+
+#define INVALID_SOCKET (-1)
+
+typedef int SOCKET;
+
 class Socket {
+
     public:
         // Constructor. If fd = 0, it will be assigned
-        Socket();
+        Socket(SOCKET fd = INVALID_SOCKET);
 
         // Destructor.
-        virtual ~Socket();
+        virtual ~Socket() = default;
+
+        // create socket fd.
+        bool Create(int type);
 
         // Open a connection to another machine.
         bool Connect();
 
         // Disconnect the socket.
         void Disconnect();
-}
+
+    private:
+        SOCKET socket_;
+};
 
 #endif /* end of include guard: SOCKET_H_1UEDGFJN */
 

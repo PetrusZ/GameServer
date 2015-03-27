@@ -19,6 +19,12 @@
 #include "Master.h"
 #include <iostream>
 #include <signal.h>
+#include <sys/stat.h>
+#include <sys/resource.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <cstdlib>
+#include "network/Socket.h"
 
 Master::Master() {
 
@@ -28,9 +34,70 @@ Master::~Master() {
 
 }
 
+void Master::Daemonize() {
+    int fd0, fd1, fd2;
+    pid_t   pid;
+    struct rlimit   rl;
+    struct sigaction sa;
+
+    // 清除文件创建屏蔽字
+    umask(0);
+
+    //XXX: 获得最大文件描述符数量？
+    if (getrlimit(RLIMIT_NOFILE, &rl) < 0) {
+        std::cerr << "can't get file limit" << std::endl;
+        exit(-1);
+    }
+
+    // Become a session leader to lose controlling TTY.
+    if ((pid = fork()) < 0) {
+        std::cerr << "can't fork" << std::endl;
+        exit(-1);
+    } else if (pid != 0) {
+        exit(0);
+    }
+    setsid();
+
+    // Ensure future opens won't allocate controlling TTYs.
+    sa.sa_handler = SIG_IGN;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    if (sigaction(SIGHUP, &sa, NULL) < 0) {
+        std::cerr << "can't sgnore SIGHUP" << std::endl;
+        exit(-1);
+    }
+    if ((pid = fork()) < 0) {
+        std::cerr << "can't fork" << std::endl;
+        exit(-1);
+    } else if (pid != 0) {
+        exit(0);
+    }
+
+    if (chdir("/") < 0) {
+        std::cerr << "can't change directory to /" << std::endl;
+        exit(-1);
+    }
+
+    /*
+    // 关闭所有打开的文件描述符
+    if (rl.rlimit_max == RLIM_INFINITY) {
+        rl.rlimit_max = 1024;
+    }
+    for (int i = 0; i < rl.rlimit_max; ++i) {
+        close(i);
+    }
+    */
+
+    fd0 = open("/dev/null", O_RDWR);
+    fd1 = dup(0);
+    fd2 = dup(0);
+}
+
 bool Master::Run(int argc, char** argv) {
-    HookSignal();
+    Daemonize();
     std::cout << "Hello Game Server From Master" << std::endl;
+    HookSignal();
+    sleep(30);
     UnHookSignal();
     return true;
 }

@@ -10,22 +10,36 @@
 cmake_minimum_required(VERSION 2.8)
 project(GameServer)
 
+SET(CMAKE_BUILD_TYPE debug)
 set(CMAKE_VERBOSE_MAKEFILE off)
 set(CMAKE_CXX_COMPILER "g++")
-set(CMAKE_CXX_FLAGS "")
+set(CMAKE_CXX_FLAGS "-std=c++11")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Wall")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -Wall")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
-aux_source_directory(./ SRC_LIST)
+############################################## GameServer ##############################################
 
-include_directories(${PROJECT_SOURCE_DIR})
+message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
+
+aux_source_directory(./ SRC_LIST)
+aux_source_directory(./network NETWORK_SRC_LIST)
+
+include_directories(${INCLUDE_DIR_LIST})
 link_directories(${PROJECT_SOURCE_DIR}/library)
 
-if(${MY_BUILD_TYPE} MATCHES "debug")
-    add_executable(GameServer ${SRC_LIST})
-    # target_link_libraries(hellod Ad Bd.a Cd.so)
-else()
-    add_executable(GameServer ${SRC_LIST})
-    # target_link_libraries(hello A B.a C.so)
-endif()
+add_executable(GameServer ${SRC_LIST} ${NETWORK_SRC_LIST})
+
+################################################# test #################################################
+
+set(TEST_CLIENT_SRC_LIST
+    test/client.cc
+    )
+add_executable(client ${TEST_CLIENT_SRC_LIST})
+target_link_libraries(client event)
+
+set(TEST_SERVER_SRC_LIST
+    test/server.cc
+    )
+add_executable(server ${TEST_SERVER_SRC_LIST})
+target_link_libraries(server event)

@@ -29,6 +29,7 @@ class Master : public Singleton<Master> {
         bool Run(int argc, char** argv);
 
     private:
+        void Daemonize();
         void HookSignal();
         void UnHookSignal();
 
