@@ -41,6 +41,8 @@ BEV_TRIG_IGNORE_WATERMARKS	library/libevent/include/event2/bufferevent.h	/^	BEV_
 BUFFEREVENT_SSL_ACCEPTING	library/libevent/include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_ACCEPTING = 2$/;"	e	enum:bufferevent_ssl_state
 BUFFEREVENT_SSL_CONNECTING	library/libevent/include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_CONNECTING = 1,$/;"	e	enum:bufferevent_ssl_state
 BUFFEREVENT_SSL_OPEN	library/libevent/include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_OPEN = 0,$/;"	e	enum:bufferevent_ssl_state
+BUF_SIZE	test/client.cc	33;"	d	file:
+BUF_SIZE	test/server.cc	36;"	d	file:
 CMAKE_BINARY_DIR	build/Makefile	/^CMAKE_BINARY_DIR = \/home\/silence\/Project\/GameServer\/build$/;"	m
 CMAKE_COMMAND	build/Makefile	/^CMAKE_COMMAND = \/usr\/bin\/cmake$/;"	m
 CMAKE_EDIT_COMMAND	build/Makefile	/^CMAKE_EDIT_COMMAND = \/usr\/bin\/ccmake$/;"	m
@@ -217,6 +219,7 @@ COMPILER_VERSION_TWEAK	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	
 COMPILER_VERSION_TWEAK	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	20;"	d	file:
 COMPILER_VERSION_TWEAK	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	149;"	d	file:
 COMPILER_VERSION_TWEAK	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	25;"	d	file:
+Create	network/Socket.cc	/^bool Socket::Create(int type) {$/;"	f	class:Socket
 DEC	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	324;"	d	file:
 DEC	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	317;"	d	file:
 DNS_ERR_CANCEL	library/libevent/include/event2/dns.h	170;"	d
@@ -241,6 +244,7 @@ DNS_OPTION_NAMESERVERS	library/libevent/include/event2/dns.h	183;"	d
 DNS_OPTION_SEARCH	library/libevent/include/event2/dns.h	182;"	d
 DNS_PTR	library/libevent/include/event2/dns.h	177;"	d
 DNS_QUERY_NO_SEARCH	library/libevent/include/event2/dns.h	180;"	d
+Daemonize	Master.cc	/^void Master::Daemonize() {$/;"	f	class:Master
 EQUALS	build/Makefile	/^EQUALS = =$/;"	m
 EVBUFFER_CB_ENABLED	library/libevent/include/event2/buffer.h	934;"	d
 EVBUFFER_DATA	library/libevent/include/event2/buffer_compat.h	112;"	d
@@ -640,6 +644,7 @@ HTTP_SERVUNAVAIL	library/libevent/include/event2/http.h	68;"	d
 HookSignal	Master.cc	/^void Master::HookSignal() {$/;"	f	class:Master
 ID_VOID_MAIN	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	9;"	d	file:
 INPUT	library/libevent/include/event2/rpc.h	460;"	d
+INVALID_SOCKET	network/Socket.h	24;"	d
 LEV_OPT_CLOSE_ON_EXEC	library/libevent/include/event2/listener.h	67;"	d
 LEV_OPT_CLOSE_ON_FREE	library/libevent/include/event2/listener.h	65;"	d
 LEV_OPT_DEFERRED_ACCEPT	library/libevent/include/event2/listener.h	90;"	d
@@ -713,12 +718,16 @@ PLATFORM_ID	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	277;"
 PLATFORM_ID	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	280;"	d	file:
 RM	build/Makefile	/^RM = \/usr\/bin\/cmake -E remove -f$/;"	m
 Run	Master.cc	/^bool Master::Run(int argc, char** argv) {$/;"	f	class:Master
+SERVER_IP	test/server.cc	34;"	d	file:
+SERVER_PORT	test/server.cc	35;"	d	file:
 SHELL	build/Makefile	/^SHELL = \/bin\/sh$/;"	m
 SINGLETON_HPP_JWRCISA4	base/Singleton.hpp	20;"	d
+SOCKET	network/Socket.h	/^typedef int SOCKET;$/;"	t
 SOCKET_H_1UEDGFJN	network/Socket.h	19;"	d
 SUFFIXES	build/Makefile	/^SUFFIXES =$/;"	m
 Singleton	base/Singleton.hpp	/^        Singleton() {$/;"	f	class:Singleton
 Singleton	base/Singleton.hpp	/^template < class type > class Singleton {$/;"	c
+Socket	network/Socket.cc	/^Socket::Socket(SOCKET fd) : socket_(fd){$/;"	f	class:Socket
 Socket	network/Socket.h	/^class Socket {$/;"	c
 Status	common/Status.h	/^class Status {$/;"	c
 TAILQ_ENTRY	library/libevent/include/event2/event_struct.h	159;"	d
@@ -737,6 +746,7 @@ _EVENT_LOG_ERR	library/libevent/include/event2/event.h	717;"	d
 _EVENT_LOG_MSG	library/libevent/include/event2/event.h	715;"	d
 _EVENT_LOG_WARN	library/libevent/include/event2/event.h	716;"	d
 _GNU_SOURCE	library/libevent/include/event2/util.h	62;"	d
+accept_new_thread	test/server.cc	/^void accept_new_thread(int sock){$/;"	f
 ai_addr	library/libevent/include/event2/util.h	/^	struct sockaddr  *ai_addr; \/* binary address *\/$/;"	m	struct:evutil_addrinfo	typeref:struct:evutil_addrinfo::sockaddr
 ai_addrlen	library/libevent/include/event2/util.h	/^	size_t  ai_addrlen;   \/* length of ai_addr *\/$/;"	m	struct:evutil_addrinfo
 ai_canonname	library/libevent/include/event2/util.h	/^	char   *ai_canonname; \/* canonical name for nodename *\/$/;"	m	struct:evutil_addrinfo
@@ -748,8 +758,10 @@ ai_socktype	library/libevent/include/event2/util.h	/^	int     ai_socktype;  \/* 
 alloc	library/libevent/include/event2/thread.h	/^	void *(*alloc)(unsigned locktype);$/;"	m	struct:evthread_lock_callbacks
 alloc_condition	library/libevent/include/event2/thread.h	/^	void *(*alloc_condition)(unsigned condtype);$/;"	m	struct:evthread_condition_callbacks
 base	library/libevent/include/event2/rpc_struct.h	/^	struct evrpc_base *base;$/;"	m	struct:evrpc	typeref:struct:evrpc::evrpc_base
+base	test/server.cc	/^    struct event_base* base;\/\/因为socket断掉后，读事件的loop要终止，所以要有base指针$/;"	m	struct:sock_ev	typeref:struct:sock_ev::event_base	file:
 be_ops	library/libevent/include/event2/bufferevent_struct.h	/^	const struct bufferevent_ops *be_ops;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::bufferevent_ops
 body_size	library/libevent/include/event2/http_struct.h	/^	size_t body_size;$/;"	m	struct:evhttp_request
+buffer	test/server.cc	/^    char* buffer;$/;"	m	struct:sock_ev_write	file:
 bufferevent	library/libevent/include/event2/bufferevent.h	/^struct bufferevent$/;"	s
 bufferevent	library/libevent/include/event2/bufferevent_struct.h	/^struct bufferevent {$/;"	s
 bufferevent_data_cb	library/libevent/include/event2/bufferevent.h	/^typedef void (*bufferevent_data_cb)(struct bufferevent *bev, void *ctx);$/;"	t
@@ -769,6 +781,9 @@ chain	library/libevent/include/event2/buffer.h	/^		void *chain;$/;"	m	struct:evb
 chunk_cb	library/libevent/include/event2/http_struct.h	/^	void (*chunk_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 chunked	library/libevent/include/event2/http_struct.h	/^	unsigned chunked:1,		\/* a chunked request *\/$/;"	m	struct:evhttp_request
 condition_api_version	library/libevent/include/event2/thread.h	/^	int condition_api_version;$/;"	m	struct:evthread_condition_callbacks
+connectServer	test/client.cc	/^int connectServer(char* ip, int port){$/;"	f
+destroy_sock_ev	test/server.cc	/^void destroy_sock_ev(struct sock_ev* sock_ev_struct){$/;"	f
+destroy_sock_ev_write	test/server.cc	/^void destroy_sock_ev_write(struct sock_ev_write* sock_ev_write_struct){$/;"	f
 dns_question_class	library/libevent/include/event2/dns_struct.h	/^	int dns_question_class;$/;"	m	struct:evdns_server_question
 dns_question_class	library/libevent/include/event2/dns_struct.h	70;"	d
 enabled	library/libevent/include/event2/bufferevent_struct.h	/^	short enabled;$/;"	m	struct:bufferevent
@@ -948,6 +963,7 @@ free	library/libevent/include/event2/thread.h	/^	void (*free)(void *lock, unsign
 free_condition	library/libevent/include/event2/thread.h	/^	void (*free_condition)(void *cond);$/;"	m	struct:evthread_condition_callbacks
 getSingleton	base/Singleton.hpp	/^        static type& getSingleton() {if(!singleton_) new type(); return *singleton_;}$/;"	f	class:Singleton
 getSingletonPtr	base/Singleton.hpp	/^        static type* getSingletonPtr() {if(!singleton_) new type(); return singleton_;}$/;"	f	class:Singleton
+getSocket	test/server.cc	/^int getSocket(){$/;"	f
 header_cb	library/libevent/include/event2/http_struct.h	/^	int (*header_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 headers_size	library/libevent/include/event2/http_struct.h	/^	size_t headers_size;$/;"	m	struct:evhttp_request
 high	library/libevent/include/event2/bufferevent_struct.h	/^	size_t high;$/;"	m	struct:event_watermark
@@ -961,6 +977,8 @@ info_platform	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	/^char co
 info_platform	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v
 info_version	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	/^char const info_version[] = {$/;"	v
 info_version	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const info_version[] = {$/;"	v
+init_read_event	test/client.cc	/^void* init_read_event(void* arg){$/;"	f
+init_read_event_thread	test/client.cc	/^void init_read_event_thread(int sock){$/;"	f
 input	library/libevent/include/event2/bufferevent_struct.h	/^	struct evbuffer *input;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::evbuffer
 input_buffer	library/libevent/include/event2/http_struct.h	/^	struct evbuffer *input_buffer;	\/* read data *\/$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evbuffer
 input_headers	library/libevent/include/event2/http_struct.h	/^	struct evkeyvalq *input_headers;$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evkeyvalq
@@ -976,6 +994,8 @@ main	Main.cc	/^main(int argc, char *argv[])$/;"	f
 main	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	/^int main(int argc, char* argv[])$/;"	f
 main	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	/^void main() {}$/;"	f
 main	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^int main(int argc, char* argv[])$/;"	f
+main	test/client.cc	/^int main() {$/;"	f
+main	test/server.cc	/^int main(){$/;"	f
 major	library/libevent/include/event2/http_struct.h	/^	char major;			\/* HTTP Major number *\/$/;"	m	struct:evhttp_request
 min_heap_idx	library/libevent/include/event2/event_struct.h	/^		int min_heap_idx;$/;"	m	union:event::__anon3
 minor	library/libevent/include/event2/http_struct.h	/^	char minor;			\/* HTTP Minor number *\/$/;"	m	struct:evhttp_request
@@ -987,15 +1007,21 @@ next	library/libevent/include/event2/keyvalq_struct.h	/^	TAILQ_ENTRY(evkeyval) n
 next	library/libevent/include/event2/rpc_struct.h	/^	TAILQ_ENTRY(evrpc) next;$/;"	m	struct:evrpc
 nquestions	library/libevent/include/event2/dns_struct.h	/^	int nquestions;$/;"	m	struct:evdns_server_request
 ntoread	library/libevent/include/event2/http_struct.h	/^	ev_int64_t ntoread;$/;"	m	struct:evhttp_request
+on_accept	test/server.cc	/^void on_accept(int sock, short event, void* arg)$/;"	f
 on_complete_cb	library/libevent/include/event2/http_struct.h	/^	void (*on_complete_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 on_complete_cb_arg	library/libevent/include/event2/http_struct.h	/^	void *on_complete_cb_arg;$/;"	m	struct:evhttp_request
+on_read	test/client.cc	/^void on_read(int sock, short event, void* arg)$/;"	f
+on_read	test/server.cc	/^void on_read(int sock, short event, void* arg)$/;"	f
+on_write	test/server.cc	/^void on_write(int sock, short event, void* arg)$/;"	f
 orig_size	library/libevent/include/event2/buffer.h	/^	size_t orig_size;$/;"	m	struct:evbuffer_cb_info
 output	library/libevent/include/event2/bufferevent_struct.h	/^	struct evbuffer *output;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::evbuffer
 output_buffer	library/libevent/include/event2/http_struct.h	/^	struct evbuffer *output_buffer;	\/* outgoing post or data *\/$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evbuffer
 output_headers	library/libevent/include/event2/http_struct.h	/^	struct evkeyvalq *output_headers;$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evkeyvalq
 pos	library/libevent/include/event2/buffer.h	/^	ev_ssize_t pos;$/;"	m	struct:evbuffer_ptr
 pos_in_chain	library/libevent/include/event2/buffer.h	/^		size_t pos_in_chain;$/;"	m	struct:evbuffer_ptr::__anon1
+process_in_new_thread_when_accepted	test/server.cc	/^void* process_in_new_thread_when_accepted(void* arg){$/;"	f
 questions	library/libevent/include/event2/dns_struct.h	/^	struct evdns_server_question **questions;$/;"	m	struct:evdns_server_request	typeref:struct:evdns_server_request::evdns_server_question
+read_ev	test/server.cc	/^    struct event* read_ev;$/;"	m	struct:sock_ev	typeref:struct:sock_ev::event	file:
 readcb	library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data_cb readcb;$/;"	m	struct:bufferevent
 remote_host	library/libevent/include/event2/http_struct.h	/^	char *remote_host;$/;"	m	struct:evhttp_request
 remote_port	library/libevent/include/event2/http_struct.h	/^	ev_uint16_t remote_port;$/;"	m	struct:evhttp_request
@@ -1010,7 +1036,7 @@ request_new_arg	library/libevent/include/event2/rpc_struct.h	/^	void *request_ne
 request_unmarshal	library/libevent/include/event2/rpc_struct.h	/^	int (*request_unmarshal)(void *, struct evbuffer *);$/;"	m	struct:evrpc
 response_code	library/libevent/include/event2/http_struct.h	/^	int response_code;		\/* HTTP Response code *\/$/;"	m	struct:evhttp_request
 response_code_line	library/libevent/include/event2/http_struct.h	/^	char *response_code_line;	\/* Readable response *\/$/;"	m	struct:evhttp_request
-sMaster	Master.h	38;"	d
+sMaster	Master.h	39;"	d
 signal_add	library/libevent/include/event2/event_compat.h	212;"	d
 signal_condition	library/libevent/include/event2/thread.h	/^	int (*signal_condition)(void *cond, int broadcast);$/;"	m	struct:evthread_condition_callbacks
 signal_del	library/libevent/include/event2/event_compat.h	215;"	d
@@ -1019,6 +1045,9 @@ signal_pending	library/libevent/include/event2/event_compat.h	216;"	d
 signal_set	library/libevent/include/event2/event_compat.h	213;"	d
 singleton_	base/Singleton.hpp	/^        static type* singleton_;$/;"	m	class:Singleton
 singleton_	base/Singleton.hpp	/^template < class type > type * Singleton < type > :: singleton_ = 0;$/;"	m	class:Singleton
+sock_ev	test/server.cc	/^struct sock_ev {\/\/用于读事件终止（socket断开）后的销毁$/;"	s	file:
+sock_ev_write	test/server.cc	/^struct sock_ev_write{\/\/用户写事件完成后的销毁，在on_write()中执行$/;"	s	file:
+socket_	network/Socket.h	/^        SOCKET socket_;$/;"	m	class:Socket
 ss_family	library/libevent/include/event2/util.h	282;"	d
 supported_locktypes	library/libevent/include/event2/thread.h	/^	unsigned supported_locktypes;$/;"	m	struct:evthread_lock_callbacks
 timeout_add	library/libevent/include/event2/event_compat.h	198;"	d
@@ -1041,6 +1070,7 @@ value	library/libevent/include/event2/keyvalq_struct.h	/^	char *value;$/;"	m	str
 wait_condition	library/libevent/include/event2/thread.h	/^	int (*wait_condition)(void *cond, void *lock,$/;"	m	struct:evthread_condition_callbacks
 wm_read	library/libevent/include/event2/bufferevent_struct.h	/^	struct event_watermark wm_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
 wm_write	library/libevent/include/event2/bufferevent_struct.h	/^	struct event_watermark wm_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
+write_ev	test/server.cc	/^    struct event* write_ev;$/;"	m	struct:sock_ev_write	typeref:struct:sock_ev_write::event	file:
 writecb	library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data_cb writecb;$/;"	m	struct:bufferevent
 ~Master	Master.cc	/^Master::~Master() {$/;"	f	class:Master
 ~Singleton	base/Singleton.hpp	/^        ~Singleton() {$/;"	f	class:Singleton

@@ -29,6 +29,8 @@ class Socket {
 
     public:
         // Constructor. If fd = 0, it will be assigned
+        Socket() = default;
+
         Socket(SOCKET fd = INVALID_SOCKET);
 
         // Destructor.

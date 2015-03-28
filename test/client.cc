@@ -32,6 +32,9 @@ using namespace std;
 
 #define BUF_SIZE 1024
 
+#define SERVER_IP "127.0.0.1"
+#define SERVER_PORT 9090
+
 /**
  * 连接到server端，如果成功，返回fd，如果失败返回-1
  */
@@ -100,12 +103,12 @@ void init_read_event_thread(int sock){
 }
 int main() {
     cout << "main started" << endl; // prints Hello World!!!
-    cout << "Please input server IP:"<<endl;
-    char ip[16];
-    cin >> ip;
-    cout << "Please input port:"<<endl;
-    int port;
-    cin >> port;
+    // cout << "Please input server IP:"<<endl;
+    char ip[16] = SERVER_IP;
+    // cin >> ip;
+    // cout << "Please input port:"<<endl;
+    int port = SERVER_PORT;
+    // cin >> port;
     cout << "ServerIP is "<<ip<<" ,port="<<port<<endl;
     int socket_fd = connectServer(ip, port);
     cout << "socket_fd="<<socket_fd<<endl;

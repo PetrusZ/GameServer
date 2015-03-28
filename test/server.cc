@@ -157,6 +157,8 @@ void* process_in_new_thread_when_accepted(void* arg){
     //--------开始libevent的loop循环-----------
     event_base_dispatch(base);
     cout<<"event_base_dispatch() stopped for sock("<<fd<<")"<<" in process_in_new_thread_when_accepted()"<<endl;
+    event_del(read_ev);
+    event_base_free(base);
     return 0;
 }
 

@@ -36,10 +36,10 @@ set(TEST_CLIENT_SRC_LIST
     test/client.cc
     )
 add_executable(client ${TEST_CLIENT_SRC_LIST})
-target_link_libraries(client event)
+target_link_libraries(client event pthread)
 
 set(TEST_SERVER_SRC_LIST
     test/server.cc
     )
 add_executable(server ${TEST_SERVER_SRC_LIST})
-target_link_libraries(server event)
+target_link_libraries(server event pthread)
