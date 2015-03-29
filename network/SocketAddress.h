@@ -21,12 +21,16 @@
 
 #include <cstdint>
 #include <string>
+#include <sys/socket.h>
 
 class SocketAddress {
     public:
         SocketAddress(const std::string hostname, const uint16_t port);
 
         SocketAddress(const uint32_t ip, const uint16_t port);
+
+        void ToSockAddr(struct sockaddr* sockaddr);
+
 
     private:
         std::string hostname_;

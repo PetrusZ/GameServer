@@ -21,6 +21,8 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+#include "SocketAddress.h"
+
 #define INVALID_SOCKET (-1)
 
 typedef int SOCKET;
@@ -29,15 +31,17 @@ class Socket {
 
     public:
         // Constructor. If fd = 0, it will be assigned
-        Socket() = default;
-
         Socket(SOCKET fd = INVALID_SOCKET);
 
         // Destructor.
         virtual ~Socket() = default;
 
         // create socket fd.
-        bool Create(int type);
+        bool Create(const int type);
+
+        bool Bind(const SocketAddress& addr);
+
+        bool Listen(const int backlog);
 
         // Open a connection to another machine.
         bool Connect();

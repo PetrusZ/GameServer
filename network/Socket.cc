@@ -17,11 +17,11 @@
  */
 #include "Socket.h"
 
-Socket::Socket(SOCKET fd) : socket_(fd){
+inline Socket::Socket(SOCKET fd) : socket_(fd){
 
 }
 
-bool Socket::Create(int type) {
+inline bool Socket::Create(int type) {
     socket_ = ::socket(AF_INET, type, 0);
     return true;
 }

@@ -24,11 +24,12 @@ message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
 aux_source_directory(./ SRC_LIST)
 aux_source_directory(./network NETWORK_SRC_LIST)
+aux_source_directory(./port PORT_SRC_LIST)
 
 include_directories(${INCLUDE_DIR_LIST})
 link_directories(${PROJECT_SOURCE_DIR}/library)
 
-add_executable(GameServer ${SRC_LIST} ${NETWORK_SRC_LIST})
+add_executable(GameServer ${SRC_LIST} ${NETWORK_SRC_LIST} ${PORT_SRC_LIST})
 
 ################################################# test #################################################
 
