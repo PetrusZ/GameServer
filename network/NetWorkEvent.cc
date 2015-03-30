@@ -19,18 +19,19 @@
 #include "NetWorkEvent.h"
 
 NetWorkEvent::NetWorkEvent(std::string log_file_name) {
-    if (!log_file_.is_open()) {
-        log_file_.open(log_file_name.c_str(), std::ofstream::out | std::ofstream::app);
-        event_set_log_callback(LogCallback);
+    if (!sFileSystem.NewWritableFile(log_file_name, &log_file_)) {
+        // TODO: error handler
     }
 }
 
 NetWorkEvent::~NetWorkEvent() {
-    log_file_.close();
+    if (log_file_) {
+        delete log_file_;
+    }
 }
 
 void NetWorkEvent::LogCallback(int severity, const char *msg) {
-    if (!log_file_.is_open()) {
+    if (!log_file_) {
         return ;
     }
 
@@ -44,5 +45,8 @@ void NetWorkEvent::LogCallback(int severity, const char *msg) {
         default:               status = "unkonw";     break; /*  never reached */
     }
 
-    log_file_ << "[" << status.c_str() << "] " << msg << std::endl;
+    std::string log = "[" + status + "] " + msg + "\n";
+    if (!log_file_->Append(log)) {
+        // TODO: error handler
+    }
 }

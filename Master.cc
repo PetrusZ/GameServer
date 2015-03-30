@@ -24,7 +24,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstdlib>
-#include "network/Socket.h"
+#include "port/Socket.h"
 
 Master::Master() {
 
@@ -73,24 +73,29 @@ void Master::Daemonize() {
         exit(0);
     }
 
+    /*
     if (chdir("/") < 0) {
         std::cerr << "can't change directory to /" << std::endl;
         exit(-1);
     }
+    */
 
-    /*
     // 关闭所有打开的文件描述符
-    if (rl.rlimit_max == RLIM_INFINITY) {
-        rl.rlimit_max = 1024;
+    if (rl.rlim_cur == RLIM_INFINITY) {
+        rl.rlim_cur = 1024;
     }
-    for (int i = 0; i < rl.rlimit_max; ++i) {
+    for (size_t i = 0; i < rl.rlim_cur; ++i) {
         close(i);
     }
-    */
 
     fd0 = open("/dev/null", O_RDWR);
     fd1 = dup(0);
     fd2 = dup(0);
+
+    if (fd0 != 0 || fd1 != 1 || fd2 !=2 ) {
+        std::cerr << "unexpected file descriptors " << fd0 << " " <<fd1 << " " << fd2 << " " << std::endl;
+        exit(-1);
+    }
 }
 
 bool Master::Run(int argc, char** argv) {

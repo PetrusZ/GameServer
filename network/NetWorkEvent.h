@@ -22,6 +22,8 @@
 #include <string>
 #include "base/Singleton.hpp"
 #include "event2/event.h"
+#include "port/FileSystem.h"
+#include "port/WritableFile.h"
 
 class NetWorkEvent : public Singleton<NetWorkEvent> {
     public:
@@ -32,10 +34,9 @@ class NetWorkEvent : public Singleton<NetWorkEvent> {
     private:
         static void LogCallback(int severity, const char* msg);
 
-        static std::ofstream log_file_;
+        static WritableFile* log_file_;
 };
 
-std::ofstream log_file_;
+WritableFile* NetWorkEvent::log_file_ = NULL;
 
 #endif /* end of include guard: NETWORKEVENT_H_T7FV5Y3S */
-
