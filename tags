@@ -17,6 +17,7 @@ ARCHITECTURE_ID	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	273;"	d	fi
 ARCHITECTURE_ID	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	276;"	d	file:
 ARCHITECTURE_ID	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	280;"	d	file:
 Append	port/WritableFile.cc	/^bool WritableFile::Append(const std::string &data) {$/;"	f	class:WritableFile
+AppendLog	common/Logger.cc	/^bool Logger::AppendLog(LogLevel level, std::string log) {$/;"	f	class:Logger
 BEV_ERROR	library/libevent/include/event2/bufferevent.h	/^	BEV_ERROR = 2$/;"	e	enum:bufferevent_filter_result
 BEV_EVENT_CONNECTED	library/libevent/include/event2/bufferevent.h	105;"	d
 BEV_EVENT_EOF	library/libevent/include/event2/bufferevent.h	102;"	d
@@ -179,7 +180,11 @@ COMPILER_VERSION_TWEAK	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	20;"	d	fi
 COMPILER_VERSION_TWEAK	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	131;"	d	file:
 COMPILER_VERSION_TWEAK	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	22;"	d	file:
 Close	port/WritableFile.cc	/^bool WritableFile::Close() {$/;"	f	class:WritableFile
+Code	common/Status.h	/^        enum Code {$/;"	g	class:Status
+CopyStatus	common/Status.cc	/^const char* Status::CopyStatus(const char *status) {$/;"	f	class:Status
 Create	port/Socket.cc	/^inline bool Socket::Create(int type) {$/;"	f	class:Socket
+DATE_FORMAT	port/Env.cc	27;"	d	file:
+DATE_LONGTH	port/Env.cc	26;"	d	file:
 DEC	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	296;"	d	file:
 DEC	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	284;"	d	file:
 DNS_ERR_CANCEL	library/libevent/include/event2/dns.h	170;"	d
@@ -205,6 +210,7 @@ DNS_OPTION_SEARCH	library/libevent/include/event2/dns.h	182;"	d
 DNS_PTR	library/libevent/include/event2/dns.h	177;"	d
 DNS_QUERY_NO_SEARCH	library/libevent/include/event2/dns.h	180;"	d
 Daemonize	Master.cc	/^void Master::Daemonize() {$/;"	f	class:Master
+ENV_H_CIE5HSSN	port/Env.h	20;"	d
 EQUALS	build/Makefile	/^EQUALS = =$/;"	m
 EVBUFFER_CB_ENABLED	library/libevent/include/event2/buffer.h	934;"	d
 EVBUFFER_DATA	library/libevent/include/event2/buffer_compat.h	112;"	d
@@ -586,10 +592,15 @@ EV_UINT32_MAX	library/libevent/include/event2/util.h	239;"	d
 EV_UINT64_MAX	library/libevent/include/event2/util.h	236;"	d
 EV_UINT8_MAX	library/libevent/include/event2/util.h	245;"	d
 EV_WRITE	library/libevent/include/event2/event.h	928;"	d
+Env	port/Env.h	/^class Env : Singleton<Env> {$/;"	c
 FILESYSTEM_H_6HRNOJVP	port/FileSystem.h	20;"	d
 FileExists	port/FileSystem.cc	/^bool FileSystem::FileExists(const std::string file_name) {$/;"	f	class:FileSystem
 FileSystem	port/FileSystem.h	/^class FileSystem : public Singleton<FileSystem> {$/;"	c
 Flush	port/WritableFile.cc	/^bool WritableFile::Flush() {$/;"	f	class:WritableFile
+FormatLogFileName	common/Logger.cc	/^std::string Logger::FormatLogFileName(const std::string &prefix, const std::string &description, bool useDate) {$/;"	f	class:Logger
+GetDate	port/Env.cc	/^std::string Env::GetDate() {$/;"	f	class:Env
+GetName	port/WritableFile.h	/^        std::string GetName() { return file_name_; }$/;"	f	class:WritableFile
+GetTid	port/Env.cc	/^uint64_t Env::GetTid() {$/;"	f	class:Env
 HEX	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	307;"	d	file:
 HEX	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	295;"	d	file:
 HTTP_BADMETHOD	library/libevent/include/event2/http.h	63;"	d
@@ -609,6 +620,7 @@ HookSignal	Master.cc	/^void Master::HookSignal() {$/;"	f	class:Master
 ID_VOID_MAIN	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	9;"	d	file:
 INPUT	library/libevent/include/event2/rpc.h	460;"	d
 INVALID_SOCKET	port/Socket.h	26;"	d
+IOError	common/Status.h	/^        static Status IOError(const std::string& msg, const std::string& msg2 = "") {$/;"	f	class:Status
 LEV_OPT_CLOSE_ON_EXEC	library/libevent/include/event2/listener.h	67;"	d
 LEV_OPT_CLOSE_ON_FREE	library/libevent/include/event2/listener.h	65;"	d
 LEV_OPT_DEFERRED_ACCEPT	library/libevent/include/event2/listener.h	90;"	d
@@ -623,7 +635,12 @@ LIST_ENTRY	library/libevent/include/event2/event_struct.h	169;"	d
 LIST_ENTRY	library/libevent/include/event2/event_struct.h	90;"	d
 LIST_HEAD	library/libevent/include/event2/event_struct.h	173;"	d
 LIST_HEAD	library/libevent/include/event2/event_struct.h	99;"	d
+LOGGER_CC_AZQLX2MN	common/Logger.cc	20;"	d	file:
+LOGGER_H_9ROTCNVM	common/Logger.h	19;"	d
 LogCallback	network/NetWorkEvent.cc	/^void NetWorkEvent::LogCallback(int severity, const char *msg) {$/;"	f	class:NetWorkEvent
+LogLevel	common/Logger.h	/^        enum LogLevel {$/;"	g	class:Logger
+LogRotate	common/Logger.cc	/^void Logger::LogRotate() {$/;"	f	class:Logger
+Logger	common/Logger.h	/^class Logger : public Singleton<Logger> {$/;"	c
 MASTER_CC_XPRMPWDX	Master.h	20;"	d
 MakeDirRecursive	port/FileSystem.cc	/^bool FileSystem::MakeDirRecursive(const std::string dir_path) {$/;"	f	class:FileSystem
 Master	Master.cc	/^Master::Master() {$/;"	f	class:Master
@@ -632,6 +649,7 @@ NETWORKEVENT_H_T7FV5Y3S	network/NetWorkEvent.h	20;"	d
 NetWorkEvent	network/NetWorkEvent.cc	/^NetWorkEvent::NetWorkEvent(std::string log_file_name) {$/;"	f	class:NetWorkEvent
 NetWorkEvent	network/NetWorkEvent.h	/^class NetWorkEvent : public Singleton<NetWorkEvent> {$/;"	c
 NewWritableFile	port/FileSystem.cc	/^bool FileSystem::NewWritableFile(const std::string &file_name, WritableFile **result) {$/;"	f	class:FileSystem
+OK	common/Status.h	/^        static Status OK() { return Status(); }$/;"	f	class:Status
 OUTPUT	library/libevent/include/event2/rpc.h	463;"	d
 OnSignal	Master.cc	/^void Master::OnSignal(int signal) {$/;"	f	class:Master
 PLATFORM_ID	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	187;"	d	file:
@@ -697,7 +715,7 @@ SINGLETON_HPP_JWRCISA4	base/Singleton.hpp	20;"	d
 SOCKET	port/Socket.h	/^typedef int SOCKET;$/;"	t
 SOCKETADDRESS_H_WEGUF5SN	port/SocketAddress.h	20;"	d
 SOCKET_H_1UEDGFJN	port/Socket.h	19;"	d
-STATUS_H_SGWFZ9YU	common/Status.h	20;"	d
+STATUS_H_SGWFZ9YU	common/Status.h	19;"	d
 SUFFIXES	build/Makefile	/^SUFFIXES =$/;"	m
 Singleton	base/Singleton.hpp	/^        Singleton() {$/;"	f	class:Singleton
 Singleton	base/Singleton.hpp	/^template < class type > class Singleton {$/;"	c
@@ -706,6 +724,9 @@ Socket	port/Socket.h	/^class Socket {$/;"	c
 SocketAddress	port/SocketAddress.cc	/^SocketAddress::SocketAddress(const std::string hostname, const uint16_t port) : hostname_(hostname), port_(port) {$/;"	f	class:SocketAddress
 SocketAddress	port/SocketAddress.cc	/^SocketAddress::SocketAddress(const uint32_t ip, const uint16_t port) : ip_(ip), port_(port) {$/;"	f	class:SocketAddress
 SocketAddress	port/SocketAddress.h	/^class SocketAddress {$/;"	c
+Status	common/Status.cc	/^Status::Status(Code code, const std::string& msg, const std::string& msg2) {$/;"	f	class:Status
+Status	common/Status.h	/^        Status() : status_(NULL) { }$/;"	f	class:Status
+Status	common/Status.h	/^        Status(const Status& s) {$/;"	f	class:Status
 Status	common/Status.h	/^class Status {$/;"	c
 TAILQ_ENTRY	library/libevent/include/event2/event_struct.h	159;"	d
 TAILQ_ENTRY	library/libevent/include/event2/event_struct.h	71;"	d
@@ -718,6 +739,7 @@ TAILQ_HEAD	library/libevent/include/event2/keyvalq_struct.h	73;"	d
 THREADPOOL_H_O4CDDLR9	port/ThreadPool.h	20;"	d
 ThreadPool	port/ThreadPool.h	/^class ThreadPool {$/;"	c
 ToSockAddr	port/SocketAddress.cc	/^void SocketAddress::ToSockAddr(struct sockaddr *sockaddr) {$/;"	f	class:SocketAddress
+ToString	common/Status.cc	/^std::string Status::ToString() const {$/;"	f	class:Status
 UnHookSignal	Master.cc	/^void Master::UnHookSignal() {$/;"	f	class:Master
 WIN32_LEAN_AND_MEAN	library/libevent/include/event.h	61;"	d
 WIN32_LEAN_AND_MEAN	library/libevent/include/event.h	65;"	d
@@ -763,8 +785,10 @@ cbarg	library/libevent/include/event2/bufferevent_struct.h	/^	void *cbarg;$/;"	m
 chain	library/libevent/include/event2/buffer.h	/^		void *chain;$/;"	m	struct:evbuffer_ptr::__anon1
 chunk_cb	library/libevent/include/event2/http_struct.h	/^	void (*chunk_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 chunked	library/libevent/include/event2/http_struct.h	/^	unsigned chunked:1,		\/* a chunked request *\/$/;"	m	struct:evhttp_request
+code	common/Status.h	/^        Code code() const { return (status_ == NULL) ? kOk : static_cast<Code>(status_[4]); }$/;"	f	class:Status
 condition_api_version	library/libevent/include/event2/thread.h	/^	int condition_api_version;$/;"	m	struct:evthread_condition_callbacks
 connectServer	test/client.cc	/^int connectServer(char* ip, int port){$/;"	f
+debug_log_	common/Logger.h	/^        WritableFile *debug_log_;$/;"	m	class:Logger
 destroy_sock_ev	test/server.cc	/^void destroy_sock_ev(struct sock_ev* sock_ev_struct){$/;"	f
 destroy_sock_ev_write	test/server.cc	/^void destroy_sock_ev_write(struct sock_ev_write* sock_ev_write_struct){$/;"	f
 dns_question_class	library/libevent/include/event2/dns_struct.h	/^	int dns_question_class;$/;"	m	struct:evdns_server_question
@@ -774,6 +798,7 @@ encode_int	library/libevent/include/event2/tag_compat.h	45;"	d
 encode_int64	library/libevent/include/event2/tag_compat.h	46;"	d
 error	library/libevent/include/event2/rpc_struct.h	/^	int error;$/;"	m	struct:evrpc_status
 error_cb	library/libevent/include/event2/http_struct.h	/^	void (*error_cb)(enum evhttp_request_error, void *);$/;"	m	struct:evhttp_request
+error_log_	common/Logger.h	/^        WritableFile *error_log_;$/;"	m	class:Logger
 errorcb	library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_event_cb errorcb;$/;"	m	struct:bufferevent
 ev_	library/libevent/include/event2/event_struct.h	/^	} ev_;$/;"	m	struct:event	typeref:union:event::__anon4
 ev_base	library/libevent/include/event2/bufferevent_struct.h	/^	struct event_base *ev_base;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_base
@@ -959,6 +984,7 @@ info_arch	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const* info_arc
 info_arch	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v
 info_compiler	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v
 info_compiler	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v
+info_log_	common/Logger.h	/^        WritableFile *info_log_;$/;"	m	class:Logger
 info_platform	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v
 info_platform	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v
 info_version	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const info_version[] = {$/;"	v
@@ -972,6 +998,14 @@ internal_	library/libevent/include/event2/buffer.h	/^	} internal_;$/;"	m	struct:
 iov_base	library/libevent/include/event2/buffer.h	/^	void *iov_base;$/;"	m	struct:evbuffer_iovec
 iov_len	library/libevent/include/event2/buffer.h	/^	size_t iov_len;$/;"	m	struct:evbuffer_iovec
 ip_	port/SocketAddress.h	/^        uint32_t ip_;$/;"	m	class:SocketAddress
+kDebug	common/Logger.h	/^            kDebug = 2,$/;"	e	enum:Logger::LogLevel
+kError	common/Logger.h	/^            kError = 1,$/;"	e	enum:Logger::LogLevel
+kIOError	common/Status.h	/^            kIOError = 1$/;"	e	enum:Status::Code
+kInfo	common/Logger.h	/^            kInfo  = 3,$/;"	e	enum:Logger::LogLevel
+kMax	common/Logger.h	/^            kMax   = 5$/;"	e	enum:Logger::LogLevel
+kNull	common/Logger.h	/^            kNull  = 0,$/;"	e	enum:Logger::LogLevel
+kOk	common/Status.h	/^            kOk = 0,$/;"	e	enum:Status::Code
+kTrace	common/Logger.h	/^            kTrace = 4,$/;"	e	enum:Logger::LogLevel
 key	library/libevent/include/event2/keyvalq_struct.h	/^	char *key;$/;"	m	struct:evkeyval
 kind	library/libevent/include/event2/http_struct.h	/^	enum evhttp_request_kind kind;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_request_kind
 lock	library/libevent/include/event2/thread.h	/^	int (*lock)(unsigned mode, void *lock);$/;"	m	struct:evthread_lock_callbacks
@@ -996,12 +1030,14 @@ next	library/libevent/include/event2/keyvalq_struct.h	/^	TAILQ_ENTRY(evkeyval) n
 next	library/libevent/include/event2/rpc_struct.h	/^	TAILQ_ENTRY(evrpc) next;$/;"	m	struct:evrpc
 nquestions	library/libevent/include/event2/dns_struct.h	/^	int nquestions;$/;"	m	struct:evdns_server_request
 ntoread	library/libevent/include/event2/http_struct.h	/^	ev_int64_t ntoread;$/;"	m	struct:evhttp_request
+ok	common/Status.h	/^        bool ok() { return (status_ == NULL); }$/;"	f	class:Status
 on_accept	test/server.cc	/^void on_accept(int sock, short event, void* arg)$/;"	f
 on_complete_cb	library/libevent/include/event2/http_struct.h	/^	void (*on_complete_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 on_complete_cb_arg	library/libevent/include/event2/http_struct.h	/^	void *on_complete_cb_arg;$/;"	m	struct:evhttp_request
 on_read	test/client.cc	/^void on_read(int sock, short event, void* arg)$/;"	f
 on_read	test/server.cc	/^void on_read(int sock, short event, void* arg)$/;"	f
 on_write	test/server.cc	/^void on_write(int sock, short event, void* arg)$/;"	f
+operator =	common/Status.h	/^        void operator=(const Status &s) {$/;"	f	class:Status
 orig_size	library/libevent/include/event2/buffer.h	/^	size_t orig_size;$/;"	m	struct:evbuffer_cb_info
 output	library/libevent/include/event2/bufferevent_struct.h	/^	struct evbuffer *output;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::evbuffer
 output_buffer	library/libevent/include/event2/http_struct.h	/^	struct evbuffer *output_buffer;	\/* outgoing post or data *\/$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evbuffer
@@ -1026,7 +1062,9 @@ request_new_arg	library/libevent/include/event2/rpc_struct.h	/^	void *request_ne
 request_unmarshal	library/libevent/include/event2/rpc_struct.h	/^	int (*request_unmarshal)(void *, struct evbuffer *);$/;"	m	struct:evrpc
 response_code	library/libevent/include/event2/http_struct.h	/^	int response_code;		\/* HTTP Response code *\/$/;"	m	struct:evhttp_request
 response_code_line	library/libevent/include/event2/http_struct.h	/^	char *response_code_line;	\/* Readable response *\/$/;"	m	struct:evhttp_request
+sEnv	port/Env.h	36;"	d
 sFileSystem	port/FileSystem.h	37;"	d
+sLogger	common/Logger.h	54;"	d
 sMaster	Master.h	39;"	d
 signal_add	library/libevent/include/event2/event_compat.h	212;"	d
 signal_condition	library/libevent/include/event2/thread.h	/^	int (*signal_condition)(void *cond, int broadcast);$/;"	m	struct:evthread_condition_callbacks
@@ -1040,6 +1078,7 @@ sock_ev	test/server.cc	/^struct sock_ev {\/\/用于读事件终止（socket断�
 sock_ev_write	test/server.cc	/^struct sock_ev_write{\/\/用户写事件完成后的销毁，在on_write()中执行$/;"	s	file:
 socket_	port/Socket.h	/^        SOCKET socket_;$/;"	m	class:Socket
 ss_family	library/libevent/include/event2/util.h	282;"	d
+status_	common/Status.h	/^        const char* status_;$/;"	m	class:Status
 supported_locktypes	library/libevent/include/event2/thread.h	/^	unsigned supported_locktypes;$/;"	m	struct:evthread_lock_callbacks
 timeout_add	library/libevent/include/event2/event_compat.h	198;"	d
 timeout_del	library/libevent/include/event2/event_compat.h	200;"	d
@@ -1048,6 +1087,7 @@ timeout_pending	library/libevent/include/event2/event_compat.h	201;"	d
 timeout_read	library/libevent/include/event2/bufferevent_struct.h	/^	struct timeval timeout_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::timeval
 timeout_set	library/libevent/include/event2/event_compat.h	199;"	d
 timeout_write	library/libevent/include/event2/bufferevent_struct.h	/^	struct timeval timeout_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::timeval
+trace_log_	common/Logger.h	/^        WritableFile *trace_log_;$/;"	m	class:Logger
 type	library/libevent/include/event2/dns_struct.h	/^	int type;$/;"	m	struct:evdns_server_question
 type	library/libevent/include/event2/http_struct.h	/^	enum evhttp_cmd_type type;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_cmd_type
 u_char	library/libevent/include/event.h	/^typedef unsigned char u_char;$/;"	t
@@ -1066,4 +1106,5 @@ writecb	library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data
 ~Master	Master.cc	/^Master::~Master() {$/;"	f	class:Master
 ~NetWorkEvent	network/NetWorkEvent.cc	/^NetWorkEvent::~NetWorkEvent() {$/;"	f	class:NetWorkEvent
 ~Singleton	base/Singleton.hpp	/^        ~Singleton() {$/;"	f	class:Singleton
+~Status	common/Status.h	/^        virtual ~Status() { delete[] status_; }$/;"	f	class:Status
 ~WritableFile	port/WritableFile.cc	/^WritableFile::~WritableFile() {$/;"	f	class:WritableFile

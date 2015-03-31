@@ -27,6 +27,8 @@ class WritableFile {
         WritableFile(const std::string filename, FILE* file);
         virtual ~WritableFile();
 
+        std::string GetName() { return file_name_; }
+
         bool Append(const std::string &data);
         bool Close();
         bool Flush();
