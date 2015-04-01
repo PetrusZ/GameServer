@@ -27,7 +27,7 @@
 #include "port/Env.h"
 
 #if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
-#error "Libevent not found or libevent version too old to supporte. Please get 2.1.5-beta or later"
+#error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"
 #endif
 
 class NetWorkEvent : public Singleton<NetWorkEvent> {
