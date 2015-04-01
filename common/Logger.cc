@@ -57,9 +57,14 @@ bool Logger::AppendLog(LogLevel level, std::string &log) {
             break;
     }
 
-    assert(LOG_BUFF_SIZE >= log.size());
 
-    LogRotate(level);
+
+    if (!LogRotate(level)) {
+        return false;
+    }
+
+    assert(*log_file);
+    assert(LOG_BUFF_SIZE >= log.size());
 
     log += "\n";
 
@@ -85,7 +90,7 @@ std::string Logger::FormatLogFileName(const std::string &prefix, const std::stri
     return file_name;
 }
 
-void Logger::LogRotate(LogLevel level) {
+bool Logger::LogRotate(LogLevel level) {
     std::string file_name;
     WritableFile** log_file;
 
@@ -107,17 +112,18 @@ void Logger::LogRotate(LogLevel level) {
             log_file = &trace_log_;
             break;
         default:
+            return false;
             break;
     }
 
     if (!sFileSystem.MakeDirRecursive(file_name)) {
-        // TODO: error handle
+        return false;
     }
 
     if (!(*log_file)) {
         bool result = sFileSystem.NewWritableFile(file_name, log_file);
         if (!result) {
-            // TODO: error handle
+            return false;
         }
     } else {
         if ((*log_file)->GetName() != file_name || !sFileSystem.FileExists(file_name)) {
@@ -125,10 +131,14 @@ void Logger::LogRotate(LogLevel level) {
             *log_file = NULL;
             bool result = sFileSystem.NewWritableFile(file_name, log_file);
             if (!result) {
-                // TODO: error handle
+                return false;
             }
         }
     }
+
+    assert(*log_file);
+
+    return true;
 }
 
 bool Logger::Fatal(const char *file, const int line, const char *func_name, const char *msg, ...) {

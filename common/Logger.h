@@ -50,7 +50,7 @@ class Logger : public Singleton<Logger> {
 
         bool AppendLog(LogLevel level, std::string &log);
 
-        void LogRotate(LogLevel level);
+        bool LogRotate(LogLevel level);
 
         std::string FormatLogFileName(const std::string& prefix, const std::string& description, bool useDate);
 

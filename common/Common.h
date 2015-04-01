@@ -22,5 +22,6 @@
 #include "Logger.h"
 #include "Status.h"
 
+#define ASSERT(expression)
 
 #endif /* end of include guard: COMMON_H_WN5MDJKE */
