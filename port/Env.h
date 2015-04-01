@@ -30,6 +30,7 @@ class Env : public Singleton<Env> {
 
         uint64_t GetTid();
 
+        time_t GetNowStamp();
         std::string GetDate();
         std::string GetTime();
 };

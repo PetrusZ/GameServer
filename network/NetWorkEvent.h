@@ -24,12 +24,19 @@
 #include "event2/event.h"
 #include "port/FileSystem.h"
 #include "port/WritableFile.h"
+#include "port/Env.h"
+
+#if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
+#error "Libevent not found or libevent version too old to supporte. Please get 2.1.5-beta or later"
+#endif
 
 class NetWorkEvent : public Singleton<NetWorkEvent> {
     public:
-        NetWorkEvent(std::string log_file_name = "Log/libevent.log");
+        NetWorkEvent() = default;
 
         ~NetWorkEvent();
+
+        bool Init(std::string log_file_name = "Log/libevent.log");
 
     private:
         static void LogCallback(int severity, const char* msg);
@@ -38,5 +45,7 @@ class NetWorkEvent : public Singleton<NetWorkEvent> {
 };
 
 WritableFile* NetWorkEvent::log_file_ = NULL;
+
+#define sNetWorkEvent NetWorkEvent::getSingleton()
 
 #endif /* end of include guard: NETWORKEVENT_H_T7FV5Y3S */

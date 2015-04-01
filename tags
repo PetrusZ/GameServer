@@ -17,7 +17,7 @@ ARCHITECTURE_ID	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	273;"	d	fi
 ARCHITECTURE_ID	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	276;"	d	file:
 ARCHITECTURE_ID	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	280;"	d	file:
 Append	port/WritableFile.cc	/^bool WritableFile::Append(const std::string &data) {$/;"	f	class:WritableFile
-AppendLog	common/Logger.cc	/^bool Logger::AppendLog(LogLevel level, std::string log) {$/;"	f	class:Logger
+AppendLog	common/Logger.cc	/^bool Logger::AppendLog(LogLevel level, std::string &log) {$/;"	f	class:Logger
 BEV_ERROR	library/libevent/include/event2/bufferevent.h	/^	BEV_ERROR = 2$/;"	e	enum:bufferevent_filter_result
 BEV_EVENT_CONNECTED	library/libevent/include/event2/bufferevent.h	105;"	d
 BEV_EVENT_EOF	library/libevent/include/event2/bufferevent.h	102;"	d
@@ -44,6 +44,7 @@ BUF_SIZE	test/server.cc	36;"	d	file:
 CMAKE_BINARY_DIR	build/Makefile	/^CMAKE_BINARY_DIR = \/opt\/petrus\/project\/GameServer\/build$/;"	m
 CMAKE_COMMAND	build/Makefile	/^CMAKE_COMMAND = \/usr\/bin\/cmake$/;"	m
 CMAKE_SOURCE_DIR	build/Makefile	/^CMAKE_SOURCE_DIR = \/opt\/petrus\/project\/GameServer$/;"	m
+COMMON_H_WN5MDJKE	common/Common.h	20;"	d
 COMPILER_ID	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	101;"	d	file:
 COMPILER_ID	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	104;"	d	file:
 COMPILER_ID	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	107;"	d	file:
@@ -210,6 +211,7 @@ DNS_OPTION_SEARCH	library/libevent/include/event2/dns.h	182;"	d
 DNS_PTR	library/libevent/include/event2/dns.h	177;"	d
 DNS_QUERY_NO_SEARCH	library/libevent/include/event2/dns.h	180;"	d
 Daemonize	Master.cc	/^void Master::Daemonize() {$/;"	f	class:Master
+Debug	common/Logger.cc	/^bool Logger::Debug(const char *file, const int line, const char *func_name, const char *msg, ...) {$/;"	f	class:Logger
 ENV_H_CIE5HSSN	port/Env.h	20;"	d
 EQUALS	build/Makefile	/^EQUALS = =$/;"	m
 EVBUFFER_CB_ENABLED	library/libevent/include/event2/buffer.h	934;"	d
@@ -592,7 +594,8 @@ EV_UINT32_MAX	library/libevent/include/event2/util.h	239;"	d
 EV_UINT64_MAX	library/libevent/include/event2/util.h	236;"	d
 EV_UINT8_MAX	library/libevent/include/event2/util.h	245;"	d
 EV_WRITE	library/libevent/include/event2/event.h	928;"	d
-Env	port/Env.h	/^class Env : Singleton<Env> {$/;"	c
+Env	port/Env.h	/^class Env : public Singleton<Env> {$/;"	c
+Error	common/Logger.cc	/^bool Logger::Error(const char *file, const int line, const char *func_name, const char *msg, ...) {$/;"	f	class:Logger
 FILESYSTEM_H_6HRNOJVP	port/FileSystem.h	20;"	d
 FileExists	port/FileSystem.cc	/^bool FileSystem::FileExists(const std::string file_name) {$/;"	f	class:FileSystem
 FileSystem	port/FileSystem.h	/^class FileSystem : public Singleton<FileSystem> {$/;"	c
@@ -601,6 +604,7 @@ FormatLogFileName	common/Logger.cc	/^std::string Logger::FormatLogFileName(const
 GetDate	port/Env.cc	/^std::string Env::GetDate() {$/;"	f	class:Env
 GetName	port/WritableFile.h	/^        std::string GetName() { return file_name_; }$/;"	f	class:WritableFile
 GetTid	port/Env.cc	/^uint64_t Env::GetTid() {$/;"	f	class:Env
+GetTime	port/Env.cc	/^std::string Env::GetTime() {$/;"	f	class:Env
 HEX	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	307;"	d	file:
 HEX	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	295;"	d	file:
 HTTP_BADMETHOD	library/libevent/include/event2/http.h	63;"	d
@@ -621,6 +625,7 @@ ID_VOID_MAIN	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	9;"	d	file:
 INPUT	library/libevent/include/event2/rpc.h	460;"	d
 INVALID_SOCKET	port/Socket.h	26;"	d
 IOError	common/Status.h	/^        static Status IOError(const std::string& msg, const std::string& msg2 = "") {$/;"	f	class:Status
+Info	common/Logger.cc	/^bool Logger::Info(const char *file, const int line, const char *func_name, const char *msg, ...) {$/;"	f	class:Logger
 LEV_OPT_CLOSE_ON_EXEC	library/libevent/include/event2/listener.h	67;"	d
 LEV_OPT_CLOSE_ON_FREE	library/libevent/include/event2/listener.h	65;"	d
 LEV_OPT_DEFERRED_ACCEPT	library/libevent/include/event2/listener.h	90;"	d
@@ -637,6 +642,12 @@ LIST_HEAD	library/libevent/include/event2/event_struct.h	173;"	d
 LIST_HEAD	library/libevent/include/event2/event_struct.h	99;"	d
 LOGGER_CC_AZQLX2MN	common/Logger.cc	20;"	d	file:
 LOGGER_H_9ROTCNVM	common/Logger.h	19;"	d
+LOG_BUFF_SIZE	common/Logger.h	26;"	d
+LOG_DEBUG	common/Logger.h	64;"	d
+LOG_ERROR	common/Logger.h	62;"	d
+LOG_INFO	common/Logger.h	63;"	d
+LOG_PREFIX_BUFF_SIZE	common/Logger.h	25;"	d
+LOG_TRACE	common/Logger.h	65;"	d
 LogCallback	network/NetWorkEvent.cc	/^void NetWorkEvent::LogCallback(int severity, const char *msg) {$/;"	f	class:NetWorkEvent
 LogLevel	common/Logger.h	/^        enum LogLevel {$/;"	g	class:Logger
 LogRotate	common/Logger.cc	/^void Logger::LogRotate() {$/;"	f	class:Logger
@@ -737,9 +748,12 @@ TAILQ_HEAD	library/libevent/include/event2/event_struct.h	80;"	d
 TAILQ_HEAD	library/libevent/include/event2/keyvalq_struct.h	47;"	d
 TAILQ_HEAD	library/libevent/include/event2/keyvalq_struct.h	73;"	d
 THREADPOOL_H_O4CDDLR9	port/ThreadPool.h	20;"	d
+TIME_FORMAT	port/Env.cc	30;"	d	file:
+TIME_LONGTH	port/Env.cc	29;"	d	file:
 ThreadPool	port/ThreadPool.h	/^class ThreadPool {$/;"	c
 ToSockAddr	port/SocketAddress.cc	/^void SocketAddress::ToSockAddr(struct sockaddr *sockaddr) {$/;"	f	class:SocketAddress
 ToString	common/Status.cc	/^std::string Status::ToString() const {$/;"	f	class:Status
+Trace	common/Logger.cc	/^bool Logger::Trace(const char *file, const int line, const char *func_name, const char *msg, ...) {$/;"	f	class:Logger
 UnHookSignal	Master.cc	/^void Master::UnHookSignal() {$/;"	f	class:Master
 WIN32_LEAN_AND_MEAN	library/libevent/include/event.h	61;"	d
 WIN32_LEAN_AND_MEAN	library/libevent/include/event.h	65;"	d
@@ -788,7 +802,7 @@ chunked	library/libevent/include/event2/http_struct.h	/^	unsigned chunked:1,		\/
 code	common/Status.h	/^        Code code() const { return (status_ == NULL) ? kOk : static_cast<Code>(status_[4]); }$/;"	f	class:Status
 condition_api_version	library/libevent/include/event2/thread.h	/^	int condition_api_version;$/;"	m	struct:evthread_condition_callbacks
 connectServer	test/client.cc	/^int connectServer(char* ip, int port){$/;"	f
-debug_log_	common/Logger.h	/^        WritableFile *debug_log_;$/;"	m	class:Logger
+debug_log_	common/Logger.h	/^        WritableFile *debug_log_ = NULL;$/;"	m	class:Logger
 destroy_sock_ev	test/server.cc	/^void destroy_sock_ev(struct sock_ev* sock_ev_struct){$/;"	f
 destroy_sock_ev_write	test/server.cc	/^void destroy_sock_ev_write(struct sock_ev_write* sock_ev_write_struct){$/;"	f
 dns_question_class	library/libevent/include/event2/dns_struct.h	/^	int dns_question_class;$/;"	m	struct:evdns_server_question
@@ -798,7 +812,7 @@ encode_int	library/libevent/include/event2/tag_compat.h	45;"	d
 encode_int64	library/libevent/include/event2/tag_compat.h	46;"	d
 error	library/libevent/include/event2/rpc_struct.h	/^	int error;$/;"	m	struct:evrpc_status
 error_cb	library/libevent/include/event2/http_struct.h	/^	void (*error_cb)(enum evhttp_request_error, void *);$/;"	m	struct:evhttp_request
-error_log_	common/Logger.h	/^        WritableFile *error_log_;$/;"	m	class:Logger
+error_log_	common/Logger.h	/^        WritableFile *error_log_ = NULL;$/;"	m	class:Logger
 errorcb	library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_event_cb errorcb;$/;"	m	struct:bufferevent
 ev_	library/libevent/include/event2/event_struct.h	/^	} ev_;$/;"	m	struct:event	typeref:union:event::__anon4
 ev_base	library/libevent/include/event2/bufferevent_struct.h	/^	struct event_base *ev_base;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_base
@@ -984,7 +998,7 @@ info_arch	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const* info_arc
 info_arch	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";$/;"	v
 info_compiler	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v
 info_compiler	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";$/;"	v
-info_log_	common/Logger.h	/^        WritableFile *info_log_;$/;"	m	class:Logger
+info_log_	common/Logger.h	/^        WritableFile *info_log_ = NULL;$/;"	m	class:Logger
 info_platform	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v
 info_platform	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";$/;"	v
 info_version	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^char const info_version[] = {$/;"	v
@@ -998,10 +1012,10 @@ internal_	library/libevent/include/event2/buffer.h	/^	} internal_;$/;"	m	struct:
 iov_base	library/libevent/include/event2/buffer.h	/^	void *iov_base;$/;"	m	struct:evbuffer_iovec
 iov_len	library/libevent/include/event2/buffer.h	/^	size_t iov_len;$/;"	m	struct:evbuffer_iovec
 ip_	port/SocketAddress.h	/^        uint32_t ip_;$/;"	m	class:SocketAddress
-kDebug	common/Logger.h	/^            kDebug = 2,$/;"	e	enum:Logger::LogLevel
+kDebug	common/Logger.h	/^            kDebug = 3,$/;"	e	enum:Logger::LogLevel
 kError	common/Logger.h	/^            kError = 1,$/;"	e	enum:Logger::LogLevel
 kIOError	common/Status.h	/^            kIOError = 1$/;"	e	enum:Status::Code
-kInfo	common/Logger.h	/^            kInfo  = 3,$/;"	e	enum:Logger::LogLevel
+kInfo	common/Logger.h	/^            kInfo  = 2,$/;"	e	enum:Logger::LogLevel
 kMax	common/Logger.h	/^            kMax   = 5$/;"	e	enum:Logger::LogLevel
 kNull	common/Logger.h	/^            kNull  = 0,$/;"	e	enum:Logger::LogLevel
 kOk	common/Status.h	/^            kOk = 0,$/;"	e	enum:Status::Code
@@ -1062,9 +1076,9 @@ request_new_arg	library/libevent/include/event2/rpc_struct.h	/^	void *request_ne
 request_unmarshal	library/libevent/include/event2/rpc_struct.h	/^	int (*request_unmarshal)(void *, struct evbuffer *);$/;"	m	struct:evrpc
 response_code	library/libevent/include/event2/http_struct.h	/^	int response_code;		\/* HTTP Response code *\/$/;"	m	struct:evhttp_request
 response_code_line	library/libevent/include/event2/http_struct.h	/^	char *response_code_line;	\/* Readable response *\/$/;"	m	struct:evhttp_request
-sEnv	port/Env.h	36;"	d
+sEnv	port/Env.h	37;"	d
 sFileSystem	port/FileSystem.h	37;"	d
-sLogger	common/Logger.h	54;"	d
+sLogger	common/Logger.h	60;"	d
 sMaster	Master.h	39;"	d
 signal_add	library/libevent/include/event2/event_compat.h	212;"	d
 signal_condition	library/libevent/include/event2/thread.h	/^	int (*signal_condition)(void *cond, int broadcast);$/;"	m	struct:evthread_condition_callbacks
@@ -1087,7 +1101,7 @@ timeout_pending	library/libevent/include/event2/event_compat.h	201;"	d
 timeout_read	library/libevent/include/event2/bufferevent_struct.h	/^	struct timeval timeout_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::timeval
 timeout_set	library/libevent/include/event2/event_compat.h	199;"	d
 timeout_write	library/libevent/include/event2/bufferevent_struct.h	/^	struct timeval timeout_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::timeval
-trace_log_	common/Logger.h	/^        WritableFile *trace_log_;$/;"	m	class:Logger
+trace_log_	common/Logger.h	/^        WritableFile *trace_log_ = NULL;$/;"	m	class:Logger
 type	library/libevent/include/event2/dns_struct.h	/^	int type;$/;"	m	struct:evdns_server_question
 type	library/libevent/include/event2/http_struct.h	/^	enum evhttp_cmd_type type;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_cmd_type
 u_char	library/libevent/include/event.h	/^typedef unsigned char u_char;$/;"	t
@@ -1103,6 +1117,7 @@ wm_read	library/libevent/include/event2/bufferevent_struct.h	/^	struct event_wat
 wm_write	library/libevent/include/event2/bufferevent_struct.h	/^	struct event_watermark wm_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
 write_ev	test/server.cc	/^    struct event* write_ev;$/;"	m	struct:sock_ev_write	typeref:struct:sock_ev_write::event	file:
 writecb	library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data_cb writecb;$/;"	m	struct:bufferevent
+~Logger	common/Logger.cc	/^Logger::~Logger() {$/;"	f	class:Logger
 ~Master	Master.cc	/^Master::~Master() {$/;"	f	class:Master
 ~NetWorkEvent	network/NetWorkEvent.cc	/^NetWorkEvent::~NetWorkEvent() {$/;"	f	class:NetWorkEvent
 ~Singleton	base/Singleton.hpp	/^        ~Singleton() {$/;"	f	class:Singleton

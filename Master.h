@@ -20,11 +20,12 @@
 #define MASTER_CC_XPRMPWDX
 
 #include "base/Singleton.hpp"
+#include "common/Common.h"
 
 class Master : public Singleton<Master> {
     public:
-        Master();
-        ~Master();
+        Master() = default;
+        ~Master() = default;
 
         bool Run(int argc, char** argv);
 

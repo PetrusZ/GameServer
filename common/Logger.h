@@ -20,6 +20,7 @@
 
 #include "port/WritableFile.h"
 #include "base/Singleton.hpp"
+#include <assert.h>
 #include <string>
 
 #define LOG_PREFIX_BUFF_SIZE 1024
@@ -30,6 +31,7 @@ class Logger : public Singleton<Logger> {
         Logger() = default;
         virtual ~Logger();
 
+        bool Fatal(const char* file, const int line, const char* func_name, const char* msg, ...);
         bool Error(const char* file, const int line, const char* func_name, const char* msg, ...);
         bool Info(const char* file, const int line, const char* func_name, const char* msg, ...);
         bool Debug(const char* file, const int line, const char* func_name, const char* msg, ...);
@@ -38,25 +40,32 @@ class Logger : public Singleton<Logger> {
     private:
         enum LogLevel {
             kNull  = 0,
-            kError = 1,
-            kInfo  = 2,
-            kDebug = 3,
-            kTrace = 4,
-            kMax   = 5
+            kFatal = 1,
+            kError = 2,
+            kInfo  = 3,
+            kDebug = 4,
+            kTrace = 5,
+            kMax   = 6
         };
 
         bool AppendLog(LogLevel level, std::string &log);
 
-        void LogRotate();
+        void LogRotate(LogLevel level);
 
         std::string FormatLogFileName(const std::string& prefix, const std::string& description, bool useDate);
 
-        WritableFile *error_log_;
-        WritableFile *info_log_;
-        WritableFile *debug_log_;
-        WritableFile *trace_log_;
+        WritableFile *error_log_ = NULL;
+        WritableFile *info_log_ = NULL;
+        WritableFile *debug_log_ = NULL;
+        WritableFile *trace_log_ = NULL;
 };
 
 #define sLogger Logger::getSingleton()
+
+#define LOG_FATAL(msg, ...) sLogger.Fatal(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
+#define LOG_ERROR(msg, ...) sLogger.Error(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
+#define LOG_INFO(msg, ...) sLogger.Info(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
+#define LOG_DEBUG(msg, ...) sLogger.Debug(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
+#define LOG_TRACE(msg, ...) sLogger.Trace(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
 
 #endif /* end of include guard: LOGGER_H_9ROTCNVM */

@@ -15,13 +15,17 @@
  *
  * =====================================================================================
  */
-#include <fstream>
 #include "NetWorkEvent.h"
+#include "event2/thread.h"
 
-NetWorkEvent::NetWorkEvent(std::string log_file_name) {
-    if (!sFileSystem.NewWritableFile(log_file_name, &log_file_)) {
-        // TODO: error handler
+bool NetWorkEvent::Init(std::string log_file_name) {
+    if (!sFileSystem.MakeDirRecursive(log_file_name) || !sFileSystem.NewWritableFile(log_file_name, &log_file_)) {
+        return false;
     }
+
+    evthread_enable_lock_debuging();
+    event_enable_debug_mode();
+    return true;
 }
 
 NetWorkEvent::~NetWorkEvent() {
@@ -38,14 +42,16 @@ void NetWorkEvent::LogCallback(int severity, const char *msg) {
     std::string status;
 
     switch (severity) {
-        case _EVENT_LOG_DEBUG: status = "deNetWorkEvent_t"; break;
+        case _EVENT_LOG_DEBUG: status = "debug"; break;
         case _EVENT_LOG_MSG:   status = "msg";   break;
         case _EVENT_LOG_WARN:  status = "warn";  break;
         case _EVENT_LOG_ERR:   status = "error"; break;
         default:               status = "unkonw";     break; /*  never reached */
     }
 
-    std::string log = "[" + status + "] " + msg + "\n";
+    std::string time = sEnv.GetTime();
+
+    std::string log = "[" + time + "] " + "[" + status + "] " + msg + "\n";
     if (!log_file_->Append(log)) {
         // TODO: error handler
     }

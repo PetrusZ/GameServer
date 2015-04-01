@@ -39,7 +39,7 @@ include_directories(${INCLUDE_DIR_LIST})
 link_directories(${PROJECT_SOURCE_DIR}/library)
 
 add_executable(GameServer ${SRC_LIST})
-target_link_libraries(GameServer event)
+target_link_libraries(GameServer event_core)
 
 ################################################# test #################################################
 
@@ -47,10 +47,10 @@ set(TEST_CLIENT_SRC_LIST
     test/client.cc
     )
 add_executable(client ${TEST_CLIENT_SRC_LIST})
-target_link_libraries(client event pthread)
+target_link_libraries(client event_core pthread)
 
 set(TEST_SERVER_SRC_LIST
     test/server.cc
     )
 add_executable(server ${TEST_SERVER_SRC_LIST})
-target_link_libraries(server event pthread)
+target_link_libraries(server event_core pthread)

@@ -27,7 +27,7 @@
 #define DATE_FORMAT "%Y-%m-%d"
 
 #define TIME_LONGTH (100)
-#define TIME_FORMAT "%H-%m-%S"
+#define TIME_FORMAT "%H:%M:%S"
 
 uint64_t Env::GetTid() {
     pthread_t tid = pthread_self();
@@ -36,18 +36,22 @@ uint64_t Env::GetTid() {
     return thread_id;
 }
 
+time_t Env::GetNowStamp() {
+    return time(NULL);
+}
+
 std::string Env::GetDate() {
-    time_t now = time(NULL);
+    time_t now = GetNowStamp();
     char date[DATE_LONGTH];
-    strftime(date, DATE_LONGTH, DATE_FORMAT, gmtime(&now));
+    strftime(date, DATE_LONGTH, DATE_FORMAT, localtime(&now));
 
     return date;
 }
 
 std::string Env::GetTime() {
-    time_t now = time(NULL);
+    time_t now = GetNowStamp();
     char time[TIME_LONGTH];
-    strftime(time, TIME_LONGTH, TIME_FORMAT, gmtime(&now));
+    strftime(time, TIME_LONGTH, TIME_FORMAT, localtime(&now));
 
     return time;
 }

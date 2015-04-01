@@ -31,6 +31,13 @@ class FileSystem : public Singleton<FileSystem> {
         bool NewWritableFile(const std::string& file_name, WritableFile** result);
 
         bool FileExists(const std::string file_name);
+
+        /*
+         * similar with mkdir -p, but mkdir based on dirname.
+         *
+         * eg: dir_path = /foo/bar/some  equal mkdir -p /foo/bar
+         *     dir_path = /foo/bar/some/ equal mkdir -p /foo/bar/some
+         */
         bool MakeDirRecursive(const std::string dir_path);
 };
 

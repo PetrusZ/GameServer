@@ -26,14 +26,6 @@
 #include <cstdlib>
 #include "port/Socket.h"
 
-Master::Master() {
-
-}
-
-Master::~Master() {
-
-}
-
 void Master::Daemonize() {
     int fd0, fd1, fd2;
     pid_t   pid;
@@ -99,10 +91,11 @@ void Master::Daemonize() {
 }
 
 bool Master::Run(int argc, char** argv) {
-    Daemonize();
     std::cout << "Hello Game Server From Master" << std::endl;
+    Daemonize();
+    LOG_INFO("HELLO LOG");
     HookSignal();
-    sleep(30);
+    sleep(5);
     UnHookSignal();
     return true;
 }
