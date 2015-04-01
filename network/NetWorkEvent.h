@@ -40,6 +40,7 @@ class NetWorkEvent : public Singleton<NetWorkEvent> {
 
     private:
         static void LogCallback(int severity, const char* msg);
+        static void FatalCallback(int err);
 
         static WritableFile* log_file_;
 };

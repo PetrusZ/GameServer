@@ -23,6 +23,9 @@ bool NetWorkEvent::Init(std::string log_file_name) {
         return false;
     }
 
+    event_set_log_callback(LogCallback);
+    event_set_fatal_callback(FatalCallback);
+
     evthread_enable_lock_debuging();
     event_enable_debug_mode();
     return true;
@@ -55,4 +58,8 @@ void NetWorkEvent::LogCallback(int severity, const char *msg) {
     if (!log_file_->Append(log)) {
         // TODO: error handler
     }
+}
+
+void NetWorkEvent::FatalCallback(int err) {
+
 }
