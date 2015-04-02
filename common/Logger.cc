@@ -58,14 +58,14 @@ bool Logger::AppendLog(LogLevel level, std::string &log) {
             break;
     }
 
-
-
+    if (log.size() <= 0) {
+        return true;
+    }
     if (!LogRotate(level)) {
         return false;
     }
 
     assert(*log_file);
-    assert(LOG_BUFF_SIZE >= log.size());
 
     log += "\n";
 
@@ -144,13 +144,20 @@ bool Logger::LogRotate(LogLevel level) {
 }
 
 std::string Logger::ConstructLog(const char *msg, va_list &ap) {
+    if (!msg) return "";
+
+    int len;
     char prefix_buf[LOG_PREFIX_BUFF_SIZE];
     char log_buf[LOG_BUFF_SIZE];
 
     std::string time = sEnv.GetTime();
-    snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s", time.c_str(), msg);
+    len = snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s", time.c_str(), msg);
 
-    vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+    assert(len <= LOG_PREFIX_BUFF_SIZE);
+
+    len = vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+
+    assert(len <= LOG_BUFF_SIZE);
 
     return log_buf;
 }

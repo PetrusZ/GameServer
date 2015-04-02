@@ -37,6 +37,26 @@ NetWorkEvent::~NetWorkEvent() {
     }
 }
 
+bool NetWorkEvent::AppendLog(const std::string& status, const char* msg, ...) {
+    int len;
+    char log_buf[LIBEVENT_LOG_BUFF_SIZE];
+    std::string time = sEnv.GetTime();
+
+    va_list ap;
+    va_start(ap, msg);
+    len = vsnprintf(log_buf, LIBEVENT_LOG_BUFF_SIZE, msg, ap);
+    va_end(ap);
+
+    assert(len <= LIBEVENT_LOG_BUFF_SIZE);
+
+    std::string log = "[" + time + "] " + "[" + status + "] " + log_buf + "\n";
+    if (!log_file_->Append(log)) {
+        return false;
+    }
+    log_file_->Flush();
+    return true;
+}
+
 void NetWorkEvent::LogCallback(int severity, const char *msg) {
     if (!log_file_) {
         return ;
@@ -52,14 +72,29 @@ void NetWorkEvent::LogCallback(int severity, const char *msg) {
         default:               status = "unkonw";     break; /*  never reached */
     }
 
-    std::string time = sEnv.GetTime();
-
-    std::string log = "[" + time + "] " + "[" + status + "] " + msg + "\n";
-    if (!log_file_->Append(log)) {
-        // TODO: error handler
-    }
+    AppendLog(status, msg);
 }
 
 void NetWorkEvent::FatalCallback(int err) {
+    int stack_num;
+    std::vector<std::string> stack_trace;
 
+    stack_num = Common::BackTrace(stack_trace);
+
+    AppendLog("fatal", "Error Code(%d)", err);
+
+    if (stack_trace.size() > 0) {
+        AppendLog("fatal", "Stack Trace:");
+        int i = 1;
+        for (auto stack : stack_trace) {
+            if (i < stack_num) {
+                AppendLog("fatal", "#%d: %s", i, stack.data());
+            } else {
+                AppendLog("fatal", "#%d: %s\n", i, stack.data());
+            }
+            ++i;
+        }
+    } else {
+        AppendLog("fatal", "No Stack Trace Info!\n");
+    }
 }

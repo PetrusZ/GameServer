@@ -20,8 +20,9 @@
 #define NETWORKEVENT_H_T7FV5Y3S
 
 #include <string>
-#include "base/Singleton.hpp"
 #include "event2/event.h"
+#include "base/Singleton.hpp"
+#include "common/Common.h"
 #include "port/FileSystem.h"
 #include "port/WritableFile.h"
 #include "port/Env.h"
@@ -29,6 +30,8 @@
 #if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
 #error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"
 #endif
+
+#define LIBEVENT_LOG_BUFF_SIZE 32768
 
 class NetWorkEvent : public Singleton<NetWorkEvent> {
     public:
@@ -41,6 +44,7 @@ class NetWorkEvent : public Singleton<NetWorkEvent> {
     private:
         static void LogCallback(int severity, const char* msg);
         static void FatalCallback(int err);
+        static bool AppendLog(const std::string& status, const char* msg, ...);
 
         static WritableFile* log_file_;
 };

@@ -20,7 +20,7 @@
 
 #include "port/WritableFile.h"
 #include "base/Singleton.hpp"
-#include <assert.h>
+#include <cassert>
 #include <string>
 
 #define LOG_PREFIX_BUFF_SIZE 1024
