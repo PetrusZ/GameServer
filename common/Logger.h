@@ -31,11 +31,11 @@ class Logger : public Singleton<Logger> {
         Logger() = default;
         virtual ~Logger();
 
-        bool Fatal(const char* file, const int line, const char* func_name, const char* msg, ...);
-        bool Error(const char* file, const int line, const char* func_name, const char* msg, ...);
-        bool Info(const char* file, const int line, const char* func_name, const char* msg, ...);
-        bool Debug(const char* file, const int line, const char* func_name, const char* msg, ...);
-        bool Trace(const char* file, const int line, const char* func_name, const char* msg, ...);
+        bool Fatal(const char* msg, ...);
+        bool Error(const char* msg, ...);
+        bool Info(const char* msg, ...);
+        bool Debug(const char* msg, ...);
+        bool Trace(const char* msg, ...);
 
     private:
         enum LogLevel {
@@ -47,6 +47,8 @@ class Logger : public Singleton<Logger> {
             kTrace = 5,
             kMax   = 6
         };
+
+        std::string ConstructLog(const char* msg, va_list& ap);
 
         bool AppendLog(LogLevel level, std::string &log);
 
@@ -62,10 +64,10 @@ class Logger : public Singleton<Logger> {
 
 #define sLogger Logger::getSingleton()
 
-#define LOG_FATAL(msg, ...) sLogger.Fatal(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
-#define LOG_ERROR(msg, ...) sLogger.Error(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
-#define LOG_INFO(msg, ...) sLogger.Info(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
-#define LOG_DEBUG(msg, ...) sLogger.Debug(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
-#define LOG_TRACE(msg, ...) sLogger.Trace(__FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__)
+#define LOG_FATAL(msg, ...) sLogger.Fatal(msg, ##__VA_ARGS__)
+#define LOG_ERROR(msg, ...) sLogger.Error(msg, ##__VA_ARGS__)
+#define LOG_INFO(msg, ...) sLogger.Info(msg, ##__VA_ARGS__)
+#define LOG_DEBUG(msg, ...) sLogger.Debug(msg, ##__VA_ARGS__)
+#define LOG_TRACE(msg, ...) sLogger.Trace(msg, ##__VA_ARGS__)
 
 #endif /* end of include guard: LOGGER_H_9ROTCNVM */

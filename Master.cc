@@ -93,7 +93,7 @@ void Master::Daemonize() {
 bool Master::Run(int argc, char** argv) {
     std::cout << "Hello Game Server From Master" << std::endl;
     Daemonize();
-    LOG_INFO("HELLO LOG");
+    LOG_INFO("HELLO LOG\n");
     HookSignal();
     sleep(5);
     UnHookSignal();
