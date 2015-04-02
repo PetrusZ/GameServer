@@ -53,18 +53,19 @@ bool Logger::AppendLog(LogLevel level, std::string &log) {
             description = "Trace";
             break;
         default:
+            assert(false);
             return false;
             break;
     }
 
-
-
+    if (log.size() <= 0) {
+        return true;
+    }
     if (!LogRotate(level)) {
         return false;
     }
 
     assert(*log_file);
-    assert(LOG_BUFF_SIZE >= log.size());
 
     log += "\n";
 
@@ -112,6 +113,7 @@ bool Logger::LogRotate(LogLevel level) {
             log_file = &trace_log_;
             break;
         default:
+            assert(false);
             return false;
             break;
     }
@@ -141,87 +143,66 @@ bool Logger::LogRotate(LogLevel level) {
     return true;
 }
 
-bool Logger::Fatal(const char *file, const int line, const char *func_name, const char *msg, ...) {
+std::string Logger::ConstructLog(const char *msg, va_list &ap) {
+    if (!msg) return "";
+
+    int len;
     char prefix_buf[LOG_PREFIX_BUFF_SIZE];
     char log_buf[LOG_BUFF_SIZE];
 
     std::string time = sEnv.GetTime();
-    snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s: %d %s %s", time.c_str(), file, line, func_name, msg);
+    len = snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s", time.c_str(), msg);
 
+    assert(len <= LOG_PREFIX_BUFF_SIZE);
+
+    len = vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+
+    assert(len <= LOG_BUFF_SIZE);
+
+    return log_buf;
+}
+
+bool Logger::Fatal(const char *msg, ...) {
     va_list ap;
     va_start(ap, msg);
-    vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+    std::string log = ConstructLog(msg, ap);
     va_end(ap);
-
-    std::string log(log_buf);
 
     return AppendLog(kFatal, log);
 }
 
-bool Logger::Error(const char *file, const int line, const char *func_name, const char *msg, ...) {
-    char prefix_buf[LOG_PREFIX_BUFF_SIZE];
-    char log_buf[LOG_BUFF_SIZE];
-
-    std::string time = sEnv.GetTime();
-    snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s: %d %s %s", time.c_str(), file, line, func_name, msg);
-
+bool Logger::Error(const char *msg, ...) {
     va_list ap;
     va_start(ap, msg);
-    vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+    std::string log = ConstructLog(msg, ap);
     va_end(ap);
-
-    std::string log(log_buf);
 
     return AppendLog(kError, log);
 }
 
-bool Logger::Info(const char *file, const int line, const char *func_name, const char *msg, ...) {
-    char prefix_buf[LOG_PREFIX_BUFF_SIZE];
-    char log_buf[LOG_BUFF_SIZE];
-
-    std::string time = sEnv.GetTime();
-    snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s: %d %s %s", time.c_str(), file, line, func_name, msg);
-
+bool Logger::Info(const char *msg, ...) {
     va_list ap;
     va_start(ap, msg);
-    vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+    std::string log = ConstructLog(msg, ap);
     va_end(ap);
-
-    std::string log(log_buf);
 
     return AppendLog(kInfo, log);
 }
 
-bool Logger::Debug(const char *file, const int line, const char *func_name, const char *msg, ...) {
-    char prefix_buf[LOG_PREFIX_BUFF_SIZE];
-    char log_buf[LOG_BUFF_SIZE];
-
-    std::string time = sEnv.GetTime();
-    snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s: %d %s %s", time.c_str(), file, line, func_name, msg);
-
+bool Logger::Debug(const char *msg, ...) {
     va_list ap;
     va_start(ap, msg);
-    vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+    std::string log = ConstructLog(msg, ap);
     va_end(ap);
-
-    std::string log(log_buf);
 
     return AppendLog(kDebug, log);
 }
 
-bool Logger::Trace(const char *file, const int line, const char *func_name, const char *msg, ...) {
-    char prefix_buf[LOG_PREFIX_BUFF_SIZE];
-    char log_buf[LOG_BUFF_SIZE];
-
-    std::string time = sEnv.GetTime();
-    snprintf(prefix_buf, LOG_PREFIX_BUFF_SIZE, "[%s] %s: %d %s %s", time.c_str(), file, line, func_name, msg);
-
+bool Logger::Trace(const char *msg, ...) {
     va_list ap;
     va_start(ap, msg);
-    vsnprintf(log_buf, LOG_BUFF_SIZE, prefix_buf, ap);
+    std::string log = ConstructLog(msg, ap);
     va_end(ap);
-
-    std::string log(log_buf);
 
     return AppendLog(kTrace, log);
 }
