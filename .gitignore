@@ -18,7 +18,7 @@
 
 # Compiled Static libraries
 *.lai
-*.la
+# *.la
 # *.a
 *.lib
 
