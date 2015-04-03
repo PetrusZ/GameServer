@@ -32,7 +32,7 @@
 using namespace std;
 
 #define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 9090
+#define SERVER_PORT 9099
 #define BUF_SIZE 1024
 
 struct sock_ev_write{//用户写事件完成后的销毁，在on_write()中执行
@@ -215,7 +215,9 @@ int main(){
     event_set(&listen_ev, fd, EV_READ|EV_PERSIST, on_accept, NULL);
     event_base_set(base, &listen_ev);
     event_add(&listen_ev, NULL);
-    event_base_dispatch(base);
+    event_base_loop(base, EVLOOP_NONBLOCK);
+    while(true) { }
+    // event_base_dispatch(base);
     //------以下语句理论上是不会走到的---------------------------
     cout<<"event_base_dispatch() in main() finished"<<endl;
     //----销毁资源-------------

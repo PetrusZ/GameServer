@@ -25,6 +25,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include "port/Socket.h"
+#include "network/LibEvent.h"
 
 void Master::Daemonize() {
     int fd0, fd1, fd2;
@@ -93,9 +94,11 @@ void Master::Daemonize() {
 bool Master::Run(int argc, char** argv) {
     std::cout << "Hello Game Server From Master" << std::endl;
     Daemonize();
-    LOG_INFO("HELLO LOG\n");
     HookSignal();
+
+    sLibEvent;
     sleep(5);
+
     UnHookSignal();
     return true;
 }

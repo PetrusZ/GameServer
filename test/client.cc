@@ -33,7 +33,7 @@ using namespace std;
 #define BUF_SIZE 1024
 
 #define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 9090
+#define SERVER_PORT 9099
 
 /**
  * 连接到server端，如果成功，返回fd，如果失败返回-1
