@@ -1,3 +1,4 @@
 #!/bin/bash
-cd build;
-cmake ..; make
+root=$(dirname "$0")
+cd ${root}/build;
+cmake ..; make -j4

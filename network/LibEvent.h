@@ -27,6 +27,7 @@
 #include "port/FileSystem.h"
 #include "port/WritableFile.h"
 #include "port/Env.h"
+#include "EventBase.h"
 
 #if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
 #error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"
@@ -39,6 +40,12 @@ class LibEvent : public Singleton<LibEvent> {
         LibEvent(std::string log_file_name = "Log/libevent.log");
 
         ~LibEvent();
+
+        bool NewEventBase(EventBase** base,
+                std::string avoid_method = "",
+                int event_featrue = EventBase::kEventFeatureNull,
+                int event_base_flag = EventBase::kEventBaseFlagNull,
+                int priority = 0);
 
     private:
         static void LogCallback(int severity, const char* msg);

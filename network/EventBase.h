@@ -22,6 +22,7 @@
 #include "event2/event.h"
 #include "common/Common.h"
 #include "Event.h"
+#include <string>
 
 #if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
 #error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"
@@ -29,24 +30,30 @@
 
 class EventBase {
     public:
-        EventBase();
+        enum EventFeature {
+            kEventFeatureNull   = 0,
+            kEventFeatureEt     = EV_FEATURE_ET,
+            kEventFeatureO1     = EV_FEATURE_O1,
+            kEventFeatureFds    = EV_FEATURE_FDS
+        };
+
+        enum EventBaseFlag {
+            kEventBaseFlagNull                  = 0,
+            kEventBaseFlagNoLock                = EVENT_BASE_FLAG_NOLOCK,
+            kEventBaseFlagIgnoreEnv             = EVENT_BASE_FLAG_IGNORE_ENV,
+            kEventBaseFlagStartupIocp           = EVENT_BASE_FLAG_STARTUP_IOCP,
+            kEventBaseFlagNoCacheTime           = EVENT_BASE_FLAG_NO_CACHE_TIME,
+            kEventBaseFlagEpollUseChangelist    = EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST
+        };
+
+        EventBase(struct event_base* base);
         virtual ~EventBase();
 
+        bool Reinit();
+        std::string GetMethod();
+        int GetFeatures();
+
     private:
-        enum EventFeature {
-            kEventFeatureEt     = 1,
-            kEventFeatureO1     = 2,
-            kEventFeatureFds    = 3
-        };
-
-        enum EventFlag {
-            kEventBaseFlagNoLock                = 1,
-            kEventBaseFlagIgnoreEnv             = 2,
-            kEventBaseFlagStartupIocp           = 3,
-            kEventBaseFlagNoCacheTime           = 4,
-            kEventBaseFlagEpollUseChangelist    = 5
-        };
-
         bool NewEvent(evutil_socket_t fd, short what, event_callback_fn callback, void* arg, Event** event);
 
         struct event_base* event_base_;

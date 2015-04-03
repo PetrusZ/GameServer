@@ -20,8 +20,7 @@
 #include "event2/thread.h"
 
 std::string LibEvent::log_file_name_;
-WritableFile* LibEvent::log_file_ = NULL;
-
+WritableFile* LibEvent::log_file_ = NULL; 
 LibEvent::LibEvent(std::string log_file_name) {
     log_file_name_ = log_file_name;
     event_set_log_callback(LogCallback);
@@ -131,4 +130,53 @@ void LibEvent::GetSupportedMethods(std::vector<std::string>& supported_methods) 
     }
 
     free(supported_methods_ptr);
+}
+
+bool LibEvent::NewEventBase(EventBase** event_base,
+        std::string avoid_method,
+        int require_features,
+        int set_flag,
+        int priority) {
+    int result;
+    struct event_base* base_struct;
+    struct event_config* config;
+
+    if (!avoid_method.empty()) {
+        config = event_config_new();
+        if (!config) return false;
+        result = event_config_avoid_method(config, avoid_method.c_str());
+        if (-1 == result) return false;
+    }
+    if (require_features == EventBase::kEventFeatureNull) {
+        if (!config) config = event_config_new();
+        if (!config) return false;
+        result = event_config_require_features(config, require_features);
+        if (-1 == result) return false;
+    }
+    if (set_flag == EventBase::kEventBaseFlagNull) {
+        if (!config) config = event_config_new();
+        if (!config) return false;
+        result = event_config_set_flag(config, set_flag);
+        if (-1 == result) return false;
+    }
+    if (!config) {
+        base_struct  = event_base_new();
+        if (!base_struct) return false;
+    } else {
+        base_struct = event_base_new_with_config(config);
+        if (!base_struct) return false;
+        event_config_free(config);
+    }
+    ASSERT(base_struct);
+    if (priority) {
+        result = event_base_priority_init(base_struct, priority);
+        if (-1 == result) {
+            event_base_free(base_struct);
+            return false;
+        }
+    }
+
+    *event_base = new EventBase(base_struct);
+
+    return true;
 }

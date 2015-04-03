@@ -96,7 +96,6 @@ bool Master::Run(int argc, char** argv) {
     Daemonize();
     HookSignal();
 
-    sLibEvent;
     sleep(5);
 
     UnHookSignal();
