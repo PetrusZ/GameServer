@@ -57,3 +57,44 @@ std::string EventBase::GetMethod() {
 int EventBase::GetFeatures() {
     return event_base_get_features(event_base_);
 }
+
+bool EventBase::Loop(int flags) {
+    if (flags == kEventLoopFlagNull) {
+        return 0 == event_base_dispatch(event_base_);
+    } else {
+        return 0 == event_base_loop(event_base_, flags);
+    }
+}
+
+bool EventBase::LoopExit(const struct timeval *tv, EventLoopExitType exit_type) {
+    if (!tv && exit_type == kBreak) {
+        return 0 == event_base_loopbreak(event_base_);
+    } else if (!tv && exit_type == kExit) {
+        return 0 == event_base_loopexit(event_base_, tv);
+    } else if (tv) {
+        return 0 == event_base_loopexit(event_base_, tv);
+    }
+    return false;
+}
+
+EventBase::EventLoopExitType EventBase::GotExitType() {
+    if (event_base_got_exit(event_base_)) {
+        return kExit;
+    } else if (event_base_got_break(event_base_)) {
+        return kBreak;
+    } else {
+        return kNomal;
+    }
+
+}
+
+bool EventBase::GettimeofdayCached(struct timeval *tv) {
+    if (0 == event_base_gettimeofday_cached(event_base_, tv)) {
+        return true;
+    }
+    return false;
+}
+
+void EventBase::DumpEvents(FILE *fp) {
+    event_base_dump_events(event_base_, fp);
+}

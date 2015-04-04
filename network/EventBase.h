@@ -46,12 +46,30 @@ class EventBase {
             kEventBaseFlagEpollUseChangelist    = EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST
         };
 
+        enum EventLoopFlag {
+            kEventLoopFlagNull      = 0,
+            kEventLoopFlagOnce      = EVLOOP_ONCE,
+            kEventLoopFlagNonBlock  = EVLOOP_NONBLOCK
+        };
+
+        enum EventLoopExitType {
+            kNomal  = 0,
+            kExit   = 1,
+            kBreak  = 2
+        };
+
         EventBase(struct event_base* base);
         virtual ~EventBase();
 
         bool Reinit();
         std::string GetMethod();
         int GetFeatures();
+
+        bool Loop(int flags = kEventLoopFlagNull);
+        bool LoopExit(const struct timeval *tv = NULL, EventLoopExitType exit_type = kExit);
+        EventLoopExitType GotExitType();
+        bool GettimeofdayCached(struct timeval *tv);
+        void DumpEvents(FILE* fp);
 
     private:
         bool NewEvent(evutil_socket_t fd, short what, event_callback_fn callback, void* arg, Event** event);
