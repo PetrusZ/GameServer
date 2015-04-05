@@ -28,6 +28,12 @@
 #error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"
 #endif
 
+#define SOCKET_HOLDER_SIZE 30000
+
+typedef int EventFeatureType;
+typedef int EventBaseFlagType;
+typedef int EventLoopFlagType;
+
 class EventBase {
     public:
         enum EventFeature {
@@ -65,16 +71,22 @@ class EventBase {
         std::string GetMethod();
         int GetFeatures();
 
-        bool Loop(int flags = kEventLoopFlagNull);
+        bool Loop(EventLoopFlagType flags = kEventLoopFlagNull);
         bool LoopExit(const struct timeval *tv = NULL, EventLoopExitType exit_type = kExit);
         EventLoopExitType GotExitType();
         bool GettimeofdayCached(struct timeval *tv);
         void DumpEvents(FILE* fp);
 
     private:
-        bool NewEvent(evutil_socket_t fd, short what, event_callback_fn callback, void* arg, Event** event);
+        bool NewEvent(EventSocket fd, EventFlagType what, EventCallback callback, void* arg, Event** event);
+        bool NewTimerEvent(EventCallback callback, void* arg, Event** event);
+        bool NewSignalEvent(EventSocket sig_num, EventCallback callback, void* arg, Event** event);
+        bool NewEventOnce(EventSocket fd, EventFlagType what, EventCallback callback, void* arg, const struct timeval* tv);
+
+        void DeleteAllEvent();
 
         struct event_base* event_base_;
+        Event* fd_event_[SOCKET_HOLDER_SIZE];
 };
 
 #endif /* end of include guard: EVENTBASE_H_YRLNXQR4 */

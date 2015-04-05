@@ -34,6 +34,9 @@ LibEvent::~LibEvent() {
     if (log_file_) {
         delete log_file_;
     }
+    if (event_base_) {
+        delete event_base_;
+    }
 }
 
 std::string LibEvent::FormatLogFileName(const std::string &prefix, const std::string &description, bool useDate) {
@@ -177,6 +180,7 @@ bool LibEvent::NewEventBase(EventBase** event_base,
     }
 
     *event_base = new EventBase(base_struct);
+    event_base_ = *event_base;
 
     return true;
 }

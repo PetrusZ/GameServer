@@ -56,6 +56,7 @@ class LibEvent : public Singleton<LibEvent> {
 
         static std::string log_file_name_;
         static WritableFile* log_file_;
+        EventBase* event_base_;
 };
 
 #define sLibEvent LibEvent::getSingleton()

@@ -260,6 +260,7 @@ DNS_PTR	library/libevent/include/event2/dns.h	175;"	d
 DNS_QUERY_NO_SEARCH	library/libevent/include/event2/dns.h	178;"	d
 Daemonize	Master.cc	/^void Master::Daemonize() {$/;"	f	class:Master
 Debug	common/Logger.cc	/^bool Logger::Debug(const char *msg, ...) {$/;"	f	class:Logger
+DumpEvents	network/EventBase.cc	/^void EventBase::DumpEvents(FILE *fp) {$/;"	f	class:EventBase
 ENV_H_CIE5HSSN	port/Env.h	20;"	d
 EQUALS	build/Makefile	/^EQUALS = =$/;"	m
 EVBUFFER_CB_ENABLED	library/libevent/include/event2/buffer.h	727;"	d
@@ -465,6 +466,8 @@ EventBase	network/EventBase.cc	/^EventBase::EventBase(struct event_base* base) :
 EventBase	network/EventBase.h	/^class EventBase {$/;"	c
 EventBaseFlag	network/EventBase.h	/^        enum EventBaseFlag {$/;"	g	class:EventBase
 EventFeature	network/EventBase.h	/^        enum EventFeature {$/;"	g	class:EventBase
+EventLoopExitType	network/EventBase.h	/^        enum EventLoopExitType {$/;"	g	class:EventBase
+EventLoopFlag	network/EventBase.h	/^        enum EventLoopFlag {$/;"	g	class:EventBase
 FILESYSTEM_H_6HRNOJVP	port/FileSystem.h	20;"	d
 Fatal	common/Logger.cc	/^bool Logger::Fatal(const char *msg, ...) {$/;"	f	class:Logger
 FatalCallback	network/LibEvent.cc	/^void LibEvent::FatalCallback(int err) {$/;"	f	class:LibEvent
@@ -474,11 +477,15 @@ Flush	port/WritableFile.cc	/^bool WritableFile::Flush() {$/;"	f	class:WritableFi
 FormatLogFileName	common/Logger.cc	/^std::string Logger::FormatLogFileName(const std::string &prefix, const std::string &description, bool useDate) {$/;"	f	class:Logger
 FormatLogFileName	network/LibEvent.cc	/^std::string LibEvent::FormatLogFileName(const std::string &prefix, const std::string &description, bool useDate) {$/;"	f	class:LibEvent
 GetDate	port/Env.cc	/^std::string Env::GetDate() {$/;"	f	class:Env
+GetFeatures	network/EventBase.cc	/^int EventBase::GetFeatures() {$/;"	f	class:EventBase
+GetMethod	network/EventBase.cc	/^std::string EventBase::GetMethod() {$/;"	f	class:EventBase
 GetName	port/WritableFile.h	/^        std::string GetName() { return file_name_; }$/;"	f	class:WritableFile
 GetNowStamp	port/Env.cc	/^time_t Env::GetNowStamp() {$/;"	f	class:Env
 GetSupportedMethods	network/LibEvent.cc	/^void LibEvent::GetSupportedMethods(std::vector<std::string>& supported_methods) {$/;"	f	class:LibEvent
 GetTid	port/Env.cc	/^uint64_t Env::GetTid() {$/;"	f	class:Env
 GetTime	port/Env.cc	/^std::string Env::GetTime() {$/;"	f	class:Env
+GettimeofdayCached	network/EventBase.cc	/^bool EventBase::GettimeofdayCached(struct timeval *tv) {$/;"	f	class:EventBase
+GotExitType	network/EventBase.cc	/^EventBase::EventLoopExitType EventBase::GotExitType() {$/;"	f	class:EventBase
 HEX	build/CMakeFiles/2.8.12.2/CompilerIdC/CMakeCCompilerId.c	335;"	d	file:
 HEX	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	328;"	d	file:
 HTTP_BADMETHOD	library/libevent/include/event2/http.h	60;"	d
@@ -525,11 +532,13 @@ LogCallback	network/LibEvent.cc	/^void LibEvent::LogCallback(int severity, const
 LogLevel	common/Logger.h	/^        enum LogLevel {$/;"	g	class:Logger
 LogRotate	common/Logger.cc	/^bool Logger::LogRotate(LogLevel level) {$/;"	f	class:Logger
 Logger	common/Logger.h	/^class Logger : public Singleton<Logger> {$/;"	c
+Loop	network/EventBase.cc	/^bool EventBase::Loop(int flags) {$/;"	f	class:EventBase
+LoopExit	network/EventBase.cc	/^bool EventBase::LoopExit(const struct timeval *tv, EventLoopExitType exit_type) {$/;"	f	class:EventBase
 MASTER_CC_XPRMPWDX	Master.h	20;"	d
 MakeDirRecursive	port/FileSystem.cc	/^bool FileSystem::MakeDirRecursive(const std::string dir_path) {$/;"	f	class:FileSystem
 Master	Master.h	/^class Master : public Singleton<Master> {$/;"	c
 NewEvent	network/EventBase.cc	/^bool EventBase::NewEvent(int fd, short what, event_callback_fn callback, void* arg, Event** event) {$/;"	f	class:EventBase
-NewEventBase	network/LibEvent.cc	/^bool NewEventBase(EventBase** event_base,$/;"	f
+NewEventBase	network/LibEvent.cc	/^bool LibEvent::NewEventBase(EventBase** event_base,$/;"	f	class:LibEvent
 NewWritableFile	port/FileSystem.cc	/^bool FileSystem::NewWritableFile(const std::string &file_name, WritableFile **result) {$/;"	f	class:FileSystem
 OK	common/Status.h	/^        static Status OK() { return Status(); }$/;"	f	class:Status
 OUTPUT	library/libevent/include/event2/rpc.h	463;"	d
@@ -587,6 +596,7 @@ PLATFORM_ID	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	274;"
 PLATFORM_ID	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	277;"	d	file:
 PLATFORM_ID	build/CMakeFiles/2.8.12.2/CompilerIdCXX/CMakeCXXCompilerId.cpp	280;"	d	file:
 RM	build/Makefile	/^RM = \/usr\/bin\/cmake -E remove -f$/;"	m
+Reinit	network/EventBase.cc	/^bool EventBase::Reinit() {$/;"	f	class:EventBase
 Run	Master.cc	/^bool Master::Run(int argc, char** argv) {$/;"	f	class:Master
 SERVER_IP	test/client.cc	35;"	d	file:
 SERVER_IP	test/server.cc	34;"	d	file:
@@ -1013,22 +1023,28 @@ input_headers	library/libevent/include/event2/http_struct.h	/^	struct evkeyvalq 
 iov_base	library/libevent/include/event2/buffer.h	/^	void *iov_base;$/;"	m	struct:evbuffer_iovec
 iov_len	library/libevent/include/event2/buffer.h	/^	size_t iov_len;$/;"	m	struct:evbuffer_iovec
 ip_	port/SocketAddress.h	/^        uint32_t ip_;$/;"	m	class:SocketAddress
+kBreak	network/EventBase.h	/^            kBreak  = 2$/;"	e	enum:EventBase::EventLoopExitType
 kDebug	common/Logger.h	/^            kDebug = 4,$/;"	e	enum:Logger::LogLevel
 kError	common/Logger.h	/^            kError = 2,$/;"	e	enum:Logger::LogLevel
-kEventBaseFlagEpollUseChangelist	network/EventBase.h	/^            kEventBaseFlagEpollUseChangelist    = 0x10$/;"	e	enum:EventBase::EventBaseFlag
-kEventBaseFlagIgnoreEnv	network/EventBase.h	/^            kEventBaseFlagIgnoreEnv             = 0x2,$/;"	e	enum:EventBase::EventBaseFlag
-kEventBaseFlagNoCacheTime	network/EventBase.h	/^            kEventBaseFlagNoCacheTime           = 0x8,$/;"	e	enum:EventBase::EventBaseFlag
-kEventBaseFlagNoLock	network/EventBase.h	/^            kEventBaseFlagNoLock                = 0x1,$/;"	e	enum:EventBase::EventBaseFlag
-kEventBaseFlagNull	network/EventBase.h	/^            kEventBaseFlagNull                  = 0x0,$/;"	e	enum:EventBase::EventBaseFlag
-kEventBaseFlagStartupIocp	network/EventBase.h	/^            kEventBaseFlagStartupIocp           = 0x4,$/;"	e	enum:EventBase::EventBaseFlag
-kEventFeatureEt	network/EventBase.h	/^            kEventFeatureEt     = 0x1,$/;"	e	enum:EventBase::EventFeature
-kEventFeatureFds	network/EventBase.h	/^            kEventFeatureFds    = 0x4$/;"	e	enum:EventBase::EventFeature
-kEventFeatureNull	network/EventBase.h	/^            kEventFeatureNull   = 0x0,$/;"	e	enum:EventBase::EventFeature
-kEventFeatureO1	network/EventBase.h	/^            kEventFeatureO1     = 0x2,$/;"	e	enum:EventBase::EventFeature
+kEventBaseFlagEpollUseChangelist	network/EventBase.h	/^            kEventBaseFlagEpollUseChangelist    = EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST$/;"	e	enum:EventBase::EventBaseFlag
+kEventBaseFlagIgnoreEnv	network/EventBase.h	/^            kEventBaseFlagIgnoreEnv             = EVENT_BASE_FLAG_IGNORE_ENV,$/;"	e	enum:EventBase::EventBaseFlag
+kEventBaseFlagNoCacheTime	network/EventBase.h	/^            kEventBaseFlagNoCacheTime           = EVENT_BASE_FLAG_NO_CACHE_TIME,$/;"	e	enum:EventBase::EventBaseFlag
+kEventBaseFlagNoLock	network/EventBase.h	/^            kEventBaseFlagNoLock                = EVENT_BASE_FLAG_NOLOCK,$/;"	e	enum:EventBase::EventBaseFlag
+kEventBaseFlagNull	network/EventBase.h	/^            kEventBaseFlagNull                  = 0,$/;"	e	enum:EventBase::EventBaseFlag
+kEventBaseFlagStartupIocp	network/EventBase.h	/^            kEventBaseFlagStartupIocp           = EVENT_BASE_FLAG_STARTUP_IOCP,$/;"	e	enum:EventBase::EventBaseFlag
+kEventFeatureEt	network/EventBase.h	/^            kEventFeatureEt     = EV_FEATURE_ET,$/;"	e	enum:EventBase::EventFeature
+kEventFeatureFds	network/EventBase.h	/^            kEventFeatureFds    = EV_FEATURE_FDS$/;"	e	enum:EventBase::EventFeature
+kEventFeatureNull	network/EventBase.h	/^            kEventFeatureNull   = 0,$/;"	e	enum:EventBase::EventFeature
+kEventFeatureO1	network/EventBase.h	/^            kEventFeatureO1     = EV_FEATURE_O1,$/;"	e	enum:EventBase::EventFeature
+kEventLoopFlagNonBlock	network/EventBase.h	/^            kEventLoopFlagNonBlock  = EVLOOP_NONBLOCK$/;"	e	enum:EventBase::EventLoopFlag
+kEventLoopFlagNull	network/EventBase.h	/^            kEventLoopFlagNull      = 0,$/;"	e	enum:EventBase::EventLoopFlag
+kEventLoopFlagOnce	network/EventBase.h	/^            kEventLoopFlagOnce      = EVLOOP_ONCE,$/;"	e	enum:EventBase::EventLoopFlag
+kExit	network/EventBase.h	/^            kExit   = 1,$/;"	e	enum:EventBase::EventLoopExitType
 kFatal	common/Logger.h	/^            kFatal = 1,$/;"	e	enum:Logger::LogLevel
 kIOError	common/Status.h	/^            kIOError = 1$/;"	e	enum:Status::Code
 kInfo	common/Logger.h	/^            kInfo  = 3,$/;"	e	enum:Logger::LogLevel
 kMax	common/Logger.h	/^            kMax   = 6$/;"	e	enum:Logger::LogLevel
+kNomal	network/EventBase.h	/^            kNomal  = 0,$/;"	e	enum:EventBase::EventLoopExitType
 kNull	common/Logger.h	/^            kNull  = 0,$/;"	e	enum:Logger::LogLevel
 kOk	common/Status.h	/^            kOk = 0,$/;"	e	enum:Status::Code
 kTrace	common/Logger.h	/^            kTrace = 5,$/;"	e	enum:Logger::LogLevel
@@ -1096,7 +1112,7 @@ response_code	library/libevent/include/event2/http_struct.h	/^	int response_code
 response_code_line	library/libevent/include/event2/http_struct.h	/^	char *response_code_line;	\/* Readable response *\/$/;"	m	struct:evhttp_request
 sEnv	port/Env.h	38;"	d
 sFileSystem	port/FileSystem.h	44;"	d
-sLibEvent	network/LibEvent.h	60;"	d
+sLibEvent	network/LibEvent.h	61;"	d
 sLogger	common/Logger.h	65;"	d
 sMaster	Master.h	40;"	d
 setup_libevent_thread	test/lievent.cc	/^void LibEvtServer::setup_libevent_thread(LibeventThread * pLibeventThread)$/;"	f	class:LibEvtServer
