@@ -19,51 +19,16 @@
 #ifndef EVENTBASE_H_YRLNXQR4
 #define EVENTBASE_H_YRLNXQR4
 
-#include "event2/event.h"
 #include "common/Common.h"
+#include "LibEventDefine.h"
 #include "Event.h"
+#include "BufferEvent.h"
 #include <string>
-
-#if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
-#error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"
-#endif
 
 #define SOCKET_HOLDER_SIZE 30000
 
-typedef int EventFeatureType;
-typedef int EventBaseFlagType;
-typedef int EventLoopFlagType;
-
 class EventBase {
     public:
-        enum EventFeature {
-            kEventFeatureNull   = 0,
-            kEventFeatureEt     = EV_FEATURE_ET,
-            kEventFeatureO1     = EV_FEATURE_O1,
-            kEventFeatureFds    = EV_FEATURE_FDS
-        };
-
-        enum EventBaseFlag {
-            kEventBaseFlagNull                  = 0,
-            kEventBaseFlagNoLock                = EVENT_BASE_FLAG_NOLOCK,
-            kEventBaseFlagIgnoreEnv             = EVENT_BASE_FLAG_IGNORE_ENV,
-            kEventBaseFlagStartupIocp           = EVENT_BASE_FLAG_STARTUP_IOCP,
-            kEventBaseFlagNoCacheTime           = EVENT_BASE_FLAG_NO_CACHE_TIME,
-            kEventBaseFlagEpollUseChangelist    = EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST
-        };
-
-        enum EventLoopFlag {
-            kEventLoopFlagNull      = 0,
-            kEventLoopFlagOnce      = EVLOOP_ONCE,
-            kEventLoopFlagNonBlock  = EVLOOP_NONBLOCK
-        };
-
-        enum EventLoopExitType {
-            kNomal  = 0,
-            kExit   = 1,
-            kBreak  = 2
-        };
-
         EventBase(struct event_base* base);
         virtual ~EventBase();
 
@@ -77,16 +42,28 @@ class EventBase {
         bool GettimeofdayCached(struct timeval *tv);
         void DumpEvents(FILE* fp);
 
-    private:
+        /*
+         * fd: 监听的fd
+         * what: EventFlag的合集
+         * callback: 与what对应的callback函数
+         */
         bool NewEvent(EventSocket fd, EventFlagType what, EventCallback callback, void* arg, Event** event);
         bool NewTimerEvent(EventCallback callback, void* arg, Event** event);
         bool NewSignalEvent(EventSocket sig_num, EventCallback callback, void* arg, Event** event);
         bool NewEventOnce(EventSocket fd, EventFlagType what, EventCallback callback, void* arg, const struct timeval* tv);
+        bool NewBufferEvent(EventSocket fd, BufferEventOptionType buffer_event_option, BufferEvent** buffer_event);
 
+        void DeleteEvent(EventSocket fd);
+        void DeleteBufferEvent(EventSocket fd);
+
+    private:
         void DeleteAllEvent();
+        void DeleteAllBufferEvent();
 
         struct event_base* event_base_;
+        // XXX: 一个fd只能对应一个event，但是会有一个fd同时监听读和写事件的情况
         Event* fd_event_[SOCKET_HOLDER_SIZE];
+        BufferEvent* fd_bufferevent_[SOCKET_HOLDER_SIZE];
 };
 
 #endif /* end of include guard: EVENTBASE_H_YRLNXQR4 */

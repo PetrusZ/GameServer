@@ -19,28 +19,11 @@
 #ifndef EVENT_H_7YKFXRLG
 #define EVENT_H_7YKFXRLG
 
-#include "event2/event.h"
 #include "common/Common.h"
-
-#if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
-#error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"
-#endif
-
-typedef evutil_socket_t EventSocket;
-typedef event_callback_fn EventCallback;
-typedef int EventFlagType;
+#include "LibEventDefine.h"
 
 class Event {
     public:
-        enum EventFlag {
-            kEventTimeout   = EV_TIMEOUT,
-            kEventRead      = EV_READ,
-            kEventWrite     = EV_WRITE,
-            kEventSignal    = EV_SIGNAL,
-            kEventPersist   = EV_PERSIST,
-            kEventEv        = EV_ET
-        };
-
         Event(struct event* event);
         virtual ~Event();
 

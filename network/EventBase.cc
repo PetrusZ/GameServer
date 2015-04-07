@@ -58,7 +58,7 @@ bool EventBase::NewTimerEvent(EventCallback callback, void *arg, Event **event) 
 }
 
 bool EventBase::NewSignalEvent(EventSocket sig_num, EventCallback callback, void *arg, Event **event) {
-    bool result = NewEvent(sig_num, Event::kEventSignal | Event::kEventPersist, callback, arg, event);
+    bool result = NewEvent(sig_num, kEventSignal | kEventPersist, callback, arg, event);
     if (result) {
         return true;
     } else {
@@ -69,6 +69,21 @@ bool EventBase::NewSignalEvent(EventSocket sig_num, EventCallback callback, void
 bool EventBase::NewEventOnce(EventSocket fd, EventFlagType what, EventCallback callback, void *arg, const struct timeval *tv) {
     bool result = event_base_once(event_base_, fd, what, callback, arg, tv);
     if (result) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool EventBase::NewBufferEvent(EventSocket fd, BufferEventOptionType buffer_event_option, BufferEvent** buffer_event) {
+    if (fd_bufferevent_[fd] != NULL) {
+        return false;
+    }
+
+    struct bufferevent* buffer_event_struct = bufferevent_socket_new(event_base_, fd, buffer_event_option);
+    if (buffer_event_struct) {
+        *buffer_event = new BufferEvent(buffer_event_struct);
+        fd_bufferevent_[fd] = *buffer_event;
         return true;
     } else {
         return false;
@@ -113,7 +128,7 @@ bool EventBase::LoopExit(const struct timeval *tv, EventLoopExitType exit_type) 
     return false;
 }
 
-EventBase::EventLoopExitType EventBase::GotExitType() {
+EventLoopExitType EventBase::GotExitType() {
     if (event_base_got_exit(event_base_)) {
         return kExit;
     } else if (event_base_got_break(event_base_)) {
@@ -135,10 +150,28 @@ void EventBase::DumpEvents(FILE *fp) {
     event_base_dump_events(event_base_, fp);
 }
 
+void EventBase::DeleteEvent(EventSocket fd) {
+    if (!fd_event_[fd]) {
+        delete fd_event_[fd];
+        fd_event_[fd] = NULL;
+    }
+}
+
+void EventBase::DeleteBufferEvent(EventSocket fd) {
+    if (!fd_bufferevent_[fd]) {
+        delete fd_bufferevent_[fd];
+        fd_bufferevent_[fd] = NULL;
+    }
+}
+
 void EventBase::DeleteAllEvent() {
     for (uint32_t i = 0; i < SOCKET_HOLDER_SIZE; ++i) {
-        if (!fd_event_[i]) {
-            delete fd_event_[i];
-        }
+        DeleteEvent(i);
+    }
+}
+
+void EventBase::DeleteAllBufferEvent() {
+    for (uint32_t i = 0; i < SOCKET_HOLDER_SIZE; ++i) {
+        DeleteBufferEvent(i);
     }
 }

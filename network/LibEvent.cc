@@ -150,13 +150,13 @@ bool LibEvent::NewEventBase(EventBase** event_base,
         result = event_config_avoid_method(config, avoid_method.c_str());
         if (-1 == result) return false;
     }
-    if (require_features == EventBase::kEventFeatureNull) {
+    if (require_features == kEventFeatureNull) {
         if (!config) config = event_config_new();
         if (!config) return false;
         result = event_config_require_features(config, require_features);
         if (-1 == result) return false;
     }
-    if (set_flag == EventBase::kEventBaseFlagNull) {
+    if (set_flag == kEventBaseFlagNull) {
         if (!config) config = event_config_new();
         if (!config) return false;
         result = event_config_set_flag(config, set_flag);

@@ -21,12 +21,12 @@
 
 #include <string>
 #include <vector>
-#include "event2/event.h"
 #include "base/Singleton.hpp"
 #include "common/Common.h"
 #include "port/FileSystem.h"
 #include "port/WritableFile.h"
 #include "port/Env.h"
+#include "LibEventDefine.h"
 #include "EventBase.h"
 
 #if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
@@ -43,8 +43,8 @@ class LibEvent : public Singleton<LibEvent> {
 
         bool NewEventBase(EventBase** base,
                 std::string avoid_method = "",
-                int event_featrue = EventBase::kEventFeatureNull,
-                int event_base_flag = EventBase::kEventBaseFlagNull,
+                int event_featrue = kEventFeatureNull,
+                int event_base_flag = kEventBaseFlagNull,
                 int priority = 0);
 
     private:
