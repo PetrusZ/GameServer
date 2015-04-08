@@ -20,9 +20,17 @@
 #include "event2/thread.h"
 
 std::string LibEvent::log_file_name_;
-WritableFile* LibEvent::log_file_ = NULL; 
+WritableFile* LibEvent::log_file_ = NULL;
+
 LibEvent::LibEvent(std::string log_file_name) {
     log_file_name_ = log_file_name;
+
+#ifdef WIN32
+    evthread_use_windows_threads();//win上设置
+#else
+    evthread_use_pthreads();    //unix上设置
+#endif
+
     event_set_log_callback(LogCallback);
     event_set_fatal_callback(FatalCallback);
 
