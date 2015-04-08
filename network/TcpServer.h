@@ -20,14 +20,15 @@
 
 #include "LibEvent.h"
 #include "EventBase.h"
-#include "Singleton.hpp"
+#include "base/Singleton.hpp"
+#include "port/Socket.h"
 
 class TcpServer : public Singleton <TcpServer> {
     public:
         TcpServer() = default;
         virtual ~TcpServer();
 
-        bool AddListenSocket(Socket &socket);
+        bool BindListenSocket(Socket &socket);
 
     private:
         EventBase* event_base_ = nullptr;
