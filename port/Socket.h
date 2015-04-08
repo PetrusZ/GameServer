@@ -49,6 +49,8 @@ class Socket {
         // Disconnect the socket.
         void Disconnect();
 
+        SOCKET GetSocket();
+
     private:
         SOCKET socket_;
 };

@@ -490,6 +490,7 @@ GetName	port/WritableFile.h	/^        std::string GetName() { return file_name_;
 GetNowStamp	port/Env.cc	/^time_t Env::GetNowStamp() {$/;"	f	class:Env
 GetReadBuffer	test/TcpEventServer.h	/^    int GetReadBuffer(char *buffer, int len)$/;"	f	class:Conn
 GetReadBufferLen	test/TcpEventServer.h	/^    int GetReadBufferLen()$/;"	f	class:Conn
+GetSocket	port/Socket.cc	/^inline SOCKET Socket::GetSocket() {$/;"	f	class:Socket
 GetSupportedMethods	network/LibEvent.cc	/^void LibEvent::GetSupportedMethods(std::vector<std::string>& supported_methods) {$/;"	f	class:LibEvent
 GetThread	test/TcpEventServer.h	/^    LibeventThread *GetThread() { return m_Thread; }$/;"	f	class:Conn
 GetTid	port/Env.cc	/^uint64_t Env::GetTid() {$/;"	f	class:Env
@@ -530,7 +531,6 @@ LIBEVENT_H_ZLTEOFP7	network/LibEvent.h	20;"	d
 LIBEVENT_LOG_BUFF_SIZE	network/LibEvent.h	36;"	d
 LIBEVENT_VERSION	library/libevent/include/event2/event.h	1084;"	d
 LIBEVENT_VERSION_NUMBER	library/libevent/include/event2/event.h	1087;"	d
-LISTEN_SOCKET_HOLDER_SIZE	network/EventBase.h	29;"	d
 LOGGER_CC_AZQLX2MN	common/Logger.cc	20;"	d	file:
 LOGGER_H_9ROTCNVM	common/Logger.h	19;"	d
 LOG_BUFF_SIZE	common/Logger.h	27;"	d
@@ -669,11 +669,13 @@ TAILQ_HEAD	library/libevent/include/event2/event_struct.h	79;"	d
 TAILQ_HEAD	library/libevent/include/event2/keyvalq_struct.h	47;"	d
 TAILQ_HEAD	library/libevent/include/event2/keyvalq_struct.h	73;"	d
 TCPEVENTSERVER_H_	test/TcpEventServer.h	21;"	d
+TCPSERVER_H_WIP2ZBBJ	network/TcpServer.h	19;"	d
 THREADPOOL_H_O4CDDLR9	port/ThreadPool.h	20;"	d
 TIME_FORMAT	port/Env.cc	30;"	d	file:
 TIME_LONGTH	port/Env.cc	29;"	d	file:
 TcpEventServer	test/TcpEventServer.cc	/^TcpEventServer::TcpEventServer(int count)$/;"	f	class:TcpEventServer
 TcpEventServer	test/TcpEventServer.h	/^class TcpEventServer$/;"	c
+TcpServer	network/TcpServer.h	/^class TcpServer : public Singleton <TcpServer> {$/;"	c
 TestServer	test/TcpEventServerTest.cc	/^        TestServer(int count) : TcpEventServer(count) { }$/;"	f	class:TestServer
 TestServer	test/TcpEventServerTest.cc	/^class TestServer : public TcpEventServer$/;"	c	file:
 ThreadPool	port/ThreadPool.h	/^class ThreadPool {$/;"	c
@@ -875,8 +877,6 @@ cbarg	library/libevent/include/event2/bufferevent_struct.h	/^	void *cbarg;$/;"	m
 chain	library/libevent/include/event2/buffer.h	/^		void *chain;$/;"	m	struct:evbuffer_ptr::__anon1
 chunk_cb	library/libevent/include/event2/http_struct.h	/^	void (*chunk_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 chunked	library/libevent/include/event2/http_struct.h	/^	unsigned chunked:1,		\/* a chunked request *\/$/;"	m	struct:evhttp_request
-clifd_bufferevent_	network/EventBase.h	/^        BufferEvent* clifd_bufferevent_[SOCKET_HOLDER_SIZE];$/;"	m	class:EventBase
-clifd_event_	network/EventBase.h	/^        Event* clifd_event_[SOCKET_HOLDER_SIZE];$/;"	m	class:EventBase
 code	common/Status.h	/^        Code code() const { return (status_ == NULL) ? kOk : static_cast<Code>(status_[4]); }$/;"	f	class:Status
 condition_api_version	library/libevent/include/event2/thread.h	/^	int condition_api_version;$/;"	m	struct:evthread_condition_callbacks
 conn_mtx	test/libevent.cc	/^    std::mutex conn_mtx;                        \/\/维护连接队列的锁$/;"	m	struct:LibeventThread	file:
@@ -997,6 +997,7 @@ event_	network/Event.h	/^        struct event* event_;$/;"	m	class:Event	typeref
 event_base	library/libevent/include/event2/event.h	/^struct event_base$/;"	s
 event_base_	network/EventBase.h	/^        struct event_base* event_base_;$/;"	m	class:EventBase	typeref:struct:EventBase::event_base
 event_base_	network/LibEvent.h	/^        EventBase* event_base_;$/;"	m	class:LibEvent
+event_base_	network/TcpServer.h	/^        EventBase* event_base_ = nullptr;$/;"	m	class:TcpServer
 event_base_config_flag	library/libevent/include/event2/event.h	/^enum event_base_config_flag {$/;"	g
 event_callback	test/bufferevent.cc	/^void event_callback(struct bufferevent *bev, short events, void *ctx)$/;"	f
 event_callback_fn	library/libevent/include/event2/event.h	/^typedef void (*event_callback_fn)(evutil_socket_t, short, void *);$/;"	t
@@ -1050,6 +1051,8 @@ evutil_timerisset	library/libevent/include/event2/util.h	417;"	d
 evutil_timerisset	library/libevent/include/event2/util.h	419;"	d
 evutil_timersub	library/libevent/include/event2/util.h	380;"	d
 evutil_timersub	library/libevent/include/event2/util.h	391;"	d
+fd_bufferevent_	network/EventBase.h	/^        BufferEvent* fd_bufferevent_[SOCKET_HOLDER_SIZE];$/;"	m	class:EventBase
+fd_event_	network/EventBase.h	/^        Event* fd_event_[SOCKET_HOLDER_SIZE];$/;"	m	class:EventBase
 file_	port/WritableFile.h	/^        FILE* file_;$/;"	m	class:WritableFile
 file_name_	port/WritableFile.h	/^        std::string file_name_;$/;"	m	class:WritableFile
 flags	library/libevent/include/event2/dns_struct.h	/^	int flags;$/;"	m	struct:evdns_server_request
@@ -1130,7 +1133,6 @@ kind	library/libevent/include/event2/http_struct.h	/^	enum evhttp_request_kind k
 last_fib	test/bufferevent.cc	/^        unsigned long last_fib[2];$/;"	m	struct:count	file:
 listen	test/libevent.cc	/^bool LibEvtServer::listen(int* port)$/;"	f	class:LibEvtServer
 listener_cb	test/libevent.cc	/^void LibEvtServer::listener_cb(struct evconnlistener *listener, evutil_socket_t fd,$/;"	f	class:LibEvtServer
-listenfd_event_	network/EventBase.h	/^        Event* listenfd_event_[LISTEN_SOCKET_HOLDER_SIZE];$/;"	m	class:EventBase
 lock	library/libevent/include/event2/thread.h	/^	int (*lock)(unsigned mode, void *lock);$/;"	m	struct:evthread_lock_callbacks
 lock_api_version	library/libevent/include/event2/thread.h	/^	int lock_api_version;$/;"	m	struct:evthread_lock_callbacks
 log_file_	network/LibEvent.cc	/^WritableFile* LibEvent::log_file_ = NULL;$/;"	m	class:LibEvent	file:

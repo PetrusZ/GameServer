@@ -26,7 +26,6 @@
 #include <string>
 
 #define SOCKET_HOLDER_SIZE 30000
-#define LISTEN_SOCKET_HOLDER_SIZE 30
 
 class EventBase {
     public:
@@ -63,9 +62,8 @@ class EventBase {
 
         struct event_base* event_base_;
         // XXX: 一个fd只能对应一个event，但是会有一个fd同时监听读和写事件的情况
-        Event* listenfd_event_[LISTEN_SOCKET_HOLDER_SIZE];
-        Event* clifd_event_[SOCKET_HOLDER_SIZE];
-        BufferEvent* clifd_bufferevent_[SOCKET_HOLDER_SIZE];
+        Event* fd_event_[SOCKET_HOLDER_SIZE];
+        BufferEvent* fd_bufferevent_[SOCKET_HOLDER_SIZE];
 };
 
 #endif /* end of include guard: EVENTBASE_H_YRLNXQR4 */

@@ -25,3 +25,7 @@ inline bool Socket::Create(int type) {
     socket_ = ::socket(AF_INET, type, 0);
     return true;
 }
+
+inline SOCKET Socket::GetSocket() {
+    return socket_;
+}

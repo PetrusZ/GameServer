@@ -20,6 +20,7 @@
 
 #include "event2/event.h"
 #include "event2/bufferevent.h"
+#include "event2/thread.h"
 
 #if !defined(LIBEVENT_VERSION_NUMBER) || LIBEVENT_VERSION_NUMBER < 0x02010500
 #error "Libevent not found or libevent version too old to supporte. Please get 2.0.22-stable or later"

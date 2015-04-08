@@ -39,7 +39,7 @@ include_directories(${INCLUDE_DIR_LIST})
 link_directories(${PROJECT_SOURCE_DIR}/library)
 
 add_executable(GameServer ${SRC_LIST})
-target_link_libraries(GameServer event_core)
+target_link_libraries(GameServer event_core event_pthreads)
 
 ################################################# test #################################################
 
