@@ -27,7 +27,7 @@ BufferEvent::~BufferEvent() {
     }
 }
 
-void BufferEvent::SetCallBack(BufferEventDataCallBack read_callback, BufferEventDataCallBack write_callback, BufferEventEventCallBack event_callback, void *callback_arg) {
+void BufferEvent::SetCallback(BufferEventDataCallBack read_callback, BufferEventDataCallBack write_callback, BufferEventEventCallBack event_callback, void *callback_arg) {
     bufferevent_setcb(buffer_event_, read_callback, write_callback, event_callback, callback_arg);
 }
 

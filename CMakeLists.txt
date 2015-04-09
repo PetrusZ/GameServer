@@ -23,7 +23,7 @@ set(INCLUDE_DIR_LIST ${PROJECT_SOURCE_DIR})
 
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-aux_source_directory(./ ROOT_SRC_LIST)
+aux_source_directory(. ROOT_SRC_LIST)
 aux_source_directory(./network NETWORK_SRC_LIST)
 aux_source_directory(./port PORT_SRC_LIST)
 aux_source_directory(./common COMMON_SRC_LIST)
@@ -34,6 +34,9 @@ set(SRC_LIST
     ${PORT_SRC_LIST}
     ${COMMON_SRC_LIST}
     )
+
+message(STATUS "SRC_LIST: ${SRC_LIST}")
+message(STATUS "INCLUDE_DIR_LIST: ${INCLUDE_DIR_LIST}")
 
 include_directories(${INCLUDE_DIR_LIST})
 link_directories(${PROJECT_SOURCE_DIR}/library)

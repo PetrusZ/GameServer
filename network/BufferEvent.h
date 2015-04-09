@@ -17,7 +17,7 @@
  */
 
 #ifndef BUFFEREVENT_H_F7VDYOKR
-#define BUFFEREVENT_H_F7VDYOKRBUFFEREVENT_H_F7VDYOKR
+#define BUFFEREVENT_H_F7VDYOKR
 
 #include "LibEventDefine.h"
 
@@ -26,7 +26,7 @@ class BufferEvent {
         BufferEvent(struct bufferevent* buffer_event_);
         virtual ~BufferEvent();
 
-        void SetCallBack(BufferEventDataCallBack read_callback, BufferEventDataCallBack write_callback, BufferEventEventCallBack event_callback, void* callback_arg);
+        void SetCallback(BufferEventDataCallBack read_callback, BufferEventDataCallBack write_callback, BufferEventEventCallBack event_callback, void* callback_arg);
 
         void Enable(EventFlagType flags);
         void Disable(EventFlagType flags);
@@ -45,7 +45,8 @@ class BufferEvent {
         void UnLock();
 
     private:
+        friend class TcpServer;
         struct bufferevent* buffer_event_;
 };
 
-#endif /* end of include guard: BUFFEREVENT_H_F7VDYOKRBUFFEREVENT_H_F7VDYOKR */
+#endif /* end of include guard: BUFFEREVENT_H_F7VDYOKR*/

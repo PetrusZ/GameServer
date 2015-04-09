@@ -31,7 +31,7 @@
  */
 typedef evutil_socket_t EventSocket;
 typedef event_callback_fn EventCallback;
-typedef int EventFlagType;
+typedef short EventFlagType;
 
 enum EventFlag {
     kEventTimeout   = EV_TIMEOUT,
@@ -48,6 +48,9 @@ enum EventFlag {
 typedef int BufferEventOptionType;
 typedef bufferevent_data_cb BufferEventDataCallBack;
 typedef bufferevent_event_cb BufferEventEventCallBack;
+
+typedef short BufferEventFlagType;
+typedef struct bufferevent BufferEventStruct;
 
 enum BufferEventOption {
     kCloseOnFree        = BEV_OPT_CLOSE_ON_FREE,

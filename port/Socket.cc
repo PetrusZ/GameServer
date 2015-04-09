@@ -26,6 +26,6 @@ inline bool Socket::Create(int type) {
     return true;
 }
 
-inline SOCKET Socket::GetSocket() {
+SOCKET Socket::GetSocket() {
     return socket_;
 }
