@@ -38,8 +38,10 @@
 class LibEvent : public Singleton<LibEvent> {
     public:
         LibEvent(std::string log_file_name = "Log/libevent.log");
-
         ~LibEvent();
+
+        LibEvent(const LibEvent&) = delete;
+        LibEvent& operator=(const LibEvent&) = delete;
 
         bool NewEventBase(EventBase** base,
                 std::string avoid_method = "",

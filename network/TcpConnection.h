@@ -30,6 +30,9 @@ class TcpConnection {
         TcpConnection(BufferEvent* buffer_event);
         virtual ~TcpConnection();
 
+        TcpConnection(const TcpConnection&) = delete;
+        TcpConnection& operator=(const TcpConnection&) = delete;
+
         virtual size_t ReadData(void* data, size_t data_len);
         virtual void WriteData(const void* data, size_t data_len);
 

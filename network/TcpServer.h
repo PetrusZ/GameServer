@@ -33,6 +33,9 @@ class TcpServer : public Singleton <TcpServer> {
         TcpServer();
         virtual ~TcpServer();
 
+        TcpServer(const TcpServer&);
+        TcpServer& operator=(const TcpServer&);
+
         bool BindListenSocket(Socket* socket);
         void RemoveTcpConnection(EventSocket socket);
 

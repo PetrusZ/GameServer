@@ -27,6 +27,9 @@ class Event {
         Event(struct event* event);
         virtual ~Event();
 
+        Event(const Event&) = delete;
+        Event& operator=(const Event&) = delete;
+
         bool Add(const struct timeval *tv);
         bool Del();
         bool PrioritySet(int priority);
