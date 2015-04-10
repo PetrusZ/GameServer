@@ -31,6 +31,9 @@ class Logger : public Singleton<Logger> {
         Logger() = default;
         virtual ~Logger();
 
+        Logger(const Logger&) = delete;
+        Logger& operator=(const Logger&) = delete;
+
         bool Fatal(const char* msg, ...);
         bool Error(const char* msg, ...);
         bool Info(const char* msg, ...);

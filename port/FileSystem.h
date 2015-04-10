@@ -28,6 +28,9 @@ class FileSystem : public Singleton<FileSystem> {
         FileSystem() = default;
         ~FileSystem() = default;
 
+        FileSystem(const FileSystem&) = delete;
+        FileSystem& operator=(const FileSystem&) = delete;
+
         bool NewWritableFile(const std::string& file_name, WritableFile** result);
 
         bool FileExists(const std::string file_name);

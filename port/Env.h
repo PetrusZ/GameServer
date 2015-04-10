@@ -28,6 +28,9 @@ class Env : public Singleton<Env> {
         Env() = default;
         virtual ~Env() = default;
 
+        Env(const Env&) = delete;
+        Env& operator=(const Env&) = delete;
+
         uint64_t GetTid();
 
         time_t GetNowStamp();

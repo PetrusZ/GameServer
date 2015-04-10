@@ -27,6 +27,9 @@ class Master : public Singleton<Master> {
         Master() = default;
         ~Master() = default;
 
+        Master(const Master&) = delete;
+        Master& operator=(const Master&) = delete;
+
         bool Run(int argc, char** argv);
 
     private:
