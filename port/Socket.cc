@@ -45,7 +45,7 @@ int Socket::Bind(const SocketAddress &addr) {
 
 int Socket::Listen(const int backlog) {
     int err = ::listen(socket_, backlog);
-    LOG_TRACE("Listen socket(%d) witch backlog(%d)", socket_, backlog);
+    LOG_TRACE("Listen socket(%d) with backlog(%d)", socket_, backlog);
     return err;
 }
 
