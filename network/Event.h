@@ -30,7 +30,7 @@ class Event {
         Event(const Event&) = delete;
         Event& operator=(const Event&) = delete;
 
-        bool Add(const struct timeval *tv);
+        bool Add(const struct timeval *tv = nullptr);
         bool Del();
         bool PrioritySet(int priority);
         bool Pending(EventFlagType what, struct timeval *tv_out);

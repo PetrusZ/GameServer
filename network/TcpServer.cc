@@ -58,8 +58,10 @@ bool TcpServer::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connecti
     if (tcp_connections_[socket] == 0) {
         tcp_connections_[socket] = tcp_connection;
         bufevent_conn_map_[tcp_connection->buffer_event_->buffer_event_] = tcp_connection;
+        LOG_TRACE("Add TcpConnection with socket(%d)", socket);
         return true;
     }
+    ASSERT(0 != tcp_connections_[socket]);
     return false;
 }
 

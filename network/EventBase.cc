@@ -41,6 +41,7 @@ bool EventBase::NewEvent(EventSocket fd, EventFlagType what, EventCallback callb
 
     if (event_struct) {
         *event = new Event(event_struct);
+        (*event)->Add();
         fd_event_[fd] = *event;
         LOG_TRACE("New event register with socket(%d), EventFlag(%d)", fd, what);
         return true;
@@ -84,6 +85,7 @@ bool EventBase::NewBufferEvent(EventSocket fd, BufferEventOptionType buffer_even
     struct bufferevent* buffer_event_struct = bufferevent_socket_new(event_base_, fd, buffer_event_option);
     if (buffer_event_struct) {
         *buffer_event = new BufferEvent(buffer_event_struct);
+        LOG_TRACE("New buffer_event register with socket(%d), BufferEventOption(%d)", fd, buffer_event_option);
         fd_bufferevent_[fd] = *buffer_event;
         return true;
     } else {
