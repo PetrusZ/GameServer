@@ -42,6 +42,7 @@ bool EventBase::NewEvent(EventSocket fd, EventFlagType what, EventCallback callb
     if (event_struct) {
         *event = new Event(event_struct);
         fd_event_[fd] = *event;
+        LOG_TRACE("New event register with socket(%d), EventFlag(%d)", fd, what);
         return true;
     } else {
         return false;
@@ -111,9 +112,15 @@ int EventBase::GetFeatures() {
 
 bool EventBase::Loop(int flags) {
     if (flags == kEventLoopFlagNull) {
-        return 0 == event_base_dispatch(event_base_);
+        LOG_TRACE("Event base start dispatch");
+        int result = event_base_dispatch(event_base_);
+        LOG_TRACE("Event base end dispatch");
+        return 0 == result;
     } else {
-        return 0 == event_base_loop(event_base_, flags);
+        LOG_TRACE("Event base start loop with flags(%d)", flags);
+        int result = event_base_loop(event_base_, flags);
+        LOG_TRACE("Event base end loop with flags(%d)", flags);
+        return 0 == result;
     }
 }
 
@@ -146,8 +153,10 @@ bool EventBase::GettimeofdayCached(struct timeval *tv) {
     return false;
 }
 
-void EventBase::DumpEvents(FILE *fp) {
+void EventBase::DumpEvents(const std::string& dump_name) {
+    FILE* fp = fopen(dump_name.c_str(), "a");
     event_base_dump_events(event_base_, fp);
+    fclose(fp);
 }
 
 void EventBase::DeleteEvent(EventSocket fd) {

@@ -43,7 +43,7 @@ class EventBase {
         bool LoopExit(const struct timeval *tv = NULL, EventLoopExitType exit_type = kExit);
         EventLoopExitType GotExitType();
         bool GettimeofdayCached(struct timeval *tv);
-        void DumpEvents(FILE* fp);
+        void DumpEvents(const std::string& dump_name = "Log/Eventbase.dump");
 
         /*
          * fd: 监听的fd

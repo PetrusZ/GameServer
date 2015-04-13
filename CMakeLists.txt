@@ -27,12 +27,14 @@ aux_source_directory(. ROOT_SRC_LIST)
 aux_source_directory(./network NETWORK_SRC_LIST)
 aux_source_directory(./port PORT_SRC_LIST)
 aux_source_directory(./common COMMON_SRC_LIST)
+aux_source_directory(./util UTIL_SRC_LIST)
 
 set(SRC_LIST
     ${ROOT_SRC_LIST}
     ${NETWORK_SRC_LIST}
     ${PORT_SRC_LIST}
     ${COMMON_SRC_LIST}
+    ${UTIL_SRC_LIST}
     )
 
 message(STATUS "SRC_LIST: ${SRC_LIST}")

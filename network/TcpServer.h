@@ -39,7 +39,11 @@ class TcpServer : public Singleton <TcpServer> {
         bool BindListenSocket(Socket* socket);
         void RemoveTcpConnection(EventSocket socket);
 
+        bool NewTcpConnection(Socket* socket);
+
         TcpConnection* GetTcpConnection(BufferEventStruct* buffer_event_struct);
+
+        void StartLoop();
 
         static void ProcessDataFromClient(SOCKET fd, const void* data, size_t data_len);
         static void SendDataToClient(SOCKET fd, const void* data, size_t data_len);

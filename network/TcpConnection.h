@@ -27,7 +27,7 @@
 
 class TcpConnection {
     public:
-        TcpConnection(BufferEvent* buffer_event);
+        TcpConnection(Socket* socket, BufferEvent* buffer_event);
         virtual ~TcpConnection();
 
         TcpConnection(const TcpConnection&) = delete;
@@ -41,6 +41,7 @@ class TcpConnection {
 
         SOCKET GetSocket();
 
+        Socket* socket_ = nullptr;
         BufferEvent* buffer_event_ = nullptr;
 };
 

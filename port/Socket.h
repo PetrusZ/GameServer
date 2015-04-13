@@ -34,22 +34,23 @@ class Socket {
         Socket(SOCKET fd = INVALID_SOCKET);
 
         // Destructor.
-        virtual ~Socket() = default;
+        virtual ~Socket();
+
+        SOCKET GetFd();
 
         // create socket fd.
         bool Create(const int type);
 
-        bool Bind(const SocketAddress& addr);
+        int Bind(const SocketAddress& addr);
 
-        bool Listen(const int backlog);
+        int Listen(const int backlog);
 
         // Open a connection to another machine.
-        bool Connect();
+        bool Connect(const SocketAddress& addr);
 
-        // Disconnect the socket.
-        void Disconnect();
+        Socket* Accept(SocketAddress* paddr);
 
-        SOCKET GetSocket();
+        bool Close();
 
     private:
         SOCKET socket_;

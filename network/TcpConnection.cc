@@ -18,7 +18,7 @@
 #include "TcpConnection.h"
 #include "TcpServer.h"
 
-TcpConnection::TcpConnection(BufferEvent* buffer_event) : buffer_event_(buffer_event) {
+TcpConnection::TcpConnection(Socket* socket, BufferEvent* buffer_event) : socket_(socket), buffer_event_(buffer_event) {
 
 }
 
@@ -26,6 +26,10 @@ TcpConnection::~TcpConnection() {
     if (buffer_event_) {
         delete buffer_event_;
         buffer_event_ = nullptr;
+    }
+    if (socket_) {
+        delete socket_;
+        socket_ = nullptr;
     }
 }
 

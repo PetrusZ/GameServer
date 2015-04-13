@@ -40,13 +40,16 @@ TcpServer::~TcpServer() {
     }
 }
 
+void TcpServer::StartLoop() {
+    event_base_->DumpEvents();
+    event_base_->Loop();
+}
+
 bool TcpServer::BindListenSocket(Socket* socket) {
-    if (!sLibEvent.NewEventBase(&event_base_, "select")) {
+    if (sLibEvent.NewEventBase(&event_base_, "select")) {
         listen_socket_ = socket;
-        event_base_->NewEvent(socket->GetSocket(), kEventRead | kEventPersist, TcpServer::AcceptCallback, this, &listen_event_);
-        if (event_base_->Loop()) {
-            return true;
-        }
+        event_base_->NewEvent(socket->GetFd(), kEventRead | kEventPersist, TcpServer::AcceptCallback, this, &listen_event_);
+        return true;
     }
     return false;
 }
@@ -71,6 +74,27 @@ void TcpServer::RemoveTcpConnection(EventSocket socket) {
     }
 }
 
+bool TcpServer::NewTcpConnection(Socket* socket) {
+    BufferEvent* buffer_event = nullptr;
+    SOCKET fd = socket->GetFd();
+    if (event_base_->NewBufferEvent(fd, kThreadSafe, &buffer_event)) {
+        TcpConnection* tcp_connection = new TcpConnection(socket, buffer_event);
+
+        buffer_event->Enable(kEventRead | kEventWrite | kEventPersist);
+        buffer_event->SetCallback(TcpServer::ReadCallback, NULL, TcpServer::EventCallback, this);
+
+        int result = AddTcpConnection(fd, tcp_connection);
+        if (result) {
+            return true;
+        }
+    }
+
+    if (buffer_event) {
+        delete buffer_event;
+    }
+    return false;
+}
+
 TcpConnection* TcpServer::GetTcpConnection(BufferEventStruct* buffer_event_struct) {
     auto it = bufevent_conn_map_.find(buffer_event_struct);
     if (it != bufevent_conn_map_.end()) {
@@ -79,19 +103,24 @@ TcpConnection* TcpServer::GetTcpConnection(BufferEventStruct* buffer_event_struc
     return nullptr;
 }
 
-void TcpServer::AcceptCallback(EventSocket socket, EventFlagType what, void* arg) {
+void TcpServer::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {
     TcpServer* tcp_server = static_cast<TcpServer*>(arg);
     BufferEvent* buffer_event = nullptr;
-    if (tcp_server->event_base_->NewBufferEvent(socket, kThreadSafe, &buffer_event)) {
-        TcpConnection* tcp_connection = new TcpConnection(buffer_event);
+    SOCKET client_fd = ::accept(fd, NULL, NULL);
+    Socket* client_socket = new Socket(client_fd);
+    if (tcp_server->event_base_->NewBufferEvent(client_fd, kThreadSafe, &buffer_event)) {
+        TcpConnection* tcp_connection = new TcpConnection(client_socket, buffer_event);
 
         buffer_event->Enable(kEventRead | kEventWrite | kEventPersist);
         buffer_event->SetCallback(TcpServer::ReadCallback, NULL, TcpServer::EventCallback, tcp_server);
 
-        tcp_server->AddTcpConnection(socket, tcp_connection);
+        int result = tcp_server->AddTcpConnection(client_fd, tcp_connection);
+        if (!result) {
+            LOG_ERROR("Socket(%d) AddTcpConnection failed!", client_fd);
+        }
     }
 
-    LOG_ERROR("Socket(%d) accept failed!", socket);
+    LOG_ERROR("Socket(%d) accept failed!", fd);
 }
 
 void TcpServer::ReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {

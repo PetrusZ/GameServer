@@ -25,7 +25,8 @@
 #include <unistd.h>
 #include <cstdlib>
 #include "port/Socket.h"
-#include "network/LibEvent.h"
+#include "port/SocketAddress.h"
+#include "network/TcpServer.h"
 
 void Master::Daemonize() {
     int fd0, fd1, fd2;
@@ -93,10 +94,17 @@ void Master::Daemonize() {
 
 bool Master::Run(int argc, char** argv) {
     std::cout << "Hello Game Server From Master" << std::endl;
-    Daemonize();
+    // Daemonize();
     HookSignal();
 
-    sleep(5);
+    SocketAddress listen_addr("127.0.0.1", 19191);
+    Socket* listen_socket = new Socket();
+    listen_socket->Create(AF_INET);
+    listen_socket->Bind(listen_addr);
+    listen_socket->Listen(256);
+
+    sTcpServer.BindListenSocket(listen_socket);
+    sTcpServer.StartLoop();
 
     UnHookSignal();
     return true;
