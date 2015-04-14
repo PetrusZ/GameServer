@@ -22,6 +22,7 @@ Accept	port/Socket.cc	/^Socket* Socket::Accept(SocketAddress *paddr) {$/;"	f	cla
 AcceptCallback	network/TcpServer.cc	/^void TcpServer::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {$/;"	f	class:TcpServer
 Active	network/Event.cc	/^void Event::Active(EventFlagType what) {$/;"	f	class:Event
 Add	network/Event.cc	/^bool Event::Add(const struct timeval *tv) {$/;"	f	class:Event
+AddListenSocket	network/TcpServer.cc	/^bool TcpServer::AddListenSocket(Socket* socket) {$/;"	f	class:TcpServer
 AddSignalEvent	test/TcpEventServer.cc	/^bool TcpEventServer::AddSignalEvent(int sig, void (*ptr)(int, short, void*))$/;"	f	class:TcpEventServer
 AddTcpConnection	network/TcpServer.cc	/^bool TcpServer::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection) {$/;"	f	class:TcpServer
 AddTimerEvent	test/TcpEventServer.cc	/^event *TcpEventServer::AddTimerEvent(void (*ptr)(int, short, void *),$/;"	f	class:TcpEventServer
@@ -56,7 +57,6 @@ BUF_SIZE	test/server.cc	36;"	d	file:
 BYTEORDER_HPP_GY7LNWF3	util/ByteOrder.hpp	19;"	d
 BackTrace	common/Common.cc	/^    int BackTrace(std::vector<std::string>& stack_trace) {$/;"	f	namespace:Common
 Bind	port/Socket.cc	/^int Socket::Bind(const SocketAddress &addr) {$/;"	f	class:Socket
-BindListenSocket	network/TcpServer.cc	/^bool TcpServer::BindListenSocket(Socket* socket) {$/;"	f	class:TcpServer
 BufferEvent	network/BufferEvent.cc	/^BufferEvent::BufferEvent(struct bufferevent* buffer_event) : buffer_event_(buffer_event) {$/;"	f	class:BufferEvent
 BufferEvent	network/BufferEvent.h	/^class BufferEvent {$/;"	c
 BufferEventDataCallBack	network/LibEventDefine.h	/^typedef bufferevent_data_cb BufferEventDataCallBack;$/;"	t
@@ -650,6 +650,7 @@ ReadEvent	test/TcpEventServer.h	/^        virtual void ReadEvent(Conn *conn) { }
 ReadEvent	test/TcpEventServerTest.cc	/^void TestServer::ReadEvent(Conn *conn)$/;"	f	class:TestServer
 ReadEventCb	test/TcpEventServer.cc	/^void TcpEventServer::ReadEventCb(struct bufferevent *bev, void *data)$/;"	f	class:TcpEventServer
 Reinit	network/EventBase.cc	/^bool EventBase::Reinit() {$/;"	f	class:EventBase
+RemoveListenSocket	network/TcpServer.cc	/^void TcpServer::RemoveListenSocket(SOCKET fd) {$/;"	f	class:TcpServer
 RemoveTcpConnection	network/TcpServer.cc	/^void TcpServer::RemoveTcpConnection(EventSocket socket) {$/;"	f	class:TcpServer
 Run	Master.cc	/^bool Master::Run(int argc, char** argv) {$/;"	f	class:Master
 SERVER_IP	test/client.cc	35;"	d	file:
@@ -1171,9 +1172,9 @@ key	library/libevent/include/event2/keyvalq_struct.h	/^	char *key;$/;"	m	struct:
 kind	library/libevent/include/event2/http_struct.h	/^	enum evhttp_request_kind kind;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_request_kind
 last_fib	test/bufferevent.cc	/^        unsigned long last_fib[2];$/;"	m	struct:count	file:
 listen	test/libevent.cc	/^bool LibEvtServer::listen(int* port)$/;"	f	class:LibEvtServer
-listen_event_	network/TcpServer.h	/^        Event* listen_event_ = nullptr;$/;"	m	class:TcpServer
-listen_socket_	network/TcpServer.h	/^        Socket* listen_socket_ = nullptr;$/;"	m	class:TcpServer
 listener_cb	test/libevent.cc	/^void LibEvtServer::listener_cb(struct evconnlistener *listener, evutil_socket_t fd,$/;"	f	class:LibEvtServer
+listenfd_event_map_	network/TcpServer.h	/^        std::map<SOCKET, Event*> listenfd_event_map_;$/;"	m	class:TcpServer
+listenfd_socket_map_	network/TcpServer.h	/^        std::map<SOCKET, Socket*> listenfd_socket_map_;$/;"	m	class:TcpServer
 lock	library/libevent/include/event2/thread.h	/^	int (*lock)(unsigned mode, void *lock);$/;"	m	struct:evthread_lock_callbacks
 lock_api_version	library/libevent/include/event2/thread.h	/^	int lock_api_version;$/;"	m	struct:evthread_lock_callbacks
 log_file_	network/LibEvent.cc	/^WritableFile* LibEvent::log_file_ = NULL;$/;"	m	class:LibEvent	file:
@@ -1262,7 +1263,7 @@ sFileSystem	port/FileSystem.h	47;"	d
 sLibEvent	network/LibEvent.h	64;"	d
 sLogger	common/Logger.h	68;"	d
 sMaster	Master.h	43;"	d
-sTcpServer	network/TcpServer.h	65;"	d
+sTcpServer	network/TcpServer.h	70;"	d
 setup_bufferevent	test/bufferevent.cc	/^struct bufferevent *setup_bufferevent(void)$/;"	f
 setup_libevent_thread	test/libevent.cc	/^void LibEvtServer::setup_libevent_thread(LibeventThread * pLibeventThread)$/;"	f	class:LibEvtServer
 signal_add	library/libevent/include/event2/event_compat.h	202;"	d

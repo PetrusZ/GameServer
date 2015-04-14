@@ -36,7 +36,7 @@ class TcpServer : public Singleton <TcpServer> {
         TcpServer(const TcpServer&);
         TcpServer& operator=(const TcpServer&);
 
-        bool BindListenSocket(Socket* socket);
+        bool AddListenSocket(Socket* socket);
         bool NewTcpConnection(Socket* socket);
 
         void StartLoop();
@@ -49,15 +49,20 @@ class TcpServer : public Singleton <TcpServer> {
         bool AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection);
         void RemoveTcpConnection(EventSocket socket);
 
+        void RemoveListenSocket(SOCKET fd);
+
         static void AcceptCallback(EventSocket socket, EventFlagType what, void* arg);
 
         //XXX: 因为libevent回调函数参数要求，不得不把BufferEventStruct暴露到接口中
         static void ReadCallback(BufferEventStruct* buffer_event_struct, void* arg);
         static void EventCallback(BufferEventStruct* buffer_event_struct, BufferEventFlagType what, void* arg);
 
+
         EventBase* event_base_ = nullptr;
-        Event* listen_event_ = nullptr;
-        Socket* listen_socket_ = nullptr;
+
+        std::map<SOCKET, Event*> listenfd_event_map_;
+        std::map<SOCKET, Socket*> listenfd_socket_map_;
+
         TcpConnection* tcp_connections_[SOCKET_HOLDER_SIZE];
         std::map<BufferEventStruct*, TcpConnection*> bufevent_conn_map_;
 };

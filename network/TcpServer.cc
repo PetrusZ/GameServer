@@ -27,13 +27,9 @@ TcpServer::~TcpServer() {
         delete event_base_;
         event_base_ = nullptr;
     }
-    if (listen_event_) {
-        delete listen_event_;
-        listen_event_ = nullptr;
-    }
-    if (listen_socket_) {
-        delete listen_socket_;
-        listen_socket_ = nullptr;
+    auto it = listenfd_event_map_.cbegin();
+    for ( ; it != listenfd_event_map_.cend(); ++it) {
+        RemoveListenSocket(it->first);
     }
     for (int i = 0; i < SOCKET_HOLDER_SIZE; ++i) {
         RemoveTcpConnection(i);
@@ -41,40 +37,33 @@ TcpServer::~TcpServer() {
 }
 
 void TcpServer::StartLoop() {
-    event_base_->DumpEvents();
     event_base_->Loop();
 }
 
-bool TcpServer::BindListenSocket(Socket* socket) {
-    if (sLibEvent.NewEventBase(&event_base_, "select")) {
-        listen_socket_ = socket;
-        event_base_->NewEvent(socket->GetFd(), kEventRead | kEventPersist, TcpServer::AcceptCallback, this, &listen_event_);
+bool TcpServer::AddListenSocket(Socket* socket) {
+    if (nullptr == event_base_ && !sLibEvent.NewEventBase(&event_base_, "select")) {
+        return false;
+    }
+
+    auto it = listenfd_event_map_.find(socket->GetFd());
+    if (it == listenfd_event_map_.end()) {
+        Event* listen_event;
+        event_base_->NewEvent(socket->GetFd(), kEventRead | kEventPersist, TcpServer::AcceptCallback, this, &listen_event);
+        listenfd_event_map_[socket->GetFd()] = listen_event;
+        listenfd_socket_map_[socket->GetFd()] = socket;
         return true;
     }
     return false;
 }
 
-bool TcpServer::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection) {
-    if (tcp_connections_[socket] == 0) {
-        tcp_connections_[socket] = tcp_connection;
-        bufevent_conn_map_[tcp_connection->buffer_event_->buffer_event_] = tcp_connection;
-        LOG_TRACE("Add TcpConnection with socket(%d)", socket);
-        return true;
-    }
-    ASSERT(0 != tcp_connections_[socket]);
-    return false;
-}
+void TcpServer::RemoveListenSocket(SOCKET fd) {
+    auto it = listenfd_event_map_.find(fd);
+    if (it != listenfd_event_map_.end()) {
+        delete it->second;
+        listenfd_event_map_.erase(it);
 
-void TcpServer::RemoveTcpConnection(EventSocket socket) {
-    if (tcp_connections_[socket] != 0) {
-        auto it = bufevent_conn_map_.find(tcp_connections_[socket]->buffer_event_->buffer_event_);
-        if (it != bufevent_conn_map_.end()) {
-            bufevent_conn_map_.erase(tcp_connections_[socket]->buffer_event_->buffer_event_);
-        }
-        delete tcp_connections_[socket];
-        tcp_connections_[socket] = 0;
-
-        // event_base_->DeleteBufferEvent(socket);
+        delete listenfd_event_map_[fd];
+        listenfd_socket_map_.erase(fd);
     }
 }
 
@@ -103,6 +92,30 @@ bool TcpServer::NewTcpConnection(Socket* socket) {
         delete buffer_event;
     }
     return false;
+}
+
+bool TcpServer::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection) {
+    if (tcp_connections_[socket] == 0) {
+        tcp_connections_[socket] = tcp_connection;
+        bufevent_conn_map_[tcp_connection->buffer_event_->buffer_event_] = tcp_connection;
+        LOG_TRACE("Add TcpConnection with socket(%d)", socket);
+        return true;
+    }
+    ASSERT(0 != tcp_connections_[socket]);
+    return false;
+}
+
+void TcpServer::RemoveTcpConnection(EventSocket socket) {
+    if (tcp_connections_[socket] != 0) {
+        auto it = bufevent_conn_map_.find(tcp_connections_[socket]->buffer_event_->buffer_event_);
+        if (it != bufevent_conn_map_.end()) {
+            bufevent_conn_map_.erase(tcp_connections_[socket]->buffer_event_->buffer_event_);
+        }
+        delete tcp_connections_[socket];
+        tcp_connections_[socket] = 0;
+
+        // event_base_->DeleteBufferEvent(socket);
+    }
 }
 
 TcpConnection* TcpServer::GetTcpConnection(BufferEventStruct* buffer_event_struct) {

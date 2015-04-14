@@ -103,7 +103,7 @@ bool Master::Run(int argc, char** argv) {
     listen_socket->Bind(listen_addr);
     listen_socket->Listen(256);
 
-    sTcpServer.BindListenSocket(listen_socket);
+    sTcpServer.AddListenSocket(listen_socket);
     sTcpServer.StartLoop();
 
     UnHookSignal();
