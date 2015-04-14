@@ -113,6 +113,30 @@ bool Master::Run(int argc, char** argv) {
 void Master::OnSignal(int signal) {
     switch (signal) {
         case SIGHUP:
+            // 平滑重启
+            break;
+        case SIGTERM:
+            // progress terminated, quick quit
+            LOG_TRACE("Received sigal SIGTERM(%d), server closing.", SIGTERM);
+            exit(EXIT_SUCCESS);
+            break;
+        case SIGABRT:
+            // ASSERT failed or catch SIGABRT from outside.
+            LOG_TRACE("Received sigal SIGABRT(%d), server closing.", SIGABRT);
+            exit(EXIT_SUCCESS);
+            break;
+        case SIGCHLD:
+            // child progress terminated.
+            break;
+        case SIGINT:
+            // quick quit, almost cause Ctrl+C
+            LOG_TRACE("Received sigal SIGINT(%d), server closing.", SIGINT);
+            exit(EXIT_SUCCESS);
+            break;
+        case SIGQUIT:
+            // easy quit,  cause Ctrl+"\"
+            LOG_TRACE("Received sigal SIGINT(%d), server closing.", SIGINT);
+            exit(EXIT_SUCCESS);
             break;
         default:
             break;
@@ -125,7 +149,8 @@ void Master::HookSignal() {
 	signal(SIGTERM, OnSignal);
 	signal(SIGABRT, OnSignal);
 	signal(SIGHUP, OnSignal);
-	signal(SIGUSR1, OnSignal);
+	signal(SIGQUIT, OnSignal);
+    signal(SIGCHLD, OnSignal);
 }
 
 void Master::UnHookSignal() {
