@@ -56,17 +56,18 @@ class EventBase {
         bool NewEventOnce(EventSocket fd, EventFlagType what, EventCallback callback, void* arg, const struct timeval* tv);
         bool NewBufferEvent(EventSocket fd, BufferEventOptionType buffer_event_option, BufferEvent** buffer_event);
 
-        void DeleteEvent(EventSocket fd);
-        void DeleteBufferEvent(EventSocket fd);
+        // void DeleteEvent(EventSocket fd);
+        // void DeleteBufferEvent(EventSocket fd);
 
     private:
-        void DeleteAllEvent();
-        void DeleteAllBufferEvent();
+        // void DeleteAllEvent();
+        // void DeleteAllBufferEvent();
 
         struct event_base* event_base_;
+
         // XXX: 一个fd只能对应一个event，但是会有一个fd同时监听读和写事件的情况
-        Event* fd_event_[SOCKET_HOLDER_SIZE];
-        BufferEvent* fd_bufferevent_[SOCKET_HOLDER_SIZE];
+        // Event* fd_event_[SOCKET_HOLDER_SIZE];
+        // BufferEvent* fd_bufferevent_[SOCKET_HOLDER_SIZE];
 };
 
 #endif /* end of include guard: EVENTBASE_H_YRLNXQR4 */

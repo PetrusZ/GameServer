@@ -20,21 +20,25 @@
 #include <string.h>
 
 EventBase::EventBase(struct event_base* base) : event_base_(base) {
-    memset(fd_event_, 0, sizeof(Event*) * SOCKET_HOLDER_SIZE);
+    // memset(fd_event_, 0, sizeof(Event*) * SOCKET_HOLDER_SIZE);
+    // memset(fd_bufferevent_, 0, sizeof(BufferEvent*) * SOCKET_HOLDER_SIZE);
 }
 
 EventBase::~EventBase() {
     if (event_base_) {
-        DeleteAllEvent();
+        // DeleteAllEvent();
+
         // 注意：不会释放当前与event_base关联的任何事件，或者关闭他们的套接字，或者释放任何指针。
          event_base_free(event_base_);
     }
 }
 
 bool EventBase::NewEvent(EventSocket fd, EventFlagType what, EventCallback callback, void* arg, Event** event) {
+    /*
     if (fd_event_[fd] != NULL) {
         return false;
     }
+    */
 
     struct event* event_struct;
     event_struct = event_new(event_base_, fd, what, callback, arg);
@@ -42,7 +46,7 @@ bool EventBase::NewEvent(EventSocket fd, EventFlagType what, EventCallback callb
     if (event_struct) {
         *event = new Event(event_struct);
         (*event)->Add();
-        fd_event_[fd] = *event;
+        // fd_event_[fd] = *event;
         LOG_TRACE("New event register with socket(%d), EventFlag(%d)", fd, what);
         return true;
     } else {
@@ -78,15 +82,17 @@ bool EventBase::NewEventOnce(EventSocket fd, EventFlagType what, EventCallback c
 }
 
 bool EventBase::NewBufferEvent(EventSocket fd, BufferEventOptionType buffer_event_option, BufferEvent** buffer_event) {
+    /*
     if (fd_bufferevent_[fd] != NULL) {
         return false;
     }
+    */
 
     struct bufferevent* buffer_event_struct = bufferevent_socket_new(event_base_, fd, buffer_event_option);
     if (buffer_event_struct) {
         *buffer_event = new BufferEvent(buffer_event_struct);
         LOG_TRACE("New buffer_event register with socket(%d), BufferEventOption(%d)", fd, buffer_event_option);
-        fd_bufferevent_[fd] = *buffer_event;
+        // fd_bufferevent_[fd] = *buffer_event;
         return true;
     } else {
         return false;
@@ -161,16 +167,19 @@ void EventBase::DumpEvents(const std::string& dump_name) {
     fclose(fp);
 }
 
+/*
 void EventBase::DeleteEvent(EventSocket fd) {
-    if (!fd_event_[fd]) {
-        delete fd_event_[fd];
+    if (fd_event_[fd]) {
+        //XXX: 只在TcpServer中管理event，而不在event_base中管理？
+        // delete fd_event_[fd];
         fd_event_[fd] = NULL;
     }
 }
 
 void EventBase::DeleteBufferEvent(EventSocket fd) {
-    if (!fd_bufferevent_[fd]) {
-        delete fd_bufferevent_[fd];
+    if (fd_bufferevent_[fd]) {
+        //XXX: 只在TcpConnection中管理bufferevent，而不在event_base中管理？
+        // delete fd_bufferevent_[fd];
         fd_bufferevent_[fd] = NULL;
     }
 }
@@ -186,3 +195,4 @@ void EventBase::DeleteAllBufferEvent() {
         DeleteBufferEvent(i);
     }
 }
+*/

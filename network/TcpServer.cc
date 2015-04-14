@@ -73,10 +73,16 @@ void TcpServer::RemoveTcpConnection(EventSocket socket) {
         }
         delete tcp_connections_[socket];
         tcp_connections_[socket] = 0;
+
+        // event_base_->DeleteBufferEvent(socket);
     }
 }
 
 bool TcpServer::NewTcpConnection(Socket* socket) {
+    if (nullptr == event_base_ && !sLibEvent.NewEventBase(&event_base_, "select")) {
+        return false;
+    }
+
     BufferEvent* buffer_event = nullptr;
     SOCKET fd = socket->GetFd();
     if (event_base_->NewBufferEvent(fd, kThreadSafe, &buffer_event)) {
@@ -88,6 +94,8 @@ bool TcpServer::NewTcpConnection(Socket* socket) {
         int result = AddTcpConnection(fd, tcp_connection);
         if (result) {
             return true;
+        } else {
+            delete tcp_connection;
         }
     }
 
@@ -120,9 +128,9 @@ void TcpServer::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {
         if (!result) {
             LOG_ERROR("Socket(%d) AddTcpConnection failed!", client_fd);
         }
+    } else {
+        LOG_ERROR("Socket(%d) accept failed!", fd);
     }
-
-    LOG_ERROR("Socket(%d) accept failed!", fd);
 }
 
 void TcpServer::ReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {
@@ -141,13 +149,15 @@ void TcpServer::ReadCallback(BufferEventStruct* buffer_event_struct, void* arg) 
         ASSERT(data_len < DATA_BUFF_SIZE);
 
         if (data_len < DATA_BUFF_SIZE) {
-            TcpServer::ProcessDataFromClient(tcp_connection->GetSocket(), data_buff, data_len);
+            tcp_server->ProcessDataFromClient(tcp_connection->GetSocket(), data_buff, data_len);
+        } else {
+            LOG_ERROR("Socket(%d) receive data length greater than buffer size(%d)", tcp_connection->GetSocket(), DATA_BUFF_SIZE);
         }
-        LOG_ERROR("Socket(%d) receive data length greater than buffer size(%d)", tcp_connection->GetSocket(), DATA_BUFF_SIZE);
 
         delete[] data_buff;
+    } else {
+        LOG_ERROR("Can't find TcpConnection in ReadCallback function.");
     }
-    LOG_ERROR("Can't find TcpConnection in ReadCallback function.");
 }
 
 void TcpServer::EventCallback(BufferEventStruct* buffer_event_struct, BufferEventFlagType what, void* arg) {
@@ -180,10 +190,17 @@ void TcpServer::EventCallback(BufferEventStruct* buffer_event_struct, BufferEven
 
 void TcpServer::ProcessDataFromClient(SOCKET fd, const void *data, size_t data_len) {
     //TODO: 处理收到的数据。交给其他线程处理
-
+    LOG_TRACE("Receive data from socket(%d), length(%d)", fd, data_len);
+    LOG_INFO("Receive data: %s", data);
 }
 
 void TcpServer::SendDataToClient(SOCKET fd, const void* data, size_t data_len) {
     //TODO: 逻辑线程处理完毕后，由此函数统一发送给客户端
-
+    if (tcp_connections_[fd]) {
+        tcp_connections_[fd]->WriteData(data, data_len);
+        LOG_TRACE("Send data to socket(%d), length(%d)", fd, data_len);
+        LOG_INFO("Send data: %s", data);
+    } else {
+        LOG_ERROR("TcpConnection(%d) not exist, send data failed.", fd);
+    }
 }

@@ -49,7 +49,7 @@ class BufferEvent {
 
     private:
         friend class TcpServer;
-        struct bufferevent* buffer_event_;
+        struct bufferevent* buffer_event_ = nullptr;
 };
 
 #endif /* end of include guard: BUFFEREVENT_H_F7VDYOKR*/

@@ -94,12 +94,12 @@ void Master::Daemonize() {
 
 bool Master::Run(int argc, char** argv) {
     std::cout << "Hello Game Server From Master" << std::endl;
-    // Daemonize();
+    Daemonize();
     HookSignal();
 
     SocketAddress listen_addr("127.0.0.1", 19191);
     Socket* listen_socket = new Socket();
-    listen_socket->Create(AF_INET);
+    listen_socket->Create(SOCK_STREAM);
     listen_socket->Bind(listen_addr);
     listen_socket->Listen(256);
 

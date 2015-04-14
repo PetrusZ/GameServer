@@ -50,6 +50,7 @@ BUFFEREVENT_H_F7VDYOKR	network/BufferEvent.h	20;"	d
 BUFFEREVENT_SSL_ACCEPTING	library/libevent/include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_ACCEPTING = 2$/;"	e	enum:bufferevent_ssl_state
 BUFFEREVENT_SSL_CONNECTING	library/libevent/include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_CONNECTING = 1,$/;"	e	enum:bufferevent_ssl_state
 BUFFEREVENT_SSL_OPEN	library/libevent/include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_OPEN = 0,$/;"	e	enum:bufferevent_ssl_state
+BUFF_SIZE	test/TcpServerTest.cc	23;"	d	file:
 BUF_SIZE	test/client.cc	33;"	d	file:
 BUF_SIZE	test/server.cc	36;"	d	file:
 BYTEORDER_HPP_GY7LNWF3	util/ByteOrder.hpp	19;"	d
@@ -253,11 +254,7 @@ DNS_QUERY_NO_SEARCH	library/libevent/include/event2/dns.h	178;"	d
 Daemonize	Master.cc	/^void Master::Daemonize() {$/;"	f	class:Master
 Debug	common/Logger.cc	/^bool Logger::Debug(const char *msg, ...) {$/;"	f	class:Logger
 Del	network/Event.cc	/^bool Event::Del() {$/;"	f	class:Event
-DeleteAllBufferEvent	network/EventBase.cc	/^void EventBase::DeleteAllBufferEvent() {$/;"	f	class:EventBase
-DeleteAllEvent	network/EventBase.cc	/^void EventBase::DeleteAllEvent() {$/;"	f	class:EventBase
-DeleteBufferEvent	network/EventBase.cc	/^void EventBase::DeleteBufferEvent(EventSocket fd) {$/;"	f	class:EventBase
 DeleteConn	test/TcpEventServer.cc	/^void ConnQueue::DeleteConn(Conn *c)$/;"	f	class:ConnQueue
-DeleteEvent	network/EventBase.cc	/^void EventBase::DeleteEvent(EventSocket fd) {$/;"	f	class:EventBase
 DeleteSignalEvent	test/TcpEventServer.cc	/^bool TcpEventServer::DeleteSignalEvent(int sig)$/;"	f	class:TcpEventServer
 DeleteTImerEvent	test/TcpEventServer.cc	/^bool TcpEventServer::DeleteTImerEvent(event *ev)$/;"	f	class:TcpEventServer
 Disable	network/BufferEvent.cc	/^void BufferEvent::Disable(EventFlagType flags) {$/;"	f	class:BufferEvent
@@ -900,7 +897,7 @@ be_ops	library/libevent/include/event2/bufferevent_struct.h	/^	const struct buff
 body_size	library/libevent/include/event2/http_struct.h	/^	size_t body_size;$/;"	m	struct:evhttp_request
 bufevent_conn_map_	network/TcpServer.h	/^        std::map<BufferEventStruct*, TcpConnection*> bufevent_conn_map_;$/;"	m	class:TcpServer
 buffer	test/server.cc	/^    char* buffer;$/;"	m	struct:sock_ev_write	file:
-buffer_event_	network/BufferEvent.h	/^        struct bufferevent* buffer_event_;$/;"	m	class:BufferEvent	typeref:struct:BufferEvent::bufferevent
+buffer_event_	network/BufferEvent.h	/^        struct bufferevent* buffer_event_ = nullptr;$/;"	m	class:BufferEvent	typeref:struct:BufferEvent::bufferevent
 buffer_event_	network/TcpConnection.h	/^        BufferEvent* buffer_event_ = nullptr;$/;"	m	class:TcpConnection
 bufferevent	library/libevent/include/event2/bufferevent.h	/^struct bufferevent$/;"	s
 bufferevent	library/libevent/include/event2/bufferevent_struct.h	/^struct bufferevent {$/;"	s
@@ -1093,8 +1090,6 @@ evutil_timerisset	library/libevent/include/event2/util.h	417;"	d
 evutil_timerisset	library/libevent/include/event2/util.h	419;"	d
 evutil_timersub	library/libevent/include/event2/util.h	380;"	d
 evutil_timersub	library/libevent/include/event2/util.h	391;"	d
-fd_bufferevent_	network/EventBase.h	/^        BufferEvent* fd_bufferevent_[SOCKET_HOLDER_SIZE];$/;"	m	class:EventBase
-fd_event_	network/EventBase.h	/^        Event* fd_event_[SOCKET_HOLDER_SIZE];$/;"	m	class:EventBase
 file_	port/WritableFile.h	/^        FILE* file_;$/;"	m	class:WritableFile
 file_name_	port/WritableFile.h	/^        std::string file_name_;$/;"	m	class:WritableFile
 flags	library/libevent/include/event2/dns_struct.h	/^	int flags;$/;"	m	struct:evdns_server_request
@@ -1204,6 +1199,7 @@ main	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^int main(int argc, char* 
 main	build/CMakeFiles/CompilerIdC/CMakeCCompilerId.c	/^void main() {}$/;"	f
 main	build/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp	/^int main(int argc, char* argv[])$/;"	f
 main	test/TcpEventServerTest.cc	/^int main()$/;"	f
+main	test/TcpServerTest.cc	/^int main(int argc, char *argv[])$/;"	f
 main	test/client.cc	/^int main() {$/;"	f
 main	test/server.cc	/^int main(){$/;"	f
 major	library/libevent/include/event2/http_struct.h	/^	char major;			\/* HTTP Major number *\/$/;"	m	struct:evhttp_request
@@ -1266,7 +1262,7 @@ sFileSystem	port/FileSystem.h	47;"	d
 sLibEvent	network/LibEvent.h	64;"	d
 sLogger	common/Logger.h	68;"	d
 sMaster	Master.h	43;"	d
-sTcpServer	network/TcpServer.h	66;"	d
+sTcpServer	network/TcpServer.h	65;"	d
 setup_bufferevent	test/bufferevent.cc	/^struct bufferevent *setup_bufferevent(void)$/;"	f
 setup_libevent_thread	test/libevent.cc	/^void LibEvtServer::setup_libevent_thread(LibeventThread * pLibeventThread)$/;"	f	class:LibEvtServer
 signal_add	library/libevent/include/event2/event_compat.h	202;"	d

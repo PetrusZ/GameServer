@@ -37,19 +37,18 @@ class TcpServer : public Singleton <TcpServer> {
         TcpServer& operator=(const TcpServer&);
 
         bool BindListenSocket(Socket* socket);
-        void RemoveTcpConnection(EventSocket socket);
-
         bool NewTcpConnection(Socket* socket);
-
-        TcpConnection* GetTcpConnection(BufferEventStruct* buffer_event_struct);
 
         void StartLoop();
 
-        static void ProcessDataFromClient(SOCKET fd, const void* data, size_t data_len);
-        static void SendDataToClient(SOCKET fd, const void* data, size_t data_len);
+        virtual void ProcessDataFromClient(SOCKET fd, const void* data, size_t data_len);
+        virtual void SendDataToClient(SOCKET fd, const void* data, size_t data_len);
 
     private:
+        TcpConnection* GetTcpConnection(BufferEventStruct* buffer_event_struct);
         bool AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection);
+        void RemoveTcpConnection(EventSocket socket);
+
         static void AcceptCallback(EventSocket socket, EventFlagType what, void* arg);
 
         //XXX: 因为libevent回调函数参数要求，不得不把BufferEventStruct暴露到接口中

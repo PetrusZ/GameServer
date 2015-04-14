@@ -24,6 +24,7 @@ BufferEvent::BufferEvent(struct bufferevent* buffer_event) : buffer_event_(buffe
 BufferEvent::~BufferEvent() {
     if (buffer_event_) {
         bufferevent_free(buffer_event_);
+        buffer_event_ = nullptr;
     }
 }
 
