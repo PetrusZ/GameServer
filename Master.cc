@@ -18,12 +18,12 @@
 
 #include "Master.h"
 #include <iostream>
-#include <signal.h>
 #include <sys/stat.h>
 #include <sys/resource.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <signal.h>
 #include "port/Socket.h"
 #include "port/SocketAddress.h"
 #include "network/TcpServer.h"
@@ -113,7 +113,8 @@ bool Master::Run(int argc, char** argv) {
 void Master::OnSignal(int signal) {
     switch (signal) {
         case SIGHUP:
-            // 平滑重启
+            // smooth restart
+            LOG_TRACE("Received sigal SIGHUP(%d), server restarting.", SIGHUP);
             break;
         case SIGTERM:
             // progress terminated, quick quit
@@ -141,22 +142,22 @@ void Master::OnSignal(int signal) {
         default:
             break;
     }
-	::signal(signal, OnSignal);
 }
 
 void Master::HookSignal() {
-    signal(SIGINT, OnSignal);
-	signal(SIGTERM, OnSignal);
-	signal(SIGABRT, OnSignal);
-	signal(SIGHUP, OnSignal);
-	signal(SIGQUIT, OnSignal);
-    signal(SIGCHLD, OnSignal);
+    Common::Signal(SIGINT, OnSignal);
+    Common::Signal(SIGTERM, OnSignal);
+	Common::Signal(SIGABRT, OnSignal);
+	Common::Signal(SIGHUP, OnSignal);
+	Common::Signal(SIGQUIT, OnSignal);
+    Common::Signal(SIGCHLD, OnSignal);
 }
 
 void Master::UnHookSignal() {
-    signal(SIGINT, 0);
-	signal(SIGTERM, 0);
-	signal(SIGABRT, 0);
-	signal(SIGHUP, 0);
-	signal(SIGUSR1, 0);
+    Common::Signal(SIGINT, SIG_DFL);
+	Common::Signal(SIGTERM, SIG_DFL);
+	Common::Signal(SIGABRT, SIG_DFL);
+	Common::Signal(SIGHUP, SIG_DFL);
+	Common::Signal(SIGQUIT, SIG_DFL);
+	Common::Signal(SIGCHLD, SIG_DFL);
 }
