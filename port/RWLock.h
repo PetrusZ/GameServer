@@ -25,9 +25,6 @@ class RWLock {
         RWLock();
         virtual ~RWLock();
 
-        RWLock(const RWLock&) = delete;
-        RWLock& operator=(const RWLock&) = delete;
-
         bool ReadLock();
         bool WriteLock();
         bool UnLock();
@@ -36,6 +33,9 @@ class RWLock {
         bool TryWriteLock();
 
     private:
+        RWLock(const RWLock&) = delete;
+        RWLock& operator=(const RWLock&) = delete;
+
         pthread_rwlock_t rwlock_;
 };
 

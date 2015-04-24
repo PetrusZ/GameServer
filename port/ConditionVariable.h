@@ -25,14 +25,14 @@ class ConditionVariable {
         ConditionVariable();
         virtual ~ConditionVariable();
 
-        ConditionVariable(const ConditionVariable&) = delete;
-        ConditionVariable& operator=(const ConditionVariable&) = delete;
-
         bool Wait(const struct timespec* timeout = nullptr);
         bool Signal();
         bool BroadCast();
 
     private:
+        ConditionVariable(const ConditionVariable&) = delete;
+        ConditionVariable& operator=(const ConditionVariable&) = delete;
+
         pthread_cond_t cond_;
         pthread_mutex_t mutex_;
 };

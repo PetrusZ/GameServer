@@ -32,9 +32,6 @@ class EventBase {
         EventBase(struct event_base* base);
         virtual ~EventBase();
 
-        EventBase(const EventBase&) = delete;
-        EventBase& operator=(const EventBase&) = delete;
-
         bool Reinit();
         std::string GetMethod();
         int GetFeatures();
@@ -60,6 +57,9 @@ class EventBase {
         // void DeleteBufferEvent(EventSocket fd);
 
     private:
+        EventBase(const EventBase&) = delete;
+        EventBase& operator=(const EventBase&) = delete;
+
         // void DeleteAllEvent();
         // void DeleteAllBufferEvent();
 

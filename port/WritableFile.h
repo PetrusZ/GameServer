@@ -27,9 +27,6 @@ class WritableFile {
         WritableFile(const std::string filename, FILE* file);
         virtual ~WritableFile();
 
-        WritableFile(const WritableFile&) = delete;
-        WritableFile& operator=(const WritableFile&) = delete;
-
         std::string GetName() { return file_name_; }
 
         bool Append(const std::string &data);
@@ -37,6 +34,9 @@ class WritableFile {
         bool Flush();
 
     private:
+        WritableFile(const WritableFile&) = delete;
+        WritableFile& operator=(const WritableFile&) = delete;
+
         std::string file_name_;
         FILE* file_;
 };

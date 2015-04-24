@@ -40,9 +40,6 @@ class LibEvent : public Singleton<LibEvent> {
         LibEvent(std::string log_file_name = "Log/libevent.log");
         ~LibEvent();
 
-        LibEvent(const LibEvent&) = delete;
-        LibEvent& operator=(const LibEvent&) = delete;
-
         bool NewEventBase(EventBase** base,
                 std::string avoid_method = "",
                 int event_featrue = kEventFeatureNull,
@@ -50,6 +47,9 @@ class LibEvent : public Singleton<LibEvent> {
                 int priority = 0);
 
     private:
+        LibEvent(const LibEvent&) = delete;
+        LibEvent& operator=(const LibEvent&) = delete;
+
         static void LogCallback(int severity, const char* msg);
         static void FatalCallback(int err);
         static bool AppendLog(const std::string& status, const char* msg, ...);

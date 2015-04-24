@@ -28,9 +28,6 @@ class FileSystem : public Singleton<FileSystem> {
         FileSystem() = default;
         ~FileSystem() = default;
 
-        FileSystem(const FileSystem&) = delete;
-        FileSystem& operator=(const FileSystem&) = delete;
-
         bool NewWritableFile(const std::string& file_name, WritableFile** result);
 
         bool FileExists(const std::string file_name);
@@ -42,6 +39,11 @@ class FileSystem : public Singleton<FileSystem> {
          *     dir_path = /foo/bar/some/ equal mkdir -p /foo/bar/some
          */
         bool MakeDirRecursive(const std::string dir_path);
+
+    private:
+        FileSystem(const FileSystem&) = delete;
+        FileSystem& operator=(const FileSystem&) = delete;
+
 };
 
 #define sFileSystem FileSystem::getSingleton()

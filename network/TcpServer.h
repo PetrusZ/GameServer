@@ -33,9 +33,6 @@ class TcpServer : public Singleton <TcpServer> {
         TcpServer();
         virtual ~TcpServer();
 
-        TcpServer(const TcpServer&);
-        TcpServer& operator=(const TcpServer&);
-
         bool AddListenSocket(Socket* socket);
         bool NewTcpConnection(Socket* socket);
 
@@ -45,6 +42,9 @@ class TcpServer : public Singleton <TcpServer> {
         virtual void SendDataToClient(SOCKET fd, const void* data, size_t data_len);
 
     private:
+        TcpServer(const TcpServer&) = delete;
+        TcpServer& operator=(const TcpServer&) = delete;
+
         TcpConnection* GetTcpConnection(BufferEventStruct* buffer_event_struct);
         bool AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection);
         void RemoveTcpConnection(EventSocket socket);

@@ -26,9 +26,6 @@ class BufferEvent {
         BufferEvent(struct bufferevent* buffer_event_);
         virtual ~BufferEvent();
 
-        BufferEvent(const BufferEvent&) = delete;
-        BufferEvent& operator=(const BufferEvent&) = delete;
-
         void SetCallback(BufferEventDataCallBack read_callback, BufferEventDataCallBack write_callback, BufferEventEventCallBack event_callback, void* callback_arg);
 
         void Enable(EventFlagType flags);
@@ -48,6 +45,9 @@ class BufferEvent {
         void UnLock();
 
     private:
+        BufferEvent(const BufferEvent&) = delete;
+        BufferEvent& operator=(const BufferEvent&) = delete;
+
         friend class TcpServer;
         struct bufferevent* buffer_event_ = nullptr;
 };

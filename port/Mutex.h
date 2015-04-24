@@ -25,14 +25,14 @@ class Mutex {
         Mutex();
         virtual ~Mutex();
 
-        Mutex(const Mutex&) = delete;
-        Mutex& operator=(const Mutex&) = delete;
-
         bool Lock();
         bool TryLock();
         bool UnLock();
 
     private:
+        Mutex(const Mutex&) = delete;
+        Mutex& operator=(const Mutex&) = delete;
+
         pthread_mutex_t mutex_;
 
         static bool attr_initalized_;

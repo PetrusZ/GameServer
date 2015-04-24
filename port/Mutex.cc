@@ -26,7 +26,7 @@ Mutex::Mutex() {
         pthread_mutexattr_settype(&attr_, PTHREAD_MUTEX_RECURSIVE);
         attr_initalized_ = true;
     }
-    pthread_mutex_init(&mutex_, attr_);
+    pthread_mutex_init(&mutex_, &attr_);
 }
 
 Mutex::~Mutex() {

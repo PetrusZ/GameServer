@@ -20,7 +20,12 @@
 #define THREADPOOL_H_O4CDDLR9
 
 class ThreadPool {
+    public:
+        ThreadPool();
+        virtual ~ThreadPool();
 
+    private:
+        /* data */
 };
 
 #endif /* end of include guard: THREADPOOL_H_O4CDDLR9 */

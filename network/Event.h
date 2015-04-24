@@ -27,9 +27,6 @@ class Event {
         Event(struct event* event);
         virtual ~Event();
 
-        Event(const Event&) = delete;
-        Event& operator=(const Event&) = delete;
-
         bool Add(const struct timeval *tv = nullptr);
         bool Del();
         bool PrioritySet(int priority);
@@ -43,6 +40,9 @@ class Event {
         bool Initialized();
 
     private:
+        Event(const Event&) = delete;
+        Event& operator=(const Event&) = delete;
+
         // TODO
         // struct event_base* GetBase();
 
