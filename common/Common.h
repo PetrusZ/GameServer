@@ -27,7 +27,7 @@
 #include <string>
 
 #if !defined(DEBUG)
-#define ASSERT(EXPR) if (!(EXPR)) { Common::AssertFailed(__FILE__, __LINE__, #EXPR); abort(); }
+#define ASSERT(EXPR) if (!(EXPR)) { Common::AssertFailed(__FILE__, __LINE__, #EXPR); ((void(*)())0)(); }
 #else
 #define ASSERT(EXPR)
 #endif

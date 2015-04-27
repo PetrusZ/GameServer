@@ -26,6 +26,7 @@
 #include <signal.h>
 #include "port/Socket.h"
 #include "port/SocketAddress.h"
+#include "port/ThreadPool.h"
 #include "network/TcpServer.h"
 
 void Master::Daemonize() {
@@ -96,6 +97,8 @@ bool Master::Run(int argc, char** argv) {
     std::cout << "Hello Game Server From Master" << std::endl;
     Daemonize();
     HookSignal();
+
+    sThreadPool.Startup();
 
     SocketAddress listen_addr("127.0.0.1", 19191);
     Socket* listen_socket = new Socket();

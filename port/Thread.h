@@ -19,6 +19,7 @@
 #define THREAD_H_TPCQFSB7
 
 #include <pthread.h>
+#include "Mutex.h"
 
 class ThreadBase {
     public:
@@ -33,9 +34,6 @@ class ThreadBase {
 class ThreadController {
     public:
         ThreadController() {
-            pthread_mutex_init(&mutex_, NULL);
-            pthread_cond_init(&cond_, NULL);
-            thread_id_ = GenerateThreadId();
         }
 
         virtual ~ThreadController() {
@@ -44,7 +42,11 @@ class ThreadController {
         }
 
         void Init(pthread_t pthread_id) {
+            pthread_mutex_init(&mutex_, NULL);
+            pthread_cond_init(&cond_, NULL);
+
             pthread_id_ = pthread_id;
+            thread_id_ = GenerateThreadId();
         }
 
         void Wait() {
@@ -82,7 +84,9 @@ class ThreadController {
 class Thread {
     public:
         ThreadBase* ExecutionTarget_;
-        ThreadController ControlInterface;
+        ThreadController ControlInterface_;
+        Mutex SetupMutex_;
+        bool DeleteAfterExit_;
 };
 
 #endif /* end of include guard: THREAD_H_TPCQFSB7 */
