@@ -41,7 +41,7 @@ class ThreadController {
             pthread_cond_destroy(&cond_);
         }
 
-        void Init(pthread_t pthread_id) {
+        void Setup(pthread_t pthread_id) {
             pthread_mutex_init(&mutex_, NULL);
             pthread_cond_init(&cond_, NULL);
 

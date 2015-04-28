@@ -46,6 +46,16 @@ link_directories(${PROJECT_SOURCE_DIR}/library)
 add_executable(GameServer ${SRC_LIST})
 target_link_libraries(GameServer event_core event_pthreads)
 
+set(SCRIPT_LIST
+    scripts/Start.sh
+    scripts/Stop.sh
+    scripts/ClearLog.sh
+    )
+# INSTALL(DIRECTORY script DESTINATION ${EXECUTABLE_OUTPUT_PATH} PATTERN "scripts/*" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
+
+# message(STATUS "SCRIPT_LIST: ${SCRIPT_LIST}")
+INSTALL(PROGRAMS ${SCRIPT_LIST} DESTINATION ${EXECUTABLE_OUTPUT_PATH} PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
+
 ################################################# test #################################################
 
 set(TEST_CLIENT_SRC_LIST

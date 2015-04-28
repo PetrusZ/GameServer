@@ -20,6 +20,7 @@
 #define THREADPOOL_H_O4CDDLR9
 
 #include <set>
+#include <cstdint>
 #include "Thread.h"
 #include "base/Singleton.hpp"
 
@@ -32,6 +33,8 @@ class ThreadPool : public Singleton <ThreadPool> {
 
         // shutdown all threads
         void Shutdown();
+
+        void IntegrityCheck();
 
         // creates a thread, returns a handle to it.
         Thread* StartThread(ThreadBase* execution_target);
@@ -46,16 +49,22 @@ class ThreadPool : public Singleton <ThreadPool> {
         // prints some neat debug stats
         void ShowStatus();
 
+        // kill count free threads
+        void KillIdleThreads(uint32_t count);
+
+        // resets the gobble counter
+        void Gobble() { threads_eaten_ = idle_threads_.size(); }
+
         static void* ThreadProcess(void *arg);
 
     private:
         const int kThreadReserve = 10;
 
-        uint32_t threads_requested_since_last_check_;
-        uint32_t threads_freed_since_last_check_;
-        uint32_t threads_exited_since_last_check_;
-        uint32_t threads_to_exit_;
-        int32_t threads_eaten_;
+        uint32_t threads_requested_since_last_check_ = 0;
+        uint32_t threads_freed_since_last_check_ = 0;
+        uint32_t threads_exited_since_last_check_ = 0;
+        uint32_t threads_to_exit_ = 0;
+        int32_t threads_eaten_ = 0;
 
         std::set<Thread*> active_threads_;
         std::set<Thread*> idle_threads_;

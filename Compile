@@ -1,4 +1,4 @@
 #!/bin/bash
 root=$(dirname "$0")
 cd ${root}/build;
-cmake ..; make -j4
+cmake ..; make -j4; make install

@@ -55,3 +55,11 @@ std::string Env::GetTime() {
 
     return time;
 }
+
+void Env::Sleep(unsigned long time_ms) {
+    timespec tv;
+    tv.tv_sec = time_ms / 1000;
+    tv.tv_nsec = (time_ms % 1000) * 1000 * 1000;
+
+    nanosleep(&tv, NULL);
+}

@@ -34,6 +34,8 @@ class Env : public Singleton<Env> {
         std::string GetDate();
         std::string GetTime();
 
+        void Sleep(unsigned long time_ms);
+
     private:
         Env(const Env&) = delete;
         Env& operator=(const Env&) = delete;

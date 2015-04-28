@@ -106,6 +106,8 @@ bool Master::Run(int argc, char** argv) {
     listen_socket->Bind(listen_addr);
     listen_socket->Listen(256);
 
+    sThreadPool.ShowStatus();
+
     sTcpServer.AddListenSocket(listen_socket);
     sTcpServer.StartLoop();
 
