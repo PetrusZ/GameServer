@@ -15,8 +15,10 @@
  *
  * =====================================================================================
  */
-#include "TcpServer.h"
 #include <cstring>
+#include "TcpServer.h"
+#include "TcpWorkerThread.h"
+#include "port/ThreadPool.h"
 
 TcpServer::TcpServer() {
     memset(tcp_connections_, 0, sizeof(TcpConnection*) * SOCKET_HOLDER_SIZE);
@@ -201,10 +203,10 @@ void TcpServer::EventCallback(BufferEventStruct* buffer_event_struct, BufferEven
     }
 }
 
-void TcpServer::ProcessDataFromClient(SOCKET fd, const void *data, size_t data_len) {
+void TcpServer::ProcessDataFromClient(SOCKET fd, const void* data, size_t data_len) {
     //TODO: 处理收到的数据。交给其他线程处理
     LOG_TRACE("Receive data from socket(%d), length(%d)", fd, data_len);
-    LOG_INFO("Receive data: %s", data);
+    sThreadPool.ExecuteTask(new TcpWorkerThread(fd, data, data_len));
 }
 
 void TcpServer::SendDataToClient(SOCKET fd, const void* data, size_t data_len) {

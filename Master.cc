@@ -24,10 +24,9 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <signal.h>
-#include "port/Socket.h"
-#include "port/SocketAddress.h"
 #include "port/ThreadPool.h"
 #include "network/TcpServer.h"
+#include "network/TcpWatcherThread.h"
 
 void Master::Daemonize() {
     int fd0, fd1, fd2;
@@ -99,17 +98,10 @@ bool Master::Run(int argc, char** argv) {
     HookSignal();
 
     sThreadPool.Startup();
+    sThreadPool.ExecuteTask(new TcpWatcherThread("127.0.0.1", 19191));
 
-    SocketAddress listen_addr("127.0.0.1", 19191);
-    Socket* listen_socket = new Socket();
-    listen_socket->Create(SOCK_STREAM);
-    listen_socket->Bind(listen_addr);
-    listen_socket->Listen(256);
-
-    sThreadPool.ShowStatus();
-
-    sTcpServer.AddListenSocket(listen_socket);
-    sTcpServer.StartLoop();
+    while(true) {
+    }
 
     UnHookSignal();
     return true;
@@ -126,11 +118,13 @@ void Master::OnSignal(int signal) {
             LOG_TRACE("Received sigal SIGTERM(%d), server closing.", SIGTERM);
             exit(EXIT_SUCCESS);
             break;
+            /*
         case SIGABRT:
             // ASSERT failed or catch SIGABRT from outside.
             LOG_TRACE("Received sigal SIGABRT(%d), server closing.", SIGABRT);
             exit(EXIT_SUCCESS);
             break;
+            */
         case SIGCHLD:
             // child progress terminated.
             break;
@@ -140,7 +134,7 @@ void Master::OnSignal(int signal) {
             exit(EXIT_SUCCESS);
             break;
         case SIGQUIT:
-            // easy quit,  cause Ctrl+"\"
+            // easy quit, cause Ctrl+"\"
             LOG_TRACE("Received sigal SIGINT(%d), server closing.", SIGINT);
             exit(EXIT_SUCCESS);
             break;

@@ -217,9 +217,7 @@ void ThreadPool::ShowStatus() {
 
 void* ThreadPool::ThreadProcess(void *arg) {
     Thread* thread = (Thread*)arg;
-    thread->SetupMutex_.Lock();
     LOG_TRACE("ThreadPool, Thread %u started.", thread->ControlInterface_.thread_id());
-    thread->SetupMutex_.UnLock();
 
     while(true) {
         if (NULL != thread->ExecutionTarget_) {

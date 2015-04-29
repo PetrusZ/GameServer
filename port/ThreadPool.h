@@ -42,12 +42,12 @@ class ThreadPool : public Singleton <ThreadPool> {
         // grabs/spawns a thread, and tells it to execute a task.
         void ExecuteTask(ThreadBase* execution_target);
 
+        // prints some neat debug stats
+        void ShowStatus();
+    private:
         // return false - suspend ourselves, and wait for a future task.
         // return true - exit, we're shutting down or no longer needed.
         bool ThreadExit(Thread* thread);
-
-        // prints some neat debug stats
-        void ShowStatus();
 
         // kill count free threads
         void KillIdleThreads(uint32_t count);
@@ -57,7 +57,6 @@ class ThreadPool : public Singleton <ThreadPool> {
 
         static void* ThreadProcess(void *arg);
 
-    private:
         const int kThreadReserve = 10;
 
         uint32_t threads_requested_since_last_check_ = 0;
