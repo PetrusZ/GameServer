@@ -27,6 +27,9 @@
 #include "port/ThreadPool.h"
 #include "network/TcpServer.h"
 #include "network/TcpWatcherThread.h"
+#include "game/World.h"
+
+volatile bool Master::stop_event_ = false;
 
 void Master::Daemonize() {
     int fd0, fd1, fd2;
@@ -100,7 +103,36 @@ bool Master::Run(int argc, char** argv) {
     sThreadPool.Startup();
     sThreadPool.ExecuteTask(new TcpWatcherThread("127.0.0.1", 19191));
 
-    while(true) {
+    uint64_t current_time = 0;
+    uint64_t prev_time = sEnv.GetRealMSTime();
+    uint64_t diff_time = 0;
+    uint64_t prev_sleep = 0;
+
+    uint32_t loop_counter = 0;
+
+    while (!stop_event_) {
+        current_time = sEnv.GetRealMSTime();
+        diff_time = current_time - prev_time;
+        ++loop_counter;
+
+        /* tick running */
+        sWorld.Update(diff_time);
+
+        /*
+           tick complete, update time and sleep
+
+           diff (D0) include time of previous sleep (d0) + tick time (t0)
+           we want that next d1 + t1 == WORLD_SLEEP_CONST
+           we can't know next t1 and then can use (t0 + d1) == WORLD_SLEEP_CONST requirement
+           d1 = WORLD_SLEEP_CONST - t0 = WORLD_SLEEP_CONST - (D0 - d0) = WORLD_SLEEP_CONST + d0 - D0
+        */
+        prev_time = sEnv.GetRealMSTime();
+        if (diff_time <= TICK_TIME + prev_sleep) {
+            prev_sleep = TICK_TIME  + prev_sleep - diff_time;
+            sEnv.Sleep(prev_sleep);
+        } else {
+            prev_sleep = 0;
+        }
     }
 
     UnHookSignal();

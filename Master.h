@@ -22,6 +22,8 @@
 #include "base/Singleton.hpp"
 #include "common/Common.h"
 
+#define TICK_TIME 50
+
 class Master : public Singleton<Master> {
     public:
         Master() = default;
@@ -38,6 +40,9 @@ class Master : public Singleton<Master> {
         void UnHookSignal();
 
         static void OnSignal(int signal);
+
+        // volatile bool stop_event_ = false;
+        static volatile bool stop_event_;
 };
 
 #define sMaster Master::getSingleton()

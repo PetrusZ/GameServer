@@ -1,0 +1,12 @@
+{
+    "server_name":"GameSever",
+    "ip":"10.1.1.220",
+    "port":10101,
+    "detail":{
+        "author":"Petrus",
+        "email":"silencly07@gmail.com",
+        "is_released":false,
+        "version":0.21
+    },
+    "test1":{ "test2":{ "test3":{ "test4":"test5" } } }
+}

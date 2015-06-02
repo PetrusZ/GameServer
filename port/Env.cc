@@ -36,8 +36,17 @@ uint64_t Env::GetTid() {
     return thread_id;
 }
 
-time_t Env::GetNowStamp() {
-    return time(NULL);
+uint64_t Env::GetRealMSTime() {
+    UpdateTime();
+    return (tv_.tv_sec * 1000) + (tv_.tv_usec / 1000);
+}
+
+uint64_t Env::GetMSTime() {
+    return (tv_.tv_sec * 1000) + (tv_.tv_usec / 1000);
+}
+
+uint32_t Env::GetNowStamp() {
+    return tv_.tv_sec;
 }
 
 std::string Env::GetDate() {
@@ -62,4 +71,8 @@ void Env::Sleep(unsigned long time_ms) {
     tv.tv_nsec = (time_ms % 1000) * 1000 * 1000;
 
     nanosleep(&tv, NULL);
+}
+
+void Env::UpdateTime() {
+    gettimeofday(&tv_, NULL);
 }

@@ -20,17 +20,25 @@
 #define ENV_H_CIE5HSSN
 
 #include "base/Singleton.hpp"
+#include <sys/time.h>
 #include <string>
 #include <cstdint>
 
 class Env : public Singleton<Env> {
     public:
-        Env() = default;
+        Env() {
+            UpdateTime();
+        }
+
         virtual ~Env() = default;
 
         uint64_t GetTid();
 
-        time_t GetNowStamp();
+        void UpdateTime();
+        uint64_t GetRealMSTime();
+        uint64_t GetMSTime();
+        uint32_t GetNowStamp();
+
         std::string GetDate();
         std::string GetTime();
 
@@ -39,6 +47,8 @@ class Env : public Singleton<Env> {
     private:
         Env(const Env&) = delete;
         Env& operator=(const Env&) = delete;
+
+        struct timeval tv_;
 };
 
 #define sEnv Env::getSingleton()
