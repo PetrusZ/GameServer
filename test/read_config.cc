@@ -25,13 +25,22 @@ int main(int argc, char *argv[])
     bool result = config.LoadFile("config.json");
     printf("load result: %d\n", result);
 
-    printf("server_name: %s\n", config.GetString("server_name").c_str());
+    int intval;
+    std::string strval;
+    bool boolval;
+    float fltval;
+
+    if (config.GetString("server_name", NULL, strval)) {
+        printf("server_name: %s\n", strval.c_str());
+    }
+    /*
     printf("ip: %s\n", config.GetString("ip").c_str());
     printf("port: %d\n", config.GetInt("port"));
     printf("author: %s\n", config.GetString("detail", "author").c_str());
     printf("email: %s\n", config.GetString("detail", "email").c_str());
     printf("is_released: %d\n", config.GetBool("detail", "is_released"));
     printf("version: %f\n", config.GetFloat("detail", "version"));
+    */
 
     printf("default test: %s\n", config.GetStringDefault("test").c_str());
 

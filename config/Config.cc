@@ -28,6 +28,7 @@
 bool ConfigFile::LoadFile(const char* file_name) {
     FILE* fp = fopen(file_name, "r");
     if (!fp) {
+        LOG_ERROR("Config file(%s) load failed! Can't find config file!", file_name);
         return false;
     }
 
@@ -41,23 +42,24 @@ bool ConfigFile::LoadFile(const char* file_name) {
         return true;
     }
 
-    LOG_ERROR("Config file(%s) load failed!", file_name);
+    LOG_ERROR("Config file(%s) load failed! Json parse error!", file_name);
     fclose(fp);
 
     return false;
 }
 
-std::string ConfigFile::GetString(const char *key, const char* field) {
+bool ConfigFile::GetString(const char *key, const char* field, std::string& value) {
     rapidjson::Value val;
     if (GetValue(key, field, val) && val.IsString()) {
-        return val.GetString();
+        value = val.GetString();
+        return true;
     }
-    return "";
+    return false;
 }
 
 std::string ConfigFile::GetStringDefault(const char *key, const char* field, const char* default_value) {
-    std::string value = GetString(key, field);
-    if ("" != value) {
+    std::string value;
+    if (GetString(key, field, value)) {
         return value;
     }
     return default_value;
@@ -78,17 +80,18 @@ std::string ConfigFile::GetStringVA(const char *default_value, int argc, ...) {
     return default_value;
 }
 
-int ConfigFile::GetInt(const char *key, const char* field) {
+bool ConfigFile::GetInt(const char *key, const char* field, int& value) {
     rapidjson::Value val;
     if (GetValue(key, field, val) && val.IsInt()) {
-        return val.GetInt();
+        value = val.GetInt();
+        return true;
     }
-    return 0;
+    return false;
 }
 
 int ConfigFile::GetIntDefault(const char *key, const char* field, int default_value) {
-    int value = GetInt(key, field);
-    if (0 != value) {
+    int value;
+    if (GetInt(key, field, value)) {
         return value;
     }
     return default_value;
@@ -109,17 +112,18 @@ int ConfigFile::GetIntVA(int default_value, int argc, ...) {
     return default_value;
 }
 
-bool ConfigFile::GetBool(const char *key, const char* field) {
+bool ConfigFile::GetBool(const char *key, const char* field, bool& value) {
     rapidjson::Value val;
     if (GetValue(key, field, val) && val.IsBool()) {
-        return val.GetBool();
+        value = val.GetBool();
+        return true;
     }
     return false;
 }
 
 bool ConfigFile::GetBoolDefault(const char *key, const char* field, bool default_value) {
-    bool value = GetBool(key, field);
-    if (false != value) {
+    bool value;
+    if (GetBool(key, field, value)) {
         return value;
     }
     return default_value;
@@ -140,17 +144,18 @@ bool ConfigFile::GetBoolVA(bool default_value, int argc, ...) {
     return default_value;
 }
 
-float ConfigFile::GetFloat(const char *key, const char* field) {
+bool ConfigFile::GetFloat(const char *key, const char* field, float& value) {
     rapidjson::Value val;
     if (GetValue(key, field, val) && val.IsDouble()) {
-        return val.GetDouble();
+        value = val.GetDouble();
+        return true;
     }
-    return 0.0f;
+    return false;
 }
 
 float ConfigFile::GetFloatDefault(const char *key, const char* field, float default_value) {
-    float value = GetFloat(key, field);
-    if (0.0f != value) {
+    float value;
+    if (GetFloat(key, field, value)) {
         return value;
     }
     return default_value;

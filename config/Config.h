@@ -28,19 +28,19 @@ class ConfigFile {
 
         bool LoadFile(const char* file_name);
 
-        std::string GetString(const char* key, const char* field = NULL);
+        bool GetString(const char* key, const char* field, std::string& value);
         std::string GetStringDefault(const char* key, const char* field = NULL, const char* default_value = "");
         std::string GetStringVA(const char* default_value, int argc, ...);
 
-        int GetInt(const char* key, const char* field = NULL);
+        bool GetInt(const char* key, const char* field, int& value);
         int GetIntDefault(const char* key, const char* field = NULL, int default_value = 0);
         int GetIntVA(int default_value, int argc, ...);
 
-        bool GetBool(const char* key, const char* field = NULL);
+        bool GetBool(const char* key, const char* field, bool& value);
         bool GetBoolDefault(const char* key, const char* field = NULL, bool default_value = false);
         bool GetBoolVA(bool default_value, int argc, ...);
 
-        float GetFloat(const char* key, const char* field = NULL);
+        bool GetFloat(const char* key, const char* field, float& value);
         float GetFloatDefault(const char* key, const char* field = NULL, float default_value = 0.0f);
         float GetFloatVA(float default_value, int argc, ...);
 
