@@ -97,6 +97,14 @@ void Master::Daemonize() {
 
 bool Master::Run(int argc, char** argv) {
     std::cout << "Hello Game Server From Master" << std::endl;
+
+    uint32_t pid = WritePID();
+    if (!pid) {
+        LOG_ERROR("Start encounter ERROR, can't write pid");
+        return false;
+    }
+    LOG_TRACE("Process ID: %u", pid);
+
     Daemonize();
     HookSignal();
 
@@ -191,4 +199,26 @@ void Master::UnHookSignal() {
 	Common::Signal(SIGHUP, SIG_DFL);
 	Common::Signal(SIGQUIT, SIG_DFL);
 	Common::Signal(SIGCHLD, SIG_DFL);
+}
+
+uint32_t Master::WritePID() {
+    int fd = open("GameServer.pid", O_CREAT | O_WRONLY, S_IRWXU);
+    FILE* fp = fdopen(fd, "w");
+
+    if (fp) {
+        struct flock lock;
+        lock.l_type = F_WRLCK;
+        lock.l_whence = SEEK_SET;
+        if (fcntl(fd, F_SETLK, &lock) < 0){
+            fclose(fp);
+            return 0;
+        }
+
+        uint32_t pid = getpid();
+        fprintf(fp, "%u", pid);
+        fclose(fp);
+        return pid;
+    }
+
+    return 0;
 }
