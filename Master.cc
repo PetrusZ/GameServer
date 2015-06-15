@@ -98,15 +98,15 @@ void Master::Daemonize() {
 bool Master::Run(int argc, char** argv) {
     std::cout << "Hello Game Server From Master" << std::endl;
 
+    Daemonize();
+    HookSignal();
+
     uint32_t pid = WritePID();
     if (!pid) {
-        LOG_ERROR("Start encounter ERROR, can't write pid");
+        LOG_ERROR("Encounter ERROR while starting, can't write pid!");
         return false;
     }
     LOG_TRACE("Process ID: %u", pid);
-
-    Daemonize();
-    HookSignal();
 
     sThreadPool.Startup();
     sThreadPool.ExecuteTask(new TcpWatcherThread("127.0.0.1", 19191));
@@ -210,13 +210,14 @@ uint32_t Master::WritePID() {
         lock.l_type = F_WRLCK;
         lock.l_whence = SEEK_SET;
         if (fcntl(fd, F_SETLK, &lock) < 0){
-            fclose(fp);
+            // fclose(fp);
             return 0;
         }
 
         uint32_t pid = getpid();
         fprintf(fp, "%u", pid);
-        fclose(fp);
+        fflush(fp);
+        // fclose(fp);
         return pid;
     }
 
