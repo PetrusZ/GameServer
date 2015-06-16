@@ -17,18 +17,17 @@ set(CMAKE_CXX_FLAGS "-std=c++11  -rdynamic")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Wall")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -Wall")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-set(INCLUDE_DIR_LIST ${PROJECT_SOURCE_DIR})
 
 ############################################## GameServer ##############################################
 
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
-aux_source_directory(. ROOT_SRC_LIST)
-aux_source_directory(./network NETWORK_SRC_LIST)
-aux_source_directory(./port PORT_SRC_LIST)
-aux_source_directory(./common COMMON_SRC_LIST)
-aux_source_directory(./util UTIL_SRC_LIST)
-aux_source_directory(./game GAME_SRC_LIST)
+aux_source_directory(./src ROOT_SRC_LIST)
+aux_source_directory(./src/shared/network NETWORK_SRC_LIST)
+aux_source_directory(./src/shared/port PORT_SRC_LIST)
+aux_source_directory(./src/shared/common COMMON_SRC_LIST)
+aux_source_directory(./src/shared/util UTIL_SRC_LIST)
+aux_source_directory(./src/gateway GATEWAY_SRC_LIST)
 
 set(SRC_LIST
     ${ROOT_SRC_LIST}
@@ -36,22 +35,32 @@ set(SRC_LIST
     ${PORT_SRC_LIST}
     ${COMMON_SRC_LIST}
     ${UTIL_SRC_LIST}
-    ${GAME_SRC_LIST}
+    ${GATEWAY_SRC_LIST}
+    )
+
+set(INCLUDE_DIR_LIST
+    ./src/shared
+    ./src/gateway
+    )
+
+set(LIBRARY_DIR_LIST
+    ${PROJECT_SOURCE_DIR}/src/shared/library
     )
 
 message(STATUS "SRC_LIST: ${SRC_LIST}")
 message(STATUS "INCLUDE_DIR_LIST: ${INCLUDE_DIR_LIST}")
+message(STATUS "LIBRARY_DIR_LIST: ${LIBRARY_DIR_LIST}")
 
 include_directories(${INCLUDE_DIR_LIST})
-link_directories(${PROJECT_SOURCE_DIR}/library)
+link_directories(${LIBRARY_DIR_LIST})
 
-add_executable(GameServer ${SRC_LIST})
-target_link_libraries(GameServer event_core event_pthreads)
+add_executable(Gateway ${SRC_LIST})
+target_link_libraries(Gateway event_core event_pthreads)
 
 set(SCRIPT_LIST
-    scripts/Start.sh
-    scripts/Stop.sh
-    scripts/ClearLog.sh
+    ./src/scripts/Start.sh
+    ./src/scripts/Stop.sh
+    ./src/scripts/ClearLog.sh
     )
 # INSTALL(DIRECTORY script DESTINATION ${EXECUTABLE_OUTPUT_PATH} PATTERN "scripts/*" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
 

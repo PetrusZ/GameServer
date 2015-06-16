@@ -27,7 +27,7 @@
 #include "port/ThreadPool.h"
 #include "network/TcpServer.h"
 #include "network/TcpWatcherThread.h"
-#include "game/World.h"
+#include "World.h"
 
 volatile bool Master::stop_event_ = false;
 
