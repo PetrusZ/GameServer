@@ -16,7 +16,11 @@
  * =====================================================================================
  */
 #include "World.h"
+#include "network/TcpServerBase.h"
 
 void World::Update(uint64_t diff) {
-    LOG_INFO("World Update: diff is %ld", diff);
+    Packet_t* packet;
+    while((packet = sTcpServer.PopClientPacket()) != nullptr) {
+        LOG_KINFO("World Update", "Receive fd(%d) length(%d) data: %s", packet->fd_, packet->data_len_, packet->data_);
+    }
 }

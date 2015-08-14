@@ -1,9 +1,9 @@
 /*
  * =====================================================================================
  *
- *       Filename:  TcpWatcherThread.h
+ *       Filename:  TcpServerBaseThread.h
  *
- *    Description:  TcpWatcherThread
+ *    Description:  TcpServerBaseThread
  *
  *        Version:  1.0
  *        Created:  04/29/2015 02:48:42 PM
@@ -22,11 +22,11 @@
 #include "port/Thread.h"
 #include "port/SocketAddress.h"
 
-class TcpWatcherThread : public ThreadBase {
+class TcpServerBaseThread : public ThreadBase {
     public:
-        TcpWatcherThread(const std::string& hostname, const uint16_t port);
-        TcpWatcherThread(const uint32_t ip, const uint16_t port);
-        virtual ~TcpWatcherThread();
+        TcpServerBaseThread(const std::string& hostname, const uint16_t port);
+        TcpServerBaseThread(const uint32_t ip, const uint16_t port);
+        virtual ~TcpServerBaseThread();
 
         bool Run();
         void OnShutdown();

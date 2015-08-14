@@ -1,9 +1,9 @@
 /*
  * =====================================================================================
  *
- *       Filename:  TcpServer.h
+ *       Filename:  TcpServerBase.h
  *
- *    Description:  TcpServer
+ *    Description:  TcpServerBase
  *
  *        Version:  1.0
  *        Created:  04/08/2015 06:35:11 PM
@@ -15,35 +15,39 @@
  *
  * =====================================================================================
  */
-#ifndef TCPSERVER_H_WIP2ZBBJ
-#define TCPSERVER_H_WIP2ZBBJ
+#ifndef TcpServerBase_H_WIP2ZBBJ
+#define TcpServerBase_H_WIP2ZBBJ
 
+#include "NetWork.h"
 #include "LibEvent.h"
 #include "EventBase.h"
-#include "base/Singleton.hpp"
 #include "port/Socket.h"
 #include "TcpConnection.h"
 #include "common/Common.h"
+#include "base/Singleton.hpp"
 #include <map>
+#include <queue>
 
 #define SOCKET_HOLDER_SIZE 30000
 
-class TcpServer : public Singleton <TcpServer> {
+class TcpServerBase : public Singleton <TcpServerBase> {
     public:
-        TcpServer();
-        virtual ~TcpServer();
+        TcpServerBase();
+        virtual ~TcpServerBase();
 
         bool AddListenSocket(Socket* socket);
         bool NewTcpConnection(Socket* socket);
 
         void StartLoop();
 
-        virtual void ProcessDataFromClient(SOCKET fd, const void* data, size_t data_len);
-        virtual void SendDataToClient(SOCKET fd, const void* data, size_t data_len);
+        Packet_t* PopClientPacket();
+        Packet_t* PopServerPacket();
+
+        virtual void SendData(SOCKET fd, const void* data, size_t data_len);
 
     private:
-        TcpServer(const TcpServer&) = delete;
-        TcpServer& operator=(const TcpServer&) = delete;
+        TcpServerBase(const TcpServerBase&) = delete;
+        TcpServerBase& operator=(const TcpServerBase&) = delete;
 
         TcpConnection* GetTcpConnection(BufferEventStruct* buffer_event_struct);
         bool AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection);
@@ -54,8 +58,14 @@ class TcpServer : public Singleton <TcpServer> {
         static void AcceptCallback(EventSocket socket, EventFlagType what, void* arg);
 
         //XXX: 因为libevent回调函数参数要求，不得不把BufferEventStruct暴露到接口中
-        static void ReadCallback(BufferEventStruct* buffer_event_struct, void* arg);
+        static Packet_t* ReadCallback(BufferEventStruct* buffer_event_struct, void* arg);
+        static void ClientReadCallback(BufferEventStruct* buffer_event_struct, void* arg);
+        static void ServerReadCallback(BufferEventStruct* buffer_event_struct, void* arg);
+
         static void EventCallback(BufferEventStruct* buffer_event_struct, BufferEventFlagType what, void* arg);
+
+        void PushClientPacket(Packet_t* packet);
+        void PushServerPacket(Packet_t* packet);
 
 
         EventBase* event_base_ = nullptr;
@@ -65,8 +75,11 @@ class TcpServer : public Singleton <TcpServer> {
 
         TcpConnection* tcp_connections_[SOCKET_HOLDER_SIZE];
         std::map<BufferEventStruct*, TcpConnection*> bufevent_conn_map_;
+
+        std::queue<Packet_t*> client_recv_queue_;
+        std::queue<Packet_t*> server_recv_queue_;
 };
 
-#define sTcpServer TcpServer::getSingleton()
+#define sTcpServer TcpServerBase::getSingleton()
 
-#endif /* end of include guard: TCPSERVER_H_WIP2ZBBJ */
+#endif /* end of include guard: TcpServerBase_H_WIP2ZBBJ */

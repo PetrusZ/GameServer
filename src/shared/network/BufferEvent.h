@@ -48,7 +48,7 @@ class BufferEvent {
         BufferEvent(const BufferEvent&) = delete;
         BufferEvent& operator=(const BufferEvent&) = delete;
 
-        friend class TcpServer;
+        friend class TcpServerBase;
         struct bufferevent* buffer_event_ = nullptr;
 };
 

@@ -25,8 +25,8 @@
 #include <cstdlib>
 #include <signal.h>
 #include "port/ThreadPool.h"
-#include "network/TcpServer.h"
-#include "network/TcpWatcherThread.h"
+#include "network/TcpServerBase.h"
+#include "network/TcpServerBaseThread.h"
 #include "World.h"
 
 volatile bool Master::stop_event_ = false;
@@ -109,7 +109,7 @@ bool Master::Run(int argc, char** argv) {
     LOG_TRACE("Process ID: %u", pid);
 
     sThreadPool.Startup();
-    sThreadPool.ExecuteTask(new TcpWatcherThread("127.0.0.1", 19191));
+    sThreadPool.ExecuteTask(new TcpServerBaseThread("127.0.0.1", 19191));
 
     uint64_t current_time = 0;
     uint64_t prev_time = sEnv.GetRealMSTime();
@@ -202,7 +202,7 @@ void Master::UnHookSignal() {
 }
 
 uint32_t Master::WritePID() {
-    int fd = open("GameServer.pid", O_CREAT | O_WRONLY, S_IRWXU);
+    int fd = open("Gateway.pid", O_CREAT | O_WRONLY, S_IRWXU);
     FILE* fp = fdopen(fd, "w");
 
     if (fp) {

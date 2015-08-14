@@ -17,7 +17,7 @@
  */
 #include "port/Socket.h"
 #include "port/SocketAddress.h"
-#include "network/TcpServer.h"
+#include "network/TcpServerBase.h"
 #include <string>
 
 #define BUFF_SIZE 4096
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     sTcpServer.NewTcpConnection(client_socket);
 
     std::string buff = "Hello server, this is client.";
-    sTcpServer.SendDataToClient(client_socket->GetFd(), buff.c_str(), buff.size());
+    sTcpServer.SendData(client_socket->GetFd(), buff.c_str(), buff.size());
 
     sTcpServer.StartLoop();
 

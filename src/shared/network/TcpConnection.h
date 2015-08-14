@@ -34,7 +34,7 @@ class TcpConnection {
         virtual void WriteData(const void* data, size_t data_len);
 
     private:
-        friend class TcpServer;
+        friend class TcpServerBase;
 
         TcpConnection(const TcpConnection&) = delete;
         TcpConnection& operator=(const TcpConnection&) = delete;

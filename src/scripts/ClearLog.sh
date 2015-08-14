@@ -1,3 +1,4 @@
 #!/bin/bash
-rm GameServer.pid
+rm -f Gateway.pid
 rm -rf ./Log
+rm -rf ./core*

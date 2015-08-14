@@ -16,7 +16,7 @@
  * =====================================================================================
  */
 #include "TcpConnection.h"
-#include "TcpServer.h"
+#include "TcpServerBase.h"
 
 TcpConnection::TcpConnection(Socket* socket, BufferEvent* buffer_event) : socket_(socket), buffer_event_(buffer_event) {
 

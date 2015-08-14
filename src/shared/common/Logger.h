@@ -73,4 +73,10 @@ class Logger : public Singleton<Logger> {
 #define LOG_DEBUG(msg, ...) sLogger.Debug(msg, ##__VA_ARGS__)
 #define LOG_TRACE(msg, ...) sLogger.Trace(msg, ##__VA_ARGS__)
 
+#define LOG_KFATAL(key, msg, ...) sLogger.Fatal("%s, " msg, key, ##__VA_ARGS__)
+#define LOG_KERROR(key, msg, ...) sLogger.Error("%s, " msg, key, ##__VA_ARGS__)
+#define LOG_KINFO(key, msg, ...) sLogger.Info("%s, " msg, key, ##__VA_ARGS__)
+#define LOG_KDEBUG(key, msg, ...) sLogger.Debug("%s, " msg, key, ##__VA_ARGS__)
+#define LOG_KTRACE(key, msg, ...) sLogger.Trace("%s, " msg, key, ##__VA_ARGS__)
+
 #endif /* end of include guard: LOGGER_H_9ROTCNVM */

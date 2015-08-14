@@ -1,9 +1,9 @@
 /*
  * =====================================================================================
  *
- *       Filename:  TcpServer.cc
+ *       Filename:  TcpServerBase.cc
  *
- *    Description:  TcpServer
+ *    Description:  TcpServerBase
  *
  *        Version:  1.0
  *        Created:  2015年04月08日 21时00分30秒
@@ -16,15 +16,15 @@
  * =====================================================================================
  */
 #include <cstring>
-#include "TcpServer.h"
+#include "TcpServerBase.h"
 #include "TcpWorkerThread.h"
 #include "port/ThreadPool.h"
 
-TcpServer::TcpServer() {
+TcpServerBase::TcpServerBase() {
     memset(tcp_connections_, 0, sizeof(TcpConnection*) * SOCKET_HOLDER_SIZE);
 }
 
-TcpServer::~TcpServer() {
+TcpServerBase::~TcpServerBase() {
     if (event_base_)  {
         delete event_base_;
         event_base_ = nullptr;
@@ -38,11 +38,11 @@ TcpServer::~TcpServer() {
     }
 }
 
-void TcpServer::StartLoop() {
+void TcpServerBase::StartLoop() {
     event_base_->Loop();
 }
 
-bool TcpServer::AddListenSocket(Socket* socket) {
+bool TcpServerBase::AddListenSocket(Socket* socket) {
     if (nullptr == event_base_ && !sLibEvent.NewEventBase(&event_base_, "select")) {
         return false;
     }
@@ -50,7 +50,7 @@ bool TcpServer::AddListenSocket(Socket* socket) {
     auto it = listenfd_event_map_.find(socket->GetFd());
     if (it == listenfd_event_map_.end()) {
         Event* listen_event;
-        event_base_->NewEvent(socket->GetFd(), kEventRead | kEventPersist, TcpServer::AcceptCallback, this, &listen_event);
+        event_base_->NewEvent(socket->GetFd(), kEventRead | kEventPersist, TcpServerBase::AcceptCallback, this, &listen_event);
         listenfd_event_map_[socket->GetFd()] = listen_event;
         listenfd_socket_map_[socket->GetFd()] = socket;
         return true;
@@ -58,7 +58,7 @@ bool TcpServer::AddListenSocket(Socket* socket) {
     return false;
 }
 
-void TcpServer::RemoveListenSocket(SOCKET fd) {
+void TcpServerBase::RemoveListenSocket(SOCKET fd) {
     auto it = listenfd_event_map_.find(fd);
     if (it != listenfd_event_map_.end()) {
         delete it->second;
@@ -69,7 +69,7 @@ void TcpServer::RemoveListenSocket(SOCKET fd) {
     }
 }
 
-bool TcpServer::NewTcpConnection(Socket* socket) {
+bool TcpServerBase::NewTcpConnection(Socket* socket) {
     if (nullptr == event_base_ && !sLibEvent.NewEventBase(&event_base_, "select")) {
         return false;
     }
@@ -80,7 +80,7 @@ bool TcpServer::NewTcpConnection(Socket* socket) {
         TcpConnection* tcp_connection = new TcpConnection(socket, buffer_event);
 
         buffer_event->Enable(kEventRead | kEventWrite | kEventPersist);
-        buffer_event->SetCallback(TcpServer::ReadCallback, NULL, TcpServer::EventCallback, this);
+        buffer_event->SetCallback(TcpServerBase::ServerReadCallback, NULL, TcpServerBase::EventCallback, this);
 
         int result = AddTcpConnection(fd, tcp_connection);
         if (result) {
@@ -96,7 +96,7 @@ bool TcpServer::NewTcpConnection(Socket* socket) {
     return false;
 }
 
-bool TcpServer::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection) {
+bool TcpServerBase::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection) {
     if (tcp_connections_[socket] == 0) {
         tcp_connections_[socket] = tcp_connection;
         bufevent_conn_map_[tcp_connection->buffer_event_->buffer_event_] = tcp_connection;
@@ -107,7 +107,7 @@ bool TcpServer::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connecti
     return false;
 }
 
-void TcpServer::RemoveTcpConnection(EventSocket socket) {
+void TcpServerBase::RemoveTcpConnection(EventSocket socket) {
     if (tcp_connections_[socket] != 0) {
         auto it = bufevent_conn_map_.find(tcp_connections_[socket]->buffer_event_->buffer_event_);
         if (it != bufevent_conn_map_.end()) {
@@ -120,7 +120,7 @@ void TcpServer::RemoveTcpConnection(EventSocket socket) {
     }
 }
 
-TcpConnection* TcpServer::GetTcpConnection(BufferEventStruct* buffer_event_struct) {
+TcpConnection* TcpServerBase::GetTcpConnection(BufferEventStruct* buffer_event_struct) {
     auto it = bufevent_conn_map_.find(buffer_event_struct);
     if (it != bufevent_conn_map_.end()) {
         return bufevent_conn_map_[buffer_event_struct];
@@ -128,8 +128,8 @@ TcpConnection* TcpServer::GetTcpConnection(BufferEventStruct* buffer_event_struc
     return nullptr;
 }
 
-void TcpServer::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {
-    TcpServer* tcp_server = static_cast<TcpServer*>(arg);
+void TcpServerBase::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {
+    TcpServerBase* tcp_server = static_cast<TcpServerBase*>(arg);
     BufferEvent* buffer_event = nullptr;
     SOCKET client_fd = ::accept(fd, NULL, NULL);
     Socket* client_socket = new Socket(client_fd);
@@ -137,7 +137,7 @@ void TcpServer::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {
         TcpConnection* tcp_connection = new TcpConnection(client_socket, buffer_event);
 
         buffer_event->Enable(kEventRead | kEventWrite | kEventPersist);
-        buffer_event->SetCallback(TcpServer::ReadCallback, NULL, TcpServer::EventCallback, tcp_server);
+        buffer_event->SetCallback(TcpServerBase::ClientReadCallback, NULL, TcpServerBase::EventCallback, tcp_server);
 
         int result = tcp_server->AddTcpConnection(client_fd, tcp_connection);
         if (!result) {
@@ -148,38 +148,52 @@ void TcpServer::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {
     }
 }
 
-void TcpServer::ReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {
+Packet_t* TcpServerBase::ReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {
     ASSERT(buffer_event_struct);
     ASSERT(arg);
 
-    TcpServer* tcp_server = static_cast<TcpServer*>(arg);
+    TcpServerBase* tcp_server = static_cast<TcpServerBase*>(arg);
     TcpConnection* tcp_connection = tcp_server->GetTcpConnection(buffer_event_struct);
 
     ASSERT(tcp_connection);
 
     if (tcp_connection) {
-        char *data_buff = new char[DATA_BUFF_SIZE];
+        char* data_buff = new char[DATA_BUFF_SIZE];
         size_t data_len = tcp_connection->ReadData(data_buff, DATA_BUFF_SIZE);
 
         ASSERT(data_len < DATA_BUFF_SIZE);
 
         if (data_len < DATA_BUFF_SIZE) {
-            tcp_server->ProcessDataFromClient(tcp_connection->GetSocket(), data_buff, data_len);
+            Packet_t* packet = new Packet_t(tcp_connection->GetSocket(), data_len, data_buff);
+            return packet;
         } else {
             LOG_ERROR("Socket(%d) receive data length greater than buffer size(%d)", tcp_connection->GetSocket(), DATA_BUFF_SIZE);
+            return nullptr;
         }
 
-        delete[] data_buff;
     } else {
         LOG_ERROR("Can't find TcpConnection in ReadCallback function.");
+        return nullptr;
     }
 }
 
-void TcpServer::EventCallback(BufferEventStruct* buffer_event_struct, BufferEventFlagType what, void* arg) {
+void TcpServerBase::ClientReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {
+    Packet_t* packet = ReadCallback(buffer_event_struct, arg);
+    TcpServerBase* tcp_server = static_cast<TcpServerBase*>(arg);
+    tcp_server->PushClientPacket(packet);
+}
+
+void TcpServerBase::ServerReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {
+    Packet_t* packet = ReadCallback(buffer_event_struct, arg);
+    TcpServerBase* tcp_server = static_cast<TcpServerBase*>(arg);
+    tcp_server->PushServerPacket(packet);
+}
+
+void TcpServerBase::EventCallback(BufferEventStruct* buffer_event_struct, BufferEventFlagType what, void* arg) {
     ASSERT(buffer_event_struct);
     ASSERT(arg);
 
-    TcpServer* tcp_server = static_cast<TcpServer*>(arg);
+    TcpServerBase* tcp_server = static_cast<TcpServerBase*>(arg);
     TcpConnection* tcp_connection = tcp_server->GetTcpConnection(buffer_event_struct);
 
     ASSERT(tcp_connection);
@@ -203,13 +217,7 @@ void TcpServer::EventCallback(BufferEventStruct* buffer_event_struct, BufferEven
     }
 }
 
-void TcpServer::ProcessDataFromClient(SOCKET fd, const void* data, size_t data_len) {
-    //TODO: 处理收到的数据。交给其他线程处理
-    LOG_TRACE("Receive data from socket(%d), length(%d)", fd, data_len);
-    sThreadPool.ExecuteTask(new TcpWorkerThread(fd, data, data_len));
-}
-
-void TcpServer::SendDataToClient(SOCKET fd, const void* data, size_t data_len) {
+void TcpServerBase::SendData(SOCKET fd, const void* data, size_t data_len) {
     //TODO: 逻辑线程处理完毕后，由此函数统一发送给客户端
     if (tcp_connections_[fd]) {
         tcp_connections_[fd]->WriteData(data, data_len);
@@ -217,5 +225,33 @@ void TcpServer::SendDataToClient(SOCKET fd, const void* data, size_t data_len) {
         LOG_INFO("Send data: %s", data);
     } else {
         LOG_ERROR("TcpConnection(%d) not exist, send data failed.", fd);
+    }
+}
+
+void TcpServerBase::PushClientPacket(Packet_t* packet) {
+    client_recv_queue_.push(packet);
+}
+
+Packet_t* TcpServerBase::PopClientPacket() {
+    if (client_recv_queue_.size() > 0) {
+        Packet_t* packet =  client_recv_queue_.front();
+        client_recv_queue_.pop();
+        return packet;
+    } else {
+        return nullptr;
+    }
+}
+
+void TcpServerBase::PushServerPacket(Packet_t* packet) {
+    server_recv_queue_.push(packet);
+}
+
+Packet_t* TcpServerBase::PopServerPacket() {
+    if (server_recv_queue_.size() > 0) {
+        Packet_t* packet =  server_recv_queue_.front();
+        server_recv_queue_.pop();
+        return packet;
+    } else {
+        return nullptr;
     }
 }

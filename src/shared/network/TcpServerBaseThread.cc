@@ -1,9 +1,9 @@
 /*
  * =====================================================================================
  *
- *       Filename:  TcpWatcherThread.cc
+ *       Filename:  TcpServerBaseThread.cc
  *
- *    Description:  TcpWatcherThread
+ *    Description:  TcpServerBaseThread
  *
  *        Version:  1.0
  *        Created:  04/29/2015 03:02:47 PM
@@ -15,30 +15,30 @@
  *
  * =====================================================================================
  */
-#include "TcpWatcherThread.h"
-#include "TcpServer.h"
+#include "TcpServerBaseThread.h"
+#include "TcpServerBase.h"
 #include "port/Socket.h"
 #include "common/Common.h"
 
-TcpWatcherThread::TcpWatcherThread(const std::string& hostname, const uint16_t port) {
+TcpServerBaseThread::TcpServerBaseThread(const std::string& hostname, const uint16_t port) {
     listen_addr_ = new SocketAddress(hostname, port);
 }
 
-TcpWatcherThread::TcpWatcherThread(const uint32_t ip, const uint16_t port) {
+TcpServerBaseThread::TcpServerBaseThread(const uint32_t ip, const uint16_t port) {
     listen_addr_ = new SocketAddress(ip, port);
 }
 
-TcpWatcherThread::~TcpWatcherThread() {
+TcpServerBaseThread::~TcpServerBaseThread() {
     if (listen_addr_) {
         delete listen_addr_;
         listen_addr_ = nullptr;
     }
 }
 
-bool TcpWatcherThread::Run() {
+bool TcpServerBaseThread::Run() {
     running_ = true;
 
-    LOG_TRACE("TcpWatcherThread, Running.");
+    LOG_TRACE("TcpServerBaseThread, Running.");
 
     Socket* listen_socket = new Socket();
     listen_socket->Create(SOCK_STREAM);
@@ -51,6 +51,6 @@ bool TcpWatcherThread::Run() {
     return true;
 }
 
-void TcpWatcherThread::OnShutdown() {
+void TcpServerBaseThread::OnShutdown() {
 
 }
