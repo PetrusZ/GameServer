@@ -27,6 +27,8 @@ aux_source_directory(./src/shared/network NETWORK_SRC_LIST)
 aux_source_directory(./src/shared/port PORT_SRC_LIST)
 aux_source_directory(./src/shared/common COMMON_SRC_LIST)
 aux_source_directory(./src/shared/util UTIL_SRC_LIST)
+aux_source_directory(./src/shared/thread THREAD_SRC_LIST)
+aux_source_directory(./src/shared/database DATABASE_SRC_LIST)
 aux_source_directory(./src/gateway GATEWAY_SRC_LIST)
 
 set(SRC_LIST
@@ -35,6 +37,8 @@ set(SRC_LIST
     ${PORT_SRC_LIST}
     ${COMMON_SRC_LIST}
     ${UTIL_SRC_LIST}
+    ${THREAD_SRC_LIST}
+    ${DATABASE_SRC_LIST}
     ${GATEWAY_SRC_LIST}
     )
 
@@ -74,6 +78,8 @@ set(TEST_CLIENT_SRC_LIST
     ${PORT_SRC_LIST}
     ${COMMON_SRC_LIST}
     ${UTIL_SRC_LIST}
+    ${THREAD_SRC_LIST}
+    ${DATABASE_SRC_LIST}
     test/TcpServerTest.cc
     )
 add_executable(TestClient ${TEST_CLIENT_SRC_LIST})

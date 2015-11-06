@@ -1,4 +1,15 @@
 #!/bin/bash
 root=$(dirname "$0")
-cd ${root}/build;
-cmake ..; make -j4; make install
+
+if [ $# -eq 0 ] ; then
+    cd ${root}/build;
+    cmake ..; make -j4; make install
+else
+    if [ $1 = clear ] ; then
+        rm -rf  ${root}/build/*
+    elif [ $1 = --help ] ; then
+        echo "Usage: $0 -- compile project"
+        echo "       $0 clear -- clear compile temporary"
+    fi
+fi
+

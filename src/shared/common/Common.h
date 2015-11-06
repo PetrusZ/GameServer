@@ -23,6 +23,8 @@
 #include "Status.h"
 
 #include <cstdlib>
+#include <cstdint>
+#include <cstring>
 #include <vector>
 #include <string>
 

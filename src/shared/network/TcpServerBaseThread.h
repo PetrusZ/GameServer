@@ -19,8 +19,8 @@
 #define TCPLISTENTHREAD_H_JQ5PSR1X
 
 #include <string>
-#include "port/Thread.h"
 #include "port/SocketAddress.h"
+#include "thread/Thread.h"
 
 class TcpServerBaseThread : public ThreadBase {
     public:

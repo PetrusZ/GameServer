@@ -19,7 +19,7 @@
 #define TCPWORKERTHREAD_H_WPR0YYNB
 
 #include "port/Socket.h"
-#include "port/Thread.h"
+#include "thread/Thread.h"
 
 class TcpWorkerThread : public ThreadBase {
     public:

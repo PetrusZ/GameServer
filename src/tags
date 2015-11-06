@@ -5,8 +5,9 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ASCII	shared/library/rapidjson/include/rapidjson/encodings.h	/^struct ASCII {$/;"	s
-ASSERT	shared/common/Common.h	30;"	d
 ASSERT	shared/common/Common.h	32;"	d
+ASSERT	shared/common/Common.h	34;"	d
+ATOMICULONG_H_ZQ324AVN	shared/thread/AtomicULong.h	20;"	d
 Accept	shared/library/rapidjson/include/rapidjson/document.h	/^    bool Accept(Handler& handler) const {$/;"	f	class:GenericValue
 Accept	shared/port/Socket.cc	/^Socket* Socket::Accept(SocketAddress *paddr) {$/;"	f	class:Socket
 AcceptCallback	shared/network/TcpServerBase.cc	/^void TcpServerBase::AcceptCallback(EventSocket fd, EventFlagType what, void* arg) {$/;"	f	class:TcpServerBase
@@ -26,11 +27,11 @@ AddMember	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericVal
 AddMember	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& AddMember(StringRefType name, GenericValue& value, Allocator& allocator) {$/;"	f	class:GenericValue
 AddMember	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& AddMember(StringRefType name, GenericValue&& value, Allocator& allocator) {$/;"	f	class:GenericValue
 AddMember	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& AddMember(StringRefType name, StringRefType value, Allocator& allocator) {$/;"	f	class:GenericValue
-AddQuery	database/Database.cpp	/^void AsyncQuery::AddQuery(const char* format, ...)$/;"	f	class:AsyncQuery
-AddQuery	database/Database.cpp	/^void QueryBuffer::AddQuery(const char* format, ...)$/;"	f	class:QueryBuffer
-AddQueryBuffer	database/Database.cpp	/^void Database::AddQueryBuffer(QueryBuffer* b)$/;"	f	class:Database
-AddQueryNA	database/Database.cpp	/^void QueryBuffer::AddQueryNA(const char* str)$/;"	f	class:QueryBuffer
-AddQueryStr	database/Database.cpp	/^void QueryBuffer::AddQueryStr(const string & str)$/;"	f	class:QueryBuffer
+AddQuery	shared/database/Database.cc	/^void AsyncQuery::AddQuery(const char *format, ...) {$/;"	f	class:AsyncQuery
+AddQuery	shared/database/Database.cc	/^void QueryBuffer::AddQuery(const char* format, ...) {$/;"	f	class:QueryBuffer
+AddQueryBuffer	shared/database/Database.cc	/^void Database::AddQueryBuffer(QueryBuffer* buffer) {$/;"	f	class:Database
+AddQueryNA	shared/database/Database.cc	/^void QueryBuffer::AddQueryNA(const char* str) {$/;"	f	class:QueryBuffer
+AddQueryStr	shared/database/Database.cc	/^void QueryBuffer::AddQueryStr(const std::string& str) {$/;"	f	class:QueryBuffer
 AddTcpConnection	shared/network/TcpServerBase.cc	/^bool TcpServerBase::AddTcpConnection(EventSocket socket, TcpConnection* tcp_connection) {$/;"	f	class:TcpServerBase
 AllocatorType	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef Allocator AllocatorType;                        \/\/!< Allocator type from template parameter.$/;"	t	class:GenericDocument
 AllocatorType	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef Allocator AllocatorType;                \/\/!< Allocator type from template parameter.$/;"	t	class:GenericValue
@@ -51,9 +52,12 @@ Apply	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <> s
 Apply	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <bool C> struct SelectIfImpl { template <typename T1, typename T2> struct Apply { typedef T1 Type; }; };$/;"	s	struct:internal::SelectIfImpl
 Array	shared/library/rapidjson/include/rapidjson/document.h	/^    struct Array {$/;"	s	class:GenericValue
 AssertFailed	shared/common/Common.cc	/^    void AssertFailed(const char* file, const int line, const char* expr) {$/;"	f	namespace:Common
-AsyncQuery	database/Database.h	/^		AsyncQuery(SQLCallbackBase* f) : func(f) {}$/;"	f	class:AsyncQuery
-AsyncQuery	database/Database.h	/^class SERVER_DECL AsyncQuery$/;"	c
-AsyncQueryResult	database/Database.h	/^struct SERVER_DECL AsyncQueryResult$/;"	s
+AsyncQuery	shared/database/Database.h	/^        AsyncQuery(QueryCallbackBase* f) : func_(f) {}$/;"	f	class:AsyncQuery
+AsyncQuery	shared/database/Database.h	/^class AsyncQuery {$/;"	c
+AsyncQueryResult	shared/database/Database.h	/^struct AsyncQueryResult {$/;"	s
+AtomicULong	shared/thread/AtomicULong.h	/^        AtomicULong() { value_ = 0; }$/;"	f	class:AtomicULong
+AtomicULong	shared/thread/AtomicULong.h	/^        AtomicULong(unsigned long init_value) : value_(init_value) { }$/;"	f	class:AtomicULong
+AtomicULong	shared/thread/AtomicULong.h	/^class AtomicULong {$/;"	c
 AutoUTF	shared/library/rapidjson/include/rapidjson/encodings.h	/^struct AutoUTF {$/;"	s
 AutoUTFInputStream	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    AutoUTFInputStream(InputByteStream& is, UTFType type = kUTF8) : is_(&is), type_(type), hasBOM_(false) {$/;"	f	class:AutoUTFInputStream
 AutoUTFInputStream	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^class AutoUTFInputStream {$/;"	c
@@ -99,7 +103,7 @@ Bool	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool Bool(bool b)
 BoolExpr	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <typename C> struct BoolExpr : SelectIf<C,TrueType,FalseType>::Type {};$/;"	s	namespace:internal
 BoolType	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <bool Cond> struct BoolType {$/;"	s	namespace:internal
 Bottom	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    T* Bottom() { return (T*)stack_; }$/;"	f	class:internal::Stack
-BroadCast	shared/port/ConditionVariable.cc	/^bool ConditionVariable::BroadCast() {$/;"	f	class:ConditionVariable
+BroadCast	shared/thread/ConditionVariable.cc	/^bool ConditionVariable::BroadCast() {$/;"	f	class:ConditionVariable
 BufferEvent	shared/network/BufferEvent.cc	/^BufferEvent::BufferEvent(struct bufferevent* buffer_event) : buffer_event_(buffer_event) {$/;"	f	class:BufferEvent
 BufferEvent	shared/network/BufferEvent.h	/^class BufferEvent {$/;"	c
 BufferEventDataCallBack	shared/network/LibEventDefine.h	/^typedef bufferevent_data_cb BufferEventDataCallBack;$/;"	t
@@ -109,15 +113,41 @@ BufferEventFlagType	shared/network/LibEventDefine.h	/^typedef short BufferEventF
 BufferEventOption	shared/network/LibEventDefine.h	/^enum BufferEventOption {$/;"	g
 BufferEventOptionType	shared/network/LibEventDefine.h	/^typedef int BufferEventOptionType;$/;"	t
 BufferEventStruct	shared/network/LibEventDefine.h	/^typedef struct bufferevent BufferEventStruct;$/;"	t	typeref:struct:bufferevent
-Busy	database/Database.h	/^	Mutex Busy;$/;"	m	struct:DatabaseConnection
+Busy_	shared/database/Database.h	/^    Mutex Busy_;$/;"	m	struct:DatabaseConnection
+CALLBACK_HPP_SMIPZOAB	shared/base/Callback.hpp	19;"	d
 COMMON_H_WN5MDJKE	shared/common/Common.h	20;"	d
-CONDITIONVARIABLE_H_JPXQ47PB	shared/port/ConditionVariable.h	19;"	d
+CONDITIONVARIABLE_H_JPXQ47PB	shared/thread/ConditionVariable.h	19;"	d
 CONFIG_BUFF_SIZE	shared/config/Config.cc	26;"	d	file:
 CONFIG_H_KLOREHKC	shared/config/Config.h	19;"	d
 COPY	shared/library/rapidjson/include/rapidjson/encodings.h	125;"	d
 COPY	shared/library/rapidjson/include/rapidjson/encodings.h	147;"	d
 COPY	shared/library/rapidjson/include/rapidjson/encodings.h	154;"	d
 COPY	shared/library/rapidjson/include/rapidjson/encodings.h	173;"	d
+CTHREAD_H_TPAOH4SK	shared/thread/CThread.h	19;"	d
+CThread	shared/thread/CThread.cc	/^CThread::CThread() : ThreadBase() {$/;"	f	class:CThread
+CThread	shared/thread/CThread.h	/^class CThread : public ThreadBase {$/;"	c
+CThreadState	shared/thread/CThread.h	/^enum CThreadState {$/;"	g
+CallbackBase	shared/base/Callback.hpp	/^class CallbackBase {$/;"	c
+CallbackFunctionP0	shared/base/Callback.hpp	/^        CallbackFunctionP0(callback_function function) : callback_(function) {}$/;"	f	class:CallbackFunctionP0
+CallbackFunctionP0	shared/base/Callback.hpp	/^class CallbackFunctionP0 : public CallbackBase {$/;"	c
+CallbackFunctionP1	shared/base/Callback.hpp	/^        CallbackFunctionP1(callback_function function, P1 p1) : callback_(function), p1_(p1) {}$/;"	f	class:CallbackFunctionP1
+CallbackFunctionP1	shared/base/Callback.hpp	/^class CallbackFunctionP1 : public CallbackBase {$/;"	c
+CallbackFunctionP2	shared/base/Callback.hpp	/^        CallbackFunctionP2(callback_function function, P1 p1, P2 p2) : callback_(function),$/;"	f	class:CallbackFunctionP2
+CallbackFunctionP2	shared/base/Callback.hpp	/^class CallbackFunctionP2 : public CallbackBase {$/;"	c
+CallbackFunctionP3	shared/base/Callback.hpp	/^        CallbackFunctionP3(callback_function function, P1 p1, P2 p2, P3 p3) : callback_(function),$/;"	f	class:CallbackFunctionP3
+CallbackFunctionP3	shared/base/Callback.hpp	/^class CallbackFunctionP3 : public CallbackBase {$/;"	c
+CallbackFunctionP4	shared/base/Callback.hpp	/^        CallbackFunctionP4(callback_function function, P1 p1, P2 p2, P3 p3, P4 p4) : callback_(function),$/;"	f	class:CallbackFunctionP4
+CallbackFunctionP4	shared/base/Callback.hpp	/^class CallbackFunctionP4 : public CallbackBase {$/;"	c
+CallbackP0	shared/base/Callback.hpp	/^        CallbackP0(Class* class_instance, Method method) : obj_(class_instance), func_(method) {}$/;"	f	class:CallbackP0
+CallbackP0	shared/base/Callback.hpp	/^class CallbackP0 : public CallbackBase{$/;"	c
+CallbackP1	shared/base/Callback.hpp	/^        CallbackP1(Class* class_instance, Method method, P1 p1) : obj_(class_instance), func_(method),$/;"	f	class:CallbackP1
+CallbackP1	shared/base/Callback.hpp	/^class CallbackP1 : public CallbackBase{$/;"	c
+CallbackP2	shared/base/Callback.hpp	/^        CallbackP2(Class* class_instance, Method method, P1 p1, P2 p2) : obj_(class_instance), func_(method),$/;"	f	class:CallbackP2
+CallbackP2	shared/base/Callback.hpp	/^class CallbackP2 : public CallbackBase{$/;"	c
+CallbackP3	shared/base/Callback.hpp	/^        CallbackP3(Class* class_instance, Method method, P1 p1, P2 p2, P3 p3) : obj_(class_instance), func_(method),$/;"	f	class:CallbackP3
+CallbackP3	shared/base/Callback.hpp	/^class CallbackP3 : public CallbackBase{$/;"	c
+CallbackP4	shared/base/Callback.hpp	/^        CallbackP4(Class* class_instance, Method method, P1 p1, P2 p2, P3 p3, P4 p4) : obj_(class_instance), func_(method),$/;"	f	class:CallbackP4
+CallbackP4	shared/base/Callback.hpp	/^class CallbackP4 : public CallbackBase{$/;"	c
 Capacity	shared/library/rapidjson/include/rapidjson/allocators.h	/^    size_t Capacity() const {$/;"	f	class:MemoryPoolAllocator
 Capacity	shared/library/rapidjson/include/rapidjson/document.h	/^    SizeType Capacity() const { RAPIDJSON_ASSERT(IsArray()); return data_.a.capacity; }$/;"	f	class:GenericValue
 Ch	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef CharType Ch; \/\/!< character type of the string$/;"	t	struct:GenericStringRef
@@ -148,7 +178,6 @@ Ch	shared/library/rapidjson/include/rapidjson/writer.h	/^    typedef typename So
 CharType	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericStringRef(CharType (&str)[N]) \/* = delete *\/;$/;"	m	struct:GenericStringRef
 CheckWithinHalfULP	shared/library/rapidjson/include/rapidjson/internal/strtod.h	/^inline int CheckWithinHalfULP(double b, const BigInteger& d, int dExp) {$/;"	f	namespace:internal
 ChunkHeader	shared/library/rapidjson/include/rapidjson/allocators.h	/^    struct ChunkHeader {$/;"	s	class:MemoryPoolAllocator
-CleanupLibs	database/CreateInterface.cpp	/^void Database::CleanupLibs()$/;"	f	class:Database
 Clear	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void Clear() {$/;"	f	class:MemoryPoolAllocator
 Clear	shared/library/rapidjson/include/rapidjson/document.h	/^    void Clear() {$/;"	f	class:GenericValue
 Clear	shared/library/rapidjson/include/rapidjson/error/error.h	/^    void Clear() { Set(kParseErrorNone); }$/;"	f	struct:ParseResult
@@ -161,6 +190,7 @@ ClearStackOnExit	shared/library/rapidjson/include/rapidjson/document.h	/^       
 ClearStackOnExit	shared/library/rapidjson/include/rapidjson/document.h	/^    struct ClearStackOnExit {$/;"	s	class:GenericDocument
 ClearStackOnExit	shared/library/rapidjson/include/rapidjson/reader.h	/^        explicit ClearStackOnExit(GenericReader& r) : r_(r) {}$/;"	f	struct:GenericReader::ClearStackOnExit
 ClearStackOnExit	shared/library/rapidjson/include/rapidjson/reader.h	/^    struct ClearStackOnExit {$/;"	s	class:GenericReader
+ClientReadCallback	shared/network/TcpServerBase.cc	/^void TcpServerBase::ClientReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {$/;"	f	class:TcpServerBase
 Close	shared/port/Socket.cc	/^bool Socket::Close() {$/;"	f	class:Socket
 Close	shared/port/WritableFile.cc	/^bool WritableFile::Close() {$/;"	f	class:WritableFile
 Code	shared/common/Status.h	/^        enum Code {$/;"	g	class:Status
@@ -170,16 +200,15 @@ CommaToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        CommaTo
 Common	shared/common/Common.cc	/^namespace Common {$/;"	n	file:
 Common	shared/common/Common.h	/^namespace Common {$/;"	n
 Compare	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    int Compare(const BigInteger& rhs) const {$/;"	f	class:internal::BigInteger
-ConditionVariable	shared/port/ConditionVariable.cc	/^ConditionVariable::ConditionVariable() {$/;"	f	class:ConditionVariable
-ConditionVariable	shared/port/ConditionVariable.h	/^class ConditionVariable {$/;"	c
+ConditionVariable	shared/thread/ConditionVariable.cc	/^ConditionVariable::ConditionVariable() {$/;"	f	class:ConditionVariable
+ConditionVariable	shared/thread/ConditionVariable.h	/^class ConditionVariable {$/;"	c
 ConfigFile	shared/config/Config.h	/^class ConfigFile {$/;"	c
 Connect	shared/port/Socket.cc	/^bool Socket::Connect(const SocketAddress& addr) {$/;"	f	class:Socket
-Connections	database/Database.h	/^		DatabaseConnection** Connections;$/;"	m	class:Database
 ConstIterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericMemberIterator<true,Encoding,Allocator>  ConstIterator;$/;"	t	class:GenericMemberIterator
 ConstMemberIterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef typename GenericMemberIterator<true,Encoding,Allocator>::Iterator ConstMemberIterator;  \/\/!< Constant member iterator for iterating in object.$/;"	t	class:GenericValue
 ConstValueIterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef const GenericValue* ConstValueIterator; \/\/!< Constant value iterator for iterating in array.$/;"	t	class:GenericValue
 ConstructLog	shared/common/Logger.cc	/^std::string Logger::ConstructLog(const char *msg, va_list &ap) {$/;"	f	class:Logger
-ControlInterface_	shared/port/Thread.h	/^        ThreadController ControlInterface_;$/;"	m	class:Thread
+ControlInterface_	shared/thread/Thread.h	/^        ThreadController ControlInterface_;$/;"	m	class:Thread
 CopyFrom	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& CopyFrom(const GenericValue<Encoding, SourceAllocator>& rhs, Allocator& allocator) {$/;"	f	class:GenericValue
 CopyFromRaw	shared/library/rapidjson/include/rapidjson/pointer.h	/^    Ch* CopyFromRaw(const GenericPointer& rhs, size_t extraToken = 0, size_t extraNameBufferSize = 0) {$/;"	f	class:GenericPointer
 CopyStatus	shared/common/Status.cc	/^const char* Status::CopyStatus(const char *status) {$/;"	f	class:Status
@@ -187,13 +216,12 @@ CountDecimalDigit32	shared/library/rapidjson/include/rapidjson/internal/dtoa.h	/
 Create	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueType& Create(GenericDocument<EncodingType, typename ValueType::AllocatorType, stackAllocator>& document, bool* alreadyExist = 0) const {$/;"	f	class:GenericPointer
 Create	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueType& Create(ValueType& root, typename ValueType::AllocatorType& allocator, bool* alreadyExist = 0) const {$/;"	f	class:GenericPointer
 Create	shared/port/Socket.cc	/^bool Socket::Create(int type) {$/;"	f	class:Socket
-CreateDatabaseInterface	database/CreateInterface.cpp	/^Database* Database::CreateDatabaseInterface()$/;"	f	class:Database
 CreateValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename DocumentType::ValueType& CreateValueByPointer(DocumentType& document, const CharType(&source)[N]) {$/;"	f
 CreateValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename DocumentType::ValueType& CreateValueByPointer(DocumentType& document, const GenericPointer<typename DocumentType::ValueType>& pointer) {$/;"	f
 CreateValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename T::ValueType& CreateValueByPointer(T& root, const CharType(&source)[N], typename T::AllocatorType& a) {$/;"	f
 CreateValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename T::ValueType& CreateValueByPointer(T& root, const GenericPointer<typename T::ValueType>& pointer, typename T::AllocatorType& a) {$/;"	f
 CrtAllocator	shared/library/rapidjson/include/rapidjson/allocators.h	/^class CrtAllocator {$/;"	c
-DATABASEENV_H	database/DatabaseEnv.h	21;"	d
+DATABASE_H_0SZOVYQA	shared/database/Database.h	19;"	d
 DATA_BUFF_SIZE	shared/network/TcpConnection.h	26;"	d
 DATE_FORMAT	shared/port/Env.cc	27;"	d	file:
 DATE_LONGTH	shared/port/Env.cc	26;"	d	file:
@@ -221,9 +249,9 @@ DNS_PTR	shared/library/libevent/include/event2/dns.h	175;"	d
 DNS_QUERY_NO_SEARCH	shared/library/libevent/include/event2/dns.h	178;"	d
 Daemonize	gateway/Master.cc	/^void Master::Daemonize() {$/;"	f	class:Master
 Data	shared/library/rapidjson/include/rapidjson/document.h	/^    union Data {$/;"	u	class:GenericValue
-Database	database/Database.cpp	/^Database::Database() : CThread()$/;"	f	class:Database
-Database	database/Database.h	/^class SERVER_DECL Database : public CThread$/;"	c
-DatabaseConnection	database/Database.h	/^struct DatabaseConnection$/;"	s
+Database	shared/database/Database.cc	/^Database::Database() : CThread() {$/;"	f	class:Database
+Database	shared/database/Database.h	/^class Database : public CThread {$/;"	c
+DatabaseConnection	shared/database/Database.h	/^struct DatabaseConnection {$/;"	s
 Debug	shared/common/Logger.cc	/^bool Logger::Debug(const char *msg, ...) {$/;"	f	class:Logger
 Decode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    RAPIDJSON_FORCEINLINE static bool Decode(InputStream& is, unsigned* codepoint) {$/;"	f	struct:AutoUTF
 Decode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    static bool Decode(InputStream& is, unsigned* codepoint) {$/;"	f	struct:ASCII
@@ -232,8 +260,8 @@ Decode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    static bool 
 Decode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    static bool Decode(InputStream& is, unsigned* codepoint) {$/;"	f	struct:UTF8
 Default	shared/library/rapidjson/include/rapidjson/reader.h	/^    bool Default() { return true; }$/;"	f	struct:BaseReaderHandler
 Del	shared/network/Event.cc	/^bool Event::Del() {$/;"	f	class:Event
-Delete	database/Database.h	/^		void Delete() { delete this; }$/;"	f	class:QueryResult
-DeleteAfterExit_	shared/port/Thread.h	/^        bool DeleteAfterExit_;$/;"	m	class:Thread
+Delete	shared/database/Database.h	/^        void Delete() { delete this; }$/;"	f	class:QueryResult
+DeleteAfterExit_	shared/thread/Thread.h	/^        bool DeleteAfterExit_;$/;"	m	class:Thread
 Destroy	shared/library/rapidjson/include/rapidjson/document.h	/^    void Destroy() {$/;"	f	class:GenericDocument
 Destroy	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    void Destroy() {$/;"	f	class:internal::Stack
 DetectType	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    void DetectType() {$/;"	f	class:AutoUTFInputStream
@@ -482,7 +510,7 @@ EndObject	shared/library/rapidjson/include/rapidjson/document.h	/^    bool EndOb
 EndObject	shared/library/rapidjson/include/rapidjson/prettywriter.h	/^    bool EndObject(SizeType memberCount = 0) {$/;"	f	class:PrettyWriter
 EndObject	shared/library/rapidjson/include/rapidjson/reader.h	/^    bool EndObject(SizeType) { return static_cast<Override&>(*this).Default(); }$/;"	f	struct:BaseReaderHandler
 EndObject	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool EndObject(SizeType memberCount = 0) {$/;"	f	class:Writer
-EndThreads	database/Database.cpp	/^void Database::EndThreads()$/;"	f	class:Database
+EndThreads	shared/database/Database.cc	/^void Database::EndThreads() {$/;"	f	class:Database
 Env	shared/port/Env.h	/^        Env() {$/;"	f	class:Env
 Env	shared/port/Env.h	/^class Env : public Singleton<Env> {$/;"	c
 Erase	shared/library/rapidjson/include/rapidjson/document.h	/^    ValueIterator Erase(ConstValueIterator first, ConstValueIterator last) {$/;"	f	class:GenericValue
@@ -493,9 +521,6 @@ EraseMember	shared/library/rapidjson/include/rapidjson/document.h	/^    MemberIt
 EraseValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^bool EraseValueByPointer(T& root, const CharType(&source)[N]) {$/;"	f
 EraseValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^bool EraseValueByPointer(T& root, const GenericPointer<typename T::ValueType>& pointer) {$/;"	f
 Error	shared/common/Logger.cc	/^bool Logger::Error(const char *msg, ...) {$/;"	f	class:Logger
-EscapeLongString	database/MySQLDatabase.cpp	/^void MySQLDatabase::EscapeLongString(const char* str, uint32 len, stringstream & out)$/;"	f	class:MySQLDatabase
-EscapeString	database/MySQLDatabase.cpp	/^string MySQLDatabase::EscapeString(const char* esc, DatabaseConnection* con)$/;"	f	class:MySQLDatabase
-EscapeString	database/MySQLDatabase.cpp	/^string MySQLDatabase::EscapeString(string Escape)$/;"	f	class:MySQLDatabase
 Event	shared/network/Event.cc	/^Event::Event(struct event* event) : event_(event) {$/;"	f	class:Event
 Event	shared/network/Event.h	/^class Event {$/;"	c
 EventBase	shared/network/EventBase.cc	/^EventBase::EventBase(struct event_base* base) : event_base_(base) {$/;"	f	class:EventBase
@@ -512,23 +537,26 @@ EventLoopExitType	shared/network/LibEventDefine.h	/^enum EventLoopExitType {$/;"
 EventLoopFlag	shared/network/LibEventDefine.h	/^enum EventLoopFlag {$/;"	g
 EventLoopFlagType	shared/network/LibEventDefine.h	/^typedef int EventLoopFlagType;$/;"	t
 EventSocket	shared/network/LibEventDefine.h	/^typedef evutil_socket_t EventSocket;$/;"	t
-Execute	database/Database.cpp	/^bool Database::Execute(const char* QueryString, ...)$/;"	f	class:Database
-ExecuteNA	database/Database.cpp	/^bool Database::ExecuteNA(const char* QueryString)$/;"	f	class:Database
-ExecuteTask	shared/port/ThreadPool.cc	/^void ThreadPool::ExecuteTask(ThreadBase *execution_target) {$/;"	f	class:ThreadPool
-ExecutionTarget_	shared/port/Thread.h	/^        ThreadBase* ExecutionTarget_;$/;"	m	class:Thread
+Execute	shared/database/Database.cc	/^bool Database::Execute(const char* query_string, ...) {$/;"	f	class:Database
+ExecuteNA	shared/database/Database.cc	/^bool Database::ExecuteNA(const char* query_string) {$/;"	f	class:Database
+ExecuteTask	shared/thread/ThreadPool.cc	/^void ThreadPool::ExecuteTask(ThreadBase *execution_target) {$/;"	f	class:ThreadPool
+ExecutionTarget_	shared/thread/Thread.h	/^        ThreadBase* ExecutionTarget_;$/;"	m	class:Thread
 Expand	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    void Expand(size_t count) {$/;"	f	class:internal::Stack
 Exponent	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    int Exponent() const { return static_cast<int>(((u_ & kExponentMask) >> kSignificandSize) - kExponentBias); }$/;"	f	class:internal::Double
-FIELD_H	database/Field.h	21;"	d
+FIELD_H_YQJ5TCAL	shared/database/Field.h	19;"	d
 FILESYSTEM_H_6HRNOJVP	shared/port/FileSystem.h	20;"	d
-FQuery	database/Database.cpp	/^QueryResult* Database::FQuery(const char* QueryString, DatabaseConnection* con)$/;"	f	class:Database
-FWaitExecute	database/Database.cpp	/^void Database::FWaitExecute(const char* QueryString, DatabaseConnection* con)$/;"	f	class:Database
+FQUEUE_HPP_SO4FYVJU	shared/base/FQueue.hpp	19;"	d
+FQuery	shared/database/Database.cc	/^QueryResult* Database::FQuery(const char* query_string, DatabaseConnection* conn) {$/;"	f	class:Database
+FQueue	shared/base/FQueue.hpp	/^        FQueue() { first_ = last_ = NULL; size_ = 0; }$/;"	f	class:FQueue
+FQueue	shared/base/FQueue.hpp	/^class FQueue {$/;"	c
+FWaitExecute	shared/database/Database.cc	/^bool Database::FWaitExecute(const char* query_string, DatabaseConnection* conn) {$/;"	f	class:Database
 FalseToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        FalseToken,$/;"	e	enum:GenericReader::Token
 FalseType	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^typedef BoolType<false> FalseType;$/;"	t	namespace:internal
 FastPath	shared/library/rapidjson/include/rapidjson/internal/strtod.h	/^inline double FastPath(double significand, int exp) {$/;"	f	namespace:internal
 Fatal	shared/common/Logger.cc	/^bool Logger::Fatal(const char *msg, ...) {$/;"	f	class:Logger
 FatalCallback	shared/network/LibEvent.cc	/^void LibEvent::FatalCallback(int err) {$/;"	f	class:LibEvent
-Fetch	database/Database.h	/^		ARCEMU_INLINE Field* Fetch() { return mCurrentRow; }$/;"	f	class:QueryResult
-Field	database/Field.h	/^class Field$/;"	c
+Fetch	shared/database/Database.h	/^        Field* Fetch() { return current_row_; }$/;"	f	class:QueryResult
+Field	shared/database/Field.h	/^class Field {$/;"	c
 FileExists	shared/port/FileSystem.cc	/^bool FileSystem::FileExists(const std::string file_name) {$/;"	f	class:FileSystem
 FileReadStream	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    FileReadStream(std::FILE* fp, char* buffer, size_t bufferSize) : fp_(fp), buffer_(buffer), bufferSize_(bufferSize), bufferLast_(0), current_(buffer_), readCount_(0), count_(0), eof_(false) { $/;"	f	class:FileReadStream
 FileReadStream	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^class FileReadStream {$/;"	c
@@ -557,9 +585,8 @@ FormatLogFileName	shared/common/Logger.cc	/^std::string Logger::FormatLogFileNam
 FormatLogFileName	shared/network/LibEvent.cc	/^std::string LibEvent::FormatLogFileName(const std::string &prefix, const std::string &description, bool useDate) {$/;"	f	class:LibEvent
 Free	shared/library/rapidjson/include/rapidjson/allocators.h	/^    static void Free(void *ptr) { (void)ptr; } \/\/ Do nothing$/;"	f	class:MemoryPoolAllocator
 Free	shared/library/rapidjson/include/rapidjson/allocators.h	/^    static void Free(void *ptr) { std::free(ptr); }$/;"	f	class:CrtAllocator
-FreeQueryResult	database/Database.cpp	/^void Database::FreeQueryResult(QueryResult* p)$/;"	f	class:Database
 FromSockAddr	shared/port/SocketAddress.cc	/^void SocketAddress::FromSockAddr(const struct sockaddr_in &saddr) {$/;"	f	class:SocketAddress
-GenerateThreadId	shared/port/Thread.h	/^        int GenerateThreadId() {$/;"	f	class:ThreadController
+GenerateThreadId	shared/thread/Thread.h	/^        int GenerateThreadId() {$/;"	f	class:ThreadController
 GenericDocument	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericDocument(Allocator* allocator = 0, size_t stackCapacity = kDefaultStackCapacity, StackAllocator* stackAllocator = 0) : $/;"	f	class:GenericDocument
 GenericDocument	shared/library/rapidjson/include/rapidjson/document.h	/^class GenericDocument : public GenericValue<Encoding, Allocator> {$/;"	c
 GenericInsituStringStream	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    GenericInsituStringStream(Ch *src) : src_(src), dst_(0), head_(src) {}$/;"	f	struct:GenericInsituStringStream
@@ -599,8 +626,8 @@ Get	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueType* Get(Va
 Get	shared/library/rapidjson/include/rapidjson/pointer.h	/^    const ValueType* Get(const ValueType& root) const { return Get(const_cast<ValueType&>(root)); }$/;"	f	class:GenericPointer
 GetAllocator	shared/library/rapidjson/include/rapidjson/document.h	/^    Allocator& GetAllocator() { return *allocator_; }$/;"	f	class:GenericDocument
 GetAllocator	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    Allocator& GetAllocator() { return *allocator_; }$/;"	f	class:internal::Stack
-GetBool	database/Field.h	/^		ARCEMU_INLINE bool GetBool() { return mValue ? atoi(mValue) > 0 : false; }$/;"	f	class:Field
 GetBool	shared/config/Config.cc	/^bool ConfigFile::GetBool(const char *key, const char* field, bool& value) {$/;"	f	class:ConfigFile
+GetBool	shared/database/Field.h	/^        bool  GetBool() { return value_ ? atoi(value_) > 0 : false; }$/;"	f	class:Field
 GetBool	shared/library/rapidjson/include/rapidjson/document.h	/^    bool GetBool() const { RAPIDJSON_ASSERT(IsBool()); return flags_ == kTrueFlag; }$/;"	f	class:GenericValue
 GetBoolDefault	shared/config/Config.cc	/^bool ConfigFile::GetBoolDefault(const char *key, const char* field, bool default_value) {$/;"	f	class:ConfigFile
 GetBoolVA	shared/config/Config.cc	/^bool ConfigFile::GetBoolVA(bool default_value, int argc, ...) {$/;"	f	class:ConfigFile
@@ -612,7 +639,6 @@ GetCallback	shared/network/Event.cc	/^EventCallback Event::GetCallback() {$/;"	f
 GetCallbackArg	shared/network/Event.cc	/^void* Event::GetCallbackArg() {$/;"	f	class:Event
 GetCapacity	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    size_t GetCapacity() const { return static_cast<size_t>(stackEnd_ - stack_); }$/;"	f	class:internal::Stack
 GetCount	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    size_t GetCount() const { return count_; }$/;"	f	class:internal::BigInteger
-GetDatabaseName	database/Database.h	/^		ARCEMU_INLINE const string & GetDatabaseName() { return mDatabaseName; }$/;"	f	class:Database
 GetDate	shared/port/Env.cc	/^std::string Env::GetDate() {$/;"	f	class:Env
 GetDigit	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    Type GetDigit(size_t index) const { RAPIDJSON_ASSERT(index < count_); return digits_[index]; }$/;"	f	class:internal::BigInteger
 GetDigitsLut	shared/library/rapidjson/include/rapidjson/internal/itoa.h	/^inline const char* GetDigitsLut() {$/;"	f	namespace:internal
@@ -625,19 +651,18 @@ GetFd	shared/network/BufferEvent.cc	/^EventSocket BufferEvent::GetFd() {$/;"	f	c
 GetFd	shared/network/Event.cc	/^EventSocket Event::GetFd() {$/;"	f	class:Event
 GetFd	shared/port/Socket.cc	/^SOCKET Socket::GetFd() {$/;"	f	class:Socket
 GetFeatures	shared/network/EventBase.cc	/^int EventBase::GetFeatures() {$/;"	f	class:EventBase
-GetFieldCount	database/Database.h	/^		ARCEMU_INLINE uint32 GetFieldCount() const { return mFieldCount; }$/;"	f	class:QueryResult
-GetFloat	database/Field.h	/^		ARCEMU_INLINE float GetFloat() { return mValue ? static_cast<float>(atof(mValue)) : 0; }$/;"	f	class:Field
 GetFloat	shared/config/Config.cc	/^bool ConfigFile::GetFloat(const char *key, const char* field, float& value) {$/;"	f	class:ConfigFile
+GetFloat	shared/database/Field.h	/^        float GetFloat() { return value_ ? static_cast<float>(atof(value_)) : 0; }$/;"	f	class:Field
 GetFloatDefault	shared/config/Config.cc	/^float ConfigFile::GetFloatDefault(const char *key, const char* field, float default_value) {$/;"	f	class:ConfigFile
 GetFloatVA	shared/config/Config.cc	/^float ConfigFile::GetFloatVA(float default_value, int argc, ...) {$/;"	f	class:ConfigFile
-GetFreeConnection	database/Database.cpp	/^DatabaseConnection* Database::GetFreeConnection()$/;"	f	class:Database
-GetHostName	database/Database.h	/^		ARCEMU_INLINE const string & GetHostName() { return mHostname; }$/;"	f	class:Database
+GetFreeConnection	shared/database/Database.cc	/^DatabaseConnection* Database::GetFreeConnection() {$/;"	f	class:Database
 GetInt	shared/config/Config.cc	/^bool ConfigFile::GetInt(const char *key, const char* field, int& value) {$/;"	f	class:ConfigFile
 GetInt	shared/library/rapidjson/include/rapidjson/document.h	/^    int GetInt() const          { RAPIDJSON_ASSERT(flags_ & kIntFlag);   return data_.n.i.i;   }$/;"	f	class:GenericValue
-GetInt16	database/Field.h	/^		ARCEMU_INLINE int16 GetInt16() { return mValue ? static_cast<int16>(atol(mValue)) : 0; }$/;"	f	class:Field
-GetInt32	database/Field.h	/^		ARCEMU_INLINE int32 GetInt32() { return mValue ? static_cast<int32>(atol(mValue)) : 0; }$/;"	f	class:Field
+GetInt16	shared/database/Field.h	/^        int16_t GetInt16() { return value_ ? static_cast<int16_t>(atol(value_)) : 0; }$/;"	f	class:Field
+GetInt32	shared/database/Field.h	/^        int32_t GetInt32() { return value_ ? static_cast<int32_t>(atol(value_)) : 0; }$/;"	f	class:Field
+GetInt64	shared/database/Field.h	/^        int64_t GetInt64() { return value_ ? static_cast<int64_t>(atoll(value_)) : 0; }$/;"	f	class:Field
 GetInt64	shared/library/rapidjson/include/rapidjson/document.h	/^    int64_t GetInt64() const    { RAPIDJSON_ASSERT(flags_ & kInt64Flag); return data_.n.i64; }$/;"	f	class:GenericValue
-GetInt8	database/Field.h	/^		ARCEMU_INLINE int8 GetInt8() { return mValue ? static_cast<int8>(atol(mValue)) : 0; }$/;"	f	class:Field
+GetInt8	shared/database/Field.h	/^        int8_t GetInt8() { return value_ ? static_cast<int8_t>(atol(value_)) : 0; }$/;"	f	class:Field
 GetIntDefault	shared/config/Config.cc	/^int ConfigFile::GetIntDefault(const char *key, const char* field, int default_value) {$/;"	f	class:ConfigFile
 GetIntVA	shared/config/Config.cc	/^int ConfigFile::GetIntVA(int default_value, int argc, ...) {$/;"	f	class:ConfigFile
 GetLength	shared/library/rapidjson/include/rapidjson/document.h	/^        inline SizeType GetLength() const       { return  (SizeType)(MaxSize -  str[LenPos]); }$/;"	f	struct:GenericValue::ShortString
@@ -651,17 +676,16 @@ GetParseErrorCode	shared/library/rapidjson/include/rapidjson/reader.h	/^    Pars
 GetParseErrorFunc	shared/library/rapidjson/include/rapidjson/error/error.h	/^typedef const RAPIDJSON_ERROR_CHARTYPE* (*GetParseErrorFunc)(ParseErrorCode);$/;"	t
 GetParseErrorOffset	shared/library/rapidjson/include/rapidjson/pointer.h	/^    size_t GetParseErrorOffset() const { return parseErrorOffset_; }$/;"	f	class:GenericPointer
 GetParseError_En	shared/library/rapidjson/include/rapidjson/error/en.h	/^inline const RAPIDJSON_ERROR_CHARTYPE* GetParseError_En(ParseErrorCode parseErrorCode) {$/;"	f
-GetQueueSize	database/Database.h	/^		ARCEMU_INLINE const uint32 GetQueueSize() { return queries_queue.get_size(); }$/;"	f	class:Database
 GetRange	shared/library/rapidjson/include/rapidjson/encodings.h	/^    static unsigned char GetRange(unsigned char c) {$/;"	f	struct:UTF8
 GetRealMSTime	shared/port/Env.cc	/^uint64_t Env::GetRealMSTime() {$/;"	f	class:Env
-GetRowCount	database/Database.h	/^		ARCEMU_INLINE uint32 GetRowCount() const { return mRowCount; }$/;"	f	class:QueryResult
 GetSize	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    size_t GetSize() const { return static_cast<size_t>(stackTop_ - stack_); }$/;"	f	class:internal::Stack
 GetSize	shared/library/rapidjson/include/rapidjson/memorybuffer.h	/^    size_t GetSize() const { return stack_.GetSize(); }$/;"	f	struct:GenericMemoryBuffer
 GetSize	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^    size_t GetSize() const { return stack_.GetSize(); }$/;"	f	class:GenericStringBuffer
 GetSocket	shared/network/TcpConnection.cc	/^SOCKET TcpConnection::GetSocket() {$/;"	f	class:TcpConnection
 GetStackCapacity	shared/library/rapidjson/include/rapidjson/document.h	/^    size_t GetStackCapacity() const { return stack_.GetCapacity(); }$/;"	f	class:GenericDocument
-GetString	database/Field.h	/^		ARCEMU_INLINE const char* GetString() { return mValue; }$/;"	f	class:Field
+GetStartTime	shared/thread/CThread.h	/^        time_t GetStartTime() { return start_time_; };$/;"	f	class:CThread
 GetString	shared/config/Config.cc	/^bool ConfigFile::GetString(const char *key, const char* field, std::string& value) {$/;"	f	class:ConfigFile
+GetString	shared/database/Field.h	/^        const char* GetString() { return value_; }$/;"	f	class:Field
 GetString	shared/library/rapidjson/include/rapidjson/document.h	/^    const Ch* GetString() const { RAPIDJSON_ASSERT(IsString()); return ((flags_ & kInlineStrFlag) ? data_.ss.str : data_.s.str); }$/;"	f	class:GenericValue
 GetString	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^    const Ch* GetString() const {$/;"	f	class:GenericStringBuffer
 GetStringDefault	shared/config/Config.cc	/^std::string ConfigFile::GetStringDefault(const char *key, const char* field, const char* default_value) {$/;"	f	class:ConfigFile
@@ -669,6 +693,7 @@ GetStringLength	shared/library/rapidjson/include/rapidjson/document.h	/^    Size
 GetStringVA	shared/config/Config.cc	/^std::string ConfigFile::GetStringVA(const char *default_value, int argc, ...) {$/;"	f	class:ConfigFile
 GetSupportedMethods	shared/network/LibEvent.cc	/^void LibEvent::GetSupportedMethods(std::vector<std::string>& supported_methods) {$/;"	f	class:LibEvent
 GetTcpConnection	shared/network/TcpServerBase.cc	/^TcpConnection* TcpServerBase::GetTcpConnection(BufferEventStruct* buffer_event_struct) {$/;"	f	class:TcpServerBase
+GetThreadState	shared/thread/CThread.h	/^        CThreadState GetThreadState() {$/;"	f	class:CThread
 GetTid	shared/port/Env.cc	/^uint64_t Env::GetTid() {$/;"	f	class:Env
 GetTime	shared/port/Env.cc	/^std::string Env::GetTime() {$/;"	f	class:Env
 GetTokenCount	shared/library/rapidjson/include/rapidjson/pointer.h	/^    size_t GetTokenCount() const { return tokenCount_; }$/;"	f	class:GenericPointer
@@ -676,12 +701,13 @@ GetTokens	shared/library/rapidjson/include/rapidjson/pointer.h	/^    const Token
 GetType	shared/library/rapidjson/include/rapidjson/document.h	/^    Type GetType()  const { return static_cast<Type>(flags_ & kTypeMask); }$/;"	f	class:GenericValue
 GetType	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    UTFType GetType() const { return type_; }$/;"	f	class:AutoUTFInputStream
 GetType	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    UTFType GetType() const { return type_; }$/;"	f	class:AutoUTFOutputStream
-GetUInt16	database/Field.h	/^		ARCEMU_INLINE uint16 GetUInt16() { return mValue ? static_cast<uint16>(atol(mValue)) : 0; }$/;"	f	class:Field
-GetUInt32	database/Field.h	/^		ARCEMU_INLINE uint32 GetUInt32() { return mValue ? static_cast<uint32>(atol(mValue)) : 0; }$/;"	f	class:Field
-GetUInt64	database/Field.h	/^		uint64 GetUInt64()$/;"	f	class:Field
-GetUInt8	database/Field.h	/^		ARCEMU_INLINE uint8 GetUInt8() { return mValue ? static_cast<uint8>(atol(mValue)) : 0; }$/;"	f	class:Field
+GetUInt16	shared/database/Field.h	/^        uint16_t GetUInt16() { return value_ ? static_cast<uint16_t>(atol(value_)) : 0; }$/;"	f	class:Field
+GetUInt32	shared/database/Field.h	/^        uint32_t GetUInt32() { return value_ ? static_cast<uint32_t>(atol(value_)) : 0; }$/;"	f	class:Field
+GetUInt64	shared/database/Field.h	/^        uint64_t GetUInt64() { return value_ ? static_cast<uint64_t>(atoll(value_)) : 0; }$/;"	f	class:Field
+GetUInt8	shared/database/Field.h	/^        uint8_t GetUInt8() { return value_ ? static_cast<uint8_t>(atol(value_)) : 0; }$/;"	f	class:Field
 GetUint	shared/library/rapidjson/include/rapidjson/document.h	/^    unsigned GetUint() const    { RAPIDJSON_ASSERT(flags_ & kUintFlag);  return data_.n.u.u;   }$/;"	f	class:GenericValue
 GetUint64	shared/library/rapidjson/include/rapidjson/document.h	/^    uint64_t GetUint64() const  { RAPIDJSON_ASSERT(flags_ & kUint64Flag); return data_.n.u64; }$/;"	f	class:GenericValue
+GetVal	shared/thread/AtomicULong.h	/^        unsigned long GetVal() { return value_; }$/;"	f	class:AtomicULong
 GetValue	shared/config/Config.cc	/^bool ConfigFile::GetValue(const char* key, const char* field, rapidjson::Value& val) {$/;"	f	class:ConfigFile
 GetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^const typename T::ValueType* GetValueByPointer(const T& root, const CharType(&source)[N]) {$/;"	f
 GetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^const typename T::ValueType* GetValueByPointer(const T& root, const GenericPointer<typename T::ValueType>& pointer) {$/;"	f
@@ -713,7 +739,7 @@ GetWithDefault	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueT
 GetWithDefault	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueType& GetWithDefault(ValueType& root, const ValueType& defaultValue, typename ValueType::AllocatorType& allocator) const {$/;"	f	class:GenericPointer
 GetWithDefault	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueType& GetWithDefault(ValueType& root, const std::basic_string<Ch>& defaultValue, typename ValueType::AllocatorType& allocator) const {$/;"	f	class:GenericPointer
 GettimeofdayCached	shared/network/EventBase.cc	/^bool EventBase::GettimeofdayCached(struct timeval *tv) {$/;"	f	class:EventBase
-Gobble	shared/port/ThreadPool.h	/^        void Gobble() { threads_eaten_ = idle_threads_.size(); }$/;"	f	class:ThreadPool
+Gobble	shared/thread/ThreadPool.h	/^        void Gobble() { threads_eaten_ = idle_threads_.size(); }$/;"	f	class:ThreadPool
 GotExitType	shared/network/EventBase.cc	/^EventLoopExitType EventBase::GotExitType() {$/;"	f	class:EventBase
 Grisu2	shared/library/rapidjson/include/rapidjson/internal/dtoa.h	/^inline void Grisu2(double value, char* buffer, int* length, int* K) {$/;"	f	namespace:internal
 GrisuRound	shared/library/rapidjson/include/rapidjson/internal/dtoa.h	/^inline void GrisuRound(char* buffer, int len, uint64_t delta, uint64_t rest, uint64_t ten_kappa, uint64_t wp_w) {$/;"	f	namespace:internal
@@ -792,7 +818,7 @@ IOError	shared/common/Status.h	/^        static Status IOError(const std::string
 IPAsString	shared/port/SocketAddress.cc	/^std::string SocketAddress::IPAsString() const {$/;"	f	class:SocketAddress
 IPToString	shared/port/SocketAddress.cc	/^std::string SocketAddress::IPToString() const {$/;"	f	class:SocketAddress
 Info	shared/common/Logger.cc	/^bool Logger::Info(const char *msg, ...) {$/;"	f	class:Logger
-Initialize	database/MySQLDatabase.cpp	/^bool MySQLDatabase::Initialize(const char* Hostname, unsigned int port, const char* Username, const char* Password, const char* DatabaseName, uint32 ConnectionCount, uint32 BufferSize)$/;"	f	class:MySQLDatabase
+Initialize_	shared/database/Database.cc	/^void Database::Initialize_() {$/;"	f	class:Database
 Initialized	shared/network/Event.cc	/^bool Event::Initialized() {$/;"	f	class:Event
 InsituStringStream	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^typedef GenericInsituStringStream<UTF8<> > InsituStringStream;$/;"	t
 Int	shared/library/rapidjson/include/rapidjson/document.h	/^    bool Int(int i) { new (stack_.template Push<ValueType>()) ValueType(i); return true; }$/;"	f	class:GenericDocument
@@ -805,7 +831,7 @@ Int64	shared/library/rapidjson/include/rapidjson/reader.h	/^    bool Int64(int64
 Int64	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool Int64(int64_t i64)     { Prefix(kNumberType); return WriteInt64(i64); }$/;"	f	class:Writer
 IntegerExponent	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    int IntegerExponent() const { return (IsNormal() ? Exponent() : kDenormalExponent) - kSignificandSize; }$/;"	f	class:internal::Double
 IntegerSignificand	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    uint64_t IntegerSignificand() const { return IsNormal() ? Significand() | kHiddenBit : Significand(); }$/;"	f	class:internal::Double
-IntegrityCheck	shared/port/ThreadPool.cc	/^void ThreadPool::IntegrityCheck() {$/;"	f	class:ThreadPool
+IntegrityCheck	shared/thread/ThreadPool.cc	/^void ThreadPool::IntegrityCheck() {$/;"	f	class:ThreadPool
 IsArray	shared/library/rapidjson/include/rapidjson/document.h	/^    bool IsArray()  const { return flags_ == kArrayFlag; }$/;"	f	class:GenericValue
 IsBaseOf	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <typename B, typename D> struct IsBaseOf$/;"	s	namespace:internal
 IsBaseOfImpl	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template<typename B, typename D> struct IsBaseOfImpl {$/;"	s	namespace:internal
@@ -859,14 +885,14 @@ IterativeParsingValueState	shared/library/rapidjson/include/rapidjson/reader.h	/
 Iterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericMember<Encoding,Allocator>* Iterator;$/;"	t	struct:GenericMemberIterator
 Iterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericMemberIterator Iterator;$/;"	t	class:GenericMemberIterator
 Iterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef const GenericMember<Encoding,Allocator>* Iterator;$/;"	t	struct:GenericMemberIterator
-Join	shared/port/Thread.h	/^        void Join() {$/;"	f	class:ThreadController
+Join	shared/thread/Thread.h	/^        void Join() {$/;"	f	class:ThreadController
 Key	shared/library/rapidjson/include/rapidjson/document.h	/^    bool Key(const Ch* str, SizeType length, bool copy) { return String(str, length, copy); }$/;"	f	class:GenericDocument
 Key	shared/library/rapidjson/include/rapidjson/prettywriter.h	/^    bool Key(const Ch* str) { return Key(str, internal::StrLen(str)); }$/;"	f	class:PrettyWriter
 Key	shared/library/rapidjson/include/rapidjson/prettywriter.h	/^    bool Key(const Ch* str, SizeType length, bool copy = false) { return String(str, length, copy); }$/;"	f	class:PrettyWriter
 Key	shared/library/rapidjson/include/rapidjson/reader.h	/^    bool Key(const Ch* str, SizeType len, bool copy) { return static_cast<Override&>(*this).String(str, len, copy); }$/;"	f	struct:BaseReaderHandler
 Key	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool Key(const Ch* str) { return Key(str, internal::StrLen(str)); }$/;"	f	class:Writer
 Key	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool Key(const Ch* str, SizeType length, bool copy = false) { return String(str, length, copy); }$/;"	f	class:Writer
-KillIdleThreads	shared/port/ThreadPool.cc	/^void ThreadPool::KillIdleThreads(uint32_t count) {$/;"	f	class:ThreadPool
+KillIdleThreads	shared/thread/ThreadPool.cc	/^void ThreadPool::KillIdleThreads(uint32_t count) {$/;"	f	class:ThreadPool
 LEV_OPT_CLOSE_ON_EXEC	shared/library/libevent/include/event2/listener.h	65;"	d
 LEV_OPT_CLOSE_ON_FREE	shared/library/libevent/include/event2/listener.h	63;"	d
 LEV_OPT_LEAVE_SOCKETS_BLOCKING	shared/library/libevent/include/event2/listener.h	60;"	d
@@ -884,6 +910,11 @@ LOG_DEBUG	shared/common/Logger.h	73;"	d
 LOG_ERROR	shared/common/Logger.h	71;"	d
 LOG_FATAL	shared/common/Logger.h	70;"	d
 LOG_INFO	shared/common/Logger.h	72;"	d
+LOG_KDEBUG	shared/common/Logger.h	79;"	d
+LOG_KERROR	shared/common/Logger.h	77;"	d
+LOG_KFATAL	shared/common/Logger.h	76;"	d
+LOG_KINFO	shared/common/Logger.h	78;"	d
+LOG_KTRACE	shared/common/Logger.h	80;"	d
 LOG_PREFIX_BUFF_SIZE	shared/common/Logger.h	26;"	d
 LOG_TRACE	shared/common/Logger.h	74;"	d
 LeftBracketToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        LeftBracketToken = 0,$/;"	e	enum:GenericReader::Token
@@ -899,7 +930,7 @@ LibEvent	shared/network/LibEvent.h	/^class LibEvent : public Singleton<LibEvent>
 Listen	shared/port/Socket.cc	/^int Socket::Listen(const int backlog) {$/;"	f	class:Socket
 LoadFile	shared/config/Config.cc	/^bool ConfigFile::LoadFile(const char* file_name) {$/;"	f	class:ConfigFile
 Lock	shared/network/BufferEvent.cc	/^void BufferEvent::Lock() {$/;"	f	class:BufferEvent
-Lock	shared/port/Mutex.cc	/^bool Mutex::Lock() {$/;"	f	class:Mutex
+Lock	shared/thread/Mutex.cc	/^bool Mutex::Lock() {$/;"	f	class:Mutex
 LogCallback	shared/network/LibEvent.cc	/^void LibEvent::LogCallback(int severity, const char *msg) {$/;"	f	class:LibEvent
 LogLevel	shared/common/Logger.h	/^        enum LogLevel {$/;"	g	class:Logger
 LogRotate	shared/common/Logger.cc	/^bool Logger::LogRotate(LogLevel level) {$/;"	f	class:Logger
@@ -907,7 +938,7 @@ Logger	shared/common/Logger.h	/^class Logger : public Singleton<Logger> {$/;"	c
 Loop	shared/network/EventBase.cc	/^bool EventBase::Loop(int flags) {$/;"	f	class:EventBase
 LoopExit	shared/network/EventBase.cc	/^bool EventBase::LoopExit(const struct timeval *tv, EventLoopExitType exit_type) {$/;"	f	class:EventBase
 MASTER_CC_XPRMPWDX	gateway/Master.h	20;"	d
-MUTEX_H_WMU51HFT	shared/port/Mutex.h	19;"	d
+MUTEX_H_WMU51HFT	shared/thread/Mutex.h	19;"	d
 MakeDirRecursive	shared/port/FileSystem.cc	/^bool FileSystem::MakeDirRecursive(const std::string dir_path) {$/;"	f	class:FileSystem
 Malloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Malloc(size_t size) { $/;"	f	class:CrtAllocator
 Malloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Malloc(size_t size) {$/;"	f	class:MemoryPoolAllocator
@@ -928,17 +959,21 @@ MemoryPoolAllocator	shared/library/rapidjson/include/rapidjson/allocators.h	/^  
 MemoryPoolAllocator	shared/library/rapidjson/include/rapidjson/allocators.h	/^class MemoryPoolAllocator {$/;"	c
 MemoryStream	shared/library/rapidjson/include/rapidjson/memorystream.h	/^    MemoryStream(const Ch *src, size_t size) : src_(src), begin_(src), end_(src + size), size_(size) {}$/;"	f	struct:MemoryStream
 MemoryStream	shared/library/rapidjson/include/rapidjson/memorystream.h	/^struct MemoryStream {$/;"	s
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)();$/;"	t	class:CallbackP0
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(P1);$/;"	t	class:CallbackP1
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(P1, P2);$/;"	t	class:CallbackP2
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(P1, P2, P3);$/;"	t	class:CallbackP3
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(P1, P2, P3, P4);$/;"	t	class:CallbackP4
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(QueryResultVector& result);$/;"	t	class:QueryCallbackP0
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(QueryResultVector& result);$/;"	t	class:QueryCallbackP1
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(QueryResultVector& result);$/;"	t	class:QueryCallbackP2
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(QueryResultVector& result);$/;"	t	class:QueryCallbackP3
+Method	shared/base/Callback.hpp	/^    typedef void (Class::*Method)(QueryResultVector& result);$/;"	t	class:QueryCallbackP4
 Min3	shared/library/rapidjson/include/rapidjson/internal/strtod.h	/^inline T Min3(T a, T b, T c) {$/;"	f	namespace:internal
 MulAdd64	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    static uint64_t MulAdd64(uint64_t a, uint64_t b, uint64_t k, uint64_t* outHigh) {$/;"	f	class:internal::BigInteger
 MultiplyPow5	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    BigInteger& MultiplyPow5(unsigned exp) {$/;"	f	class:internal::BigInteger
-Mutex	shared/port/Mutex.cc	/^Mutex::Mutex() {$/;"	f	class:Mutex
-Mutex	shared/port/Mutex.h	/^class Mutex {$/;"	c
-MySQLDatabase	database/MySQLDatabase.cpp	/^MySQLDatabase::MySQLDatabase() : Database()$/;"	f	class:MySQLDatabase
-MySQLDatabase	database/MySQLDatabase.h	/^class SERVER_DECL MySQLDatabase : public Database$/;"	c
-MySQLDatabaseConnection	database/MySQLDatabase.h	/^struct MySQLDatabaseConnection : public DatabaseConnection$/;"	s
-MySQLQueryResult	database/MySQLDatabase.cpp	/^MySQLQueryResult::MySQLQueryResult(MYSQL_RES* res, uint32 FieldCount, uint32 RowCount) : QueryResult(FieldCount, RowCount), mResult(res)$/;"	f	class:MySQLQueryResult
-MySQLQueryResult	database/MySQLDatabase.h	/^class SERVER_DECL MySQLQueryResult : public QueryResult$/;"	c
-MySql	database/MySQLDatabase.h	/^	MYSQL* MySql;$/;"	m	struct:MySQLDatabaseConnection
+Mutex	shared/thread/Mutex.cc	/^Mutex::Mutex() {$/;"	f	class:Mutex
+Mutex	shared/thread/Mutex.h	/^class Mutex {$/;"	c
 N	shared/library/rapidjson/include/rapidjson/reader.h	1050;"	d
 N	shared/library/rapidjson/include/rapidjson/reader.h	1064;"	d
 N16	shared/library/rapidjson/include/rapidjson/reader.h	1051;"	d
@@ -956,8 +991,8 @@ NewTcpConnection	shared/network/TcpServerBase.cc	/^bool TcpServerBase::NewTcpCon
 NewTimerEvent	shared/network/EventBase.cc	/^bool EventBase::NewTimerEvent(EventCallback callback, void *arg, Event **event) {$/;"	f	class:EventBase
 NewWritableFile	shared/port/FileSystem.cc	/^bool FileSystem::NewWritableFile(const std::string &file_name, WritableFile **result) {$/;"	f	class:FileSystem
 NextPositiveDouble	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    double NextPositiveDouble() const {$/;"	f	class:internal::Double
-NextRow	database/MySQLDatabase.cpp	/^bool MySQLQueryResult::NextRow()$/;"	f	class:MySQLQueryResult
 No	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^    typedef char (&No) [2];$/;"	t	struct:internal::IsBaseOfImpl
+Node	shared/base/FQueue.hpp	/^        struct Node {$/;"	s	class:FQueue
 NonConstIterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericMemberIterator<false,Encoding,Allocator> NonConstIterator;$/;"	t	class:GenericMemberIterator
 Normalize	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    DiyFp Normalize() const {$/;"	f	struct:internal::DiyFp
 NormalizeBoundary	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    DiyFp NormalizeBoundary() const {$/;"	f	struct:internal::DiyFp
@@ -979,9 +1014,10 @@ OUTPUT	shared/library/libevent/include/event2/rpc.h	463;"	d
 Object	shared/library/rapidjson/include/rapidjson/document.h	/^    struct Object {$/;"	s	class:GenericValue
 ObjectEmpty	shared/library/rapidjson/include/rapidjson/document.h	/^    bool ObjectEmpty() const { RAPIDJSON_ASSERT(IsObject()); return data_.o.size == 0; }$/;"	f	class:GenericValue
 Offset	shared/library/rapidjson/include/rapidjson/error/error.h	/^    size_t Offset() const { return offset_; }$/;"	f	struct:ParseResult
-OnShutdown	shared/network/TcpWatcherThread.cc	/^void TcpWatcherThread::OnShutdown() {$/;"	f	class:TcpWatcherThread
+OnShutdown	shared/network/TcpServerBaseThread.cc	/^void TcpServerBaseThread::OnShutdown() {$/;"	f	class:TcpServerBaseThread
 OnShutdown	shared/network/TcpWorkerThread.cc	/^void TcpWorkerThread::OnShutdown() {$/;"	f	class:TcpWorkerThread
-OnShutdown	shared/port/Thread.h	/^        virtual void OnShutdown() {}$/;"	f	class:ThreadBase
+OnShutdown	shared/thread/CThread.cc	/^void CThread::OnShutdown() {$/;"	f	class:CThread
+OnShutdown	shared/thread/Thread.h	/^        virtual void OnShutdown() {}$/;"	f	class:ThreadBase
 OnSignal	gateway/Master.cc	/^void Master::OnSignal(int signal) {$/;"	f	class:Master
 OrExpr	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <typename C1, typename C2> struct OrExpr  : OrExprCond<C1::Value, C2::Value>::Type {};$/;"	s	namespace:internal
 OrExprCond	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <> struct OrExprCond<false, false> : FalseType {};$/;"	s	namespace:internal
@@ -1077,6 +1113,7 @@ PTRDIFF_MAX	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	242;"
 PTRDIFF_MIN	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	238;"	d
 PTRDIFF_MIN	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	241;"	d
 PacketMgr	shared/network/PacketMgr.h	/^class PacketMgr {$/;"	c
+Packet_t	shared/network/NetWork.h	/^    Packet_t(SOCKET fd, size_t data_len, const void* data) : fd_(fd), data_len_(data_len), data_(data) { }$/;"	f	struct:Packet_t
 Packet_t	shared/network/NetWork.h	/^struct Packet_t {$/;"	s
 Parse	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericDocument& Parse(const Ch* str) {$/;"	f	class:GenericDocument
 Parse	shared/library/rapidjson/include/rapidjson/pointer.h	/^    void Parse(const Ch* source, size_t length) {$/;"	f	class:GenericPointer
@@ -1116,8 +1153,8 @@ PercentDecodeStream	shared/library/rapidjson/include/rapidjson/pointer.h	/^     
 PercentDecodeStream	shared/library/rapidjson/include/rapidjson/pointer.h	/^    class PercentDecodeStream {$/;"	c	class:GenericPointer
 PercentEncodeStream	shared/library/rapidjson/include/rapidjson/pointer.h	/^        PercentEncodeStream(OutputStream& os) : os_(os) {}$/;"	f	class:GenericPointer::PercentEncodeStream
 PercentEncodeStream	shared/library/rapidjson/include/rapidjson/pointer.h	/^    class PercentEncodeStream {$/;"	c	class:GenericPointer
-Perform	database/Database.cpp	/^void AsyncQuery::Perform()$/;"	f	class:AsyncQuery
-PerformQueryBuffer	database/Database.cpp	/^void Database::PerformQueryBuffer(QueryBuffer* b, DatabaseConnection* ccon)$/;"	f	class:Database
+Perform	shared/database/Database.cc	/^void AsyncQuery::Perform() {$/;"	f	class:AsyncQuery
+PerformQueryBuffer	shared/database/Database.cc	/^void Database::PerformQueryBuffer(QueryBuffer* buffer, DatabaseConnection* conn) {$/;"	f	class:Database
 PlainType	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericMember<Encoding,Allocator> PlainType;$/;"	t	class:GenericMemberIterator
 Pointer	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef typename BaseType::pointer         Pointer;$/;"	t	class:GenericMemberIterator
 Pointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typedef GenericPointer<Value> Pointer;$/;"	t
@@ -1130,7 +1167,8 @@ Pop	shared/library/rapidjson/include/rapidjson/reader.h	/^        const char* Po
 Pop	shared/library/rapidjson/include/rapidjson/reader.h	/^        const char* Pop() {$/;"	f	class:GenericReader::NumberStream
 Pop	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^    void Pop(size_t count) { stack_.template Pop<Ch>(count); }$/;"	f	class:GenericStringBuffer
 PopBack	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& PopBack() {$/;"	f	class:GenericValue
-PopPacket	shared/network/TcpServerBase.cc	/^Packet_t TcpServerBase::PopPacket() {$/;"	f	class:TcpServerBase
+PopClientPacket	shared/network/TcpServerBase.cc	/^Packet_t* TcpServerBase::PopClientPacket() {$/;"	f	class:TcpServerBase
+PopServerPacket	shared/network/TcpServerBase.cc	/^Packet_t* TcpServerBase::PopServerPacket() {$/;"	f	class:TcpServerBase
 Pow10	shared/library/rapidjson/include/rapidjson/internal/pow10.h	/^inline double Pow10(int n) {$/;"	f	namespace:internal
 Predict	shared/library/rapidjson/include/rapidjson/reader.h	/^    RAPIDJSON_FORCEINLINE IterativeParsingState Predict(IterativeParsingState state, Token token) {$/;"	f	class:GenericReader
 Prefix	shared/library/rapidjson/include/rapidjson/writer.h	/^    void Prefix(Type type) {$/;"	f	class:Writer
@@ -1148,7 +1186,8 @@ PushBack	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValu
 PushBack	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& PushBack(StringRefType value, Allocator& allocator) {$/;"	f	class:GenericValue
 PushBack	shared/library/rapidjson/include/rapidjson/document.h	/^    PushBack(T value, Allocator& allocator) {$/;"	f	class:GenericValue
 PushBack	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    void PushBack(Type digit) {$/;"	f	class:internal::BigInteger
-PushPacket	shared/network/TcpServerBase.cc	/^void TcpServerBase::PushPacket(Packet_t packet) {$/;"	f	class:TcpServerBase
+PushClientPacket	shared/network/TcpServerBase.cc	/^void TcpServerBase::PushClientPacket(Packet_t* packet) {$/;"	f	class:TcpServerBase
+PushServerPacket	shared/network/TcpServerBase.cc	/^void TcpServerBase::PushServerPacket(Packet_t* packet) {$/;"	f	class:TcpServerBase
 Put	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    void Put(Ch c) { Encoding::Put(os_, c);  }$/;"	f	class:EncodedOutputStream
 Put	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    void Put(Ch c) { putFunc_(*os_, c); }$/;"	f	class:AutoUTFOutputStream
 Put	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    void Put(Ch) { RAPIDJSON_ASSERT(false); }$/;"	f	class:AutoUTFInputStream
@@ -1199,14 +1238,27 @@ PutN	shared/library/rapidjson/include/rapidjson/filewritestream.h	/^inline void 
 PutN	shared/library/rapidjson/include/rapidjson/memorybuffer.h	/^inline void PutN(MemoryBuffer& memoryBuffer, char c, size_t n) {$/;"	f
 PutN	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^inline void PutN(Stream& stream, Ch c, size_t n) {$/;"	f
 PutN	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^inline void PutN(GenericStringBuffer<UTF8<> >& stream, char c, size_t n) {$/;"	f
-Query	database/Database.cpp	/^QueryResult* Database::Query(const char* QueryString, ...)$/;"	f	class:Database
-QueryBuffer	database/Database.h	/^class SERVER_DECL QueryBuffer$/;"	c
-QueryNA	database/Database.cpp	/^QueryResult* Database::QueryNA(const char* QueryString)$/;"	f	class:Database
-QueryResult	database/Database.h	/^		QueryResult(uint32 fields, uint32 rows) : mFieldCount(fields), mRowCount(rows), mCurrentRow(NULL) {}$/;"	f	class:QueryResult
-QueryResult	database/Database.h	/^class SERVER_DECL QueryResult$/;"	c
-QueryThread	database/Database.h	/^		QueryThread(Database* d) : CThread(), db(d) {}$/;"	f	class:QueryThread
-QueryThread	database/Database.h	/^class SERVER_DECL QueryThread : public CThread$/;"	c
-QueueAsyncQuery	database/Database.cpp	/^void Database::QueueAsyncQuery(AsyncQuery* query)$/;"	f	class:Database
+QUERY_STRING_SIZE	shared/database/Database.h	31;"	d
+Query	shared/database/Database.cc	/^QueryResult* Database::Query(const char* query_string, ...) {$/;"	f	class:Database
+QueryBuffer	shared/database/Database.h	/^class QueryBuffer {$/;"	c
+QueryCallbackBase	shared/base/Callback.hpp	/^class QueryCallbackBase {$/;"	c
+QueryCallbackP0	shared/base/Callback.hpp	/^        QueryCallbackP0(Class* class_instance, Method method) : QueryCallbackBase(), obj_(class_instance), func_(method) {}$/;"	f	class:QueryCallbackP0
+QueryCallbackP0	shared/base/Callback.hpp	/^class QueryCallbackP0 : public QueryCallbackBase {$/;"	c
+QueryCallbackP1	shared/base/Callback.hpp	/^        QueryCallbackP1(Class* class_instance, Method method, P1 p1) : QueryCallbackBase(), obj_(class_instance), func_(method),$/;"	f	class:QueryCallbackP1
+QueryCallbackP1	shared/base/Callback.hpp	/^class QueryCallbackP1 : public QueryCallbackBase {$/;"	c
+QueryCallbackP2	shared/base/Callback.hpp	/^        QueryCallbackP2(Class* class_instance, Method method, P1 p1, P2 p2) : QueryCallbackBase(), obj_(class_instance), func_(method),$/;"	f	class:QueryCallbackP2
+QueryCallbackP2	shared/base/Callback.hpp	/^class QueryCallbackP2 : public QueryCallbackBase {$/;"	c
+QueryCallbackP3	shared/base/Callback.hpp	/^        QueryCallbackP3(Class* class_instance, Method method, P1 p1, P2 p2, P3 p3) : QueryCallbackBase(), obj_(class_instance), func_(method),$/;"	f	class:QueryCallbackP3
+QueryCallbackP3	shared/base/Callback.hpp	/^class QueryCallbackP3 : public QueryCallbackBase {$/;"	c
+QueryCallbackP4	shared/base/Callback.hpp	/^        QueryCallbackP4(Class* class_instance, Method method, P1 p1, P2 p2, P3 p3, P4 p4) : QueryCallbackBase(), obj_(class_instance), func_(method),$/;"	f	class:QueryCallbackP4
+QueryCallbackP4	shared/base/Callback.hpp	/^class QueryCallbackP4 : public QueryCallbackBase {$/;"	c
+QueryNA	shared/database/Database.cc	/^QueryResult* Database::QueryNA(const char* query_string) {$/;"	f	class:Database
+QueryResult	shared/database/Database.h	/^        QueryResult(uint32_t fields, uint32_t rows) : field_count_(fields), row_count_(rows), current_row_(NULL) {}$/;"	f	class:QueryResult
+QueryResult	shared/database/Database.h	/^class QueryResult {$/;"	c
+QueryResultVector	shared/base/Callback.hpp	/^typedef std::vector<AsyncQueryResult> QueryResultVector;$/;"	t
+QueryThread	shared/database/Database.h	/^        QueryThread(Database* db) : ThreadBase(), db_(db) {}$/;"	f	class:QueryThread
+QueryThread	shared/database/Database.h	/^class QueryThread : public ThreadBase {$/;"	c
+QueueAsyncQuery	shared/database/Database.cc	/^void Database::QueueAsyncQuery(AsyncQuery* query) {$/;"	f	class:Database
 RAPIDJSON_64BIT	shared/library/rapidjson/include/rapidjson/rapidjson.h	227;"	d
 RAPIDJSON_64BIT	shared/library/rapidjson/include/rapidjson/rapidjson.h	229;"	d
 RAPIDJSON_ALIGN	shared/library/rapidjson/include/rapidjson/rapidjson.h	245;"	d
@@ -1304,14 +1356,14 @@ RAPIDJSON_UINT64_C2	shared/library/rapidjson/include/rapidjson/rapidjson.h	261;"
 RAPIDJSON_VERSION_CODE	shared/library/rapidjson/include/rapidjson/rapidjson.h	391;"	d
 RAPIDJSON_VERSION_STRING	shared/library/rapidjson/include/rapidjson/rapidjson.h	73;"	d
 RAPIDJSON_WRITER_H_	shared/library/rapidjson/include/rapidjson/writer.h	16;"	d
-RWLOCK_H_86CAQHNY	shared/port/RWLock.h	19;"	d
-RWLock	shared/port/RWLock.cc	/^RWLock::RWLock() {$/;"	f	class:RWLock
-RWLock	shared/port/RWLock.h	/^class RWLock {$/;"	c
+RWLOCK_H_86CAQHNY	shared/thread/RWLock.h	19;"	d
+RWLock	shared/thread/RWLock.cc	/^RWLock::RWLock() {$/;"	f	class:RWLock
+RWLock	shared/thread/RWLock.h	/^class RWLock {$/;"	c
 Read	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    void Read() {$/;"	f	class:FileReadStream
 Read	shared/network/BufferEvent.cc	/^size_t BufferEvent::Read(void *data, size_t size) {$/;"	f	class:BufferEvent
-ReadCallback	shared/network/TcpServerBase.cc	/^void TcpServerBase::ReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {$/;"	f	class:TcpServerBase
+ReadCallback	shared/network/TcpServerBase.cc	/^Packet_t* TcpServerBase::ReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {$/;"	f	class:TcpServerBase
 ReadData	shared/network/TcpConnection.cc	/^size_t TcpConnection::ReadData(void *data, size_t data_len) {$/;"	f	class:TcpConnection
-ReadLock	shared/port/RWLock.cc	/^bool RWLock::ReadLock() {$/;"	f	class:RWLock
+ReadLock	shared/thread/RWLock.cc	/^bool RWLock::ReadLock() {$/;"	f	class:RWLock
 Reader	shared/library/rapidjson/include/rapidjson/reader.h	/^typedef GenericReader<UTF8<>, UTF8<> > Reader;$/;"	t
 Realloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Realloc(void* originalPtr, size_t originalSize, size_t newSize) {$/;"	f	class:CrtAllocator
 Realloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Realloc(void* originalPtr, size_t originalSize, size_t newSize) {$/;"	f	class:MemoryPoolAllocator
@@ -1333,8 +1385,16 @@ Resize	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    void Re
 RightBracketToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        RightBracketToken,$/;"	e	enum:GenericReader::Token
 RightCurlyBracketToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        RightCurlyBracketToken,$/;"	e	enum:GenericReader::Token
 Run	gateway/Master.cc	/^bool Master::Run(int argc, char** argv) {$/;"	f	class:Master
-Run	shared/network/TcpWatcherThread.cc	/^bool TcpWatcherThread::Run() {$/;"	f	class:TcpWatcherThread
+Run	shared/base/Callback.hpp	/^        void Run(QueryResultVector& result) { (obj_->*func_)(result); }$/;"	f	class:QueryCallbackP0
+Run	shared/base/Callback.hpp	/^        void Run(QueryResultVector& result) { (obj_->*func_)(result, p1_); }$/;"	f	class:QueryCallbackP1
+Run	shared/base/Callback.hpp	/^        void Run(QueryResultVector& result) { (obj_->*func_)(result, p1_, p2_); }$/;"	f	class:QueryCallbackP2
+Run	shared/base/Callback.hpp	/^        void Run(QueryResultVector& result) { (obj_->*func_)(result, p1_, p2_, p3_); }$/;"	f	class:QueryCallbackP3
+Run	shared/base/Callback.hpp	/^        void Run(QueryResultVector& result) { (obj_->*func_)(result, p1_, p2_, p3_, p4_); }$/;"	f	class:QueryCallbackP4
+Run	shared/database/Database.cc	/^bool Database::Run() {$/;"	f	class:Database
+Run	shared/database/Database.cc	/^bool QueryThread::Run() {$/;"	f	class:QueryThread
+Run	shared/network/TcpServerBaseThread.cc	/^bool TcpServerBaseThread::Run() {$/;"	f	class:TcpServerBaseThread
 Run	shared/network/TcpWorkerThread.cc	/^bool TcpWorkerThread::Run() {$/;"	f	class:TcpWorkerThread
+Run	shared/thread/CThread.cc	/^bool CThread::Run() {$/;"	f	class:CThread
 SCNX16	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	221;"	d
 SCNX32	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	234;"	d
 SCNX64	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	247;"	d
@@ -1435,7 +1495,7 @@ SOCKETADDRESS_H_WEGUF5SN	shared/port/SocketAddress.h	20;"	d
 SOCKET_HOLDER_SIZE	shared/network/EventBase.h	28;"	d
 SOCKET_HOLDER_SIZE	shared/network/TcpServerBase.h	31;"	d
 SOCKET_H_1UEDGFJN	shared/port/Socket.h	19;"	d
-STACK_SIZE	shared/common/Common.h	35;"	d
+STACK_SIZE	shared/common/Common.h	37;"	d
 STATIC_ASSERTION_FAILURE	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^template <> struct STATIC_ASSERTION_FAILURE<true> { enum { value = 1 }; };$/;"	s
 STATUS_H_SGWFZ9YU	shared/common/Status.h	19;"	d
 SelectIf	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <typename C, typename T1, typename T2> struct SelectIf : SelectIfCond<C::Value, T1, T2> {};$/;"	s	namespace:internal
@@ -1443,6 +1503,7 @@ SelectIfCond	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^templa
 SelectIfImpl	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <> struct SelectIfImpl<false> { template <typename T1, typename T2> struct Apply { typedef T2 Type; }; };$/;"	s	namespace:internal
 SelectIfImpl	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <bool C> struct SelectIfImpl { template <typename T1, typename T2> struct Apply { typedef T1 Type; }; };$/;"	s	namespace:internal
 SendData	shared/network/TcpServerBase.cc	/^void TcpServerBase::SendData(SOCKET fd, const void* data, size_t data_len) {$/;"	f	class:TcpServerBase
+ServerReadCallback	shared/network/TcpServerBase.cc	/^void TcpServerBase::ServerReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {$/;"	f	class:TcpServerBase
 Set	shared/library/rapidjson/include/rapidjson/error/error.h	/^    void Set(ParseErrorCode code, size_t offset = 0) { code_ = code; offset_ = offset; }$/;"	f	struct:ParseResult
 Set	shared/library/rapidjson/include/rapidjson/pointer.h	/^        Set(GenericDocument<EncodingType, typename ValueType::AllocatorType, stackAllocator>& document, T value) const {$/;"	f	class:GenericPointer
 Set	shared/library/rapidjson/include/rapidjson/pointer.h	/^    Set(ValueType& root, T value, typename ValueType::AllocatorType& allocator) const {$/;"	f	class:GenericPointer
@@ -1458,7 +1519,7 @@ SetArray	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValu
 SetArrayRaw	shared/library/rapidjson/include/rapidjson/document.h	/^    void SetArrayRaw(GenericValue* values, SizeType count, Allocator& allocator) {$/;"	f	class:GenericValue
 SetBool	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& SetBool(bool b) { this->~GenericValue(); new (this) GenericValue(b); return *this; }$/;"	f	class:GenericValue
 SetCallback	shared/network/BufferEvent.cc	/^void BufferEvent::SetCallback(BufferEventDataCallBack read_callback, BufferEventDataCallBack write_callback, BufferEventEventCallBack event_callback, void *callback_arg) {$/;"	f	class:BufferEvent
-SetDB	database/Database.h	/^		ARCEMU_INLINE void SetDB(Database* dbb) { db = dbb; }$/;"	f	class:AsyncQuery
+SetDB	shared/database/Database.h	/^        void SetDB(Database* db) { db_ = db; }$/;"	f	class:AsyncQuery
 SetDouble	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& SetDouble(double d)       { this->~GenericValue(); new (this) GenericValue(d);    return *this; }$/;"	f	class:GenericValue
 SetFd	shared/network/BufferEvent.cc	/^bool BufferEvent::SetFd(EventSocket fd) {$/;"	f	class:BufferEvent
 SetIP	shared/port/SocketAddress.cc	/^void SocketAddress::SetIP(const std::string &hostname) {$/;"	f	class:SocketAddress
@@ -1479,10 +1540,12 @@ SetString	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericVal
 SetString	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& SetString(const Ch* s, SizeType length, Allocator& allocator) { this->~GenericValue(); SetStringRaw(StringRef(s, length), allocator); return *this; }$/;"	f	class:GenericValue
 SetString	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& SetString(const std::basic_string<Ch>& s, Allocator& allocator) { return SetString(s.data(), SizeType(s.size()), allocator); }$/;"	f	class:GenericValue
 SetStringRaw	shared/library/rapidjson/include/rapidjson/document.h	/^    void SetStringRaw(StringRefType s, Allocator& allocator) {$/;"	f	class:GenericValue
+SetThreadState	shared/thread/CThread.h	/^        void SetThreadState(CThreadState thread_state) { thread_state_.SetVal(thread_state); }$/;"	f	class:CThread
 SetTimeouts	shared/network/BufferEvent.cc	/^void BufferEvent::SetTimeouts(const struct timeval *timeout_read, const struct timeval *timeout_write) {$/;"	f	class:BufferEvent
 SetUint	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& SetUint(unsigned u)       { this->~GenericValue(); new (this) GenericValue(u);    return *this; }$/;"	f	class:GenericValue
 SetUint64	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& SetUint64(uint64_t u64)   { this->~GenericValue(); new (this) GenericValue(u64);  return *this; }$/;"	f	class:GenericValue
-SetValue	database/Field.h	/^		ARCEMU_INLINE void SetValue(char* value) { mValue = value; }$/;"	f	class:Field
+SetVal	shared/thread/AtomicULong.cc	/^unsigned long AtomicULong::SetVal(unsigned long new_value) {$/;"	f	class:AtomicULong
+SetValue	shared/database/Field.h	/^        void SetValue(char* value) { value_ = value; }$/;"	f	class:Field
 SetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^SetValueByPointer(DocumentType& document, const CharType(&source)[N], T2 value) {$/;"	f
 SetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^SetValueByPointer(DocumentType& document, const GenericPointer<typename DocumentType::ValueType>& pointer, T2 value) {$/;"	f
 SetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^SetValueByPointer(T& root, const CharType(&source)[N], T2 value, typename T::AllocatorType& a) {$/;"	f
@@ -1503,21 +1566,20 @@ SetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typenam
 SetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename T::ValueType& SetValueByPointer(T& root, const GenericPointer<typename T::ValueType>& pointer, const typename T::Ch* value, typename T::AllocatorType& a) {$/;"	f
 SetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename T::ValueType& SetValueByPointer(T& root, const GenericPointer<typename T::ValueType>& pointer, const typename T::ValueType& value, typename T::AllocatorType& a) {$/;"	f
 SetValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename T::ValueType& SetValueByPointer(T& root, const GenericPointer<typename T::ValueType>& pointer, typename T::ValueType& value, typename T::AllocatorType& a) {$/;"	f
-Setup	shared/port/Thread.h	/^        void Setup(pthread_t pthread_id) {$/;"	f	class:ThreadController
-SetupMutex_	shared/port/Thread.h	/^        Mutex SetupMutex_;$/;"	m	class:Thread
+Setup	shared/thread/Thread.h	/^        void Setup(pthread_t pthread_id) {$/;"	f	class:ThreadController
+SetupMutex_	shared/thread/Thread.h	/^        Mutex SetupMutex_;$/;"	m	class:Thread
 SfinaeTag	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^struct SfinaeTag {};$/;"	s	namespace:internal
 ShortString	shared/library/rapidjson/include/rapidjson/document.h	/^    struct ShortString {$/;"	s	class:GenericValue
-ShowStatus	shared/port/ThreadPool.cc	/^void ThreadPool::ShowStatus() {$/;"	f	class:ThreadPool
+ShowStatus	shared/thread/ThreadPool.cc	/^void ThreadPool::ShowStatus() {$/;"	f	class:ThreadPool
 ShrinkToFit	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    void ShrinkToFit() { $/;"	f	class:internal::Stack
 ShrinkToFit	shared/library/rapidjson/include/rapidjson/memorybuffer.h	/^    void ShrinkToFit() { stack_.ShrinkToFit(); }$/;"	f	struct:GenericMemoryBuffer
 ShrinkToFit	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^    void ShrinkToFit() {$/;"	f	class:GenericStringBuffer
-Shutdown	database/MySQLDatabase.cpp	/^void MySQLDatabase::Shutdown()$/;"	f	class:MySQLDatabase
-Shutdown	shared/port/ThreadPool.cc	/^void ThreadPool::Shutdown() {$/;"	f	class:ThreadPool
+Shutdown	shared/thread/ThreadPool.cc	/^void ThreadPool::Shutdown() {$/;"	f	class:ThreadPool
 Sigfunc	shared/common/Common.h	/^    typedef void Sigfunc(int);$/;"	t	namespace:Common
 Sign	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    bool Sign() const { return (u_ & kSignMask) != 0; }$/;"	f	class:internal::Double
 Signal	shared/common/Common.cc	/^    Sigfunc* Signal(int signo, Sigfunc* func) {$/;"	f	namespace:Common
-Signal	shared/port/ConditionVariable.cc	/^bool ConditionVariable::Signal() {$/;"	f	class:ConditionVariable
-Signal	shared/port/Thread.h	/^        void Signal() {$/;"	f	class:ThreadController
+Signal	shared/thread/ConditionVariable.cc	/^bool ConditionVariable::Signal() {$/;"	f	class:ConditionVariable
+Signal	shared/thread/Thread.h	/^        void Signal() {$/;"	f	class:ThreadController
 Significand	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    uint64_t Significand() const { return u_ & kSignificandMask; }$/;"	f	class:internal::Double
 Singleton	shared/base/Singleton.hpp	/^        Singleton() {$/;"	f	class:Singleton
 Singleton	shared/base/Singleton.hpp	/^template < typename Type > class Singleton {$/;"	c
@@ -1548,8 +1610,8 @@ StartObject	shared/library/rapidjson/include/rapidjson/document.h	/^    bool Sta
 StartObject	shared/library/rapidjson/include/rapidjson/prettywriter.h	/^    bool StartObject() {$/;"	f	class:PrettyWriter
 StartObject	shared/library/rapidjson/include/rapidjson/reader.h	/^    bool StartObject() { return static_cast<Override&>(*this).Default(); }$/;"	f	struct:BaseReaderHandler
 StartObject	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool StartObject() {$/;"	f	class:Writer
-StartThread	shared/port/ThreadPool.cc	/^Thread* ThreadPool::StartThread(ThreadBase *execution_target) {$/;"	f	class:ThreadPool
-Startup	shared/port/ThreadPool.cc	/^void ThreadPool::Startup() {$/;"	f	class:ThreadPool
+StartThread	shared/thread/ThreadPool.cc	/^Thread* ThreadPool::StartThread(ThreadBase *execution_target) {$/;"	f	class:ThreadPool
+Startup	shared/thread/ThreadPool.cc	/^void ThreadPool::Startup() {$/;"	f	class:ThreadPool
 StaticAssertTest	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^template<int x> struct StaticAssertTest {};$/;"	s
 Status	shared/common/Status.cc	/^Status::Status(Code code, const std::string& msg, const std::string& msg2) {$/;"	f	class:Status
 Status	shared/common/Status.h	/^        Status() : status_(NULL) { }$/;"	f	class:Status
@@ -1589,8 +1651,6 @@ StrtodDiyFp	shared/library/rapidjson/include/rapidjson/internal/strtod.h	/^inlin
 StrtodFast	shared/library/rapidjson/include/rapidjson/internal/strtod.h	/^inline bool StrtodFast(double d, int p, double* result) {$/;"	f	namespace:internal
 StrtodFullPrecision	shared/library/rapidjson/include/rapidjson/internal/strtod.h	/^inline double StrtodFullPrecision(double d, int p, const char* decimals, size_t length, size_t decimalPosition, int exp) {$/;"	f	namespace:internal
 StrtodNormalPrecision	shared/library/rapidjson/include/rapidjson/internal/strtod.h	/^inline double StrtodNormalPrecision(double d, int p) {$/;"	f	namespace:internal
-SupportsReplaceInto	database/MySQLDatabase.h	/^		bool SupportsReplaceInto() { return true; }$/;"	f	class:MySQLDatabase
-SupportsTableLocking	database/MySQLDatabase.h	/^		bool SupportsTableLocking() { return true; }$/;"	f	class:MySQLDatabase
 Swap	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueType& Swap(GenericDocument<EncodingType, typename ValueType::AllocatorType, stackAllocator>& document, ValueType& value) const {$/;"	f	class:GenericPointer
 Swap	shared/library/rapidjson/include/rapidjson/pointer.h	/^    ValueType& Swap(ValueType& root, ValueType& value, typename ValueType::AllocatorType& allocator) const {$/;"	f	class:GenericPointer
 SwapValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^typename DocumentType::ValueType& SwapValueByPointer(DocumentType& document, const CharType(&source)[N], typename DocumentType::ValueType& value) {$/;"	f
@@ -1610,10 +1670,15 @@ TAILQ_HEAD	shared/library/libevent/include/event2/event_struct.h	79;"	d
 TAILQ_HEAD	shared/library/libevent/include/event2/keyvalq_struct.h	47;"	d
 TAILQ_HEAD	shared/library/libevent/include/event2/keyvalq_struct.h	73;"	d
 TCPCONNECTION_H_DX9TE0VQ	shared/network/TcpConnection.h	19;"	d
-TCPLISTENTHREAD_H_JQ5PSR1X	shared/network/TcpWatcherThread.h	19;"	d
+TCPLISTENTHREAD_H_JQ5PSR1X	shared/network/TcpServerBaseThread.h	19;"	d
 TCPWORKERTHREAD_H_WPR0YYNB	shared/network/TcpWorkerThread.h	19;"	d
-THREADPOOL_H_O4CDDLR9	shared/port/ThreadPool.h	20;"	d
-THREAD_H_TPCQFSB7	shared/port/Thread.h	19;"	d
+THREADPOOL_H_O4CDDLR9	shared/thread/ThreadPool.h	20;"	d
+THREADSTATE_AWAITING	shared/thread/CThread.h	/^    THREADSTATE_AWAITING$/;"	e	enum:CThreadState
+THREADSTATE_BUSY	shared/thread/CThread.h	/^    THREADSTATE_BUSY,$/;"	e	enum:CThreadState
+THREADSTATE_PAUSED	shared/thread/CThread.h	/^    THREADSTATE_PAUSED,$/;"	e	enum:CThreadState
+THREADSTATE_SLEEPING	shared/thread/CThread.h	/^    THREADSTATE_SLEEPING,$/;"	e	enum:CThreadState
+THREADSTATE_TERMINATE	shared/thread/CThread.h	/^    THREADSTATE_TERMINATE   = 0,$/;"	e	enum:CThreadState
+THREAD_H_TPCQFSB7	shared/thread/Thread.h	19;"	d
 TICK_TIME	gateway/Master.h	25;"	d
 TIME_FORMAT	shared/port/Env.cc	30;"	d	file:
 TIME_LONGTH	shared/port/Env.cc	29;"	d	file:
@@ -1651,10 +1716,10 @@ TcpConnection	shared/network/TcpConnection.cc	/^TcpConnection::TcpConnection(Soc
 TcpConnection	shared/network/TcpConnection.h	/^class TcpConnection {$/;"	c
 TcpServerBase	shared/network/TcpServerBase.cc	/^TcpServerBase::TcpServerBase() {$/;"	f	class:TcpServerBase
 TcpServerBase	shared/network/TcpServerBase.h	/^class TcpServerBase : public Singleton <TcpServerBase> {$/;"	c
+TcpServerBaseThread	shared/network/TcpServerBaseThread.cc	/^TcpServerBaseThread::TcpServerBaseThread(const std::string& hostname, const uint16_t port) {$/;"	f	class:TcpServerBaseThread
+TcpServerBaseThread	shared/network/TcpServerBaseThread.cc	/^TcpServerBaseThread::TcpServerBaseThread(const uint32_t ip, const uint16_t port) {$/;"	f	class:TcpServerBaseThread
+TcpServerBaseThread	shared/network/TcpServerBaseThread.h	/^class TcpServerBaseThread : public ThreadBase {$/;"	c
 TcpServerBase_H_WIP2ZBBJ	shared/network/TcpServerBase.h	19;"	d
-TcpWatcherThread	shared/network/TcpWatcherThread.cc	/^TcpWatcherThread::TcpWatcherThread(const std::string& hostname, const uint16_t port) {$/;"	f	class:TcpWatcherThread
-TcpWatcherThread	shared/network/TcpWatcherThread.cc	/^TcpWatcherThread::TcpWatcherThread(const uint32_t ip, const uint16_t port) {$/;"	f	class:TcpWatcherThread
-TcpWatcherThread	shared/network/TcpWatcherThread.h	/^class TcpWatcherThread : public ThreadBase {$/;"	c
 TcpWorkerThread	shared/network/TcpWorkerThread.h	/^        TcpWorkerThread(SOCKET fd, const void* data, size_t data_len) : fd_(fd), data_(data), data_len_(data_len) { }$/;"	f	class:TcpWorkerThread
 TcpWorkerThread	shared/network/TcpWorkerThread.h	/^class TcpWorkerThread : public ThreadBase {$/;"	c
 Tell	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    size_t Tell() const { RAPIDJSON_ASSERT(false);  return 0; }$/;"	f	class:EncodedOutputStream
@@ -1668,15 +1733,15 @@ Tell	shared/library/rapidjson/include/rapidjson/pointer.h	/^        size_t Tell(
 Tell	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    size_t Tell() const { return static_cast<size_t>(src_ - head_); }$/;"	f	struct:GenericStringStream
 Tell	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    size_t Tell() { return static_cast<size_t>(src_ - head_); }$/;"	f	struct:GenericInsituStringStream
 Tell	shared/library/rapidjson/include/rapidjson/reader.h	/^        size_t Tell() { return is.Tell(); }$/;"	f	class:GenericReader::NumberStream
-Thread	shared/port/Thread.h	/^class Thread {$/;"	c
-ThreadBase	shared/port/Thread.h	/^        ThreadBase() {}$/;"	f	class:ThreadBase
-ThreadBase	shared/port/Thread.h	/^class ThreadBase {$/;"	c
-ThreadController	shared/port/Thread.h	/^        ThreadController() {$/;"	f	class:ThreadController
-ThreadController	shared/port/Thread.h	/^class ThreadController {$/;"	c
-ThreadExit	shared/port/ThreadPool.cc	/^bool ThreadPool::ThreadExit(Thread *thread) {$/;"	f	class:ThreadPool
-ThreadPool	shared/port/ThreadPool.h	/^class ThreadPool : public Singleton <ThreadPool> {$/;"	c
-ThreadProcess	shared/port/ThreadPool.cc	/^void* ThreadPool::ThreadProcess(void *arg) {$/;"	f	class:ThreadPool
-ThreadRunning	database/Database.h	/^		bool ThreadRunning;$/;"	m	class:Database
+Thread	shared/thread/Thread.h	/^class Thread {$/;"	c
+ThreadBase	shared/thread/Thread.h	/^        ThreadBase() {}$/;"	f	class:ThreadBase
+ThreadBase	shared/thread/Thread.h	/^class ThreadBase {$/;"	c
+ThreadController	shared/thread/Thread.h	/^        ThreadController() {$/;"	f	class:ThreadController
+ThreadController	shared/thread/Thread.h	/^class ThreadController {$/;"	c
+ThreadExit	shared/thread/ThreadPool.cc	/^bool ThreadPool::ThreadExit(Thread *thread) {$/;"	f	class:ThreadPool
+ThreadPool	shared/thread/ThreadPool.h	/^class ThreadPool : public Singleton <ThreadPool> {$/;"	c
+ThreadProcess	shared/thread/ThreadPool.cc	/^void* ThreadPool::ThreadProcess(void *arg) {$/;"	f	class:ThreadPool
+ThreadProcessQuery	shared/database/Database.cc	/^void Database::ThreadProcessQuery() {$/;"	f	class:Database
 ToBias	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    uint64_t ToBias() const { return (u_ & kSignMask) ? ~u_ + 1 : u_ | kSignMask; }$/;"	f	class:internal::Double
 ToDouble	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    double ToDouble() const {$/;"	f	struct:internal::DiyFp
 ToSockAddr	shared/port/SocketAddress.cc	/^void SocketAddress::ToSockAddr(struct sockaddr_in *sockaddr) const {$/;"	f	class:SocketAddress
@@ -1692,9 +1757,9 @@ Transcoder	shared/library/rapidjson/include/rapidjson/encodings.h	/^struct Trans
 Transit	shared/library/rapidjson/include/rapidjson/reader.h	/^    RAPIDJSON_FORCEINLINE IterativeParsingState Transit(IterativeParsingState src, Token token, IterativeParsingState dst, InputStream& is, Handler& handler) {$/;"	f	class:GenericReader
 TrueToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        TrueToken,$/;"	e	enum:GenericReader::Token
 TrueType	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^typedef BoolType<true> TrueType;$/;"	t	namespace:internal
-TryLock	shared/port/Mutex.cc	/^bool Mutex::TryLock() {$/;"	f	class:Mutex
-TryReadLock	shared/port/RWLock.cc	/^bool RWLock::TryReadLock() {$/;"	f	class:RWLock
-TryWriteLock	shared/port/RWLock.cc	/^bool RWLock::TryWriteLock() {$/;"	f	class:RWLock
+TryLock	shared/thread/Mutex.cc	/^bool Mutex::TryLock() {$/;"	f	class:Mutex
+TryReadLock	shared/thread/RWLock.cc	/^bool RWLock::TryReadLock() {$/;"	f	class:RWLock
+TryWriteLock	shared/thread/RWLock.cc	/^bool RWLock::TryWriteLock() {$/;"	f	class:RWLock
 Type	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    typedef uint64_t Type;$/;"	t	class:internal::BigInteger
 Type	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^    typedef BoolType Type;$/;"	t	struct:internal::BoolType
 Type	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <> struct SelectIfImpl<false> { template <typename T1, typename T2> struct Apply { typedef T2 Type; }; };$/;"	t	struct:internal::SelectIfImpl::Apply
@@ -1756,7 +1821,7 @@ Uint64	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool Uint64(uin
 Uint64Value	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    uint64_t Uint64Value() const { return u_; }$/;"	f	class:internal::Double
 UnHookSignal	gateway/Master.cc	/^void Master::UnHookSignal() {$/;"	f	class:Master
 UnLock	shared/network/BufferEvent.cc	/^void BufferEvent::UnLock() {$/;"	f	class:BufferEvent
-UnLock	shared/port/Mutex.cc	/^bool Mutex::UnLock() {$/;"	f	class:Mutex
+UnLock	shared/thread/Mutex.cc	/^bool Mutex::UnLock() {$/;"	f	class:Mutex
 Update	gateway/World.cc	/^void World::Update(uint64_t diff) {$/;"	f	class:World
 UpdateTime	shared/port/Env.cc	/^void Env::UpdateTime() {$/;"	f	class:Env
 Usable	shared/library/rapidjson/include/rapidjson/document.h	/^        inline static bool Usable(SizeType len) { return            (MaxSize >= len); }$/;"	f	struct:GenericValue::ShortString
@@ -1781,10 +1846,10 @@ WINT_MAX	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	265;"	d
 WINT_MIN	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	264;"	d
 WORLD_H_FKNOTEM7	gateway/World.h	19;"	d
 WRITABLEFILE_H_EIVNP1X7	shared/port/WritableFile.h	20;"	d
-Wait	shared/port/ConditionVariable.cc	/^bool ConditionVariable::Wait(const struct timespec* timeout) {$/;"	f	class:ConditionVariable
-Wait	shared/port/Thread.h	/^        void Wait() {$/;"	f	class:ThreadController
-WaitExecute	database/Database.cpp	/^bool Database::WaitExecute(const char* QueryString, ...)$/;"	f	class:Database
-WaitExecuteNA	database/Database.cpp	/^bool Database::WaitExecuteNA(const char* QueryString)$/;"	f	class:Database
+Wait	shared/thread/ConditionVariable.cc	/^bool ConditionVariable::Wait(const struct timespec* timeout) {$/;"	f	class:ConditionVariable
+Wait	shared/thread/Thread.h	/^        void Wait() {$/;"	f	class:ThreadController
+WaitExecute	shared/database/Database.cc	/^bool Database::WaitExecute(const char* query_string, ...) {$/;"	f	class:Database
+WaitExecuteNA	shared/database/Database.cc	/^bool Database::WaitExecuteNA(const char* query_string) {$/;"	f	class:Database
 World	gateway/World.h	/^class World : public Singleton<World> {$/;"	c
 WritableFile	shared/port/WritableFile.cc	/^WritableFile::WritableFile(const std::string file_name, FILE* file) : file_name_(file_name), file_(file) {$/;"	f	class:WritableFile
 WritableFile	shared/port/WritableFile.h	/^class WritableFile {$/;"	c
@@ -1801,7 +1866,7 @@ WriteInt	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteInt
 WriteInt	shared/library/rapidjson/include/rapidjson/writer.h	/^inline bool Writer<StringBuffer>::WriteInt(int i) {$/;"	f	class:Writer
 WriteInt64	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteInt64(int64_t i64) {$/;"	f	class:Writer
 WriteInt64	shared/library/rapidjson/include/rapidjson/writer.h	/^inline bool Writer<StringBuffer>::WriteInt64(int64_t i64) {$/;"	f	class:Writer
-WriteLock	shared/port/RWLock.cc	/^bool RWLock::WriteLock() {$/;"	f	class:RWLock
+WriteLock	shared/thread/RWLock.cc	/^bool RWLock::WriteLock() {$/;"	f	class:RWLock
 WriteNull	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteNull()  {$/;"	f	class:Writer
 WritePID	gateway/Master.cc	/^uint32_t Master::WritePID() {$/;"	f	class:Master
 WriteStartArray	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteStartArray()  { os_->Put('['); return true; }$/;"	f	class:Writer
@@ -1819,8 +1884,6 @@ Z16	shared/library/rapidjson/include/rapidjson/reader.h	668;"	d
 Z16	shared/library/rapidjson/include/rapidjson/reader.h	676;"	d
 Z16	shared/library/rapidjson/include/rapidjson/writer.h	247;"	d
 Z16	shared/library/rapidjson/include/rapidjson/writer.h	255;"	d
-_BeginTransaction	database/MySQLDatabase.cpp	/^void MySQLDatabase::_BeginTransaction(DatabaseConnection* conn)$/;"	f	class:MySQLDatabase
-_DATABASE_H	database/Database.h	21;"	d
 _EVBUFFER_IOVEC_IS_NATIVE	shared/library/libevent/include/event2/buffer.h	127;"	d
 _EVENT2_BUFFEREVENT_COMPAT_H_	shared/library/libevent/include/event2/bufferevent_compat.h	29;"	d
 _EVENT2_BUFFEREVENT_H_	shared/library/libevent/include/event2/bufferevent.h	28;"	d
@@ -1966,24 +2029,15 @@ _EVENT_SIZEOF_VOID_P	shared/library/libevent/include/event2/util.h	74;"	d
 _EVENT_STDC_HEADERS	shared/library/libevent/include/event2/event-config.h	426;"	d
 _EVENT_TIME_WITH_SYS_TIME	shared/library/libevent/include/event2/event-config.h	429;"	d
 _EVENT_VERSION	shared/library/libevent/include/event2/event-config.h	432;"	d
-_EndTransaction	database/MySQLDatabase.cpp	/^void MySQLDatabase::_EndTransaction(DatabaseConnection* conn)$/;"	f	class:MySQLDatabase
 _GNU_SOURCE	shared/library/libevent/include/event2/util.h	61;"	d
-_HandleError	database/MySQLDatabase.cpp	/^bool MySQLDatabase::_HandleError(MySQLDatabaseConnection* con, uint32 ErrorNumber)$/;"	f	class:MySQLDatabase
-_Initialize	database/Database.cpp	/^void Database::_Initialize()$/;"	f	class:Database
 _MSC_INTTYPES_H_	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	42;"	d
 _MSC_STDINT_H_	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	42;"	d
-_Reconnect	database/MySQLDatabase.cpp	/^bool MySQLDatabase::_Reconnect(MySQLDatabaseConnection* conn)$/;"	f	class:MySQLDatabase
-_SendQuery	database/MySQLDatabase.cpp	/^bool MySQLDatabase::_SendQuery(DatabaseConnection* con, const char* Sql, bool Self)$/;"	f	class:MySQLDatabase
-_StoreQueryResult	database/MySQLDatabase.cpp	/^QueryResult* MySQLDatabase::_StoreQueryResult(DatabaseConnection* con)$/;"	f	class:MySQLDatabase
 _W64	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	106;"	d
 _W64	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	108;"	d
-__DATASTORE_H	database/DataStore.h	21;"	d
-__MYSQLDATABASE_H	database/MySQLDatabase.h	21;"	d
-_counter	database/Database.h	/^		uint32 _counter;$/;"	m	class:Database
 _ev	shared/library/libevent/include/event2/event_struct.h	/^	} _ev;$/;"	m	struct:event	typeref:union:event::__anon17
 _internal	shared/library/libevent/include/event2/buffer.h	/^	} _internal;$/;"	m	struct:evbuffer_ptr	typeref:struct:evbuffer_ptr::__anon15
 a	shared/library/rapidjson/include/rapidjson/document.h	/^        Array a;$/;"	m	union:GenericValue::Data
-active_threads_	shared/port/ThreadPool.h	/^        std::set<Thread*> active_threads_;$/;"	m	class:ThreadPool
+active_threads_	shared/thread/ThreadPool.h	/^        std::set<Thread*> active_threads_;$/;"	m	class:ThreadPool
 ai_addr	shared/library/libevent/include/event2/util.h	/^	struct sockaddr  *ai_addr; \/* binary address *\/$/;"	m	struct:evutil_addrinfo	typeref:struct:evutil_addrinfo::sockaddr
 ai_addrlen	shared/library/libevent/include/event2/util.h	/^	size_t  ai_addrlen;   \/* length of ai_addr *\/$/;"	m	struct:evutil_addrinfo
 ai_canonname	shared/library/libevent/include/event2/util.h	/^	char   *ai_canonname; \/* canonical name for nodename *\/$/;"	m	struct:evutil_addrinfo
@@ -1997,10 +2051,10 @@ alloc_condition	shared/library/libevent/include/event2/thread.h	/^	void *(*alloc
 allocator_	shared/library/rapidjson/include/rapidjson/document.h	/^    Allocator* allocator_;$/;"	m	class:GenericDocument
 allocator_	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    Allocator* allocator_;$/;"	m	class:internal::Stack
 allocator_	shared/library/rapidjson/include/rapidjson/pointer.h	/^    Allocator* allocator_;                  \/\/!< The current allocator. It is either user-supplied or equal to ownAllocator_.$/;"	m	class:GenericPointer
-attr_	shared/port/Mutex.cc	/^pthread_mutexattr_t Mutex::attr_;$/;"	m	class:Mutex	file:
-attr_	shared/port/Mutex.h	/^        static pthread_mutexattr_t attr_;$/;"	m	class:Mutex
-attr_initalized_	shared/port/Mutex.cc	/^bool Mutex::attr_initalized_ = false;$/;"	m	class:Mutex	file:
-attr_initalized_	shared/port/Mutex.h	/^        static bool attr_initalized_;$/;"	m	class:Mutex
+attr_	shared/thread/Mutex.cc	/^pthread_mutexattr_t Mutex::attr_;$/;"	m	class:Mutex	file:
+attr_	shared/thread/Mutex.h	/^        static pthread_mutexattr_t attr_;$/;"	m	class:Mutex
+attr_initalized_	shared/thread/Mutex.cc	/^bool Mutex::attr_initalized_ = false;$/;"	m	class:Mutex	file:
+attr_initalized_	shared/thread/Mutex.h	/^        static bool attr_initalized_;$/;"	m	class:Mutex
 base	shared/library/libevent/include/event2/rpc_struct.h	/^	struct evrpc_base *base;$/;"	m	struct:evrpc	typeref:struct:evrpc::evrpc_base
 baseAllocator_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    BaseAllocator* baseAllocator_;  \/\/!< base allocator for allocating memory chunks.$/;"	m	class:MemoryPoolAllocator
 be_ops	shared/library/libevent/include/event2/bufferevent_struct.h	/^	const struct bufferevent_ops *be_ops;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::bufferevent_ops
@@ -2024,6 +2078,16 @@ bufferevent_flush_mode	shared/library/libevent/include/event2/bufferevent.h	/^en
 bufferevent_options	shared/library/libevent/include/event2/bufferevent.h	/^enum bufferevent_options {$/;"	g
 bufferevent_ssl_state	shared/library/libevent/include/event2/bufferevent_ssl.h	/^enum bufferevent_ssl_state {$/;"	g
 cIterativeParsingStateCount	shared/library/rapidjson/include/rapidjson/reader.h	/^        cIterativeParsingStateCount$/;"	e	enum:GenericReader::IterativeParsingState
+callback_	shared/base/Callback.hpp	/^        callback_function callback_;$/;"	m	class:CallbackFunctionP0
+callback_	shared/base/Callback.hpp	/^        callback_function callback_;$/;"	m	class:CallbackFunctionP1
+callback_	shared/base/Callback.hpp	/^        callback_function callback_;$/;"	m	class:CallbackFunctionP2
+callback_	shared/base/Callback.hpp	/^        callback_function callback_;$/;"	m	class:CallbackFunctionP3
+callback_	shared/base/Callback.hpp	/^        callback_function callback_;$/;"	m	class:CallbackFunctionP4
+callback_function	shared/base/Callback.hpp	/^    typedef void (*callback_function)();$/;"	t	class:CallbackFunctionP0
+callback_function	shared/base/Callback.hpp	/^    typedef void (*callback_function)(P1);$/;"	t	class:CallbackFunctionP1
+callback_function	shared/base/Callback.hpp	/^    typedef void (*callback_function)(P1, P2);$/;"	t	class:CallbackFunctionP2
+callback_function	shared/base/Callback.hpp	/^    typedef void (*callback_function)(P1, P2, P3);$/;"	t	class:CallbackFunctionP3
+callback_function	shared/base/Callback.hpp	/^    typedef void (*callback_function)(P1, P2, P3, P4);$/;"	t	class:CallbackFunctionP4
 capacity	shared/library/rapidjson/include/rapidjson/allocators.h	/^        size_t capacity;    \/\/!< Capacity of the chunk in bytes (excluding the header itself).$/;"	m	struct:MemoryPoolAllocator::ChunkHeader
 capacity	shared/library/rapidjson/include/rapidjson/document.h	/^        SizeType capacity;$/;"	m	struct:GenericValue::Array
 capacity	shared/library/rapidjson/include/rapidjson/document.h	/^        SizeType capacity;$/;"	m	struct:GenericValue::Object
@@ -2037,11 +2101,14 @@ chunkHead_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    ChunkHe
 chunk_capacity_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    size_t chunk_capacity_;     \/\/!< The minimum capacity of chunk when they are allocated.$/;"	m	class:MemoryPoolAllocator
 chunk_cb	shared/library/libevent/include/event2/http_struct.h	/^	void (*chunk_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 chunked	shared/library/libevent/include/event2/http_struct.h	/^	unsigned chunked:1,		\/* a chunked request *\/$/;"	m	struct:evhttp_request
+client_recv_queue_	shared/network/TcpServerBase.h	/^        std::queue<Packet_t*> client_recv_queue_;$/;"	m	class:TcpServerBase
 code	shared/common/Status.h	/^        Code code() const { return (status_ == NULL) ? kOk : static_cast<Code>(status_[4]); }$/;"	f	class:Status
 code_	shared/library/rapidjson/include/rapidjson/error/error.h	/^    ParseErrorCode code_;$/;"	m	struct:ParseResult
-cond_	shared/port/ConditionVariable.h	/^        pthread_cond_t cond_;$/;"	m	class:ConditionVariable
-cond_	shared/port/Thread.h	/^        pthread_cond_t cond_;$/;"	m	class:ThreadController
+cond_	shared/thread/ConditionVariable.h	/^        pthread_cond_t cond_;$/;"	m	class:ConditionVariable
+cond_	shared/thread/Thread.h	/^        pthread_cond_t cond_;$/;"	m	class:ThreadController
 condition_api_version	shared/library/libevent/include/event2/thread.h	/^	int condition_api_version;$/;"	m	struct:evthread_condition_callbacks
+connection_count_	shared/database/Database.h	/^        uint32_t connection_count_;$/;"	m	class:Database
+connections_	shared/database/Database.h	/^        DatabaseConnection** connections_;$/;"	m	class:Database
 copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 0 };$/;"	e	enum:StreamTraits::__anon12
 copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 1 };$/;"	e	enum:StreamTraits::__anon13
 copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 1 };$/;"	e	enum:StreamTraits::__anon14
@@ -2051,16 +2118,19 @@ current_	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    Ch cur
 current_	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    Ch current_;$/;"	m	class:EncodedInputStream
 current_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    Ch *current_;$/;"	m	class:FileReadStream
 current_	shared/library/rapidjson/include/rapidjson/filewritestream.h	/^    char *current_;$/;"	m	class:FileWriteStream
+current_row_	shared/database/Database.h	/^        Field* current_row_;$/;"	m	class:QueryResult
 d	shared/library/rapidjson/include/rapidjson/document.h	/^        double d;$/;"	m	union:GenericValue::Number
 d_	shared/library/rapidjson/include/rapidjson/document.h	/^        GenericDocument& d_;$/;"	m	struct:GenericDocument::ClearStackOnExit
 d_	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^        double d_;$/;"	m	union:internal::Double::__anon4
-data	shared/network/NetWork.h	/^    const void* data;$/;"	m	struct:Packet_t
 data_	shared/library/rapidjson/include/rapidjson/document.h	/^    Data data_;$/;"	m	class:GenericValue
+data_	shared/network/NetWork.h	/^    const void* data_;$/;"	m	struct:Packet_t
 data_	shared/network/TcpWorkerThread.h	/^        const void* data_;$/;"	m	class:TcpWorkerThread
-data_len	shared/network/NetWork.h	/^    size_t data_len;$/;"	m	struct:Packet_t
+data_len_	shared/network/NetWork.h	/^    size_t data_len_;$/;"	m	struct:Packet_t
 data_len_	shared/network/TcpWorkerThread.h	/^        const size_t data_len_;$/;"	m	class:TcpWorkerThread
-db	database/Database.h	/^		Database* db;$/;"	m	class:AsyncQuery
-db	database/Database.h	/^		Database* db;$/;"	m	class:QueryThread
+database_name	shared/database/Database.h	/^        const std::string& database_name() const { return database_name_; }$/;"	f	class:Database
+database_name_	shared/database/Database.h	/^        std::string database_name_;$/;"	m	class:Database
+db_	shared/database/Database.h	/^        Database* db_;$/;"	m	class:AsyncQuery
+db_	shared/database/Database.h	/^        Database* db_;$/;"	m	class:QueryThread
 debug_log_	shared/common/Logger.h	/^        WritableFile *debug_log_ = NULL;$/;"	m	class:Logger
 digits_	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    Type digits_[kCapacity];$/;"	m	class:internal::BigInteger
 dns_question_class	shared/library/libevent/include/event2/dns_struct.h	/^	int dns_question_class;$/;"	m	struct:evdns_server_question
@@ -2233,11 +2303,24 @@ evutil_timerisset	shared/library/libevent/include/event2/util.h	417;"	d
 evutil_timerisset	shared/library/libevent/include/event2/util.h	419;"	d
 evutil_timersub	shared/library/libevent/include/event2/util.h	380;"	d
 evutil_timersub	shared/library/libevent/include/event2/util.h	391;"	d
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackFunctionP0
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackFunctionP1
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackFunctionP2
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackFunctionP3
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackFunctionP4
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackP0
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackP1
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackP2
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackP3
+execute	shared/base/Callback.hpp	/^        void execute() { return operator()(); }$/;"	f	class:CallbackP4
 f	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    uint64_t f;$/;"	m	struct:internal::DiyFp
-fd	shared/network/NetWork.h	/^    SOCKET fd;$/;"	m	struct:Packet_t
+fd_	shared/network/NetWork.h	/^    SOCKET fd_;$/;"	m	struct:Packet_t
 fd_	shared/network/TcpWorkerThread.h	/^        SOCKET fd_;$/;"	m	class:TcpWorkerThread
+field_count	shared/database/Database.h	/^        uint32_t field_count() const { return field_count_; }$/;"	f	class:QueryResult
+field_count_	shared/database/Database.h	/^        uint32_t field_count_;$/;"	m	class:QueryResult
 file_	shared/port/WritableFile.h	/^        FILE* file_;$/;"	m	class:WritableFile
 file_name_	shared/port/WritableFile.h	/^        std::string file_name_;$/;"	m	class:WritableFile
+first_	shared/base/FQueue.hpp	/^        Node* first_;$/;"	m	class:FQueue
 flags	shared/library/libevent/include/event2/dns_struct.h	/^	int flags;$/;"	m	struct:evdns_server_request
 flags	shared/library/libevent/include/event2/http_struct.h	/^	int flags;$/;"	m	struct:evhttp_request
 flags_	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue() RAPIDJSON_NOEXCEPT : data_(), flags_(kNullFlag) {}$/;"	f	class:GenericValue
@@ -2255,9 +2338,20 @@ fp_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    std::FILE*
 fp_	shared/library/rapidjson/include/rapidjson/filewritestream.h	/^    std::FILE* fp_;$/;"	m	class:FileWriteStream
 free	shared/library/libevent/include/event2/thread.h	/^	void (*free)(void *lock, unsigned locktype);$/;"	m	struct:evthread_lock_callbacks
 free_condition	shared/library/libevent/include/event2/thread.h	/^	void (*free_condition)(void *cond);$/;"	m	struct:evthread_condition_callbacks
-func	database/Database.h	/^		SQLCallbackBase* func;$/;"	m	class:AsyncQuery
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:CallbackP0
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:CallbackP1
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:CallbackP2
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:CallbackP3
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:CallbackP4
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:QueryCallbackP0
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:QueryCallbackP1
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:QueryCallbackP2
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:QueryCallbackP3
+func_	shared/base/Callback.hpp	/^        Method func_;$/;"	m	class:QueryCallbackP4
+func_	shared/database/Database.h	/^        QueryCallbackBase* func_;$/;"	m	class:AsyncQuery
 getSingleton	shared/base/Singleton.hpp	/^        static Type& getSingleton() {if(!singleton_) new Type(); return *singleton_;}$/;"	f	class:Singleton
 getSingletonPtr	shared/base/Singleton.hpp	/^        static Type* getSingletonPtr() {if(!singleton_) new Type(); return singleton_;}$/;"	f	class:Singleton
+get_size	shared/base/FQueue.hpp	/^        uint32_t get_size() {$/;"	f	class:FQueue
 hasBOM_	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    bool hasBOM_;$/;"	m	class:AutoUTFInputStream
 hasRoot_	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool hasRoot_;$/;"	m	class:Writer
 hashcode	shared/library/rapidjson/include/rapidjson/document.h	/^        unsigned hashcode;  \/\/!< reserved$/;"	m	struct:GenericValue::String
@@ -2267,7 +2361,9 @@ head_	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    const Ch* hea
 headers_size	shared/library/libevent/include/event2/http_struct.h	/^	size_t headers_size;$/;"	m	struct:evhttp_request
 high	shared/library/libevent/include/event2/bufferevent_struct.h	/^	size_t high;$/;"	m	struct:event_watermark
 host_cache	shared/library/libevent/include/event2/http_struct.h	/^	char *host_cache;$/;"	m	struct:evhttp_request
+hostname	shared/database/Database.h	/^        const std::string& hostname() const { return hostname_; }$/;"	f	class:Database
 hostname	shared/port/SocketAddress.h	/^        std::string hostname() const { return hostname_; }$/;"	f	class:SocketAddress
+hostname_	shared/database/Database.h	/^        std::string hostname_;$/;"	m	class:Database
 hostname_	shared/port/SocketAddress.h	/^        std::string hostname_;$/;"	m	class:SocketAddress
 http_req	shared/library/libevent/include/event2/rpc_struct.h	/^	struct evhttp_request *http_req;$/;"	m	struct:evrpc_status	typeref:struct:evrpc_status::evhttp_request
 i	shared/library/rapidjson/include/rapidjson/document.h	/^            int i;$/;"	m	struct:GenericValue::Number::I
@@ -2275,7 +2371,7 @@ i	shared/library/rapidjson/include/rapidjson/document.h	/^        }i;$/;"	m	unio
 i32toa	shared/library/rapidjson/include/rapidjson/internal/itoa.h	/^inline char* i32toa(int32_t value, char* buffer) {$/;"	f	namespace:internal
 i64	shared/library/rapidjson/include/rapidjson/document.h	/^        int64_t i64;$/;"	m	union:GenericValue::Number
 i64toa	shared/library/rapidjson/include/rapidjson/internal/itoa.h	/^inline char* i64toa(int64_t value, char* buffer) {$/;"	f	namespace:internal
-idle_threads_	shared/port/ThreadPool.h	/^        std::set<Thread*> idle_threads_;$/;"	m	class:ThreadPool
+idle_threads_	shared/thread/ThreadPool.h	/^        std::set<Thread*> idle_threads_;$/;"	m	class:ThreadPool
 imaxabs	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	279;"	d
 imaxdiv	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^imaxdiv_t __cdecl imaxdiv(intmax_t numer, intmax_t denom)$/;"	f
 imaxdiv_t	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^} imaxdiv_t;$/;"	t	typeref:struct:__anon3
@@ -2447,7 +2543,7 @@ kSignificandMask	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/
 kSignificandSize	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const int kSignificandSize = 52;$/;"	m	class:internal::Double
 kStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kStringFlag = 0x100000,$/;"	e	enum:GenericValue::__anon1
 kStringType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kStringType = 5,    \/\/!< string$/;"	e	enum:Type
-kThreadReserve	shared/port/ThreadPool.h	/^        const int kThreadReserve = 10;$/;"	m	class:ThreadPool
+kThreadReserve	shared/thread/ThreadPool.h	/^        const int kThreadReserve = 10;$/;"	m	class:ThreadPool
 kThreadSafe	shared/network/LibEventDefine.h	/^    kThreadSafe         = BEV_OPT_THREADSAFE,$/;"	e	enum:BufferEventOption
 kTimeout	shared/network/LibEventDefine.h	/^    kTimeout        = BEV_EVENT_TIMEOUT,$/;"	e	enum:BufferEventFlag
 kTokenCount	shared/library/rapidjson/include/rapidjson/reader.h	/^        kTokenCount$/;"	e	enum:GenericReader::Token
@@ -2467,12 +2563,13 @@ kUnlockCallbacks	shared/network/LibEventDefine.h	/^    kUnlockCallbacks    = BEV
 kWriting	shared/network/LibEventDefine.h	/^    kWriting        = BEV_EVENT_WRITING,$/;"	e	enum:BufferEventFlag
 key	shared/library/libevent/include/event2/keyvalq_struct.h	/^	char *key;$/;"	m	struct:evkeyval
 kind	shared/library/libevent/include/event2/http_struct.h	/^	enum evhttp_request_kind kind;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_request_kind
+last_	shared/base/FQueue.hpp	/^        Node* last_;$/;"	m	class:FQueue
 length	shared/library/rapidjson/include/rapidjson/document.h	/^        SizeType length;$/;"	m	struct:GenericValue::String
 length	shared/library/rapidjson/include/rapidjson/document.h	/^    const SizeType length; \/\/!< length of the string (excluding the trailing NULL terminator)$/;"	m	struct:GenericStringRef
 length	shared/library/rapidjson/include/rapidjson/pointer.h	/^        SizeType length;            \/\/!< Length of the name.$/;"	m	struct:GenericPointer::Token
 length_	shared/library/rapidjson/include/rapidjson/reader.h	/^        SizeType length_;$/;"	m	class:GenericReader::StackStream
 level_stack_	shared/library/rapidjson/include/rapidjson/writer.h	/^    internal::Stack<StackAllocator> level_stack_;$/;"	m	class:Writer
-listen_addr_	shared/network/TcpWatcherThread.h	/^        SocketAddress* listen_addr_ = nullptr;$/;"	m	class:TcpWatcherThread
+listen_addr_	shared/network/TcpServerBaseThread.h	/^        SocketAddress* listen_addr_ = nullptr;$/;"	m	class:TcpServerBaseThread
 listenfd_event_map_	shared/network/TcpServerBase.h	/^        std::map<SOCKET, Event*> listenfd_event_map_;$/;"	m	class:TcpServerBase
 listenfd_socket_map_	shared/network/TcpServerBase.h	/^        std::map<SOCKET, Socket*> listenfd_socket_map_;$/;"	m	class:TcpServerBase
 lock	shared/library/libevent/include/event2/thread.h	/^	int (*lock)(unsigned mode, void *lock);$/;"	m	struct:evthread_lock_callbacks
@@ -2482,26 +2579,16 @@ log_file_	shared/network/LibEvent.h	/^        static WritableFile* log_file_;$/;
 log_file_name_	shared/network/LibEvent.cc	/^std::string LibEvent::log_file_name_;$/;"	m	class:LibEvent	file:
 log_file_name_	shared/network/LibEvent.h	/^        static std::string log_file_name_;$/;"	m	class:LibEvent
 low	shared/library/libevent/include/event2/bufferevent_struct.h	/^	size_t low;$/;"	m	struct:event_watermark
-mConnectionCount	database/Database.h	/^		int32 mConnectionCount;$/;"	m	class:Database
-mCurrentRow	database/Database.h	/^		Field* mCurrentRow;$/;"	m	class:QueryResult
-mDatabaseName	database/Database.h	/^		string mDatabaseName;$/;"	m	class:Database
-mFieldCount	database/Database.h	/^		uint32 mFieldCount;$/;"	m	class:QueryResult
-mHostname	database/Database.h	/^		string mHostname;$/;"	m	class:Database
-mPassword	database/Database.h	/^		string mPassword;$/;"	m	class:Database
-mPort	database/Database.h	/^		uint32 mPort;$/;"	m	class:Database
-mResult	database/MySQLDatabase.h	/^		MYSQL_RES* mResult;$/;"	m	class:MySQLQueryResult
-mRowCount	database/Database.h	/^		uint32 mRowCount;$/;"	m	class:QueryResult
-mUsername	database/Database.h	/^		string mUsername;$/;"	m	class:Database
-mValue	database/Field.h	/^		char* mValue;$/;"	m	class:Field
 main	gateway/Main.cc	/^main(int argc, char *argv[])$/;"	f
 major	shared/library/libevent/include/event2/http_struct.h	/^	char major;			\/* HTTP Major number *\/$/;"	m	struct:evhttp_request
 members	shared/library/rapidjson/include/rapidjson/document.h	/^        Member* members;$/;"	m	struct:GenericValue::Object
 min_heap_idx	shared/library/libevent/include/event2/event_struct.h	/^		int min_heap_idx;$/;"	m	union:event::__anon16
 minor	shared/library/libevent/include/event2/http_struct.h	/^	char minor;			\/* HTTP Minor number *\/$/;"	m	struct:evhttp_request
-mutex_	shared/port/ConditionVariable.h	/^        pthread_mutex_t mutex_;$/;"	m	class:ConditionVariable
-mutex_	shared/port/Mutex.h	/^        pthread_mutex_t mutex_;$/;"	m	class:Mutex
-mutex_	shared/port/Thread.h	/^        pthread_mutex_t mutex_;$/;"	m	class:ThreadController
-mutex_	shared/port/ThreadPool.h	/^        Mutex mutex_;$/;"	m	class:ThreadPool
+mutex_	shared/base/FQueue.hpp	/^        Mutex mutex_;$/;"	m	class:FQueue
+mutex_	shared/thread/ConditionVariable.h	/^        pthread_mutex_t mutex_;$/;"	m	class:ConditionVariable
+mutex_	shared/thread/Mutex.h	/^        pthread_mutex_t mutex_;$/;"	m	class:Mutex
+mutex_	shared/thread/Thread.h	/^        pthread_mutex_t mutex_;$/;"	m	class:ThreadController
+mutex_	shared/thread/ThreadPool.h	/^        Mutex mutex_;$/;"	m	class:ThreadPool
 n	shared/library/rapidjson/include/rapidjson/document.h	/^        Number n;$/;"	m	union:GenericValue::Data
 n_added	shared/library/libevent/include/event2/buffer.h	/^	size_t n_added;$/;"	m	struct:evbuffer_cb_info
 n_deleted	shared/library/libevent/include/event2/buffer.h	/^	size_t n_deleted;$/;"	m	struct:evbuffer_cb_info
@@ -2513,9 +2600,20 @@ next	shared/library/libevent/include/event2/http_struct.h	/^	TAILQ_ENTRY(evhttp_
 next	shared/library/libevent/include/event2/keyvalq_struct.h	/^	TAILQ_ENTRY(evkeyval) next;$/;"	m	struct:evkeyval
 next	shared/library/libevent/include/event2/rpc_struct.h	/^	TAILQ_ENTRY(evrpc) next;$/;"	m	struct:evrpc
 next	shared/library/rapidjson/include/rapidjson/allocators.h	/^        ChunkHeader *next;  \/\/!< Next chunk in the linked list.$/;"	m	struct:MemoryPoolAllocator::ChunkHeader
+next_	shared/base/FQueue.hpp	/^            void *next_;$/;"	m	struct:FQueue::Node
 nquestions	shared/library/libevent/include/event2/dns_struct.h	/^	int nquestions;$/;"	m	struct:evdns_server_request
 ntoread	shared/library/libevent/include/event2/http_struct.h	/^	ev_int64_t ntoread;$/;"	m	struct:evhttp_request
 o	shared/library/rapidjson/include/rapidjson/document.h	/^        Object o;$/;"	m	union:GenericValue::Data
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP0
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP1
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP2
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP3
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP4
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP0
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP1
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP2
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP3
+obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP4
 offset_	shared/library/rapidjson/include/rapidjson/error/error.h	/^    size_t offset_;$/;"	m	struct:ParseResult
 ok	shared/common/Status.h	/^        bool ok() { return (status_ == NULL); }$/;"	f	class:Status
 operator !=	shared/library/rapidjson/include/rapidjson/document.h	/^    bool operator!=(ConstIterator that) const { return ptr_ != that.ptr_; }$/;"	f	class:GenericMemberIterator
@@ -2524,6 +2622,16 @@ operator !=	shared/library/rapidjson/include/rapidjson/document.h	/^    bool ope
 operator !=	shared/library/rapidjson/include/rapidjson/document.h	/^    template <typename T> RAPIDJSON_DISABLEIF_RETURN((internal::IsGenericValue<T>), (bool)) operator!=(const T& rhs) const { return !(*this == rhs); }$/;"	f	class:GenericValue
 operator !=	shared/library/rapidjson/include/rapidjson/document.h	/^    template <typename T> friend RAPIDJSON_DISABLEIF_RETURN((internal::IsGenericValue<T>), (bool)) operator!=(const T& lhs, const GenericValue& rhs) { return !(rhs == lhs); }$/;"	f	class:GenericValue
 operator !=	shared/library/rapidjson/include/rapidjson/pointer.h	/^    bool operator!=(const GenericPointer& rhs) const { return !(*this == rhs); }$/;"	f	class:GenericPointer
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (callback_)(); }$/;"	f	class:CallbackFunctionP0
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (callback_)(p1_); }$/;"	f	class:CallbackFunctionP1
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (callback_)(p1_, p2_); }$/;"	f	class:CallbackFunctionP2
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (callback_)(p1_, p2_, p3_); }$/;"	f	class:CallbackFunctionP3
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (callback_)(p1_, p2_, p3_, p4_); }$/;"	f	class:CallbackFunctionP4
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (obj_->*func_()); }$/;"	f	class:CallbackP0
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (obj_->*func_(p1_)); }$/;"	f	class:CallbackP1
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (obj_->*func_(p1_, p2_)); }$/;"	f	class:CallbackP2
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (obj_->*func_(p1_, p2_, p3_)); }$/;"	f	class:CallbackP3
+operator ()	shared/base/Callback.hpp	/^        void operator()() { return (obj_->*func_(p1_, p2_, p3_, p4_)); }$/;"	f	class:CallbackP4
 operator *	shared/library/rapidjson/include/rapidjson/document.h	/^    Reference operator*() const { return *ptr_; }$/;"	f	class:GenericMemberIterator
 operator *	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    DiyFp operator*(const DiyFp& rhs) const {$/;"	f	struct:internal::DiyFp
 operator *=	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    BigInteger& operator*=(uint32_t u) {$/;"	f	class:internal::BigInteger
@@ -2587,6 +2695,36 @@ ownAllocator_	shared/library/rapidjson/include/rapidjson/document.h	/^    Alloca
 ownAllocator_	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    Allocator* ownAllocator_;$/;"	m	class:internal::Stack
 ownAllocator_	shared/library/rapidjson/include/rapidjson/pointer.h	/^    Allocator* ownAllocator_;               \/\/!< Allocator owned by this Pointer.$/;"	m	class:GenericPointer
 ownBaseAllocator_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    BaseAllocator* ownBaseAllocator_;   \/\/!< base allocator created by this object.$/;"	m	class:MemoryPoolAllocator
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackFunctionP1
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackFunctionP2
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackFunctionP3
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackFunctionP4
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackP1
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackP2
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackP3
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:CallbackP4
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:QueryCallbackP1
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:QueryCallbackP2
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:QueryCallbackP3
+p1_	shared/base/Callback.hpp	/^        P1 p1_;$/;"	m	class:QueryCallbackP4
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:CallbackFunctionP2
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:CallbackFunctionP3
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:CallbackFunctionP4
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:CallbackP2
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:CallbackP3
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:CallbackP4
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:QueryCallbackP2
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:QueryCallbackP3
+p2_	shared/base/Callback.hpp	/^        P2 p2_;$/;"	m	class:QueryCallbackP4
+p3_	shared/base/Callback.hpp	/^        P3 p3_;$/;"	m	class:CallbackFunctionP3
+p3_	shared/base/Callback.hpp	/^        P3 p3_;$/;"	m	class:CallbackFunctionP4
+p3_	shared/base/Callback.hpp	/^        P3 p3_;$/;"	m	class:CallbackP3
+p3_	shared/base/Callback.hpp	/^        P3 p3_;$/;"	m	class:CallbackP4
+p3_	shared/base/Callback.hpp	/^        P3 p3_;$/;"	m	class:QueryCallbackP3
+p3_	shared/base/Callback.hpp	/^        P3 p3_;$/;"	m	class:QueryCallbackP4
+p4_	shared/base/Callback.hpp	/^        P4 p4_;$/;"	m	class:CallbackFunctionP4
+p4_	shared/base/Callback.hpp	/^        P4 p4_;$/;"	m	class:CallbackP4
+p4_	shared/base/Callback.hpp	/^        P4 p4_;$/;"	m	class:QueryCallbackP4
 padding	shared/library/rapidjson/include/rapidjson/document.h	/^            char padding[4];$/;"	m	struct:GenericValue::Number::I
 padding2	shared/library/rapidjson/include/rapidjson/document.h	/^            char padding2[4];$/;"	m	struct:GenericValue::Number::U
 parseErrorCode_	shared/library/rapidjson/include/rapidjson/pointer.h	/^    PointerParseErrorCode parseErrorCode_;  \/\/!< Parsing error code.$/;"	m	class:GenericPointer
@@ -2594,27 +2732,30 @@ parseErrorOffset_	shared/library/rapidjson/include/rapidjson/pointer.h	/^    siz
 parseResult_	shared/library/rapidjson/include/rapidjson/document.h	/^          parseResult_(rhs.parseResult_)$/;"	f	class:GenericDocument
 parseResult_	shared/library/rapidjson/include/rapidjson/document.h	/^    ParseResult parseResult_;$/;"	m	class:GenericDocument
 parseResult_	shared/library/rapidjson/include/rapidjson/reader.h	/^    ParseResult parseResult_;$/;"	m	class:GenericReader
+password_	shared/database/Database.h	/^        std::string password_;$/;"	m	class:Database
+pop	shared/base/FQueue.hpp	/^        T pop() {$/;"	f	class:FQueue
 port	shared/port/SocketAddress.h	/^        uint16_t port() const { return port_; }$/;"	f	class:SocketAddress
+port_	shared/database/Database.h	/^        uint16_t port_;$/;"	m	class:Database
 port_	shared/port/SocketAddress.h	/^        uint16_t port_;$/;"	m	class:SocketAddress
 pos	shared/library/libevent/include/event2/buffer.h	/^	ev_ssize_t pos;$/;"	m	struct:evbuffer_ptr
 pos_in_chain	shared/library/libevent/include/event2/buffer.h	/^		size_t pos_in_chain;$/;"	m	struct:evbuffer_ptr::__anon15
-pthread_id_	shared/port/Thread.h	/^        pthread_t pthread_id_;$/;"	m	class:ThreadBase
-pthread_id_	shared/port/Thread.h	/^        pthread_t pthread_id_;$/;"	m	class:ThreadController
+pthread_id_	shared/thread/Thread.h	/^        pthread_t pthread_id_;$/;"	m	class:ThreadBase
+pthread_id_	shared/thread/Thread.h	/^        pthread_t pthread_id_;$/;"	m	class:ThreadController
 ptr_	shared/library/rapidjson/include/rapidjson/document.h	/^    Pointer ptr_; \/\/!< raw pointer$/;"	m	class:GenericMemberIterator
+push	shared/base/FQueue.hpp	/^        void push(T& item) {$/;"	f	class:FQueue
 putFunc_	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    PutFunc putFunc_;$/;"	m	class:AutoUTFOutputStream
-qt	database/Database.h	/^		QueryThread* qt;$/;"	m	class:Database
-queries	database/Database.h	/^		vector<AsyncQueryResult> queries;$/;"	m	class:AsyncQuery
-queries	database/Database.h	/^		vector<char*> queries;$/;"	m	class:QueryBuffer
-queries_queue	database/Database.h	/^		FQueue<char*> queries_queue;$/;"	m	class:Database
-query	database/Database.h	/^	char* query;$/;"	m	struct:AsyncQueryResult
-query_buffer	database/Database.h	/^		FQueue<QueryBuffer*> query_buffer;$/;"	m	class:Database
+queries_	shared/database/Database.h	/^        std::vector<AsyncQueryResult> queries_;$/;"	m	class:AsyncQuery
+queries_	shared/database/Database.h	/^        std::vector<char*> queries_;$/;"	m	class:QueryBuffer
+queries_queue_	shared/database/Database.h	/^        FQueue<char*> queries_queue_;$/;"	m	class:Database
+query_	shared/database/Database.h	/^    char* query_;$/;"	m	struct:AsyncQueryResult
+query_buffer_	shared/database/Database.h	/^        FQueue<QueryBuffer*> query_buffer_;$/;"	m	class:Database
+query_thread_	shared/database/Database.h	/^        QueryThread* query_thread_;$/;"	m	class:Database
 questions	shared/library/libevent/include/event2/dns_struct.h	/^	struct evdns_server_question **questions;$/;"	m	struct:evdns_server_request	typeref:struct:evdns_server_request::evdns_server_question
 quot	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^   intmax_t quot;$/;"	m	struct:__anon3
 r_	shared/library/rapidjson/include/rapidjson/reader.h	/^        GenericReader& r_;$/;"	m	struct:GenericReader::ClearStackOnExit
 readCount_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    size_t readCount_;$/;"	m	class:FileReadStream
 readcb	shared/library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data_cb readcb;$/;"	m	struct:bufferevent
 recv_queue_	shared/network/PacketMgr.h	/^        std::queue<Packet_t> recv_queue_;$/;"	m	class:PacketMgr
-recv_queue_	shared/network/TcpServerBase.h	/^        std::queue<Packet_t> recv_queue_;$/;"	m	class:TcpServerBase
 rem	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^   intmax_t rem;$/;"	m	struct:__anon3
 remote_host	shared/library/libevent/include/event2/http_struct.h	/^	char *remote_host;$/;"	m	struct:evhttp_request
 remote_port	shared/library/libevent/include/event2/http_struct.h	/^	ev_uint16_t remote_port;$/;"	m	struct:evhttp_request
@@ -2629,12 +2770,14 @@ request_new_arg	shared/library/libevent/include/event2/rpc_struct.h	/^	void *req
 request_unmarshal	shared/library/libevent/include/event2/rpc_struct.h	/^	int (*request_unmarshal)(void *, struct evbuffer *);$/;"	m	struct:evrpc
 response_code	shared/library/libevent/include/event2/http_struct.h	/^	int response_code;		\/* HTTP Response code *\/$/;"	m	struct:evhttp_request
 response_code_line	shared/library/libevent/include/event2/http_struct.h	/^	char *response_code_line;	\/* Readable response *\/$/;"	m	struct:evhttp_request
-result	database/Database.h	/^	QueryResult* result;$/;"	m	struct:AsyncQueryResult
-run	database/Database.cpp	/^bool Database::run()$/;"	f	class:Database
-run	database/Database.cpp	/^bool QueryThread::run()$/;"	f	class:QueryThread
-running_	shared/network/TcpWatcherThread.h	/^        bool running_ = false;$/;"	m	class:TcpWatcherThread
+result_	shared/database/Database.h	/^    QueryResult* result_;$/;"	m	struct:AsyncQueryResult
+row_count	shared/database/Database.h	/^        uint32_t row_count() const { return row_count_; }$/;"	f	class:QueryResult
+row_count_	shared/database/Database.h	/^        uint32_t row_count_;$/;"	m	class:QueryResult
+running_	shared/database/Database.h	/^        bool running_ = false;$/;"	m	class:Database
+running_	shared/network/TcpServerBaseThread.h	/^        bool running_ = false;$/;"	m	class:TcpServerBaseThread
 running_	shared/network/TcpWorkerThread.h	/^        bool running_ = false;$/;"	m	class:TcpWorkerThread
-rwlock_	shared/port/RWLock.h	/^        pthread_rwlock_t rwlock_;$/;"	m	class:RWLock
+running_	shared/thread/CThread.h	/^        bool        running_;$/;"	m	class:CThread
+rwlock_	shared/thread/RWLock.h	/^        pthread_rwlock_t rwlock_;$/;"	m	class:RWLock
 s	shared/library/rapidjson/include/rapidjson/document.h	/^        String s;$/;"	m	union:GenericValue::Data
 s	shared/library/rapidjson/include/rapidjson/document.h	/^    const Ch* const s; \/\/!< plain CharType pointer$/;"	m	struct:GenericStringRef
 s	shared/library/rapidjson/include/rapidjson/reader.h	/^    Stream s;$/;"	m	class:internal::StreamLocalCopy
@@ -2644,9 +2787,10 @@ sFileSystem	shared/port/FileSystem.h	49;"	d
 sLibEvent	shared/network/LibEvent.h	64;"	d
 sLogger	shared/common/Logger.h	68;"	d
 sMaster	gateway/Master.h	50;"	d
-sTcpServer	shared/network/TcpServerBase.h	76;"	d
-sThreadPool	shared/port/ThreadPool.h	73;"	d
+sTcpServer	shared/network/TcpServerBase.h	83;"	d
+sThreadPool	shared/thread/ThreadPool.h	73;"	d
 sWorld	gateway/World.h	36;"	d
+server_recv_queue_	shared/network/TcpServerBase.h	/^        std::queue<Packet_t*> server_recv_queue_;$/;"	m	class:TcpServerBase
 signal_add	shared/library/libevent/include/event2/event_compat.h	202;"	d
 signal_condition	shared/library/libevent/include/event2/thread.h	/^	int (*signal_condition)(void *cond, int broadcast);$/;"	m	struct:evthread_condition_callbacks
 signal_del	shared/library/libevent/include/event2/event_compat.h	205;"	d
@@ -2658,6 +2802,7 @@ singleton_	shared/base/Singleton.hpp	/^template < typename Type > Type * Singlet
 size	shared/library/rapidjson/include/rapidjson/allocators.h	/^        size_t size;        \/\/!< Current size of allocated memory in bytes.$/;"	m	struct:MemoryPoolAllocator::ChunkHeader
 size	shared/library/rapidjson/include/rapidjson/document.h	/^        SizeType size;$/;"	m	struct:GenericValue::Array
 size	shared/library/rapidjson/include/rapidjson/document.h	/^        SizeType size;$/;"	m	struct:GenericValue::Object
+size_	shared/base/FQueue.hpp	/^        volatile unsigned int size_;$/;"	m	class:FQueue
 size_	shared/library/rapidjson/include/rapidjson/memorystream.h	/^    size_t size_;       \/\/!< Size of the stream.$/;"	m	struct:MemoryStream
 socket_	shared/network/TcpConnection.h	/^        Socket* socket_ = nullptr;$/;"	m	class:TcpConnection
 socket_	shared/port/Socket.h	/^        SOCKET socket_;$/;"	m	class:Socket
@@ -2676,6 +2821,7 @@ stack_	shared/library/rapidjson/include/rapidjson/memorybuffer.h	/^    mutable i
 stack_	shared/library/rapidjson/include/rapidjson/reader.h	/^        internal::Stack<StackAllocator>& stack_;$/;"	m	class:GenericReader::StackStream
 stack_	shared/library/rapidjson/include/rapidjson/reader.h	/^    internal::Stack<StackAllocator> stack_;  \/\/!< A stack for storing decoded string temporarily during non-destructive parsing.$/;"	m	class:GenericReader
 stack_	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^    mutable internal::Stack<Allocator> stack_;$/;"	m	class:GenericStringBuffer
+start_time_	shared/thread/CThread.h	/^        time_t      start_time_;$/;"	m	class:CThread
 status_	shared/common/Status.h	/^        const char* status_;$/;"	m	class:Status
 stop_event_	gateway/Master.cc	/^volatile bool Master::stop_event_ = false;$/;"	m	class:Master	file:
 stop_event_	gateway/Master.h	/^        static volatile bool stop_event_;$/;"	m	class:Master
@@ -2691,16 +2837,16 @@ supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum
 supported_locktypes	shared/library/libevent/include/event2/thread.h	/^	unsigned supported_locktypes;$/;"	m	struct:evthread_lock_callbacks
 takeFunc_	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    TakeFunc takeFunc_;$/;"	m	class:AutoUTFInputStream
 tcp_connections_	shared/network/TcpServerBase.h	/^        TcpConnection* tcp_connections_[SOCKET_HOLDER_SIZE];$/;"	m	class:TcpServerBase
-thread_id	shared/port/Thread.h	/^        int thread_id() {$/;"	f	class:ThreadController
-thread_id_	shared/port/Thread.h	/^        int thread_id_;$/;"	m	class:ThreadController
-thread_id_count_	shared/port/Thread.cc	/^volatile int ThreadController::thread_id_count_ = 0;$/;"	m	class:ThreadController	file:
-thread_id_count_	shared/port/Thread.h	/^        static volatile int thread_id_count_;$/;"	m	class:ThreadController
-thread_proc_query	database/Database.cpp	/^void Database::thread_proc_query()$/;"	f	class:Database
-threads_eaten_	shared/port/ThreadPool.h	/^        int32_t threads_eaten_ = 0;$/;"	m	class:ThreadPool
-threads_exited_since_last_check_	shared/port/ThreadPool.h	/^        uint32_t threads_exited_since_last_check_ = 0;$/;"	m	class:ThreadPool
-threads_freed_since_last_check_	shared/port/ThreadPool.h	/^        uint32_t threads_freed_since_last_check_ = 0;$/;"	m	class:ThreadPool
-threads_requested_since_last_check_	shared/port/ThreadPool.h	/^        uint32_t threads_requested_since_last_check_ = 0;$/;"	m	class:ThreadPool
-threads_to_exit_	shared/port/ThreadPool.h	/^        uint32_t threads_to_exit_ = 0;$/;"	m	class:ThreadPool
+thread_id	shared/thread/Thread.h	/^        int thread_id() {$/;"	f	class:ThreadController
+thread_id_	shared/thread/Thread.h	/^        int thread_id_;$/;"	m	class:ThreadController
+thread_id_count_	shared/thread/Thread.cc	/^volatile int ThreadController::thread_id_count_ = 0;$/;"	m	class:ThreadController	file:
+thread_id_count_	shared/thread/Thread.h	/^        static volatile int thread_id_count_;$/;"	m	class:ThreadController
+thread_state_	shared/thread/CThread.h	/^        AtomicULong thread_state_;$/;"	m	class:CThread
+threads_eaten_	shared/thread/ThreadPool.h	/^        int32_t threads_eaten_ = 0;$/;"	m	class:ThreadPool
+threads_exited_since_last_check_	shared/thread/ThreadPool.h	/^        uint32_t threads_exited_since_last_check_ = 0;$/;"	m	class:ThreadPool
+threads_freed_since_last_check_	shared/thread/ThreadPool.h	/^        uint32_t threads_freed_since_last_check_ = 0;$/;"	m	class:ThreadPool
+threads_requested_since_last_check_	shared/thread/ThreadPool.h	/^        uint32_t threads_requested_since_last_check_ = 0;$/;"	m	class:ThreadPool
+threads_to_exit_	shared/thread/ThreadPool.h	/^        uint32_t threads_to_exit_ = 0;$/;"	m	class:ThreadPool
 timeout_add	shared/library/libevent/include/event2/event_compat.h	188;"	d
 timeout_del	shared/library/libevent/include/event2/event_compat.h	190;"	d
 timeout_initialized	shared/library/libevent/include/event2/event_compat.h	192;"	d
@@ -2746,24 +2892,30 @@ uri	shared/library/libevent/include/event2/rpc_struct.h	/^	const char* uri;$/;"	
 uri_elems	shared/library/libevent/include/event2/http_struct.h	/^	struct evhttp_uri *uri_elems;	\/* uri elements *\/$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evhttp_uri
 userBuffer_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void *userBuffer_;          \/\/!< User supplied buffer.$/;"	m	class:MemoryPoolAllocator
 userdone	shared/library/libevent/include/event2/http_struct.h	/^	    userdone:1;			\/* the user has sent all data *\/$/;"	m	struct:evhttp_request
+username_	shared/database/Database.h	/^        std::string username_;$/;"	m	class:Database
 util	shared/util/ByteOrder.hpp	/^namespace util {$/;"	n
 valid_	shared/library/rapidjson/include/rapidjson/pointer.h	/^        bool valid_;        \/\/!< Whether the parsing is valid.$/;"	m	class:GenericPointer::PercentDecodeStream
 value	shared/library/libevent/include/event2/keyvalq_struct.h	/^	char *value;$/;"	m	struct:evkeyval
 value	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue<Encoding, Allocator> value;    \/\/!< value of member.$/;"	m	struct:GenericMember
 value	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^template <> struct STATIC_ASSERTION_FAILURE<true> { enum { value = 1 }; };$/;"	e	enum:STATIC_ASSERTION_FAILURE::__anon11
 valueCount	shared/library/rapidjson/include/rapidjson/writer.h	/^        size_t valueCount;  \/\/!< number of values in this level$/;"	m	struct:Writer::Level
+value_	shared/base/FQueue.hpp	/^            T value_;$/;"	m	struct:FQueue::Node
+value_	shared/database/Field.h	/^        char* value_;$/;"	m	class:Field
+value_	shared/thread/AtomicULong.h	/^        volatile unsigned long value_;$/;"	m	class:AtomicULong
 wait_condition	shared/library/libevent/include/event2/thread.h	/^	int (*wait_condition)(void *cond, void *lock,$/;"	m	struct:evthread_condition_callbacks
 wcstoimax	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	311;"	d
 wcstoumax	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	312;"	d
 wm_read	shared/library/libevent/include/event2/bufferevent_struct.h	/^	struct event_watermark wm_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
 wm_write	shared/library/libevent/include/event2/bufferevent_struct.h	/^	struct event_watermark wm_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
 writecb	shared/library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data_cb writecb;$/;"	m	struct:bufferevent
-~AsyncQuery	database/Database.cpp	/^AsyncQuery::~AsyncQuery()$/;"	f	class:AsyncQuery
+~AsyncQuery	shared/database/Database.cc	/^AsyncQuery::~AsyncQuery() {$/;"	f	class:AsyncQuery
 ~BufferEvent	shared/network/BufferEvent.cc	/^BufferEvent::~BufferEvent() {$/;"	f	class:BufferEvent
+~CThread	shared/thread/CThread.cc	/^CThread::~CThread() {$/;"	f	class:CThread
+~CallbackBase	shared/base/Callback.hpp	/^        virtual ~CallbackBase() {}$/;"	f	class:CallbackBase
 ~ClearStackOnExit	shared/library/rapidjson/include/rapidjson/document.h	/^        ~ClearStackOnExit() { d_.ClearStack(); }$/;"	f	struct:GenericDocument::ClearStackOnExit
 ~ClearStackOnExit	shared/library/rapidjson/include/rapidjson/reader.h	/^        ~ClearStackOnExit() { r_.ClearStack(); }$/;"	f	struct:GenericReader::ClearStackOnExit
-~ConditionVariable	shared/port/ConditionVariable.cc	/^ConditionVariable::~ConditionVariable() {$/;"	f	class:ConditionVariable
-~Database	database/Database.cpp	/^Database::~Database()$/;"	f	class:Database
+~ConditionVariable	shared/thread/ConditionVariable.cc	/^ConditionVariable::~ConditionVariable() {$/;"	f	class:ConditionVariable
+~Database	shared/database/Database.cc	/^Database::~Database() {$/;"	f	class:Database
 ~Event	shared/network/Event.cc	/^Event::~Event() {$/;"	f	class:Event
 ~EventBase	shared/network/EventBase.cc	/^EventBase::~EventBase() {$/;"	f	class:EventBase
 ~GenericDocument	shared/library/rapidjson/include/rapidjson/document.h	/^    ~GenericDocument() {$/;"	f	class:GenericDocument
@@ -2772,14 +2924,18 @@ writecb	shared/library/libevent/include/event2/bufferevent_struct.h	/^	buffereve
 ~LibEvent	shared/network/LibEvent.cc	/^LibEvent::~LibEvent() {$/;"	f	class:LibEvent
 ~Logger	shared/common/Logger.cc	/^Logger::~Logger() {$/;"	f	class:Logger
 ~MemoryPoolAllocator	shared/library/rapidjson/include/rapidjson/allocators.h	/^    ~MemoryPoolAllocator() {$/;"	f	class:MemoryPoolAllocator
-~Mutex	shared/port/Mutex.cc	/^Mutex::~Mutex() {$/;"	f	class:Mutex
-~MySQLDatabase	database/MySQLDatabase.cpp	/^MySQLDatabase::~MySQLDatabase()$/;"	f	class:MySQLDatabase
-~MySQLQueryResult	database/MySQLDatabase.cpp	/^MySQLQueryResult::~MySQLQueryResult()$/;"	f	class:MySQLQueryResult
+~Mutex	shared/thread/Mutex.cc	/^Mutex::~Mutex() {$/;"	f	class:Mutex
 ~NumberStream	shared/library/rapidjson/include/rapidjson/reader.h	/^        ~NumberStream() {}$/;"	f	class:GenericReader::NumberStream
-~QueryResult	database/Database.h	/^		virtual ~QueryResult() {}$/;"	f	class:QueryResult
-~QueryThread	database/Database.cpp	/^QueryThread::~QueryThread()$/;"	f	class:QueryThread
-~RWLock	shared/port/RWLock.cc	/^RWLock::~RWLock() {$/;"	f	class:RWLock
-~SQLCallbackBase	database/Database.cpp	/^SQLCallbackBase::~SQLCallbackBase()$/;"	f	class:SQLCallbackBase
+~Packet_t	shared/network/NetWork.h	/^    ~Packet_t() {$/;"	f	struct:Packet_t
+~QueryCallbackBase	shared/base/Callback.hpp	/^        virtual ~QueryCallbackBase() {}$/;"	f	class:QueryCallbackBase
+~QueryCallbackP0	shared/base/Callback.hpp	/^        virtual ~QueryCallbackP0() {} $/;"	f	class:QueryCallbackP0
+~QueryCallbackP1	shared/base/Callback.hpp	/^        virtual ~QueryCallbackP1() {} $/;"	f	class:QueryCallbackP1
+~QueryCallbackP2	shared/base/Callback.hpp	/^        virtual ~QueryCallbackP2() {} $/;"	f	class:QueryCallbackP2
+~QueryCallbackP3	shared/base/Callback.hpp	/^        virtual ~QueryCallbackP3() {} $/;"	f	class:QueryCallbackP3
+~QueryCallbackP4	shared/base/Callback.hpp	/^        virtual ~QueryCallbackP4() {} $/;"	f	class:QueryCallbackP4
+~QueryResult	shared/database/Database.h	/^        virtual ~QueryResult() {}$/;"	f	class:QueryResult
+~QueryThread	shared/database/Database.cc	/^QueryThread::~QueryThread() {$/;"	f	class:QueryThread
+~RWLock	shared/thread/RWLock.cc	/^RWLock::~RWLock() {$/;"	f	class:RWLock
 ~Singleton	shared/base/Singleton.hpp	/^        ~Singleton() {$/;"	f	class:Singleton
 ~Socket	shared/port/Socket.cc	/^Socket::~Socket() {$/;"	f	class:Socket
 ~Stack	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    ~Stack() {$/;"	f	class:internal::Stack
@@ -2787,8 +2943,8 @@ writecb	shared/library/libevent/include/event2/bufferevent_struct.h	/^	buffereve
 ~StreamLocalCopy	shared/library/rapidjson/include/rapidjson/reader.h	/^    ~StreamLocalCopy() { original_ = s; }$/;"	f	class:internal::StreamLocalCopy
 ~TcpConnection	shared/network/TcpConnection.cc	/^TcpConnection::~TcpConnection() {$/;"	f	class:TcpConnection
 ~TcpServerBase	shared/network/TcpServerBase.cc	/^TcpServerBase::~TcpServerBase() {$/;"	f	class:TcpServerBase
-~TcpWatcherThread	shared/network/TcpWatcherThread.cc	/^TcpWatcherThread::~TcpWatcherThread() {$/;"	f	class:TcpWatcherThread
+~TcpServerBaseThread	shared/network/TcpServerBaseThread.cc	/^TcpServerBaseThread::~TcpServerBaseThread() {$/;"	f	class:TcpServerBaseThread
 ~TcpWorkerThread	shared/network/TcpWorkerThread.h	/^        virtual ~TcpWorkerThread() { }$/;"	f	class:TcpWorkerThread
-~ThreadBase	shared/port/Thread.h	/^        virtual ~ThreadBase() {}$/;"	f	class:ThreadBase
-~ThreadController	shared/port/Thread.h	/^        virtual ~ThreadController() {$/;"	f	class:ThreadController
+~ThreadBase	shared/thread/Thread.h	/^        virtual ~ThreadBase() {}$/;"	f	class:ThreadBase
+~ThreadController	shared/thread/Thread.h	/^        virtual ~ThreadController() {$/;"	f	class:ThreadController
 ~WritableFile	shared/port/WritableFile.cc	/^WritableFile::~WritableFile() {$/;"	f	class:WritableFile
