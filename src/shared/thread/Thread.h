@@ -85,6 +85,7 @@ class Thread {
     public:
         ThreadBase* ExecutionTarget_;
         ThreadController ControlInterface_;
+
         Mutex SetupMutex_;
         bool DeleteAfterExit_;
 };

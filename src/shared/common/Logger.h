@@ -34,6 +34,8 @@ class Logger : public Singleton<Logger> {
         Logger(const Logger&) = delete;
         Logger& operator=(const Logger&) = delete;
 
+        void Init(const char* server_name) { server_name_ = server_name; }
+
         bool Fatal(const char* msg, ...);
         bool Error(const char* msg, ...);
         bool Info(const char* msg, ...);
@@ -63,6 +65,8 @@ class Logger : public Singleton<Logger> {
         WritableFile *info_log_ = NULL;
         WritableFile *debug_log_ = NULL;
         WritableFile *trace_log_ = NULL;
+
+        std::string server_name_;
 };
 
 #define sLogger Logger::getSingleton()

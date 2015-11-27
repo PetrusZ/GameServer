@@ -39,8 +39,6 @@ class Master : public Singleton<Master> {
         void HookSignal();
         void UnHookSignal();
 
-        uint32_t WritePID();
-
         static void OnSignal(int signal);
 
         // volatile bool stop_event_ = false;

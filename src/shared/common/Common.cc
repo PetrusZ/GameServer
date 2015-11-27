@@ -16,8 +16,11 @@
  * =====================================================================================
  */
 #include "Common.h"
+
 #include <execinfo.h>
 #include <signal.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 namespace Common {
     int BackTrace(std::vector<std::string>& stack_trace) {
@@ -88,5 +91,33 @@ namespace Common {
             return oact.sa_handler;
         }
     }
-}
 
+    uint32_t WritePID(const char* process_name) {
+        std::string pid_file = process_name;
+        pid_file += ".pid";
+        int fd = open(pid_file.c_str(), O_CREAT | O_WRONLY, S_IRWXU);
+
+        if (-1 != fd) {
+            struct flock lock;
+            lock.l_type = F_WRLCK;
+            lock.l_whence = SEEK_SET;
+            lock.l_start = 0;
+            lock.l_len = 1;
+            if (fcntl(fd, F_SETLK, &lock) < 0){
+                close(fd);
+                return 0;
+            }
+
+            ftruncate(fd, 0);
+
+            uint32_t pid = getpid();
+            FILE* fp = fdopen(fd, "w");
+            fprintf(fp, "%u", pid);
+            fflush(fp);
+
+            return pid;
+        }
+
+        return 0;
+    }
+}

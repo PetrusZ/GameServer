@@ -76,6 +76,7 @@ class TcpServerBase : public Singleton <TcpServerBase> {
         TcpConnection* tcp_connections_[SOCKET_HOLDER_SIZE];
         std::map<BufferEventStruct*, TcpConnection*> bufevent_conn_map_;
 
+        //TODO: 多线程加锁
         std::queue<Packet_t*> client_recv_queue_;
         std::queue<Packet_t*> server_recv_queue_;
 };

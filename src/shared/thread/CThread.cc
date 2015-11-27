@@ -31,5 +31,6 @@ bool CThread::Run() {
 }
 
 void CThread::OnShutdown() {
+    running_ = false;
     thread_state_.SetVal(THREADSTATE_TERMINATE);
 }

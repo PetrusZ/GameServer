@@ -79,7 +79,7 @@ bool Logger::AppendLog(LogLevel level, std::string &log) {
 
 std::string Logger::FormatLogFileName(const std::string &prefix, const std::string &description, bool useDate) {
     std::string file_name;
-    file_name = prefix + "/";
+    file_name = prefix + "/" + server_name_ + "/";
     file_name += description;
 
     if (useDate) {

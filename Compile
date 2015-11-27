@@ -7,7 +7,8 @@ if [ $# -eq 0 ] ; then
 else
     if [ $1 = clear ] ; then
         rm -rf  ${root}/build/*
-    elif [ $1 = --help ] ; then
+    # elif [ $1 = --help ] ; then
+    else
         echo "Usage: $0 -- compile project"
         echo "       $0 clear -- clear compile temporary"
     fi
