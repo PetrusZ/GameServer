@@ -19,6 +19,7 @@
 #define QUERYWORKERTHREAD_H_N6XTUP1I
 
 #include "MySQLDatabase.h"
+#include "RedisDatabase.h"
 
 class QueryWorkerThread : public CThread {
     public:

@@ -17,10 +17,6 @@
  */
 #include "MySQLDatabase.h"
 
-MySQLDatabase::MySQLDatabase() {
-
-}
-
 MySQLDatabase::~MySQLDatabase() {
     for (uint32_t i = 0; i < connection_count_; ++i) {
         mysql_close(static_cast<MySQLDatabaseConnection*>(connections_[i])->Mysql_);

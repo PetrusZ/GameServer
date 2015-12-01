@@ -8,9 +8,12 @@ else
     if [ $1 = all ] ; then
         ./Gateway
         ./Database
-    elif [ $1 = gateway ]; then
+    elif [ $1 = Gateway ]; then
         ./Gateway
-    elif [ $1 = database ]; then
+    elif [ $1 = Database ]; then
         ./Database
+    else 
+        echo "Usage: $0 all -- start all server processes"
+        echo "       $0 server_name -- start the specific server"
     fi
 fi

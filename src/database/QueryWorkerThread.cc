@@ -29,5 +29,15 @@ bool QueryWorkerThread::Run() {
 
     result->Delete();
 
+    RedisQueryResult* redis_result = dynamic_cast<RedisQueryResult*>(sRedisDatabase.QueryNA("GET test"));
+
+    for (uint32_t i = 0; i < redis_result->row_count(); ++i) {
+        Field* field = redis_result->Fetch();
+        LOG_INFO("field %d: %s", i, field->GetString());
+        redis_result->NextRow();
+    }
+
+    redis_result->Delete();
+
     return true;
 }

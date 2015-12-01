@@ -28,7 +28,6 @@ aux_source_directory(./src/shared/port PORT_SRC_LIST)
 aux_source_directory(./src/shared/common COMMON_SRC_LIST)
 aux_source_directory(./src/shared/util UTIL_SRC_LIST)
 aux_source_directory(./src/shared/thread THREAD_SRC_LIST)
-# aux_source_directory(./src/shared/database DATABASE_SRC_LIST)
 aux_source_directory(./src/gateway GATEWAY_SRC_LIST)
 
 set(SRC_LIST
@@ -38,7 +37,6 @@ set(SRC_LIST
     ${COMMON_SRC_LIST}
     ${UTIL_SRC_LIST}
     ${THREAD_SRC_LIST}
-    # ${DATABASE_SRC_LIST}
     ${GATEWAY_SRC_LIST}
     )
 
@@ -61,16 +59,6 @@ link_directories(${LIBRARY_DIR_LIST})
 add_executable(Gateway ${SRC_LIST})
 target_link_libraries(Gateway event_core event_pthreads)
 
-set(SCRIPT_LIST
-    ./src/scripts/Start.sh
-    ./src/scripts/Stop.sh
-    ./src/scripts/ClearLog.sh
-    )
-# INSTALL(DIRECTORY script DESTINATION ${EXECUTABLE_OUTPUT_PATH} PATTERN "scripts/*" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
-
-# message(STATUS "SCRIPT_LIST: ${SCRIPT_LIST}")
-INSTALL(PROGRAMS ${SCRIPT_LIST} DESTINATION ${EXECUTABLE_OUTPUT_PATH} PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
-
 ############################################## Database Server ##############################################
 
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
@@ -81,7 +69,6 @@ aux_source_directory(./src/shared/port PORT_SRC_LIST)
 aux_source_directory(./src/shared/common COMMON_SRC_LIST)
 aux_source_directory(./src/shared/util UTIL_SRC_LIST)
 aux_source_directory(./src/shared/thread THREAD_SRC_LIST)
-# aux_source_directory(./src/shared/database DATABASE_SRC_LIST)
 aux_source_directory(./src/database DATABASE_SRC_LIST)
 
 set(SRC_LIST
@@ -111,7 +98,19 @@ include_directories(${INCLUDE_DIR_LIST})
 link_directories(${LIBRARY_DIR_LIST})
 
 add_executable(Database ${SRC_LIST})
-target_link_libraries(Database event_core event_pthreads mysqlclient)
+target_link_libraries(Database event_core event_pthreads mysqlclient hiredis)
+
+################################################# Script #################################################
+
+set(SCRIPT_LIST
+    ./src/scripts/Start.sh
+    ./src/scripts/Stop.sh
+    ./src/scripts/ClearLog.sh
+    )
+# INSTALL(DIRECTORY script DESTINATION ${EXECUTABLE_OUTPUT_PATH} PATTERN "scripts/*" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
+
+# message(STATUS "SCRIPT_LIST: ${SCRIPT_LIST}")
+INSTALL(PROGRAMS ${SCRIPT_LIST} DESTINATION ${EXECUTABLE_OUTPUT_PATH} PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE)
 
 ################################################# test #################################################
 

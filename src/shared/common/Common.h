@@ -42,7 +42,7 @@ namespace Common {
     extern int BackTrace(std::vector<std::string>& stack_trace);
     extern void AssertFailed(const char* file, const int line, const char* expr);
     extern Sigfunc* Signal(int signo, Sigfunc *func);
-    extern uint32_t WritePID(const char* server_name);
+    extern uint32_t WritePID(const char* process_name);
 }
 
 #endif /* end of include guard: COMMON_H_WN5MDJKE */

@@ -97,7 +97,7 @@ void Master::Daemonize() {
 }
 
 bool Master::Run(int argc, char** argv) {
-    std::cout << "Hello Database Server From Master" << std::endl;
+    LOG_STDOUT("Hello Database Server From Master");
 
     Daemonize();
     HookSignal();
@@ -114,10 +114,13 @@ bool Master::Run(int argc, char** argv) {
     sThreadPool.Startup();
     sThreadPool.ExecuteTask(new TcpServerBaseThread("127.0.0.1", 19191));
 
-    sEnv.Sleep(20000);
-
     // Start Mysql
     if (!sMySQLDatabase.Initialize("127.0.0.1", 3306, "root", "123@taomee.com", "GameServer", 8)) {
+        return false;
+    }
+
+    // Start Redis
+    if (!sRedisDatabase.Initialize("127.0.0.1", 6379, "root", "123@taomee.com", "GameServer", 8)) {
         return false;
     }
 

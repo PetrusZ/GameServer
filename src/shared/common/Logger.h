@@ -34,13 +34,16 @@ class Logger : public Singleton<Logger> {
         Logger(const Logger&) = delete;
         Logger& operator=(const Logger&) = delete;
 
-        void Init(const char* server_name) { server_name_ = server_name; }
+        void Init(const char* process_name) { process_name_ = process_name; }
 
         bool Fatal(const char* msg, ...);
         bool Error(const char* msg, ...);
         bool Info(const char* msg, ...);
         bool Debug(const char* msg, ...);
         bool Trace(const char* msg, ...);
+
+        void StdErr(const char* msg, ...);
+        void StdOut(const char* msg, ...);
 
     private:
         enum LogLevel {
@@ -66,7 +69,7 @@ class Logger : public Singleton<Logger> {
         WritableFile *debug_log_ = NULL;
         WritableFile *trace_log_ = NULL;
 
-        std::string server_name_;
+        std::string process_name_;
 };
 
 #define sLogger Logger::getSingleton()
@@ -76,11 +79,15 @@ class Logger : public Singleton<Logger> {
 #define LOG_INFO(msg, ...) sLogger.Info(msg, ##__VA_ARGS__)
 #define LOG_DEBUG(msg, ...) sLogger.Debug(msg, ##__VA_ARGS__)
 #define LOG_TRACE(msg, ...) sLogger.Trace(msg, ##__VA_ARGS__)
+#define LOG_STDOUT(msg, ...) sLogger.StdOut(msg, ##__VA_ARGS__)
+#define LOG_STDERR(msg, ...) sLogger.StdErr(msg, ##__VA_ARGS__)
 
 #define LOG_KFATAL(key, msg, ...) sLogger.Fatal("%s, " msg, key, ##__VA_ARGS__)
 #define LOG_KERROR(key, msg, ...) sLogger.Error("%s, " msg, key, ##__VA_ARGS__)
 #define LOG_KINFO(key, msg, ...) sLogger.Info("%s, " msg, key, ##__VA_ARGS__)
 #define LOG_KDEBUG(key, msg, ...) sLogger.Debug("%s, " msg, key, ##__VA_ARGS__)
 #define LOG_KTRACE(key, msg, ...) sLogger.Trace("%s, " msg, key, ##__VA_ARGS__)
+#define LOG_KSTDOUT(key, msg, ...) sLogger.StdOut("%s, " msg, key, ##__VA_ARGS__)
+#define LOG_KSTDERR(key, msg, ...) sLogger.StdErr("%s, " msg, key, ##__VA_ARGS__)
 
 #endif /* end of include guard: LOGGER_H_9ROTCNVM */

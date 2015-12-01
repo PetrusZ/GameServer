@@ -103,6 +103,7 @@ BaseType	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef std
 Begin	shared/library/rapidjson/include/rapidjson/document.h	/^    ConstValueIterator Begin() const { return const_cast<GenericValue&>(*this).Begin(); }$/;"	f	class:GenericValue
 Begin	shared/library/rapidjson/include/rapidjson/document.h	/^    ValueIterator Begin() { RAPIDJSON_ASSERT(IsArray()); return data_.a.elements; }$/;"	f	class:GenericValue
 BeginTransaction	database/MySQLDatabase.cc	/^void MySQLDatabase::BeginTransaction(DatabaseConnection *conn) {$/;"	f	class:MySQLDatabase
+BeginTransaction	database/RedisDatabase.cc	/^void RedisDatabase::BeginTransaction(DatabaseConnection *conn) {$/;"	f	class:RedisDatabase
 BigInteger	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    BigInteger(const BigInteger& rhs) : count_(rhs.count_) {$/;"	f	class:internal::BigInteger
 BigInteger	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    BigInteger(const char* decimals, size_t length) : count_(1) {$/;"	f	class:internal::BigInteger
 BigInteger	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    explicit BigInteger(uint64_t u) : count_(1) {$/;"	f	class:internal::BigInteger
@@ -129,7 +130,7 @@ Busy_	database/Database.h	/^    Mutex Busy_;$/;"	m	struct:DatabaseConnection
 CALLBACK_HPP_SMIPZOAB	shared/base/Callback.hpp	19;"	d
 CAN_CLIENT_COMPRESS	shared/library/mysql/include/mysql_com.h	208;"	d
 CAN_CLIENT_COMPRESS	shared/library/mysql/include/mysql_com.h	210;"	d
-CEILING	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon16
+CEILING	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon22
 CHANGED_BLOCKS_HASH	shared/library/mysql/include/keycache.h	40;"	d
 CHARSET_DIR	shared/library/mysql/include/m_ctype.h	36;"	d
 CHARSET_INFO	shared/library/mysql/include/m_ctype.h	/^} CHARSET_INFO;$/;"	t	typeref:struct:charset_info_st
@@ -1780,6 +1781,7 @@ EndObject	shared/library/rapidjson/include/rapidjson/reader.h	/^    bool EndObje
 EndObject	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool EndObject(SizeType memberCount = 0) {$/;"	f	class:Writer
 EndThreads	database/Database.cc	/^void Database::EndThreads() {$/;"	f	class:Database
 EndTransaction	database/MySQLDatabase.cc	/^void MySQLDatabase::EndTransaction(DatabaseConnection *conn) {$/;"	f	class:MySQLDatabase
+EndTransaction	database/RedisDatabase.cc	/^void RedisDatabase::EndTransaction(DatabaseConnection *conn) {$/;"	f	class:RedisDatabase
 Env	shared/port/Env.h	/^        Env() {$/;"	f	class:Env
 Env	shared/port/Env.h	/^class Env : public Singleton<Env> {$/;"	c
 Erase	shared/library/rapidjson/include/rapidjson/document.h	/^    ValueIterator Erase(ConstValueIterator first, ConstValueIterator last) {$/;"	f	class:GenericValue
@@ -1791,8 +1793,11 @@ EraseValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^bool 
 EraseValueByPointer	shared/library/rapidjson/include/rapidjson/pointer.h	/^bool EraseValueByPointer(T& root, const GenericPointer<typename T::ValueType>& pointer) {$/;"	f
 Error	shared/common/Logger.cc	/^bool Logger::Error(const char *msg, ...) {$/;"	f	class:Logger
 EscapeLongString	database/MySQLDatabase.cc	/^void MySQLDatabase::EscapeLongString(const char *str, uint32_t len, std::stringstream &out) {$/;"	f	class:MySQLDatabase
+EscapeLongString	database/RedisDatabase.cc	/^void RedisDatabase::EscapeLongString(const char* str, uint32_t len, std::stringstream& out) {$/;"	f	class:RedisDatabase
 EscapeString	database/MySQLDatabase.cc	/^std::string MySQLDatabase::EscapeString(const char* escape, DatabaseConnection* conn) {$/;"	f	class:MySQLDatabase
 EscapeString	database/MySQLDatabase.cc	/^std::string MySQLDatabase::EscapeString(std::string escape) {$/;"	f	class:MySQLDatabase
+EscapeString	database/RedisDatabase.cc	/^std::string RedisDatabase::EscapeString(const char* escape, DatabaseConnection* conn) {$/;"	f	class:RedisDatabase
+EscapeString	database/RedisDatabase.cc	/^std::string RedisDatabase::EscapeString(std::string escape) {$/;"	f	class:RedisDatabase
 Event	shared/network/Event.cc	/^Event::Event(struct event* event) : event_(event) {$/;"	f	class:Event
 Event	shared/network/Event.h	/^class Event {$/;"	c
 EventBase	shared/network/EventBase.cc	/^EventBase::EventBase(struct event_base* base) : event_base_(base) {$/;"	f	class:EventBase
@@ -1867,7 +1872,7 @@ FIND_TYPE_NO_OVERWRITE	shared/library/mysql/include/typelib.h	36;"	d
 FIND_TYPE_NO_PREFIX	shared/library/mysql/include/typelib.h	34;"	d
 FIONREAD_IN_SYS_IOCTL	shared/library/mysql/include/my_config.h	157;"	d
 FLOATING_POINT_BUFFER	shared/library/mysql/include/m_string.h	186;"	d
-FLOOR	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon16
+FLOOR	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon22
 FLUSH_FORCE_WRITE	shared/library/mysql/include/my_sys.h	/^  FLUSH_FORCE_WRITE$/;"	e	enum:flush_type
 FLUSH_IGNORE_CHANGED	shared/library/mysql/include/my_sys.h	/^  FLUSH_IGNORE_CHANGED, \/* remove block from the cache *\/$/;"	e	enum:flush_type
 FLUSH_KEEP	shared/library/mysql/include/my_sys.h	/^  FLUSH_KEEP,           \/* flush block and keep it in the cache *\/$/;"	e	enum:flush_type
@@ -2132,8 +2137,8 @@ Gobble	shared/thread/ThreadPool.h	/^        void Gobble() { threads_eaten_ = idl
 GotExitType	shared/network/EventBase.cc	/^EventLoopExitType EventBase::GotExitType() {$/;"	f	class:EventBase
 Grisu2	shared/library/rapidjson/include/rapidjson/internal/dtoa.h	/^inline void Grisu2(double value, char* buffer, int* length, int* K) {$/;"	f	namespace:internal
 GrisuRound	shared/library/rapidjson/include/rapidjson/internal/dtoa.h	/^inline void GrisuRound(char* buffer, int len, uint64_t delta, uint64_t rest, uint64_t ten_kappa, uint64_t wp_w) {$/;"	f	namespace:internal
-HALF_EVEN	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon16
-HALF_UP	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon16
+HALF_EVEN	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon22
+HALF_UP	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon22
 HASH_LINK	shared/library/mysql/include/keycache.h	/^typedef struct st_hash_link HASH_LINK;$/;"	t	typeref:struct:st_hash_link
 HAVE_ALLOCA_H	shared/library/mysql/include/my_config.h	35;"	d
 HAVE_ARPA_INET_H	shared/library/mysql/include/my_config.h	36;"	d
@@ -2328,6 +2333,10 @@ HAVE_ULONG	shared/library/mysql/include/my_config.h	183;"	d
 HAVE_UNISTD_H	shared/library/mysql/include/my_config.h	58;"	d
 HAVE_U_INT32_T	shared/library/mysql/include/my_config.h	184;"	d
 HAVE_VASPRINTF	shared/library/mysql/include/my_config.h	134;"	d
+HIREDIS_MAJOR	shared/library/hiredis/include/hiredis/hiredis.h	42;"	d
+HIREDIS_MINOR	shared/library/hiredis/include/hiredis/hiredis.h	43;"	d
+HIREDIS_PATCH	shared/library/hiredis/include/hiredis/hiredis.h	44;"	d
+HIREDIS_SONAME	shared/library/hiredis/include/hiredis/hiredis.h	45;"	d
 HOSTNAME_LENGTH	shared/library/mysql/include/mysql_com.h	23;"	d
 HTTP_BADMETHOD	shared/library/libevent/include/event2/http.h	60;"	d
 HTTP_BADREQUEST	shared/library/libevent/include/event2/http.h	58;"	d
@@ -2343,6 +2352,7 @@ HTTP_NOTMODIFIED	shared/library/libevent/include/event2/http.h	57;"	d
 HTTP_OK	shared/library/libevent/include/event2/http.h	53;"	d
 HTTP_SERVUNAVAIL	shared/library/libevent/include/event2/http.h	65;"	d
 HandleError	database/MySQLDatabase.cc	/^bool MySQLDatabase::HandleError(MySQLDatabaseConnection *conn, uint32_t error_number) {$/;"	f	class:MySQLDatabase
+HandleError	database/RedisDatabase.cc	/^bool RedisDatabase::HandleError(RedisDatabaseConnection *conn, uint32_t error_number) {$/;"	f	class:RedisDatabase
 HandleError	shared/library/rapidjson/include/rapidjson/reader.h	/^    void HandleError(IterativeParsingState src, InputStream& is) {$/;"	f	class:GenericReader
 HasBOM	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    bool HasBOM() const { return hasBOM_; }$/;"	f	class:AutoUTFInputStream
 HasMember	shared/library/rapidjson/include/rapidjson/document.h	/^    bool HasMember(const Ch* name) const { return FindMember(name) != MemberEnd(); }$/;"	f	class:GenericValue
@@ -2450,7 +2460,9 @@ IS_NUM	shared/library/mysql/include/mysql.h	79;"	d
 IS_PRI_KEY	shared/library/mysql/include/mysql.h	72;"	d
 IS_SESSION_STATE_TYPE	shared/library/mysql/include/mysql_com.h	517;"	d
 Info	shared/common/Logger.cc	/^bool Logger::Info(const char *msg, ...) {$/;"	f	class:Logger
+Init	shared/common/Logger.h	/^        void Init(const char* process_name) { process_name_ = process_name; }$/;"	f	class:Logger
 Initialize	database/MySQLDatabase.cc	/^bool MySQLDatabase::Initialize(const char *hostname, uint16_t port, const char *username, const char *password, const char *database_name, uint32_t connection_count) {$/;"	f	class:MySQLDatabase
+Initialize	database/RedisDatabase.cc	/^bool RedisDatabase::Initialize(const char *hostname, uint16_t port, const char *username, const char *password, const char *database_name, uint32_t connection_count) {$/;"	f	class:RedisDatabase
 Initialize_	database/Database.cc	/^void Database::Initialize_() {$/;"	f	class:Database
 Initialized	shared/network/Event.cc	/^bool Event::Initialized() {$/;"	f	class:Event
 InsituStringStream	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^typedef GenericInsituStringStream<UTF8<> > InsituStringStream;$/;"	t
@@ -2556,20 +2568,24 @@ LOCAL_INFILE_ERROR_LEN	shared/library/mysql/include/mysql.h	424;"	d
 LOGGER_CC_AZQLX2MN	shared/common/Logger.cc	20;"	d	file:
 LOGGER_H_9ROTCNVM	shared/common/Logger.h	19;"	d
 LOG_BUFF_SIZE	shared/common/Logger.h	27;"	d
-LOG_DEBUG	shared/common/Logger.h	73;"	d
-LOG_ERROR	shared/common/Logger.h	71;"	d
-LOG_FATAL	shared/common/Logger.h	70;"	d
-LOG_INFO	shared/common/Logger.h	72;"	d
-LOG_KDEBUG	shared/common/Logger.h	79;"	d
-LOG_KERROR	shared/common/Logger.h	77;"	d
-LOG_KFATAL	shared/common/Logger.h	76;"	d
-LOG_KINFO	shared/common/Logger.h	78;"	d
-LOG_KTRACE	shared/common/Logger.h	80;"	d
+LOG_DEBUG	shared/common/Logger.h	80;"	d
+LOG_ERROR	shared/common/Logger.h	78;"	d
+LOG_FATAL	shared/common/Logger.h	77;"	d
+LOG_INFO	shared/common/Logger.h	79;"	d
+LOG_KDEBUG	shared/common/Logger.h	88;"	d
+LOG_KERROR	shared/common/Logger.h	86;"	d
+LOG_KFATAL	shared/common/Logger.h	85;"	d
+LOG_KINFO	shared/common/Logger.h	87;"	d
+LOG_KSTDERR	shared/common/Logger.h	91;"	d
+LOG_KSTDOUT	shared/common/Logger.h	90;"	d
+LOG_KTRACE	shared/common/Logger.h	89;"	d
 LOG_PREFIX_BUFF_SIZE	shared/common/Logger.h	26;"	d
-LOG_TRACE	shared/common/Logger.h	74;"	d
+LOG_STDERR	shared/common/Logger.h	83;"	d
+LOG_STDOUT	shared/common/Logger.h	82;"	d
+LOG_TRACE	shared/common/Logger.h	81;"	d
 LeftBracketToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        LeftBracketToken = 0,$/;"	e	enum:GenericReader::Token
 LeftCurlyBracketToken	shared/library/rapidjson/include/rapidjson/reader.h	/^        LeftCurlyBracketToken,$/;"	e	enum:GenericReader::Token
-LenPos	shared/library/rapidjson/include/rapidjson/document.h	/^        enum { MaxChars = sizeof(String) \/ sizeof(Ch), MaxSize = MaxChars - 1, LenPos = MaxSize };$/;"	e	enum:GenericValue::ShortString::__anon2
+LenPos	shared/library/rapidjson/include/rapidjson/document.h	/^        enum { MaxChars = sizeof(String) \/ sizeof(Ch), MaxSize = MaxChars - 1, LenPos = MaxSize };$/;"	e	enum:GenericValue::ShortString::__anon8
 Length	shared/library/rapidjson/include/rapidjson/reader.h	/^        size_t Length() const { return length_; }$/;"	f	class:GenericReader::StackStream
 Length	shared/library/rapidjson/include/rapidjson/reader.h	/^        size_t Length() { return 0; }$/;"	f	class:GenericReader::NumberStream
 Length	shared/library/rapidjson/include/rapidjson/reader.h	/^        size_t Length() { return stackStream.Length(); }$/;"	f	class:GenericReader::NumberStream
@@ -2880,11 +2896,11 @@ MYSQL_VERSION_ID	shared/library/mysql/include/mysql_version.h	15;"	d
 MYSQL_VERSION_MAJOR	shared/library/mysql/include/my_config.h	375;"	d
 MYSQL_VERSION_MINOR	shared/library/mysql/include/my_config.h	376;"	d
 MYSQL_VERSION_PATCH	shared/library/mysql/include/my_config.h	377;"	d
-MYSQL_VIO_INVALID	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  enum { MYSQL_VIO_INVALID, MYSQL_VIO_TCP, MYSQL_VIO_SOCKET,$/;"	e	enum:st_plugin_vio_info::__anon19
-MYSQL_VIO_MEMORY	shared/library/mysql/include/mysql/plugin_auth_common.h	/^         MYSQL_VIO_PIPE, MYSQL_VIO_MEMORY } protocol;$/;"	e	enum:st_plugin_vio_info::__anon19
-MYSQL_VIO_PIPE	shared/library/mysql/include/mysql/plugin_auth_common.h	/^         MYSQL_VIO_PIPE, MYSQL_VIO_MEMORY } protocol;$/;"	e	enum:st_plugin_vio_info::__anon19
-MYSQL_VIO_SOCKET	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  enum { MYSQL_VIO_INVALID, MYSQL_VIO_TCP, MYSQL_VIO_SOCKET,$/;"	e	enum:st_plugin_vio_info::__anon19
-MYSQL_VIO_TCP	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  enum { MYSQL_VIO_INVALID, MYSQL_VIO_TCP, MYSQL_VIO_SOCKET,$/;"	e	enum:st_plugin_vio_info::__anon19
+MYSQL_VIO_INVALID	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  enum { MYSQL_VIO_INVALID, MYSQL_VIO_TCP, MYSQL_VIO_SOCKET,$/;"	e	enum:st_plugin_vio_info::__anon25
+MYSQL_VIO_MEMORY	shared/library/mysql/include/mysql/plugin_auth_common.h	/^         MYSQL_VIO_PIPE, MYSQL_VIO_MEMORY } protocol;$/;"	e	enum:st_plugin_vio_info::__anon25
+MYSQL_VIO_PIPE	shared/library/mysql/include/mysql/plugin_auth_common.h	/^         MYSQL_VIO_PIPE, MYSQL_VIO_MEMORY } protocol;$/;"	e	enum:st_plugin_vio_info::__anon25
+MYSQL_VIO_SOCKET	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  enum { MYSQL_VIO_INVALID, MYSQL_VIO_TCP, MYSQL_VIO_SOCKET,$/;"	e	enum:st_plugin_vio_info::__anon25
+MYSQL_VIO_TCP	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  enum { MYSQL_VIO_INVALID, MYSQL_VIO_TCP, MYSQL_VIO_SOCKET,$/;"	e	enum:st_plugin_vio_info::__anon25
 MYSYS_ERRMSG_SIZE	shared/library/mysql/include/my_sys.h	64;"	d
 MYSYS_STRERROR_SIZE	shared/library/mysql/include/my_sys.h	65;"	d
 MY_ALIGN	shared/library/mysql/include/my_global.h	424;"	d
@@ -2964,8 +2980,8 @@ MY_FILE_MIN	shared/library/mysql/include/my_global.h	296;"	d
 MY_FNABP	shared/library/mysql/include/my_sys.h	71;"	d
 MY_FREE_ON_ERROR	shared/library/mysql/include/my_sys.h	91;"	d
 MY_FULL_IO	shared/library/mysql/include/my_sys.h	79;"	d
-MY_GCVT_ARG_DOUBLE	shared/library/mysql/include/m_string.h	/^  MY_GCVT_ARG_DOUBLE$/;"	e	enum:__anon15
-MY_GCVT_ARG_FLOAT	shared/library/mysql/include/m_string.h	/^  MY_GCVT_ARG_FLOAT,$/;"	e	enum:__anon15
+MY_GCVT_ARG_DOUBLE	shared/library/mysql/include/m_string.h	/^  MY_GCVT_ARG_DOUBLE$/;"	e	enum:__anon21
+MY_GCVT_ARG_FLOAT	shared/library/mysql/include/m_string.h	/^  MY_GCVT_ARG_FLOAT,$/;"	e	enum:__anon21
 MY_GCVT_MAX_FIELD_WIDTH	shared/library/mysql/include/m_string.h	203;"	d
 MY_GIVE_INFO	shared/library/mysql/include/my_sys.h	100;"	d
 MY_GLOBAL_INCLUDED	shared/library/mysql/include/my_global.h	18;"	d
@@ -3132,8 +3148,8 @@ Malloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Mallo
 Malloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Malloc(size_t size) {$/;"	f	class:MemoryPoolAllocator
 Master	database/Master.h	/^class Master : public Singleton<Master> {$/;"	c
 Master	gateway/Master.h	/^class Master : public Singleton<Master> {$/;"	c
-MaxChars	shared/library/rapidjson/include/rapidjson/document.h	/^        enum { MaxChars = sizeof(String) \/ sizeof(Ch), MaxSize = MaxChars - 1, LenPos = MaxSize };$/;"	e	enum:GenericValue::ShortString::__anon2
-MaxSize	shared/library/rapidjson/include/rapidjson/document.h	/^        enum { MaxChars = sizeof(String) \/ sizeof(Ch), MaxSize = MaxChars - 1, LenPos = MaxSize };$/;"	e	enum:GenericValue::ShortString::__anon2
+MaxChars	shared/library/rapidjson/include/rapidjson/document.h	/^        enum { MaxChars = sizeof(String) \/ sizeof(Ch), MaxSize = MaxChars - 1, LenPos = MaxSize };$/;"	e	enum:GenericValue::ShortString::__anon8
+MaxSize	shared/library/rapidjson/include/rapidjson/document.h	/^        enum { MaxChars = sizeof(String) \/ sizeof(Ch), MaxSize = MaxChars - 1, LenPos = MaxSize };$/;"	e	enum:GenericValue::ShortString::__anon8
 MaybeAddConst	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <bool Constify, typename T> struct MaybeAddConst : SelectIfCond<Constify, const T, T> {};$/;"	s	namespace:internal
 Member	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericMember<Encoding, Allocator> Member;$/;"	t	class:GenericValue
 MemberBegin	shared/library/rapidjson/include/rapidjson/document.h	/^    ConstMemberIterator MemberBegin() const { RAPIDJSON_ASSERT(IsObject()); return ConstMemberIterator(data_.o.members); }$/;"	f	class:GenericValue
@@ -3163,7 +3179,6 @@ MulAdd64	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    
 MultiplyPow5	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    BigInteger& MultiplyPow5(unsigned exp) {$/;"	f	class:internal::BigInteger
 Mutex	shared/thread/Mutex.cc	/^Mutex::Mutex() {$/;"	f	class:Mutex
 Mutex	shared/thread/Mutex.h	/^class Mutex {$/;"	c
-MySQLDatabase	database/MySQLDatabase.cc	/^MySQLDatabase::MySQLDatabase() {$/;"	f	class:MySQLDatabase
 MySQLDatabase	database/MySQLDatabase.h	/^class MySQLDatabase : public Database, public Singleton<MySQLDatabase> {$/;"	c
 MySQLDatabaseConnection	database/MySQLDatabase.h	/^struct MySQLDatabaseConnection : public DatabaseConnection {$/;"	s
 MySQLQueryResult	database/MySQLDatabase.cc	/^MySQLQueryResult::MySQLQueryResult(MYSQL_RES* res, uint32_t field_count, uint32_t row_count) : QueryResult(field_count, row_count), result_(res) {$/;"	f	class:MySQLQueryResult
@@ -3203,6 +3218,7 @@ NewTimerEvent	shared/network/EventBase.cc	/^bool EventBase::NewTimerEvent(EventC
 NewWritableFile	shared/port/FileSystem.cc	/^bool FileSystem::NewWritableFile(const std::string &file_name, WritableFile **result) {$/;"	f	class:FileSystem
 NextPositiveDouble	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    double NextPositiveDouble() const {$/;"	f	class:internal::Double
 NextRow	database/MySQLDatabase.cc	/^bool MySQLQueryResult::NextRow() {$/;"	f	class:MySQLQueryResult
+NextRow	database/RedisDatabase.cc	/^bool RedisQueryResult::NextRow() {$/;"	f	class:RedisQueryResult
 No	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^    typedef char (&No) [2];$/;"	t	struct:internal::IsBaseOfImpl
 Node	shared/base/FQueue.hpp	/^        struct Node {$/;"	s	class:FQueue
 NonConstIterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericMemberIterator<false,Encoding,Allocator> NonConstIterator;$/;"	t	class:GenericMemberIterator
@@ -3859,6 +3875,34 @@ READ_FIFO	shared/library/mysql/include/my_sys.h	/^  READ_FIFO, READ_NET,WRITE_NE
 READ_NET	shared/library/mysql/include/my_sys.h	/^  READ_FIFO, READ_NET,WRITE_NET};$/;"	e	enum:cache_type
 REAL_RESULT	shared/library/mysql/include/mysql_com.h	/^enum Item_result {STRING_RESULT=0, REAL_RESULT, INT_RESULT, ROW_RESULT,$/;"	e	enum:Item_result
 RECORD_CACHE_SIZE	shared/library/mysql/include/my_global.h	332;"	d
+REDISDATABASE_CC_THW3Y1JZ	database/RedisDatabase.cc	19;"	d	file:
+REDISDATABASE_H_A2DO91UB	database/RedisDatabase.h	20;"	d
+REDIS_BLOCK	shared/library/hiredis/include/hiredis/hiredis.h	49;"	d
+REDIS_CONNECTED	shared/library/hiredis/include/hiredis/hiredis.h	53;"	d
+REDIS_CONNECT_RETRIES	shared/library/hiredis/include/hiredis/hiredis.h	81;"	d
+REDIS_CONN_TCP	shared/library/hiredis/include/hiredis/hiredis.h	/^    REDIS_CONN_TCP,$/;"	e	enum:redisConnectionType
+REDIS_CONN_UNIX	shared/library/hiredis/include/hiredis/hiredis.h	/^    REDIS_CONN_UNIX,$/;"	e	enum:redisConnectionType
+REDIS_DISCONNECTING	shared/library/hiredis/include/hiredis/hiredis.h	59;"	d
+REDIS_ERR	shared/library/hiredis/include/hiredis/read.h	37;"	d
+REDIS_ERR_EOF	shared/library/hiredis/include/hiredis/read.h	45;"	d
+REDIS_ERR_IO	shared/library/hiredis/include/hiredis/read.h	44;"	d
+REDIS_ERR_OOM	shared/library/hiredis/include/hiredis/read.h	47;"	d
+REDIS_ERR_OTHER	shared/library/hiredis/include/hiredis/read.h	48;"	d
+REDIS_ERR_PROTOCOL	shared/library/hiredis/include/hiredis/read.h	46;"	d
+REDIS_FREEING	shared/library/hiredis/include/hiredis/hiredis.h	63;"	d
+REDIS_IN_CALLBACK	shared/library/hiredis/include/hiredis/hiredis.h	66;"	d
+REDIS_KEEPALIVE_INTERVAL	shared/library/hiredis/include/hiredis/hiredis.h	77;"	d
+REDIS_MONITORING	shared/library/hiredis/include/hiredis/hiredis.h	72;"	d
+REDIS_OK	shared/library/hiredis/include/hiredis/read.h	38;"	d
+REDIS_READER_MAX_BUF	shared/library/hiredis/include/hiredis/read.h	57;"	d
+REDIS_REPLY_ARRAY	shared/library/hiredis/include/hiredis/read.h	51;"	d
+REDIS_REPLY_ERROR	shared/library/hiredis/include/hiredis/read.h	55;"	d
+REDIS_REPLY_INTEGER	shared/library/hiredis/include/hiredis/read.h	52;"	d
+REDIS_REPLY_NIL	shared/library/hiredis/include/hiredis/read.h	53;"	d
+REDIS_REPLY_STATUS	shared/library/hiredis/include/hiredis/read.h	54;"	d
+REDIS_REPLY_STRING	shared/library/hiredis/include/hiredis/read.h	50;"	d
+REDIS_REUSEADDR	shared/library/hiredis/include/hiredis/hiredis.h	75;"	d
+REDIS_SUBSCRIBED	shared/library/hiredis/include/hiredis/hiredis.h	69;"	d
 REFRESH_BINARY_LOG	shared/library/mysql/include/mysql_com.h	150;"	d
 REFRESH_DES_KEY_FILE	shared/library/mysql/include/mysql_com.h	162;"	d
 REFRESH_ENGINE_LOG	shared/library/mysql/include/mysql_com.h	149;"	d
@@ -3896,6 +3940,21 @@ Reader	shared/library/rapidjson/include/rapidjson/reader.h	/^typedef GenericRead
 Realloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Realloc(void* originalPtr, size_t originalSize, size_t newSize) {$/;"	f	class:CrtAllocator
 Realloc	shared/library/rapidjson/include/rapidjson/allocators.h	/^    void* Realloc(void* originalPtr, size_t originalSize, size_t newSize) {$/;"	f	class:MemoryPoolAllocator
 Reconnect	database/MySQLDatabase.cc	/^bool MySQLDatabase::Reconnect(MySQLDatabaseConnection *conn) {$/;"	f	class:MySQLDatabase
+Reconnect	database/RedisDatabase.cc	/^bool RedisDatabase::Reconnect(RedisDatabaseConnection *conn) {$/;"	f	class:RedisDatabase
+RedisDatabase	database/RedisDatabase.h	/^class RedisDatabase : public Database, public Singleton<RedisDatabase> {$/;"	c
+RedisDatabaseConnection	database/RedisDatabase.h	/^struct RedisDatabaseConnection : public DatabaseConnection {$/;"	s
+RedisQtAdapter	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        RedisQtAdapter(QObject * parent = 0)$/;"	f	class:RedisQtAdapter
+RedisQtAdapter	shared/library/hiredis/include/hiredis/adapters/qt.h	/^class RedisQtAdapter : public QObject {$/;"	c
+RedisQtAddRead	shared/library/hiredis/include/hiredis/adapters/qt.h	/^    void RedisQtAddRead(void * adapter) {$/;"	f	class:RedisQtAdapter
+RedisQtAddWrite	shared/library/hiredis/include/hiredis/adapters/qt.h	/^    void RedisQtAddWrite(void * adapter) {$/;"	f	class:RedisQtAdapter
+RedisQtCleanup	shared/library/hiredis/include/hiredis/adapters/qt.h	/^    void RedisQtCleanup(void * adapter) {$/;"	f	class:RedisQtAdapter
+RedisQtDelRead	shared/library/hiredis/include/hiredis/adapters/qt.h	/^    void RedisQtDelRead(void * adapter) {$/;"	f	class:RedisQtAdapter
+RedisQtDelWrite	shared/library/hiredis/include/hiredis/adapters/qt.h	/^    void RedisQtDelWrite(void * adapter) {$/;"	f	class:RedisQtAdapter
+RedisQueryResult	database/RedisDatabase.cc	/^RedisQueryResult::RedisQueryResult(redisReply* reply, uint32_t field_count, uint32_t row_count) : QueryResult(field_count, row_count), result_(reply) {$/;"	f	class:RedisQueryResult
+RedisQueryResult	database/RedisDatabase.h	/^class RedisQueryResult : public QueryResult {$/;"	c
+RedisRunLoop	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^} RedisRunLoop;$/;"	t	typeref:struct:__anon6
+RedisSource	shared/library/hiredis/include/hiredis/adapters/glib.h	/^} RedisSource;$/;"	t	typeref:struct:__anon5
+Redis_	database/RedisDatabase.h	/^    redisContext* Redis_;$/;"	m	struct:RedisDatabaseConnection
 Reference	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef typename BaseType::reference       Reference;$/;"	t	class:GenericMemberIterator
 Reinit	shared/network/EventBase.cc	/^bool EventBase::Reinit() {$/;"	f	class:EventBase
 RemoveAllMembers	shared/library/rapidjson/include/rapidjson/document.h	/^    void RemoveAllMembers() {$/;"	f	class:GenericValue
@@ -3908,6 +3967,7 @@ RemoveMember	shared/library/rapidjson/include/rapidjson/document.h	/^    bool Re
 RemoveMember	shared/library/rapidjson/include/rapidjson/document.h	/^    bool RemoveMember(const std::basic_string<Ch>& name) { return RemoveMember(GenericValue(StringRef(name))); }$/;"	f	class:GenericValue
 RemoveSfinaeTag	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <typename T> struct RemoveSfinaeTag<SfinaeTag&(*)(T)> { typedef T Type; };$/;"	s	namespace:internal
 RemoveTcpConnection	shared/network/TcpServerBase.cc	/^void TcpServerBase::RemoveTcpConnection(EventSocket socket) {$/;"	f	class:TcpServerBase
+Reply_	database/RedisDatabase.h	/^    redisReply* Reply_;$/;"	m	struct:RedisDatabaseConnection
 Reserve	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue& Reserve(SizeType newCapacity, Allocator &allocator) {$/;"	f	class:GenericValue
 Reset	shared/library/rapidjson/include/rapidjson/writer.h	/^    void Reset(OutputStream& os) {$/;"	f	class:Writer
 Resize	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    void Resize(size_t newCapacity) {$/;"	f	class:internal::Stack
@@ -4018,6 +4078,7 @@ SCNxPTR	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	265;"	d
 SCNxPTR	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	270;"	d
 SCRAMBLED_PASSWORD_CHAR_LENGTH	shared/library/mysql/include/mysql_com.h	98;"	d
 SCRAMBLE_LENGTH	shared/library/mysql/include/mysql_com.h	95;"	d
+SDS_MAX_PREALLOC	shared/library/hiredis/include/hiredis/sds.h	34;"	d
 SEQ_READ_APPEND	shared/library/mysql/include/my_sys.h	/^  SEQ_READ_APPEND		\/* sequential read or append *\/,$/;"	e	enum:cache_type
 SERVER_MORE_RESULTS_EXISTS	shared/library/mysql/include/mysql_com.h	261;"	d
 SERVER_PS_OUT_PARAMS	shared/library/mysql/include/mysql_com.h	288;"	d
@@ -4128,6 +4189,7 @@ SelectIfImpl	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^templa
 SelectIfImpl	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^template <bool C> struct SelectIfImpl { template <typename T1, typename T2> struct Apply { typedef T1 Type; }; };$/;"	s	namespace:internal
 SendData	shared/network/TcpServerBase.cc	/^void TcpServerBase::SendData(SOCKET fd, const void* data, size_t data_len) {$/;"	f	class:TcpServerBase
 SendQuery	database/MySQLDatabase.cc	/^bool MySQLDatabase::SendQuery(DatabaseConnection *conn, const char *sql) {$/;"	f	class:MySQLDatabase
+SendQuery	database/RedisDatabase.cc	/^bool RedisDatabase::SendQuery(DatabaseConnection *conn, const char *sql) {$/;"	f	class:RedisDatabase
 ServerReadCallback	shared/network/TcpServerBase.cc	/^void TcpServerBase::ServerReadCallback(BufferEventStruct* buffer_event_struct, void* arg) {$/;"	f	class:TcpServerBase
 Set	shared/library/rapidjson/include/rapidjson/error/error.h	/^    void Set(ParseErrorCode code, size_t offset = 0) { code_ = code; offset_ = offset; }$/;"	f	struct:ParseResult
 Set	shared/library/rapidjson/include/rapidjson/pointer.h	/^        Set(GenericDocument<EncodingType, typename ValueType::AllocatorType, stackAllocator>& document, T value) const {$/;"	f	class:GenericPointer
@@ -4200,6 +4262,7 @@ ShrinkToFit	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    vo
 ShrinkToFit	shared/library/rapidjson/include/rapidjson/memorybuffer.h	/^    void ShrinkToFit() { stack_.ShrinkToFit(); }$/;"	f	struct:GenericMemoryBuffer
 ShrinkToFit	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^    void ShrinkToFit() {$/;"	f	class:GenericStringBuffer
 Shutdown	database/MySQLDatabase.cc	/^void MySQLDatabase::Shutdown() {$/;"	f	class:MySQLDatabase
+Shutdown	database/RedisDatabase.cc	/^void RedisDatabase::Shutdown() {$/;"	f	class:RedisDatabase
 Shutdown	shared/thread/ThreadPool.cc	/^void ThreadPool::Shutdown() {$/;"	f	class:ThreadPool
 Sigfunc	shared/common/Common.h	/^    typedef void Sigfunc(int);$/;"	t	namespace:Common
 Sign	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    bool Sign() const { return (u_ & kSignMask) != 0; }$/;"	f	class:internal::Double
@@ -4243,7 +4306,10 @@ Status	shared/common/Status.cc	/^Status::Status(Code code, const std::string& ms
 Status	shared/common/Status.h	/^        Status() : status_(NULL) { }$/;"	f	class:Status
 Status	shared/common/Status.h	/^        Status(const Status& s) {$/;"	f	class:Status
 Status	shared/common/Status.h	/^class Status {$/;"	c
+StdErr	shared/common/Logger.cc	/^void Logger::StdErr(const char *msg, ...) {$/;"	f	class:Logger
+StdOut	shared/common/Logger.cc	/^void Logger::StdOut(const char *msg, ...) {$/;"	f	class:Logger
 StoreQueryResult	database/MySQLDatabase.cc	/^QueryResult* MySQLDatabase::StoreQueryResult(DatabaseConnection *conn) {$/;"	f	class:MySQLDatabase
+StoreQueryResult	database/RedisDatabase.cc	/^QueryResult* RedisDatabase::StoreQueryResult(DatabaseConnection *conn) {$/;"	f	class:RedisDatabase
 StrLen	shared/library/rapidjson/include/rapidjson/internal/strfunc.h	/^inline SizeType StrLen(const Ch* s) {$/;"	f	namespace:internal
 StreamLocalCopy	shared/library/rapidjson/include/rapidjson/reader.h	/^    StreamLocalCopy(Stream& original) : s(original) {}$/;"	f	class:internal::StreamLocalCopy
 StreamLocalCopy	shared/library/rapidjson/include/rapidjson/reader.h	/^    StreamLocalCopy(Stream& original) : s(original), original_(original) {}$/;"	f	class:internal::StreamLocalCopy
@@ -4326,7 +4392,7 @@ TRANS	shared/library/rapidjson/include/rapidjson/encodings.h	174;"	d
 TRASH	shared/library/mysql/include/my_sys.h	171;"	d
 TRASH	shared/library/mysql/include/my_sys.h	178;"	d
 TRUE	shared/library/mysql/include/my_global.h	181;"	d
-TRUNCATE	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon16
+TRUNCATE	shared/library/mysql/include/decimal.h	/^{TRUNCATE=0, HALF_EVEN, HALF_UP, CEILING, FLOOR}$/;"	e	enum:__anon22
 TYPELIB	shared/library/mysql/include/typelib.h	/^} TYPELIB;$/;"	t	typeref:struct:st_typelib
 TYPE_NOT_SET	shared/library/mysql/include/my_sys.h	/^  TYPE_NOT_SET= 0, READ_CACHE, WRITE_CACHE,$/;"	e	enum:cache_type
 Take	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    Ch Take() { Ch c = current_; current_ = Encoding::Take(is_); return c; }$/;"	f	class:EncodedInputStream
@@ -4499,7 +4565,7 @@ Validate	shared/library/rapidjson/include/rapidjson/encodings.h	/^    static boo
 Validate	shared/library/rapidjson/include/rapidjson/encodings.h	/^    static bool Validate(InputStream& is, OutputStream& os) {$/;"	f	struct:UTF8
 Value	shared/library/rapidjson/include/rapidjson/document.h	/^typedef GenericValue<UTF8<> > Value;$/;"	t
 Value	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    double Value() const { return d_; }$/;"	f	class:internal::Double
-Value	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^    enum { Value = (sizeof(Check(Host(), 0)) == sizeof(Yes)) };$/;"	e	enum:internal::IsBaseOfImpl::__anon5
+Value	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^    enum { Value = (sizeof(Check(Host(), 0)) == sizeof(Yes)) };$/;"	e	enum:internal::IsBaseOfImpl::__anon11
 Value	shared/library/rapidjson/include/rapidjson/internal/meta.h	/^    static const bool Value = Cond;$/;"	m	struct:internal::BoolType
 ValueIterator	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericValue* ValueIterator;            \/\/!< Value iterator for iterating in array.$/;"	t	class:GenericValue
 ValueType	shared/library/rapidjson/include/rapidjson/document.h	/^    typedef GenericValue<Encoding, Allocator> ValueType;    \/\/!< Value type of itself.$/;"	t	class:GenericValue
@@ -4549,8 +4615,7 @@ WriteInt64	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteI
 WriteInt64	shared/library/rapidjson/include/rapidjson/writer.h	/^inline bool Writer<StringBuffer>::WriteInt64(int64_t i64) {$/;"	f	class:Writer
 WriteLock	shared/thread/RWLock.cc	/^bool RWLock::WriteLock() {$/;"	f	class:RWLock
 WriteNull	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteNull()  {$/;"	f	class:Writer
-WritePID	database/Master.cc	/^uint32_t Master::WritePID(const char* server_name) {$/;"	f	class:Master
-WritePID	gateway/Master.cc	/^uint32_t Master::WritePID(const char* server_name) {$/;"	f	class:Master
+WritePID	shared/common/Common.cc	/^    uint32_t WritePID(const char* process_name) {$/;"	f	namespace:Common
 WriteStartArray	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteStartArray()  { os_->Put('['); return true; }$/;"	f	class:Writer
 WriteStartObject	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteStartObject() { os_->Put('{'); return true; }$/;"	f	class:Writer
 WriteString	shared/library/rapidjson/include/rapidjson/writer.h	/^    bool WriteString(const Ch* str, SizeType length)  {$/;"	f	class:Writer
@@ -4732,14 +4797,28 @@ _SH_DENYWRD	shared/library/mysql/include/my_global.h	247;"	d
 _USE_MATH_DEFINES	shared/library/mysql/include/my_global.h	26;"	d
 _W64	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	106;"	d
 _W64	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	108;"	d
+__HIREDIS_AE_H__	shared/library/hiredis/include/hiredis/adapters/ae.h	32;"	d
+__HIREDIS_ASYNC_H	shared/library/hiredis/include/hiredis/async.h	33;"	d
+__HIREDIS_GLIB_H__	shared/library/hiredis/include/hiredis/adapters/glib.h	2;"	d
+__HIREDIS_H	shared/library/hiredis/include/hiredis/hiredis.h	35;"	d
+__HIREDIS_IVYKIS_H__	shared/library/hiredis/include/hiredis/adapters/ivykis.h	2;"	d
+__HIREDIS_LIBEVENT_H__	shared/library/hiredis/include/hiredis/adapters/libevent.h	32;"	d
+__HIREDIS_LIBEV_H__	shared/library/hiredis/include/hiredis/adapters/libev.h	32;"	d
+__HIREDIS_LIBUV_H__	shared/library/hiredis/include/hiredis/adapters/libuv.h	2;"	d
+__HIREDIS_MACOSX_H__	shared/library/hiredis/include/hiredis/adapters/macosx.h	7;"	d
+__HIREDIS_QT_H__	shared/library/hiredis/include/hiredis/adapters/qt.h	27;"	d
+__HIREDIS_READ_H	shared/library/hiredis/include/hiredis/read.h	34;"	d
+__SDS_H	shared/library/hiredis/include/hiredis/sds.h	32;"	d
 __STDC_FORMAT_MACROS	shared/library/mysql/include/my_global.h	25;"	d
 __STDC_LIMIT_MACROS	shared/library/mysql/include/my_global.h	24;"	d
 __attribute__	shared/library/mysql/include/my_compiler.h	164;"	d
 __func__	shared/library/mysql/include/my_compiler.h	114;"	d
+__redis_strerror_r	shared/library/hiredis/include/hiredis/hiredis.h	88;"	d
+__redis_strerror_r	shared/library/hiredis/include/hiredis/hiredis.h	94;"	d
 _db_stack_frame_	shared/library/mysql/include/my_dbug.h	/^struct _db_stack_frame_ {$/;"	s
 _decimal_h	shared/library/mysql/include/decimal.h	17;"	d
-_ev	shared/library/libevent/include/event2/event_struct.h	/^	} _ev;$/;"	m	struct:event	typeref:union:event::__anon24
-_internal	shared/library/libevent/include/event2/buffer.h	/^	} _internal;$/;"	m	struct:evbuffer_ptr	typeref:struct:evbuffer_ptr::__anon22
+_ev	shared/library/libevent/include/event2/event_struct.h	/^	} _ev;$/;"	m	struct:event	typeref:union:event::__anon30
+_internal	shared/library/libevent/include/event2/buffer.h	/^	} _internal;$/;"	m	struct:evbuffer_ptr	typeref:struct:evbuffer_ptr::__anon28
 _keycache_h	shared/library/mysql/include/keycache.h	19;"	d
 _list_h_	shared/library/mysql/include/my_list.h	17;"	d
 _m_ctype_h	shared/library/mysql/include/m_ctype.h	21;"	d
@@ -4756,7 +4835,12 @@ _mysql_time_h_	shared/library/mysql/include/mysql_time.h	17;"	d
 _mysql_version_h	shared/library/mysql/include/mysql_version.h	9;"	d
 _typelib_h	shared/library/mysql/include/typelib.h	18;"	d
 a	shared/library/rapidjson/include/rapidjson/document.h	/^        Array a;$/;"	m	union:GenericValue::Data
+ac	shared/library/hiredis/include/hiredis/adapters/glib.h	/^    redisAsyncContext *ac;$/;"	m	struct:__anon5
 active_threads_	shared/thread/ThreadPool.h	/^        std::set<Thread*> active_threads_;$/;"	m	class:ThreadPool
+addRead	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        void addRead() {$/;"	f	class:RedisQtAdapter
+addRead	shared/library/hiredis/include/hiredis/async.h	/^        void (*addRead)(void *privdata);$/;"	m	struct:redisAsyncContext::__anon3
+addWrite	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        void addWrite() {$/;"	f	class:RedisQtAdapter
+addWrite	shared/library/hiredis/include/hiredis/async.h	/^        void (*addWrite)(void *privdata);$/;"	m	struct:redisAsyncContext::__anon3
 add_collation	shared/library/mysql/include/m_ctype.h	/^  int  (*add_collation)(struct charset_info_st *cs);$/;"	m	struct:my_charset_loader_st
 advanced_command	shared/library/mysql/include/sql_common.h	/^  my_bool (*advanced_command)(MYSQL *mysql,$/;"	m	struct:st_mysql_methods
 affected_rows	shared/library/mysql/include/mysql.h	/^  my_ulonglong   affected_rows;$/;"	m	struct:st_mysql_stmt
@@ -4771,7 +4855,7 @@ ai_flags	shared/library/libevent/include/event2/util.h	/^	int     ai_flags;     
 ai_next	shared/library/libevent/include/event2/util.h	/^	struct evutil_addrinfo  *ai_next; \/* next structure in linked list *\/$/;"	m	struct:evutil_addrinfo	typeref:struct:evutil_addrinfo::evutil_addrinfo
 ai_protocol	shared/library/libevent/include/event2/util.h	/^	int     ai_protocol;  \/* 0 or IPPROTO_xxx for IPv4 and IPv6 *\/$/;"	m	struct:evutil_addrinfo
 ai_socktype	shared/library/libevent/include/event2/util.h	/^	int     ai_socktype;  \/* SOCK_xxx *\/$/;"	m	struct:evutil_addrinfo
-align	shared/library/mysql/include/my_compiler.h	/^    my_alignment_imp<alignment> align;$/;"	m	union:my_aligned_storage::__anon20
+align	shared/library/mysql/include/my_compiler.h	/^    my_alignment_imp<alignment> align;$/;"	m	union:my_aligned_storage::__anon26
 alloc	shared/library/libevent/include/event2/thread.h	/^	void *(*alloc)(unsigned locktype);$/;"	m	struct:evthread_lock_callbacks
 alloc	shared/library/mysql/include/mysql.h	/^  MEM_ROOT alloc;$/;"	m	struct:st_mysql_data
 alloc_condition	shared/library/libevent/include/event2/thread.h	/^	void *(*alloc_condition)(unsigned condtype);$/;"	m	struct:evthread_condition_callbacks
@@ -4791,7 +4875,7 @@ arg_type	shared/library/mysql/include/my_getopt.h	/^  enum get_opt_arg_type arg_
 arg_type	shared/library/mysql/include/mysql_com.h	/^  enum Item_result *arg_type;		\/* Pointer to item_results *\/$/;"	m	struct:st_udf_args	typeref:enum:st_udf_args::Item_result
 args	shared/library/mysql/include/mysql_com.h	/^  char **args;				\/* Pointer to argument *\/$/;"	m	struct:st_udf_args
 array_elements	shared/library/mysql/include/my_global.h	177;"	d
-attr	shared/library/mysql/include/my_xml.h	/^  } attr;$/;"	m	struct:xml_stack_st	typeref:struct:xml_stack_st::__anon21
+attr	shared/library/mysql/include/my_xml.h	/^  } attr;$/;"	m	struct:xml_stack_st	typeref:struct:xml_stack_st::__anon27
 attr_	shared/thread/Mutex.cc	/^pthread_mutexattr_t Mutex::attr_;$/;"	m	class:Mutex	file:
 attr_	shared/thread/Mutex.h	/^        static pthread_mutexattr_t attr_;$/;"	m	class:Mutex
 attr_initalized_	shared/thread/Mutex.cc	/^bool Mutex::attr_initalized_ = false;$/;"	m	class:Mutex	file:
@@ -4804,13 +4888,13 @@ baseAllocator_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    Bas
 base_name	shared/library/mysql/include/my_sys.h	640;"	d
 be_ops	shared/library/libevent/include/event2/bufferevent_struct.h	/^	const struct bufferevent_ops *be_ops;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::bufferevent_ops
 before_header_callback_fn	shared/library/mysql/include/mysql_com_server.h	/^typedef void (*before_header_callback_fn)$/;"	t
-beg	shared/library/mysql/include/m_ctype.h	/^  uint beg;$/;"	m	struct:__anon18
+beg	shared/library/mysql/include/m_ctype.h	/^  uint beg;$/;"	m	struct:__anon24
 beg	shared/library/mysql/include/my_xml.h	/^  const char *beg;$/;"	m	struct:xml_stack_st
 begin_	shared/library/rapidjson/include/rapidjson/memorystream.h	/^    const Ch* begin_;   \/\/!< Original head of the string.$/;"	m	struct:MemoryStream
 bfill	shared/library/mysql/include/m_string.h	24;"	d
 binary_number	shared/library/mysql/include/m_ctype.h	/^  uint      binary_number;$/;"	m	struct:charset_info_st
 bind	shared/library/mysql/include/mysql.h	/^  MYSQL_BIND     *bind;                \/* output parameters *\/$/;"	m	struct:st_mysql_stmt
-bind_address	shared/library/mysql/include/mysql.h	/^    char *bind_address;$/;"	m	union:st_mysql_options::__anon17
+bind_address	shared/library/mysql/include/mysql.h	/^    char *bind_address;$/;"	m	union:st_mysql_options::__anon23
 bind_param_done	shared/library/mysql/include/mysql.h	/^  my_bool        bind_param_done;      \/* input buffers were supplied *\/$/;"	m	struct:st_mysql_stmt
 bind_result_done	shared/library/mysql/include/mysql.h	/^  unsigned char  bind_result_done;     \/* output buffers were supplied *\/$/;"	m	struct:st_mysql_stmt
 block_mem	shared/library/mysql/include/keycache.h	/^  uchar *block_mem;              \/* memory for block buffers                 *\/$/;"	m	struct:st_key_cache
@@ -4828,6 +4912,8 @@ body_size	shared/library/libevent/include/event2/http_struct.h	/^	size_t body_si
 bool	shared/library/mysql/include/my_global.h	602;"	d
 broadcast_cond	shared/library/mysql/include/mysql/psi/psi.h	/^  broadcast_cond_v1_t broadcast_cond;$/;"	m	struct:PSI_v1
 broadcast_cond_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef void (*broadcast_cond_v1_t)$/;"	t
+buf	shared/library/hiredis/include/hiredis/read.h	/^    char *buf; \/* Read buffer *\/$/;"	m	struct:redisReader
+buf	shared/library/hiredis/include/hiredis/sds.h	/^    char buf[];$/;"	m	struct:sdshdr
 buf	shared/library/mysql/include/decimal.h	/^  decimal_digit_t *buf;$/;"	m	struct:st_decimal_t
 buf_length	shared/library/mysql/include/mysql_com.h	/^  unsigned long remain_in_buf,length, buf_length, where_b;$/;"	m	struct:st_net
 bufevent_conn_map_	shared/network/TcpServerBase.h	/^        std::map<BufferEventStruct*, TcpConnection*> bufevent_conn_map_;$/;"	m	class:TcpServerBase
@@ -4836,7 +4922,7 @@ buff_end	shared/library/mysql/include/mysql_com.h	/^  unsigned char *buff,*buff_
 buffer	shared/library/mysql/include/my_sys.h	/^  uchar                 *buffer;         \/* The read buffer. *\/$/;"	m	struct:st_io_cache_share
 buffer	shared/library/mysql/include/my_sys.h	/^  uchar  *buffer;				\/* The read buffer *\/$/;"	m	struct:st_io_cache
 buffer	shared/library/mysql/include/my_sys.h	/^  uchar *buffer;$/;"	m	struct:st_dynamic_array
-buffer	shared/library/mysql/include/my_xml.h	/^    char *buffer;$/;"	m	struct:xml_stack_st::__anon21
+buffer	shared/library/mysql/include/my_xml.h	/^    char *buffer;$/;"	m	struct:xml_stack_st::__anon27
 buffer	shared/library/mysql/include/mysql.h	/^  void		*buffer;	  \/* buffer to get\/put data *\/$/;"	m	struct:st_mysql_bind
 bufferEnd_	shared/library/rapidjson/include/rapidjson/filewritestream.h	/^    char *bufferEnd_;$/;"	m	class:FileWriteStream
 bufferLast_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    Ch *bufferLast_;$/;"	m	class:FileReadStream
@@ -4847,7 +4933,7 @@ buffer_event_	shared/network/BufferEvent.h	/^        struct bufferevent* buffer_
 buffer_event_	shared/network/TcpConnection.h	/^        BufferEvent* buffer_event_ = nullptr;$/;"	m	class:TcpConnection
 buffer_length	shared/library/mysql/include/my_sys.h	/^  size_t	buffer_length;$/;"	m	struct:st_io_cache
 buffer_length	shared/library/mysql/include/mysql.h	/^  unsigned long buffer_length;$/;"	m	struct:st_mysql_bind
-buffer_size	shared/library/mysql/include/my_xml.h	/^    size_t buffer_size;$/;"	m	struct:xml_stack_st::__anon21
+buffer_size	shared/library/mysql/include/my_xml.h	/^    size_t buffer_size;$/;"	m	struct:xml_stack_st::__anon27
 buffer_type	shared/library/mysql/include/mysql.h	/^  enum enum_field_types buffer_type;	\/* buffer type *\/$/;"	m	struct:st_mysql_bind	typeref:enum:st_mysql_bind::enum_field_types
 bufferevent	shared/library/libevent/include/event2/bufferevent.h	/^struct bufferevent$/;"	s
 bufferevent	shared/library/libevent/include/event2/bufferevent_struct.h	/^struct bufferevent {$/;"	s
@@ -4859,6 +4945,7 @@ bufferevent_flush_mode	shared/library/libevent/include/event2/bufferevent.h	/^en
 bufferevent_options	shared/library/libevent/include/event2/bufferevent.h	/^enum bufferevent_options {$/;"	g
 bufferevent_ssl_state	shared/library/libevent/include/event2/bufferevent_ssl.h	/^enum bufferevent_ssl_state {$/;"	g
 bzero	shared/library/mysql/include/m_string.h	25;"	d
+c	shared/library/hiredis/include/hiredis/async.h	/^    redisContext c;$/;"	m	struct:redisAsyncContext
 cIterativeParsingStateCount	shared/library/rapidjson/include/rapidjson/reader.h	/^        cIterativeParsingStateCount$/;"	e	enum:GenericReader::IterativeParsingState
 cache_lock	shared/library/mysql/include/keycache.h	/^  mysql_mutex_t cache_lock;      \/* to lock access to the cache structure    *\/$/;"	m	struct:st_key_cache
 cache_type	shared/library/mysql/include/my_sys.h	/^enum cache_type$/;"	g
@@ -4891,8 +4978,9 @@ cb_arg	shared/library/libevent/include/event2/http_struct.h	/^	void *cb_arg;$/;"
 cb_arg	shared/library/libevent/include/event2/rpc_struct.h	/^	void *cb_arg;$/;"	m	struct:evrpc
 cbarg	shared/library/libevent/include/event2/bufferevent_struct.h	/^	void *cbarg;$/;"	m	struct:bufferevent
 ch	shared/library/mysql/include/m_ctype.h	/^  my_wc_t ch[MY_UCA_MAX_CONTRACTION];   \/* Character sequence              *\/$/;"	m	struct:my_contraction_t
-chain	shared/library/libevent/include/event2/buffer.h	/^		void *chain;$/;"	m	struct:evbuffer_ptr::__anon22
+chain	shared/library/libevent/include/event2/buffer.h	/^		void *chain;$/;"	m	struct:evbuffer_ptr::__anon28
 changed_blocks	shared/library/mysql/include/keycache.h	/^  BLOCK_LINK *changed_blocks[CHANGED_BLOCKS_HASH]; \/* hash for dirty file bl.*\/$/;"	m	struct:st_key_cache
+channels	shared/library/hiredis/include/hiredis/async.h	/^        struct dict *channels;$/;"	m	struct:redisAsyncContext::__anon4	typeref:struct:redisAsyncContext::__anon4::dict
 character_set	shared/library/mysql/include/mysql.h	/^typedef struct character_set$/;"	s
 charpos	shared/library/mysql/include/m_ctype.h	/^  size_t  (*charpos)(const struct charset_info_st *, const char *b,$/;"	m	struct:my_charset_handler_st
 charset	shared/library/mysql/include/mysql.h	/^  struct charset_info_st *charset;$/;"	m	struct:st_mysql	typeref:struct:st_mysql::charset_info_st
@@ -4904,11 +4992,13 @@ chunkHead_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    ChunkHe
 chunk_capacity_	shared/library/rapidjson/include/rapidjson/allocators.h	/^    size_t chunk_capacity_;     \/\/!< The minimum capacity of chunk when they are allocated.$/;"	m	class:MemoryPoolAllocator
 chunk_cb	shared/library/libevent/include/event2/http_struct.h	/^	void (*chunk_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
 chunked	shared/library/libevent/include/event2/http_struct.h	/^	unsigned chunked:1,		\/* a chunked request *\/$/;"	m	struct:evhttp_request
-ci	shared/library/mysql/include/mysql.h	/^  } ci;$/;"	m	struct:st_mysql_options	typeref:union:st_mysql_options::__anon17
+ci	shared/library/mysql/include/mysql.h	/^  } ci;$/;"	m	struct:st_mysql_options	typeref:union:st_mysql_options::__anon23
+cleanup	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        void cleanup() {$/;"	f	class:RedisQtAdapter
+cleanup	shared/library/hiredis/include/hiredis/async.h	/^        void (*cleanup)(void *privdata);$/;"	m	struct:redisAsyncContext::__anon3
 clear_alloc_root	shared/library/mysql/include/my_sys.h	766;"	d
 client_flag	shared/library/mysql/include/mysql.h	/^  unsigned long client_flag,server_capabilities;$/;"	m	struct:st_mysql
 client_flag	shared/library/mysql/include/mysql.h	/^  unsigned long client_flag;$/;"	m	struct:st_mysql_options
-client_ip	shared/library/mysql/include/mysql.h	/^    char *client_ip;$/;"	m	union:st_mysql_options::__anon17
+client_ip	shared/library/mysql/include/mysql.h	/^    char *client_ip;$/;"	m	union:st_mysql_options::__anon23
 client_recv_queue_	shared/network/TcpServerBase.h	/^        std::queue<Packet_t*> client_recv_queue_;$/;"	m	class:TcpServerBase
 close_table	shared/library/mysql/include/mysql/psi/psi.h	/^  close_table_v1_t close_table;$/;"	m	struct:PSI_v1
 close_table_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef void (*close_table_v1_t)(struct TABLE_SHARE *server_share,$/;"	t
@@ -4936,16 +5026,27 @@ connect_timeout	shared/library/mysql/include/mysql.h	/^  unsigned int connect_ti
 connection_attributes	shared/library/mysql/include/sql_common.h	/^  HASH connection_attributes;$/;"	m	struct:st_mysql_options_extention
 connection_attributes_length	shared/library/mysql/include/sql_common.h	/^  size_t connection_attributes_length;$/;"	m	struct:st_mysql_options_extention
 connection_count_	database/Database.h	/^        uint32_t connection_count_;$/;"	m	class:Database
+connection_type	shared/library/hiredis/include/hiredis/hiredis.h	/^    enum redisConnectionType connection_type;$/;"	m	struct:redisContext	typeref:enum:redisContext::redisConnectionType
 connections_	database/Database.h	/^        DatabaseConnection** connections_;$/;"	m	class:Database
 connector_fd	shared/library/mysql/include/mysql.h	/^  unsigned char	*connector_fd;		\/* ConnectorFd for SSL *\/$/;"	m	struct:st_mysql
 const_item	shared/library/mysql/include/mysql_com.h	/^  my_bool const_item;          \/* 1 if function always returns the same value *\/$/;"	m	struct:st_udf_init
+context	shared/library/hiredis/include/hiredis/adapters/ae.h	/^    redisAsyncContext *context;$/;"	m	struct:redisAeEvents
+context	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^    redisAsyncContext *context;$/;"	m	struct:redisIvykisEvents
+context	shared/library/hiredis/include/hiredis/adapters/libev.h	/^    redisAsyncContext *context;$/;"	m	struct:redisLibevEvents
+context	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^    redisAsyncContext *context;$/;"	m	struct:redisLibeventEvents
+context	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^  redisAsyncContext* context;$/;"	m	struct:redisLibuvEvents
+context	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^    redisAsyncContext *context;$/;"	m	struct:__anon6
 contractions	shared/library/mysql/include/m_ctype.h	/^  MY_CONTRACTIONS contractions;$/;"	m	struct:my_uca_level_info_st
-copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 0 };$/;"	e	enum:StreamTraits::__anon12
-copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 1 };$/;"	e	enum:StreamTraits::__anon13
-copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 1 };$/;"	e	enum:StreamTraits::__anon14
+copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 0 };$/;"	e	enum:StreamTraits::__anon18
+copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 1 };$/;"	e	enum:StreamTraits::__anon19
+copyOptimization	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    enum { copyOptimization = 1 };$/;"	e	enum:StreamTraits::__anon20
 count	shared/library/mysql/include/typelib.h	/^  unsigned int count;		\/* How many types *\/$/;"	m	struct:st_typelib
 count_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    size_t count_;  \/\/!< Number of characters read$/;"	m	class:FileReadStream
 count_	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    size_t count_;$/;"	m	class:internal::BigInteger
+createArray	shared/library/hiredis/include/hiredis/read.h	/^    void *(*createArray)(const redisReadTask*, int);$/;"	m	struct:redisReplyObjectFunctions
+createInteger	shared/library/hiredis/include/hiredis/read.h	/^    void *(*createInteger)(const redisReadTask*, long long);$/;"	m	struct:redisReplyObjectFunctions
+createNil	shared/library/hiredis/include/hiredis/read.h	/^    void *(*createNil)(const redisReadTask*);$/;"	m	struct:redisReplyObjectFunctions
+createString	shared/library/hiredis/include/hiredis/read.h	/^    void *(*createString)(const redisReadTask*, char*, size_t);$/;"	m	struct:redisReplyObjectFunctions
 create_file	shared/library/mysql/include/mysql/psi/psi.h	/^  create_file_v1_t create_file;$/;"	m	struct:PSI_v1
 create_file_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef void (*create_file_v1_t)(PSI_file_key key, const char *name,$/;"	t
 create_metadata_lock	shared/library/mysql/include/mysql/psi/psi.h	/^  create_metadata_lock_v1_t create_metadata_lock;$/;"	m	struct:PSI_v1
@@ -4971,10 +5072,13 @@ current_node_type	shared/library/mysql/include/my_xml.h	/^  enum my_xml_node_typ
 current_pos	shared/library/mysql/include/my_sys.h	/^  uchar  **current_pos, **current_end;$/;"	m	struct:st_io_cache
 current_row	shared/library/mysql/include/mysql.h	/^  MYSQL_ROW	current_row;		\/* buffer to current row *\/$/;"	m	struct:st_mysql_res
 current_row_	database/Database.h	/^        Field* current_row_;$/;"	m	class:QueryResult
+current_row_count_	database/RedisDatabase.h	/^        uint32_t current_row_count_ = 0;$/;"	m	class:RedisQueryResult
 d	shared/library/rapidjson/include/rapidjson/document.h	/^        double d;$/;"	m	union:GenericValue::Number
 d_	shared/library/rapidjson/include/rapidjson/document.h	/^        GenericDocument& d_;$/;"	m	struct:GenericDocument::ClearStackOnExit
-d_	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^        double d_;$/;"	m	union:internal::Double::__anon4
-data	shared/library/mysql/include/my_compiler.h	/^    char data[size];$/;"	m	union:my_aligned_storage::__anon20
+d_	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^        double d_;$/;"	m	union:internal::Double::__anon10
+data	shared/library/hiredis/include/hiredis/async.h	/^        void *data;$/;"	m	struct:redisAsyncContext::__anon3
+data	shared/library/hiredis/include/hiredis/async.h	/^    void *data;$/;"	m	struct:redisAsyncContext
+data	shared/library/mysql/include/my_compiler.h	/^    char data[size];$/;"	m	union:my_aligned_storage::__anon26
 data	shared/library/mysql/include/my_list.h	/^  void *data;$/;"	m	struct:st_list
 data	shared/library/mysql/include/mysql.h	/^  MYSQL_DATA	*data;$/;"	m	struct:st_mysql_res
 data	shared/library/mysql/include/mysql.h	/^  MYSQL_ROW data;$/;"	m	struct:st_mysql_rows
@@ -4999,7 +5103,7 @@ debug_log_	shared/common/Logger.h	/^        WritableFile *debug_log_ = NULL;$/;"
 decimal_digit_t	shared/library/mysql/include/decimal.h	/^typedef int32 decimal_digit_t;$/;"	t
 decimal_make_zero	shared/library/mysql/include/decimal.h	99;"	d
 decimal_neg	shared/library/mysql/include/decimal.h	115;"	d
-decimal_round_mode	shared/library/mysql/include/decimal.h	/^  decimal_round_mode;$/;"	t	typeref:enum:__anon16
+decimal_round_mode	shared/library/mysql/include/decimal.h	/^  decimal_round_mode;$/;"	t	typeref:enum:__anon22
 decimal_string_size	shared/library/mysql/include/decimal.h	111;"	d
 decimal_t	shared/library/mysql/include/decimal.h	/^} decimal_t;$/;"	t	typeref:struct:st_decimal_t
 decimals	shared/library/mysql/include/mysql.h	/^  unsigned int decimals;      \/* Number of decimals in field *\/$/;"	m	struct:st_mysql_field
@@ -5009,6 +5113,10 @@ def_length	shared/library/mysql/include/mysql.h	/^  unsigned int def_length;$/;"
 def_value	shared/library/mysql/include/my_getopt.h	/^  longlong   def_value;                 \/**< Default value *\/$/;"	m	struct:my_option
 default_auth	shared/library/mysql/include/sql_common.h	/^  char *default_auth;$/;"	m	struct:st_mysql_options_extention
 default_shared_memory_base_name	shared/library/mysql/include/my_global.h	136;"	d
+delRead	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        void delRead() {$/;"	f	class:RedisQtAdapter
+delRead	shared/library/hiredis/include/hiredis/async.h	/^        void (*delRead)(void *privdata);$/;"	m	struct:redisAsyncContext::__anon3
+delWrite	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        void delWrite() {$/;"	f	class:RedisQtAdapter
+delWrite	shared/library/hiredis/include/hiredis/async.h	/^        void (*delWrite)(void *privdata);$/;"	m	struct:redisAsyncContext::__anon3
 delete_current_thread	shared/library/mysql/include/mysql/psi/psi.h	/^  delete_current_thread_v1_t delete_current_thread;$/;"	m	struct:PSI_v1
 delete_current_thread_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef void (*delete_current_thread_v1_t)(void);$/;"	t
 delete_thread	shared/library/mysql/include/mysql/psi/psi.h	/^  delete_thread_v1_t delete_thread;$/;"	m	struct:PSI_v1
@@ -5064,6 +5172,9 @@ dwCreatingFlag	shared/library/mysql/include/my_pthread.h	/^    DWORD dwCreatingF
 dwStackSize	shared/library/mysql/include/my_pthread.h	/^    DWORD dwStackSize ;$/;"	m	struct:thread_attr
 dynamic_element	shared/library/mysql/include/my_sys.h	736;"	d
 e	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    int e;$/;"	m	struct:internal::DiyFp
+element	shared/library/hiredis/include/hiredis/hiredis.h	/^    struct redisReply **element; \/* elements vector for REDIS_REPLY_ARRAY *\/$/;"	m	struct:redisReply	typeref:struct:redisReply::redisReply
+elements	shared/library/hiredis/include/hiredis/hiredis.h	/^    size_t elements; \/* number of elements, for REDIS_REPLY_ARRAY *\/$/;"	m	struct:redisReply
+elements	shared/library/hiredis/include/hiredis/read.h	/^    int elements; \/* number of elements in multibulk container *\/$/;"	m	struct:redisReadTask
 elements	shared/library/mysql/include/my_sys.h	/^  uint elements,max_element;$/;"	m	struct:st_dynamic_array
 elements	shared/library/rapidjson/include/rapidjson/document.h	/^        GenericValue* elements;$/;"	m	struct:GenericValue::Array
 embedded_info	shared/library/mysql/include/mysql.h	/^  struct embedded_query_result *embedded_info;$/;"	m	struct:st_mysql_data	typeref:struct:st_mysql_data::embedded_query_result
@@ -5071,8 +5182,8 @@ enable_cleartext_plugin	shared/library/mysql/include/sql_common.h	/^  my_bool en
 enabled	shared/library/libevent/include/event2/bufferevent_struct.h	/^	short enabled;$/;"	m	struct:bufferevent
 encode_int	shared/library/libevent/include/event2/tag_compat.h	45;"	d
 encode_int64	shared/library/libevent/include/event2/tag_compat.h	46;"	d
-end	shared/library/mysql/include/m_ctype.h	/^  uint end;$/;"	m	struct:__anon18
-end	shared/library/mysql/include/my_xml.h	/^    char *end;$/;"	m	struct:xml_stack_st::__anon21
+end	shared/library/mysql/include/m_ctype.h	/^  uint end;$/;"	m	struct:__anon24
+end	shared/library/mysql/include/my_xml.h	/^    char *end;$/;"	m	struct:xml_stack_st::__anon27
 end	shared/library/mysql/include/my_xml.h	/^  const char *end;$/;"	m	struct:xml_stack_st
 end_	shared/library/rapidjson/include/rapidjson/memorystream.h	/^    const Ch* end_;     \/\/!< End of stream.$/;"	m	struct:MemoryStream
 end_	shared/library/rapidjson/include/rapidjson/pointer.h	/^        const Ch* end_;     \/\/!< Past-the-end position.$/;"	m	class:GenericPointer::PercentDecodeStream
@@ -5122,6 +5233,9 @@ enum_session_state_type	shared/library/mysql/include/mysql_com.h	/^enum enum_ses
 enum_stmt_attr_type	shared/library/mysql/include/mysql.h	/^enum enum_stmt_attr_type$/;"	g
 eof	shared/library/mysql/include/mysql.h	/^  my_bool	eof;			\/* Used by mysql_fetch_row *\/$/;"	m	struct:st_mysql_res
 eof_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    bool eof_;$/;"	m	class:FileReadStream
+err	shared/library/hiredis/include/hiredis/async.h	/^    int err;$/;"	m	struct:redisAsyncContext
+err	shared/library/hiredis/include/hiredis/hiredis.h	/^    int err; \/* Error flags, 0 when there is no error *\/$/;"	m	struct:redisContext
+err	shared/library/hiredis/include/hiredis/read.h	/^    int err; \/* Error flags, 0 when there is no error *\/$/;"	m	struct:redisReader
 error	shared/library/libevent/include/event2/rpc_struct.h	/^	int error;$/;"	m	struct:evrpc_status
 error	shared/library/mysql/include/m_ctype.h	/^  char error[128];$/;"	m	struct:my_charset_loader_st
 error	shared/library/mysql/include/my_sys.h	/^  int	seek_not_done,error;$/;"	m	struct:st_io_cache
@@ -5132,8 +5246,12 @@ error_handler	shared/library/mysql/include/my_alloc.h	/^  void (*error_handler)(
 error_log_	shared/common/Logger.h	/^        WritableFile *error_log_ = NULL;$/;"	m	class:Logger
 error_value	shared/library/mysql/include/mysql.h	/^  my_bool       error_value;      \/* used if error is 0 *\/$/;"	m	struct:st_mysql_bind
 errorcb	shared/library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_event_cb errorcb;$/;"	m	struct:bufferevent
+errstr	shared/library/hiredis/include/hiredis/async.h	/^    char *errstr;$/;"	m	struct:redisAsyncContext
+errstr	shared/library/hiredis/include/hiredis/hiredis.h	/^    char errstr[128]; \/* String representation of error when applicable *\/$/;"	m	struct:redisContext
+errstr	shared/library/hiredis/include/hiredis/read.h	/^    char errstr[128]; \/* String representation of error when applicable *\/$/;"	m	struct:redisReader
 errstr	shared/library/mysql/include/my_xml.h	/^  char errstr[128];$/;"	m	struct:xml_stack_st
 escape_with_backslash_is_dangerous	shared/library/mysql/include/m_ctype.h	/^  my_bool   escape_with_backslash_is_dangerous;$/;"	m	struct:charset_info_st
+ev	shared/library/hiredis/include/hiredis/async.h	/^    } ev;$/;"	m	struct:redisAsyncContext	typeref:struct:redisAsyncContext::__anon3
 ev_active_next	shared/library/libevent/include/event2/event_struct.h	/^	TAILQ_ENTRY(event) ev_active_next;$/;"	m	struct:event
 ev_arg	shared/library/libevent/include/event2/event_struct.h	/^	void *ev_arg;$/;"	m	struct:event
 ev_base	shared/library/libevent/include/event2/bufferevent_struct.h	/^	struct event_base *ev_base;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_base
@@ -5165,27 +5283,27 @@ ev_intptr_t	shared/library/libevent/include/event2/util.h	176;"	d
 ev_intptr_t	shared/library/libevent/include/event2/util.h	179;"	d
 ev_intptr_t	shared/library/libevent/include/event2/util.h	182;"	d
 ev_intptr_t	shared/library/libevent/include/event2/util.h	185;"	d
-ev_io	shared/library/libevent/include/event2/event_struct.h	/^		} ev_io;$/;"	m	union:event::__anon24	typeref:struct:event::__anon24::__anon25
-ev_io_next	shared/library/libevent/include/event2/event_struct.h	/^			TAILQ_ENTRY(event) ev_io_next;$/;"	m	struct:event::__anon24::__anon25
-ev_ncalls	shared/library/libevent/include/event2/event_struct.h	/^			short ev_ncalls;$/;"	m	struct:event::__anon24::__anon26
+ev_io	shared/library/libevent/include/event2/event_struct.h	/^		} ev_io;$/;"	m	union:event::__anon30	typeref:struct:event::__anon30::__anon31
+ev_io_next	shared/library/libevent/include/event2/event_struct.h	/^			TAILQ_ENTRY(event) ev_io_next;$/;"	m	struct:event::__anon30::__anon31
+ev_ncalls	shared/library/libevent/include/event2/event_struct.h	/^			short ev_ncalls;$/;"	m	struct:event::__anon30::__anon32
 ev_next	shared/library/libevent/include/event2/event_struct.h	/^	TAILQ_ENTRY(event) ev_next;$/;"	m	struct:event
-ev_next_with_common_timeout	shared/library/libevent/include/event2/event_struct.h	/^		TAILQ_ENTRY(event) ev_next_with_common_timeout;$/;"	m	union:event::__anon23
+ev_next_with_common_timeout	shared/library/libevent/include/event2/event_struct.h	/^		TAILQ_ENTRY(event) ev_next_with_common_timeout;$/;"	m	union:event::__anon29
 ev_off_t	shared/library/libevent/include/event2/util.h	197;"	d
 ev_off_t	shared/library/libevent/include/event2/util.h	199;"	d
-ev_pncalls	shared/library/libevent/include/event2/event_struct.h	/^			short *ev_pncalls;$/;"	m	struct:event::__anon24::__anon26
+ev_pncalls	shared/library/libevent/include/event2/event_struct.h	/^			short *ev_pncalls;$/;"	m	struct:event::__anon30::__anon32
 ev_pri	shared/library/libevent/include/event2/event_struct.h	/^	ev_uint8_t ev_pri;	\/* smaller numbers are higher priority *\/$/;"	m	struct:event
 ev_read	shared/library/libevent/include/event2/bufferevent_struct.h	/^	struct event ev_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event
 ev_res	shared/library/libevent/include/event2/event_struct.h	/^	short ev_res;		\/* result passed to event callback *\/$/;"	m	struct:event
-ev_signal	shared/library/libevent/include/event2/event_struct.h	/^		} ev_signal;$/;"	m	union:event::__anon24	typeref:struct:event::__anon24::__anon26
-ev_signal_next	shared/library/libevent/include/event2/event_struct.h	/^			TAILQ_ENTRY(event) ev_signal_next;$/;"	m	struct:event::__anon24::__anon26
+ev_signal	shared/library/libevent/include/event2/event_struct.h	/^		} ev_signal;$/;"	m	union:event::__anon30	typeref:struct:event::__anon30::__anon32
+ev_signal_next	shared/library/libevent/include/event2/event_struct.h	/^			TAILQ_ENTRY(event) ev_signal_next;$/;"	m	struct:event::__anon30::__anon32
 ev_socklen_t	shared/library/libevent/include/event2/util.h	254;"	d
 ev_socklen_t	shared/library/libevent/include/event2/util.h	256;"	d
 ev_socklen_t	shared/library/libevent/include/event2/util.h	258;"	d
 ev_ssize_t	shared/library/libevent/include/event2/util.h	191;"	d
 ev_ssize_t	shared/library/libevent/include/event2/util.h	193;"	d
-ev_timeout	shared/library/libevent/include/event2/event_struct.h	/^			struct timeval ev_timeout;$/;"	m	struct:event::__anon24::__anon25	typeref:struct:event::__anon24::__anon25::timeval
+ev_timeout	shared/library/libevent/include/event2/event_struct.h	/^			struct timeval ev_timeout;$/;"	m	struct:event::__anon30::__anon31	typeref:struct:event::__anon30::__anon31::timeval
 ev_timeout	shared/library/libevent/include/event2/event_struct.h	/^	struct timeval ev_timeout;$/;"	m	struct:event	typeref:struct:event::timeval
-ev_timeout_pos	shared/library/libevent/include/event2/event_struct.h	/^	} ev_timeout_pos;$/;"	m	struct:event	typeref:union:event::__anon23
+ev_timeout_pos	shared/library/libevent/include/event2/event_struct.h	/^	} ev_timeout_pos;$/;"	m	struct:event	typeref:union:event::__anon29
 ev_uint16_t	shared/library/libevent/include/event2/util.h	145;"	d
 ev_uint16_t	shared/library/libevent/include/event2/util.h	148;"	d
 ev_uint16_t	shared/library/libevent/include/event2/util.h	151;"	d
@@ -5244,6 +5362,7 @@ event_get_signal	shared/library/libevent/include/event2/event.h	1005;"	d
 event_log_cb	shared/library/libevent/include/event2/event.h	/^typedef void (*event_log_cb)(int severity, const char *msg);$/;"	t
 event_method_feature	shared/library/libevent/include/event2/event.h	/^enum event_method_feature {$/;"	g
 event_watermark	shared/library/libevent/include/event2/bufferevent_struct.h	/^struct event_watermark {$/;"	s
+events	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^  int                events;$/;"	m	struct:redisLibuvEvents
 everrorcb	shared/library/libevent/include/event2/bufferevent_compat.h	32;"	d
 evhttp_cmd_type	shared/library/libevent/include/event2/http.h	/^enum evhttp_cmd_type {$/;"	g
 evhttp_request	shared/library/libevent/include/event2/http_struct.h	/^struct evhttp_request {$/;"	s
@@ -5314,6 +5433,9 @@ extension	shared/library/mysql/include/mysql_com.h	/^  void *extension;$/;"	m	st
 extra_info	shared/library/mysql/include/mysql.h	/^  my_ulonglong extra_info;		\/* Not used *\/$/;"	m	struct:st_mysql
 f	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    uint64_t f;$/;"	m	struct:internal::DiyFp
 fcntl	shared/library/mysql/include/mysql_com.h	/^  int fcntl;$/;"	m	struct:st_net
+fd	shared/library/hiredis/include/hiredis/adapters/ae.h	/^    int fd;$/;"	m	struct:redisAeEvents
+fd	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^    struct iv_fd fd;$/;"	m	struct:redisIvykisEvents	typeref:struct:redisIvykisEvents::iv_fd
+fd	shared/library/hiredis/include/hiredis/hiredis.h	/^    int fd;$/;"	m	struct:redisContext
 fd	shared/library/mysql/include/mysql/psi/mysql_socket.h	/^  my_socket fd;$/;"	m	struct:st_mysql_socket
 fd	shared/library/mysql/include/mysql_com.h	/^  my_socket fd;					\/* For Perl DBI\/dbd *\/$/;"	m	struct:st_net
 fd_	shared/network/NetWork.h	/^    SOCKET fd_;$/;"	m	struct:Packet_t
@@ -5349,6 +5471,7 @@ first_secondary_ignorable	shared/library/mysql/include/m_ctype.h	/^  my_wc_t fir
 first_tertiary_ignorable	shared/library/mysql/include/m_ctype.h	/^  my_wc_t first_tertiary_ignorable;$/;"	m	struct:uca_info_st
 first_trailing	shared/library/mysql/include/m_ctype.h	/^  my_wc_t first_trailing;$/;"	m	struct:uca_info_st
 first_variable	shared/library/mysql/include/m_ctype.h	/^  my_wc_t first_variable;$/;"	m	struct:uca_info_st
+flags	shared/library/hiredis/include/hiredis/hiredis.h	/^    int flags;$/;"	m	struct:redisContext
 flags	shared/library/libevent/include/event2/dns_struct.h	/^	int flags;$/;"	m	struct:evdns_server_request
 flags	shared/library/libevent/include/event2/http_struct.h	/^	int flags;$/;"	m	struct:evhttp_request
 flags	shared/library/mysql/include/m_ctype.h	/^  char *flags;           \/* Character flags, e.g. "is contraction head") *\/$/;"	m	struct:my_contraction_list_t
@@ -5384,11 +5507,16 @@ floatstore	shared/library/mysql/include/little_endian.h	/^static inline void flo
 flush_io_cache	shared/library/mysql/include/my_sys.h	704;"	d
 flush_type	shared/library/mysql/include/my_sys.h	/^enum flush_type$/;"	g
 flush_use_result	shared/library/mysql/include/sql_common.h	/^  void (*flush_use_result)(MYSQL *mysql, my_bool flush_all_results);$/;"	m	struct:st_mysql_methods
+fn	shared/library/hiredis/include/hiredis/async.h	/^    redisCallbackFn *fn;$/;"	m	struct:redisCallback
+fn	shared/library/hiredis/include/hiredis/read.h	/^    redisReplyObjectFunctions *fn;$/;"	m	struct:redisReader
 fp_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    std::FILE* fp_;$/;"	m	class:FileReadStream
 fp_	shared/library/rapidjson/include/rapidjson/filewritestream.h	/^    std::FILE* fp_;$/;"	m	class:FileWriteStream
 frac	shared/library/mysql/include/decimal.h	/^  int    intg, frac, len;$/;"	m	struct:st_decimal_t
+free	shared/library/hiredis/include/hiredis/sds.h	/^    int free;$/;"	m	struct:sdshdr
 free	shared/library/libevent/include/event2/thread.h	/^	void (*free)(void *lock, unsigned locktype);$/;"	m	struct:evthread_lock_callbacks
 free	shared/library/mysql/include/my_alloc.h	/^  USED_MEM *free;                  \/* blocks with free memory in it *\/$/;"	m	struct:st_mem_root
+freeObject	shared/library/hiredis/include/hiredis/read.h	/^    void (*freeObject)(void*);$/;"	m	struct:redisReplyObjectFunctions
+freeRedisRunLoop	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static int freeRedisRunLoop(RedisRunLoop* redisRunLoop) {$/;"	f
 free_block_list	shared/library/mysql/include/keycache.h	/^  BLOCK_LINK *free_block_list;   \/* list of free blocks *\/$/;"	m	struct:st_key_cache
 free_condition	shared/library/libevent/include/event2/thread.h	/^	void (*free_condition)(void *cond);$/;"	m	struct:evthread_condition_callbacks
 free_embedded_thd	shared/library/mysql/include/sql_common.h	/^  void (*free_embedded_thd)(MYSQL *mysql);$/;"	m	struct:st_mysql_methods
@@ -5440,6 +5568,7 @@ global_cache_w_requests	shared/library/mysql/include/keycache.h	/^  ulonglong gl
 global_cache_write	shared/library/mysql/include/keycache.h	/^  ulonglong global_cache_write;     \/* number of writes from cache to files  *\/$/;"	m	struct:st_key_cache
 gmtime_r	shared/library/mysql/include/my_global.h	/^static inline struct tm *gmtime_r(const time_t *clock, struct tm *res)$/;"	f
 ha_checksum	shared/library/mysql/include/my_sys.h	/^typedef uint32 ha_checksum;$/;"	t
+handle	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^  uv_poll_t          handle;$/;"	m	struct:redisLibuvEvents
 handle	shared/library/mysql/include/mysql.h	/^  MYSQL		*handle;		\/* for unbuffered reads *\/$/;"	m	struct:st_mysql_res
 handle	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  HANDLE handle;  \/**< it's set, if the protocol is PIPE or MEMORY *\/$/;"	m	struct:st_plugin_vio_info
 hasBOM_	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    bool hasBOM_;$/;"	m	class:AutoUTFInputStream
@@ -5453,12 +5582,14 @@ hash_sort	shared/library/mysql/include/m_ctype.h	/^  void (*hash_sort)(const str
 hashcode	shared/library/rapidjson/include/rapidjson/document.h	/^        unsigned hashcode;  \/\/!< reserved$/;"	m	struct:GenericValue::String
 hdr	shared/library/mysql/include/mysql/plugin_trace.h	/^  const unsigned char  *hdr;$/;"	m	struct:st_trace_event_args
 hdr_len	shared/library/mysql/include/mysql/plugin_trace.h	/^  size_t                hdr_len;$/;"	m	struct:st_trace_event_args
+head	shared/library/hiredis/include/hiredis/async.h	/^    redisCallback *head, *tail;$/;"	m	struct:redisCallbackList
 head_	shared/library/rapidjson/include/rapidjson/pointer.h	/^        const Ch* head_;    \/\/!< Original head of the string.$/;"	m	class:GenericPointer::PercentDecodeStream
 head_	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    Ch* head_;$/;"	m	struct:GenericInsituStringStream
 head_	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    const Ch* head_;    \/\/!< Original head of the string.$/;"	m	struct:GenericStringStream
 head_node	shared/library/mysql/include/sql_common.h	/^  LIST *head_node;$/;"	m	struct:st_session_track_info_node
 headers_size	shared/library/libevent/include/event2/http_struct.h	/^	size_t headers_size;$/;"	m	struct:evhttp_request
 high	shared/library/libevent/include/event2/bufferevent_struct.h	/^	size_t high;$/;"	m	struct:event_watermark
+host	shared/library/hiredis/include/hiredis/hiredis.h	/^        char *host;$/;"	m	struct:redisContext::__anon1
 host	shared/library/mysql/include/mysql.h	/^  char		*host,*user,*passwd,*unix_socket,*server_version,*host_info;$/;"	m	struct:st_mysql
 host	shared/library/mysql/include/mysql.h	/^  char *host,*user,*password,*unix_socket,*db;$/;"	m	struct:st_mysql_options
 host_cache	shared/library/libevent/include/event2/http_struct.h	/^	char *host_cache;$/;"	m	struct:evhttp_request
@@ -5479,9 +5610,10 @@ id	shared/library/mysql/include/my_getopt.h	/^  int        id;                  
 id	shared/library/mysql/include/my_sys.h	/^typedef struct st_syslog_facility { int id; const char *name; } SYSLOG_FACILITY;$/;"	m	struct:st_syslog_facility
 ident_map	shared/library/mysql/include/m_ctype.h	/^  const uchar *ident_map;$/;"	m	struct:charset_info_st
 idle_threads_	shared/thread/ThreadPool.h	/^        std::set<Thread*> idle_threads_;$/;"	m	class:ThreadPool
+idx	shared/library/hiredis/include/hiredis/read.h	/^    int idx; \/* index in parent (array) object *\/$/;"	m	struct:redisReadTask
 imaxabs	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	279;"	d
 imaxdiv	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^imaxdiv_t __cdecl imaxdiv(intmax_t numer, intmax_t denom)$/;"	f
-imaxdiv_t	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^} imaxdiv_t;$/;"	t	typeref:struct:__anon3
+imaxdiv_t	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^} imaxdiv_t;$/;"	t	typeref:struct:__anon9
 inArray	shared/library/rapidjson/include/rapidjson/writer.h	/^        bool inArray;       \/\/!< true if in array, otherwise in object$/;"	m	struct:Writer::Level
 in_init	shared/library/mysql/include/keycache.h	/^  my_bool in_init;		\/* Set to 1 in MySQL during init\/resize     *\/$/;"	m	struct:st_key_cache
 in_resize	shared/library/mysql/include/keycache.h	/^  my_bool in_resize;             \/* true during resize operation             *\/$/;"	m	struct:st_key_cache
@@ -5702,6 +5834,7 @@ int_least16_t	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	/^t
 int_least32_t	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	/^typedef int32_t   int_least32_t;$/;"	t
 int_least64_t	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	/^typedef int64_t   int_least64_t;$/;"	t
 int_least8_t	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	/^typedef int8_t    int_least8_t;$/;"	t
+integer	shared/library/hiredis/include/hiredis/hiredis.h	/^    long long integer; \/* The integer when type is REDIS_REPLY_INTEGER *\/$/;"	m	struct:redisReply
 internal	shared/library/rapidjson/include/rapidjson/document.h	/^namespace internal {$/;"	n
 internal	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^namespace internal {$/;"	n
 internal	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^namespace internal {$/;"	n
@@ -5721,6 +5854,7 @@ intptr	shared/library/mysql/include/my_global.h	/^typedef long intptr;$/;"	t
 intptr	shared/library/mysql/include/my_global.h	/^typedef long long intptr;$/;"	t
 intptr_t	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	/^   typedef _W64 signed int   intptr_t;$/;"	t
 intptr_t	shared/library/rapidjson/include/rapidjson/msinttypes/stdint.h	/^   typedef signed __int64    intptr_t;$/;"	t
+invalid	shared/library/hiredis/include/hiredis/async.h	/^        redisCallbackList invalid;$/;"	m	struct:redisAsyncContext::__anon4
 iov_base	shared/library/libevent/include/event2/buffer.h	/^	void *iov_base;$/;"	m	struct:evbuffer_iovec
 iov_len	shared/library/libevent/include/event2/buffer.h	/^	size_t iov_len;$/;"	m	struct:evbuffer_iovec
 ip	shared/port/SocketAddress.h	/^        uint32_t ip() const { return ip_; }$/;"	f	class:SocketAddress
@@ -5734,17 +5868,17 @@ is_null_value	shared/library/mysql/include/mysql.h	/^  my_bool	is_null_value;   
 is_unsigned	shared/library/mysql/include/mysql.h	/^  my_bool       is_unsigned;      \/* set if integer type is unsigned *\/$/;"	m	struct:st_mysql_bind
 ismbchar	shared/library/mysql/include/m_ctype.h	/^  uint    (*ismbchar)(const struct charset_info_st *, const char *,$/;"	m	struct:my_charset_handler_st
 item	shared/library/mysql/include/m_ctype.h	/^  MY_CONTRACTION *item;  \/* List of contractions                         *\/$/;"	m	struct:my_contraction_list_t
-kArrayFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kArrayFlag = kArrayType,$/;"	e	enum:GenericValue::__anon1
+kArrayFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kArrayFlag = kArrayType,$/;"	e	enum:GenericValue::__anon7
 kArrayType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kArrayType = 4,     \/\/!< array $/;"	e	enum:Type
 kBitCount	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    static const size_t kBitCount = 3328;  \/\/ 64bit * 54 > 10^1000$/;"	m	class:internal::BigInteger
-kBoolFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kBoolFlag = 0x100,$/;"	e	enum:GenericValue::__anon1
+kBoolFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kBoolFlag = 0x100,$/;"	e	enum:GenericValue::__anon7
 kBreak	shared/network/LibEventDefine.h	/^    kBreak  = 2$/;"	e	enum:EventLoopExitType
 kCapacity	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    static const size_t kCapacity = kBitCount \/ sizeof(Type);$/;"	m	class:internal::BigInteger
 kCloseOnFree	shared/network/LibEventDefine.h	/^    kCloseOnFree        = BEV_OPT_CLOSE_ON_FREE,$/;"	e	enum:BufferEventOption
 kConnected	shared/network/LibEventDefine.h	/^    kConnected      = BEV_EVENT_CONNECTED$/;"	e	enum:BufferEventFlag
-kConstStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kConstStringFlag = kStringType | kStringFlag,$/;"	e	enum:GenericValue::__anon1
-kCopyFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kCopyFlag = 0x200000,$/;"	e	enum:GenericValue::__anon1
-kCopyStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kCopyStringFlag = kStringType | kStringFlag | kCopyFlag,$/;"	e	enum:GenericValue::__anon1
+kConstStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kConstStringFlag = kStringType | kStringFlag,$/;"	e	enum:GenericValue::__anon7
+kCopyFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kCopyFlag = 0x200000,$/;"	e	enum:GenericValue::__anon7
+kCopyStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kCopyStringFlag = kStringType | kStringFlag | kCopyFlag,$/;"	e	enum:GenericValue::__anon7
 kDebug	shared/common/Logger.h	/^            kDebug = 4,$/;"	e	enum:Logger::LogLevel
 kDefaultArrayCapacity	shared/library/rapidjson/include/rapidjson/document.h	/^    static const SizeType kDefaultArrayCapacity = 16;$/;"	m	class:GenericValue
 kDefaultCapacity	shared/library/rapidjson/include/rapidjson/memorybuffer.h	/^    static const size_t kDefaultCapacity = 256;$/;"	m	struct:GenericMemoryBuffer
@@ -5757,7 +5891,7 @@ kDefaultStackCapacity	shared/library/rapidjson/include/rapidjson/reader.h	/^    
 kDeferCallbacks	shared/network/LibEventDefine.h	/^    kDeferCallbacks     = BEV_OPT_DEFER_CALLBACKS,$/;"	e	enum:BufferEventOption
 kDenormalExponent	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const int kDenormalExponent = 1 - kExponentBias;$/;"	m	class:internal::Double
 kDiySignificandSize	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    static const int kDiySignificandSize = 64;$/;"	m	struct:internal::DiyFp
-kDoubleFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kDoubleFlag = 0x4000,$/;"	e	enum:GenericValue::__anon1
+kDoubleFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kDoubleFlag = 0x4000,$/;"	e	enum:GenericValue::__anon7
 kDpDenormalExponent	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    static const int kDpDenormalExponent = -kDpExponentBias + 1;$/;"	m	struct:internal::DiyFp
 kDpExponentBias	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    static const int kDpExponentBias = 0x3FF + kDpSignificandSize;$/;"	m	struct:internal::DiyFp
 kDpExponentMask	shared/library/rapidjson/include/rapidjson/internal/diyfp.h	/^    static const uint64_t kDpExponentMask = RAPIDJSON_UINT64_C2(0x7FF00000, 0x00000000);$/;"	m	struct:internal::DiyFp
@@ -5791,31 +5925,31 @@ kEventWrite	shared/network/LibEventDefine.h	/^    kEventWrite     = EV_WRITE,$/;
 kExit	shared/network/LibEventDefine.h	/^    kExit   = 1,$/;"	e	enum:EventLoopExitType
 kExponentBias	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const int kExponentBias = 0x3FF;$/;"	m	class:internal::Double
 kExponentMask	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const uint64_t kExponentMask = RAPIDJSON_UINT64_C2(0x7FF00000, 0x00000000);$/;"	m	class:internal::Double
-kFalseFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kFalseFlag = kFalseType | kBoolFlag,$/;"	e	enum:GenericValue::__anon1
+kFalseFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kFalseFlag = kFalseType | kBoolFlag,$/;"	e	enum:GenericValue::__anon7
 kFalseType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kFalseType = 1,     \/\/!< false$/;"	e	enum:Type
 kFatal	shared/common/Logger.h	/^            kFatal = 1,$/;"	e	enum:Logger::LogLevel
 kHiddenBit	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const uint64_t kHiddenBit = RAPIDJSON_UINT64_C2(0x00100000, 0x00000000);$/;"	m	class:internal::Double
 kIOError	shared/common/Status.h	/^            kIOError = 1$/;"	e	enum:Status::Code
 kInfo	shared/common/Logger.h	/^            kInfo  = 3,$/;"	e	enum:Logger::LogLevel
-kInlineStrFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kInlineStrFlag = 0x400000,$/;"	e	enum:GenericValue::__anon1
-kInt64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kInt64Flag = 0x1000,$/;"	e	enum:GenericValue::__anon1
-kIntFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kIntFlag = 0x400,$/;"	e	enum:GenericValue::__anon1
+kInlineStrFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kInlineStrFlag = 0x400000,$/;"	e	enum:GenericValue::__anon7
+kInt64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kInt64Flag = 0x1000,$/;"	e	enum:GenericValue::__anon7
+kIntFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kIntFlag = 0x400,$/;"	e	enum:GenericValue::__anon7
 kMax	shared/common/Logger.h	/^            kMax   = 6$/;"	e	enum:Logger::LogLevel
 kNeedFree	shared/library/rapidjson/include/rapidjson/allocators.h	/^    static const bool kNeedFree = false;    \/\/!< Tell users that no need to call Free() with this allocator. (concept Allocator)$/;"	m	class:MemoryPoolAllocator
 kNeedFree	shared/library/rapidjson/include/rapidjson/allocators.h	/^    static const bool kNeedFree = true;$/;"	m	class:CrtAllocator
 kNomal	shared/network/LibEventDefine.h	/^    kNomal  = 0,$/;"	e	enum:EventLoopExitType
 kNull	shared/common/Logger.h	/^            kNull  = 0,$/;"	e	enum:Logger::LogLevel
-kNullFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNullFlag = kNullType,$/;"	e	enum:GenericValue::__anon1
+kNullFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNullFlag = kNullType,$/;"	e	enum:GenericValue::__anon7
 kNullType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kNullType = 0,      \/\/!< null$/;"	e	enum:Type
-kNumberAnyFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberAnyFlag = kNumberType | kNumberFlag | kIntFlag | kInt64Flag | kUintFlag | kUint64Flag | kDoubleFlag,$/;"	e	enum:GenericValue::__anon1
-kNumberDoubleFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberDoubleFlag = kNumberType | kNumberFlag | kDoubleFlag,$/;"	e	enum:GenericValue::__anon1
-kNumberFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberFlag = 0x200,$/;"	e	enum:GenericValue::__anon1
-kNumberInt64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberInt64Flag = kNumberType | kNumberFlag | kInt64Flag,$/;"	e	enum:GenericValue::__anon1
-kNumberIntFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberIntFlag = kNumberType | kNumberFlag | kIntFlag | kInt64Flag,$/;"	e	enum:GenericValue::__anon1
+kNumberAnyFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberAnyFlag = kNumberType | kNumberFlag | kIntFlag | kInt64Flag | kUintFlag | kUint64Flag | kDoubleFlag,$/;"	e	enum:GenericValue::__anon7
+kNumberDoubleFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberDoubleFlag = kNumberType | kNumberFlag | kDoubleFlag,$/;"	e	enum:GenericValue::__anon7
+kNumberFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberFlag = 0x200,$/;"	e	enum:GenericValue::__anon7
+kNumberInt64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberInt64Flag = kNumberType | kNumberFlag | kInt64Flag,$/;"	e	enum:GenericValue::__anon7
+kNumberIntFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberIntFlag = kNumberType | kNumberFlag | kIntFlag | kInt64Flag,$/;"	e	enum:GenericValue::__anon7
 kNumberType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kNumberType = 6     \/\/!< number$/;"	e	enum:Type
-kNumberUint64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberUint64Flag = kNumberType | kNumberFlag | kUint64Flag,$/;"	e	enum:GenericValue::__anon1
-kNumberUintFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberUintFlag = kNumberType | kNumberFlag | kUintFlag | kUint64Flag | kInt64Flag,$/;"	e	enum:GenericValue::__anon1
-kObjectFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kObjectFlag = kObjectType,$/;"	e	enum:GenericValue::__anon1
+kNumberUint64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberUint64Flag = kNumberType | kNumberFlag | kUint64Flag,$/;"	e	enum:GenericValue::__anon7
+kNumberUintFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kNumberUintFlag = kNumberType | kNumberFlag | kUintFlag | kUint64Flag | kInt64Flag,$/;"	e	enum:GenericValue::__anon7
+kObjectFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kObjectFlag = kObjectType,$/;"	e	enum:GenericValue::__anon7
 kObjectType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kObjectType = 3,    \/\/!< object$/;"	e	enum:Type
 kOk	shared/common/Status.h	/^            kOk = 0,$/;"	e	enum:Status::Code
 kParseDefaultFlags	shared/library/rapidjson/include/rapidjson/reader.h	/^    kParseDefaultFlags = RAPIDJSON_PARSE_DEFAULT_FLAGS  \/\/!< Default parse flags. Can be customized by defining RAPIDJSON_PARSE_DEFAULT_FLAGS$/;"	e	enum:ParseFlag
@@ -5850,28 +5984,28 @@ kPointerParseErrorInvalidPercentEncoding	shared/library/rapidjson/include/rapidj
 kPointerParseErrorNone	shared/library/rapidjson/include/rapidjson/pointer.h	/^    kPointerParseErrorNone = 0,                     \/\/!< The parse is successful$/;"	e	enum:PointerParseErrorCode
 kPointerParseErrorTokenMustBeginWithSolidus	shared/library/rapidjson/include/rapidjson/pointer.h	/^    kPointerParseErrorTokenMustBeginWithSolidus,    \/\/!< A token must begin with a '\/'$/;"	e	enum:PointerParseErrorCode
 kReading	shared/network/LibEventDefine.h	/^    kReading        = BEV_EVENT_READING,$/;"	e	enum:BufferEventFlag
-kShortStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kShortStringFlag = kStringType | kStringFlag | kCopyFlag | kInlineStrFlag,$/;"	e	enum:GenericValue::__anon1
+kShortStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kShortStringFlag = kStringType | kStringFlag | kCopyFlag | kInlineStrFlag,$/;"	e	enum:GenericValue::__anon7
 kSignMask	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const uint64_t kSignMask = RAPIDJSON_UINT64_C2(0x80000000, 0x00000000);$/;"	m	class:internal::Double
 kSignificandMask	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const uint64_t kSignificandMask = RAPIDJSON_UINT64_C2(0x000FFFFF, 0xFFFFFFFF);$/;"	m	class:internal::Double
 kSignificandSize	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^    static const int kSignificandSize = 52;$/;"	m	class:internal::Double
-kStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kStringFlag = 0x100000,$/;"	e	enum:GenericValue::__anon1
+kStringFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kStringFlag = 0x100000,$/;"	e	enum:GenericValue::__anon7
 kStringType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kStringType = 5,    \/\/!< string$/;"	e	enum:Type
 kThreadReserve	shared/thread/ThreadPool.h	/^        const int kThreadReserve = 10;$/;"	m	class:ThreadPool
 kThreadSafe	shared/network/LibEventDefine.h	/^    kThreadSafe         = BEV_OPT_THREADSAFE,$/;"	e	enum:BufferEventOption
 kTimeout	shared/network/LibEventDefine.h	/^    kTimeout        = BEV_EVENT_TIMEOUT,$/;"	e	enum:BufferEventFlag
 kTokenCount	shared/library/rapidjson/include/rapidjson/reader.h	/^        kTokenCount$/;"	e	enum:GenericReader::Token
 kTrace	shared/common/Logger.h	/^            kTrace = 5,$/;"	e	enum:Logger::LogLevel
-kTrueFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kTrueFlag = kTrueType | kBoolFlag,$/;"	e	enum:GenericValue::__anon1
+kTrueFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kTrueFlag = kTrueType | kBoolFlag,$/;"	e	enum:GenericValue::__anon7
 kTrueType	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^    kTrueType = 2,      \/\/!< true$/;"	e	enum:Type
 kTypeBit	shared/library/rapidjson/include/rapidjson/internal/biginteger.h	/^    static const size_t kTypeBit = sizeof(Type) * 8;$/;"	m	class:internal::BigInteger
-kTypeMask	shared/library/rapidjson/include/rapidjson/document.h	/^        kTypeMask = 0xFF    \/\/ bitwise-and with mask of 0xFF can be optimized by compiler$/;"	e	enum:GenericValue::__anon1
+kTypeMask	shared/library/rapidjson/include/rapidjson/document.h	/^        kTypeMask = 0xFF    \/\/ bitwise-and with mask of 0xFF can be optimized by compiler$/;"	e	enum:GenericValue::__anon7
 kUTF16BE	shared/library/rapidjson/include/rapidjson/encodings.h	/^    kUTF16BE = 2,   \/\/!< UTF-16 big endian.$/;"	e	enum:UTFType
 kUTF16LE	shared/library/rapidjson/include/rapidjson/encodings.h	/^    kUTF16LE = 1,   \/\/!< UTF-16 little endian.$/;"	e	enum:UTFType
 kUTF32BE	shared/library/rapidjson/include/rapidjson/encodings.h	/^    kUTF32BE = 4    \/\/!< UTF-32 big endian.$/;"	e	enum:UTFType
 kUTF32LE	shared/library/rapidjson/include/rapidjson/encodings.h	/^    kUTF32LE = 3,   \/\/!< UTF-32 little endian.$/;"	e	enum:UTFType
 kUTF8	shared/library/rapidjson/include/rapidjson/encodings.h	/^    kUTF8 = 0,      \/\/!< UTF-8.$/;"	e	enum:UTFType
-kUint64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kUint64Flag = 0x2000,$/;"	e	enum:GenericValue::__anon1
-kUintFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kUintFlag = 0x800,$/;"	e	enum:GenericValue::__anon1
+kUint64Flag	shared/library/rapidjson/include/rapidjson/document.h	/^        kUint64Flag = 0x2000,$/;"	e	enum:GenericValue::__anon7
+kUintFlag	shared/library/rapidjson/include/rapidjson/document.h	/^        kUintFlag = 0x800,$/;"	e	enum:GenericValue::__anon7
 kUnlockCallbacks	shared/network/LibEventDefine.h	/^    kUnlockCallbacks    = BEV_OPT_UNLOCK_CALLBACKS$/;"	e	enum:BufferEventOption
 kWriting	shared/network/LibEventDefine.h	/^    kWriting        = BEV_EVENT_WRITING,$/;"	e	enum:BufferEventFlag
 key	shared/library/libevent/include/event2/keyvalq_struct.h	/^	char *key;$/;"	m	struct:evkeyval
@@ -5894,6 +6028,9 @@ last_trailing	shared/library/mysql/include/m_ctype.h	/^  my_wc_t last_trailing;$
 last_variable	shared/library/mysql/include/m_ctype.h	/^  my_wc_t last_variable;$/;"	m	struct:uca_info_st
 leave_xml	shared/library/mysql/include/my_xml.h	/^  int  (*leave_xml)(struct xml_stack_st *st,const char *val, size_t len);$/;"	m	struct:xml_stack_st
 left	shared/library/mysql/include/my_alloc.h	/^  unsigned int	left;		   \/* memory left in block  *\/$/;"	m	struct:st_used_mem
+len	shared/library/hiredis/include/hiredis/hiredis.h	/^    int len; \/* Length of string *\/$/;"	m	struct:redisReply
+len	shared/library/hiredis/include/hiredis/read.h	/^    size_t len; \/* Buffer length *\/$/;"	m	struct:redisReader
+len	shared/library/hiredis/include/hiredis/sds.h	/^    int len;$/;"	m	struct:sdshdr
 len	shared/library/mysql/include/decimal.h	/^  int    intg, frac, len;$/;"	m	struct:st_decimal_t
 length	shared/library/mysql/include/m_string.h	/^  size_t length;$/;"	m	struct:st_mysql_const_lex_string
 length	shared/library/mysql/include/m_string.h	/^  size_t length;$/;"	m	struct:st_mysql_lex_string
@@ -5959,6 +6096,8 @@ longlongstore	shared/library/mysql/include/big_endian.h	/^static inline void lon
 longlongstore	shared/library/mysql/include/little_endian.h	/^static inline void longlongstore(uchar *T, longlong V)$/;"	f
 longstore	shared/library/mysql/include/big_endian.h	/^static inline void longstore (uchar *T, int32 A)$/;"	f
 longstore	shared/library/mysql/include/little_endian.h	/^static inline void longstore (uchar *T, int32 V) { int4store(T, V); }$/;"	f
+loop	shared/library/hiredis/include/hiredis/adapters/ae.h	/^    aeEventLoop *loop;$/;"	m	struct:redisAeEvents
+loop	shared/library/hiredis/include/hiredis/adapters/libev.h	/^    struct ev_loop *loop;$/;"	m	struct:redisLibevEvents	typeref:struct:redisLibevEvents::ev_loop
 low	shared/library/libevent/include/event2/bufferevent_struct.h	/^	size_t low;$/;"	m	struct:event_watermark
 m_after_header	shared/library/mysql/include/mysql_com_server.h	/^  after_header_callback_fn m_after_header;$/;"	m	struct:st_net_server
 m_autocommit	shared/library/mysql/include/mysql/psi/psi.h	/^  my_bool m_autocommit;$/;"	m	struct:PSI_transaction_locker_state_v1
@@ -5970,6 +6109,7 @@ m_cond	shared/library/mysql/include/mysql/psi/mysql_thread.h	/^  native_cond_t m
 m_cond	shared/library/mysql/include/mysql/psi/psi.h	/^  struct PSI_cond *m_cond;$/;"	m	struct:PSI_cond_locker_state_v1	typeref:struct:PSI_cond_locker_state_v1::PSI_cond
 m_created_tmp_disk_tables	shared/library/mysql/include/mysql/psi/psi.h	/^  ulong m_created_tmp_disk_tables;$/;"	m	struct:PSI_statement_locker_state_v1
 m_created_tmp_tables	shared/library/mysql/include/mysql/psi/psi.h	/^  ulong m_created_tmp_tables;$/;"	m	struct:PSI_statement_locker_state_v1
+m_ctx	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        redisAsyncContext * m_ctx;$/;"	m	class:RedisQtAdapter
 m_digest	shared/library/mysql/include/mysql/psi/psi.h	/^  const struct sql_digest_storage *m_digest;$/;"	m	struct:PSI_statement_locker_state_v1	typeref:struct:PSI_statement_locker_state_v1::sql_digest_storage
 m_discarded	shared/library/mysql/include/mysql/psi/psi.h	/^  my_bool m_discarded;$/;"	m	struct:PSI_statement_locker_state_v1
 m_file	shared/library/mysql/include/mysql/psi/mysql_file.h	/^  FILE *m_file;$/;"	m	struct:st_mysql_file
@@ -6043,6 +6183,7 @@ m_psi	shared/library/mysql/include/mysql/psi/mysql_thread.h	/^  struct PSI_mutex
 m_psi	shared/library/mysql/include/mysql/psi/mysql_thread.h	/^  struct PSI_rwlock *m_psi;$/;"	m	struct:st_mysql_prlock	typeref:struct:st_mysql_prlock::PSI_rwlock
 m_psi	shared/library/mysql/include/mysql/psi/mysql_thread.h	/^  struct PSI_rwlock *m_psi;$/;"	m	struct:st_mysql_rwlock	typeref:struct:st_mysql_rwlock::PSI_rwlock
 m_psi_key	shared/library/mysql/include/my_alloc.h	/^  PSI_memory_key m_psi_key;$/;"	m	struct:st_mem_root
+m_read	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        QSocketNotifier * m_read;$/;"	m	class:RedisQtAdapter
 m_read_only	shared/library/mysql/include/mysql/psi/psi.h	/^  my_bool m_read_only;$/;"	m	struct:PSI_transaction_locker_state_v1
 m_release_savepoint_count	shared/library/mysql/include/mysql/psi/psi.h	/^  ulong m_release_savepoint_count;$/;"	m	struct:PSI_transaction_locker_state_v1
 m_rollback_to_savepoint_count	shared/library/mysql/include/mysql/psi/psi.h	/^  ulong m_rollback_to_savepoint_count;$/;"	m	struct:PSI_transaction_locker_state_v1
@@ -6115,6 +6256,7 @@ m_wait	shared/library/mysql/include/mysql/psi/psi.h	/^  void *m_wait;$/;"	m	stru
 m_wait	shared/library/mysql/include/mysql/psi/psi.h	/^  void *m_wait;$/;"	m	struct:PSI_table_locker_state_v1
 m_work_completed	shared/library/mysql/include/mysql/psi/psi.h	/^  ulonglong m_work_completed;$/;"	m	struct:PSI_stage_progress
 m_work_estimated	shared/library/mysql/include/mysql/psi/psi.h	/^  ulonglong m_work_estimated;$/;"	m	struct:PSI_stage_progress
+m_write	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        QSocketNotifier * m_write;$/;"	m	class:RedisQtAdapter
 main	database/Main.cc	/^main(int argc, char *argv[])$/;"	f
 main	gateway/Main.cc	/^main(int argc, char *argv[])$/;"	f
 major	shared/library/libevent/include/event2/http_struct.h	/^	char major;			\/* HTTP Major number *\/$/;"	m	struct:evhttp_request
@@ -6132,11 +6274,12 @@ max_timeout_msec	shared/library/mysql/include/my_global.h	/^  long max_timeout_m
 max_value	shared/library/mysql/include/my_getopt.h	/^  ulonglong  max_value;                 \/**< Max allowed value (for numbers) *\/$/;"	m	struct:my_option
 max_value	shared/library/mysql/include/mysql_com.h	/^  unsigned long seed1,seed2,max_value;$/;"	m	struct:rand_struct
 max_value_dbl	shared/library/mysql/include/mysql_com.h	/^  double max_value_dbl;$/;"	m	struct:rand_struct
+maxbuf	shared/library/hiredis/include/hiredis/read.h	/^    size_t maxbuf; \/* Max length of unused buffer *\/$/;"	m	struct:redisReader
 maxchar	shared/library/mysql/include/m_ctype.h	/^  my_wc_t maxchar;$/;"	m	struct:my_uca_level_info_st
 maxchar	shared/library/mysql/include/m_ctype.h	/^  my_wc_t maxchar;$/;"	m	struct:unicase_info_st
 maybe_null	shared/library/mysql/include/mysql_com.h	/^  char *maybe_null;			\/* Set to 1 for all maybe_null args *\/$/;"	m	struct:st_udf_args
 maybe_null	shared/library/mysql/include/mysql_com.h	/^  my_bool maybe_null;          \/* 1 if function can return NULL *\/$/;"	m	struct:st_udf_init
-mb_len	shared/library/mysql/include/m_ctype.h	/^  uint mb_len;$/;"	m	struct:__anon18
+mb_len	shared/library/mysql/include/m_ctype.h	/^  uint mb_len;$/;"	m	struct:__anon24
 mb_wc	shared/library/mysql/include/m_ctype.h	/^  my_charset_conv_mb_wc mb_wc;$/;"	m	struct:my_charset_handler_st
 mbcharlen	shared/library/mysql/include/m_ctype.h	/^  uint    (*mbcharlen)(const struct charset_info_st *, uint c);$/;"	m	struct:my_charset_handler_st
 mbmaxlen	shared/library/mysql/include/m_ctype.h	/^  uint      mbmaxlen;$/;"	m	struct:charset_info_st
@@ -6158,7 +6301,7 @@ memory_realloc_v1_t	shared/library/mysql/include/mysql/psi/psi_memory.h	/^typede
 methods	shared/library/mysql/include/mysql.h	/^  const struct st_mysql_methods *methods;$/;"	m	struct:st_mysql	typeref:struct:st_mysql::st_mysql_methods
 methods	shared/library/mysql/include/mysql.h	/^  const struct st_mysql_methods *methods;$/;"	m	struct:st_mysql_res	typeref:struct:st_mysql_res::st_mysql_methods
 methods_to_use	shared/library/mysql/include/mysql.h	/^  enum mysql_option methods_to_use;$/;"	m	struct:st_mysql_options	typeref:enum:st_mysql_options::mysql_option
-min_heap_idx	shared/library/libevent/include/event2/event_struct.h	/^		int min_heap_idx;$/;"	m	union:event::__anon23
+min_heap_idx	shared/library/libevent/include/event2/event_struct.h	/^		int min_heap_idx;$/;"	m	union:event::__anon29
 min_malloc	shared/library/mysql/include/my_alloc.h	/^  size_t min_malloc;$/;"	m	struct:st_mem_root
 min_sort_char	shared/library/mysql/include/m_ctype.h	/^  my_wc_t   min_sort_char;$/;"	m	struct:charset_info_st
 min_value	shared/library/mysql/include/my_getopt.h	/^  longlong   min_value;                 \/**< Min allowed value (for numbers) *\/$/;"	m	struct:my_option
@@ -6211,7 +6354,7 @@ my_delete_allow_opened	shared/library/mysql/include/my_sys.h	582;"	d
 my_double2ulonglong	shared/library/mysql/include/my_global.h	/^inline unsigned long long my_double2ulonglong(double d)$/;"	f
 my_error_reporter	shared/library/mysql/include/my_sys.h	/^typedef void (*my_error_reporter)(enum loglevel level, const char *format, ...)$/;"	t
 my_free	shared/library/mysql/include/mysql/service_mysql_alloc.h	56;"	d
-my_gcvt_arg_type	shared/library/mysql/include/m_string.h	/^} my_gcvt_arg_type;$/;"	t	typeref:enum:__anon15
+my_gcvt_arg_type	shared/library/mysql/include/m_string.h	/^} my_gcvt_arg_type;$/;"	t	typeref:enum:__anon21
 my_get_large_page_size	shared/library/mysql/include/my_sys.h	202;"	d
 my_get_one_option	shared/library/mysql/include/my_getopt.h	/^typedef my_bool (*my_get_one_option)(int, const struct my_option *, char *);$/;"	t
 my_getopt_value	shared/library/mysql/include/my_getopt.h	/^typedef void *(*my_getopt_value)(const char *, size_t, const struct my_option *,$/;"	t
@@ -6247,7 +6390,7 @@ my_large_malloc	shared/library/mysql/include/my_sys.h	203;"	d
 my_lex_states	shared/library/mysql/include/m_ctype.h	/^enum my_lex_states$/;"	g
 my_like_range	shared/library/mysql/include/m_ctype.h	766;"	d
 my_malloc	shared/library/mysql/include/mysql/service_mysql_alloc.h	54;"	d
-my_match_t	shared/library/mysql/include/m_ctype.h	/^} my_match_t;$/;"	t	typeref:struct:__anon18
+my_match_t	shared/library/mysql/include/m_ctype.h	/^} my_match_t;$/;"	t	typeref:struct:__anon24
 my_mbcharlen	shared/library/mysql/include/m_ctype.h	775;"	d
 my_mbcharlen_2	shared/library/mysql/include/m_ctype.h	785;"	d
 my_mbmaxlenlen	shared/library/mysql/include/m_ctype.h	794;"	d
@@ -6549,6 +6692,7 @@ net_buffer_length	shared/library/mysql/include/mysql.h	328;"	d
 net_new_transaction	shared/library/mysql/include/mysql_com.h	520;"	d
 new_thread	shared/library/mysql/include/mysql/psi/psi.h	/^  new_thread_v1_t new_thread;$/;"	m	struct:PSI_v1
 new_thread_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef struct PSI_thread* (*new_thread_v1_t)$/;"	t	typeref:struct:new_thread_v1_t
+next	shared/library/hiredis/include/hiredis/async.h	/^    struct redisCallback *next; \/* simple singly linked list *\/$/;"	m	struct:redisCallback	typeref:struct:redisCallback::redisCallback
 next	shared/library/libevent/include/event2/http_struct.h	/^	TAILQ_ENTRY(evhttp_request) next;$/;"	m	struct:evhttp_request
 next	shared/library/libevent/include/event2/keyvalq_struct.h	/^	TAILQ_ENTRY(evkeyval) next;$/;"	m	struct:evkeyval
 next	shared/library/libevent/include/event2/rpc_struct.h	/^	TAILQ_ENTRY(evrpc) next;$/;"	m	struct:evrpc
@@ -6567,6 +6711,7 @@ number_off_files	shared/library/mysql/include/my_dir.h	/^  uint			number_off_fil
 numcells	shared/library/mysql/include/m_ctype.h	/^  size_t  (*numcells)(const struct charset_info_st *, const char *b,$/;"	m	struct:my_charset_handler_st
 numchars	shared/library/mysql/include/m_ctype.h	/^  size_t  (*numchars)(const struct charset_info_st *, const char *b,$/;"	m	struct:my_charset_handler_st
 o	shared/library/rapidjson/include/rapidjson/document.h	/^        Object o;$/;"	m	union:GenericValue::Data
+obj	shared/library/hiredis/include/hiredis/read.h	/^    void *obj; \/* holds user-generated value for a read task *\/$/;"	m	struct:redisReadTask
 obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP0
 obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP1
 obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:CallbackP2
@@ -6577,10 +6722,14 @@ obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP1
 obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP2
 obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP3
 obj_	shared/base/Callback.hpp	/^        Class* obj_;$/;"	m	class:QueryCallbackP4
+obuf	shared/library/hiredis/include/hiredis/hiredis.h	/^    char *obuf; \/* Write buffer *\/$/;"	m	struct:redisContext
 offset	shared/library/mysql/include/mysql.h	/^  unsigned long offset;           \/* offset position for char\/binary fetch *\/$/;"	m	struct:st_mysql_bind
 offset_	shared/library/rapidjson/include/rapidjson/error/error.h	/^    size_t offset_;$/;"	m	struct:ParseResult
 oflag	shared/library/mysql/include/my_sys.h	/^  int    oflag;     \/* open flags, e.g O_APPEND *\/$/;"	m	struct:st_my_file_info
 ok	shared/common/Status.h	/^        bool ok() { return (status_ == NULL); }$/;"	f	class:Status
+onConnect	shared/library/hiredis/include/hiredis/async.h	/^    redisConnectCallback *onConnect;$/;"	m	struct:redisAsyncContext
+onDisconnect	shared/library/hiredis/include/hiredis/async.h	/^    redisDisconnectCallback *onDisconnect;$/;"	m	struct:redisAsyncContext
+on_close	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static void on_close(uv_handle_t* handle) {$/;"	f
 once_alloc	shared/library/mysql/include/m_ctype.h	/^  void *(*once_alloc)(size_t);$/;"	m	struct:my_charset_loader_st
 opaque	shared/library/mysql/include/mysql/psi/psi.h	/^  int opaque;$/;"	m	struct:PSI_none
 opaque_THD	shared/library/mysql/include/mysql/psi/psi.h	/^  struct opaque_THD$/;"	s
@@ -6732,6 +6881,7 @@ param_count	shared/library/mysql/include/mysql.h	/^  unsigned int   param_count;
 param_division_limit	shared/library/mysql/include/keycache.h	/^  ulonglong param_division_limit; \/* min. percentage of warm blocks           *\/$/;"	m	struct:st_key_cache
 param_number	shared/library/mysql/include/mysql.h	/^  unsigned int	param_number;	  \/* For null count and error messages *\/$/;"	m	struct:st_mysql_bind
 params	shared/library/mysql/include/mysql.h	/^  MYSQL_BIND     *params;              \/* input parameters *\/$/;"	m	struct:st_mysql_stmt
+parent	shared/library/hiredis/include/hiredis/read.h	/^    struct redisReadTask *parent; \/* parent task *\/$/;"	m	struct:redisReadTask	typeref:struct:redisReadTask::redisReadTask
 parseErrorCode_	shared/library/rapidjson/include/rapidjson/pointer.h	/^    PointerParseErrorCode parseErrorCode_;  \/\/!< Parsing error code.$/;"	m	class:GenericPointer
 parseErrorOffset_	shared/library/rapidjson/include/rapidjson/pointer.h	/^    size_t parseErrorOffset_;               \/\/!< Offset in code unit when parsing fail.$/;"	m	class:GenericPointer
 parseResult_	shared/library/rapidjson/include/rapidjson/document.h	/^          parseResult_(rhs.parseResult_)$/;"	f	class:GenericDocument
@@ -6740,6 +6890,8 @@ parseResult_	shared/library/rapidjson/include/rapidjson/reader.h	/^    ParseResu
 passwd	shared/library/mysql/include/mysql.h	/^  char		*host,*user,*passwd,*unix_socket,*server_version,*host_info;$/;"	m	struct:st_mysql
 password	shared/library/mysql/include/mysql.h	/^  char *host,*user,*password,*unix_socket,*db;$/;"	m	struct:st_mysql_options
 password_	database/Database.h	/^        std::string password_;$/;"	m	class:Database
+path	shared/library/hiredis/include/hiredis/hiredis.h	/^        char *path;$/;"	m	struct:redisContext::__anon2
+patterns	shared/library/hiredis/include/hiredis/async.h	/^        struct dict *patterns;$/;"	m	struct:redisAsyncContext::__anon4	typeref:struct:redisAsyncContext::__anon4::dict
 pbool	shared/library/mysql/include/my_global.h	/^typedef char	pbool;		\/* Mixed prototypes can take char *\/$/;"	t
 pchar	shared/library/mysql/include/my_global.h	/^typedef char	pchar;		\/* Mixed prototypes can take char *\/$/;"	t
 pctype	shared/library/mysql/include/m_ctype.h	/^  uchar  pctype;$/;"	m	struct:uni_ctype_st
@@ -6768,14 +6920,17 @@ placeholder	shared/library/mysql/include/mysql/psi/psi.h	/^  int placeholder;$/;
 placeholder	shared/library/mysql/include/mysql/psi/psi_memory.h	/^  int placeholder;$/;"	m	struct:PSI_memory_info_v2
 plugin_dir	shared/library/mysql/include/sql_common.h	/^  char *plugin_dir;$/;"	m	struct:st_mysql_options_extention
 plugin_name	shared/library/mysql/include/mysql/plugin_trace.h	/^  const char           *plugin_name;$/;"	m	struct:st_trace_event_args
+poll_fd	shared/library/hiredis/include/hiredis/adapters/glib.h	/^    GPollFD poll_fd;$/;"	m	struct:__anon5
 pop	shared/base/FQueue.hpp	/^        T pop() {$/;"	f	class:FQueue
+port	shared/library/hiredis/include/hiredis/hiredis.h	/^        int port;$/;"	m	struct:redisContext::__anon1
 port	shared/library/mysql/include/mysql.h	/^  unsigned int	port;$/;"	m	struct:st_mysql
 port	shared/library/mysql/include/mysql.h	/^  unsigned int port, protocol;$/;"	m	struct:st_mysql_options
 port	shared/port/SocketAddress.h	/^        uint16_t port() const { return port_; }$/;"	f	class:SocketAddress
 port_	database/Database.h	/^        uint16_t port_;$/;"	m	class:Database
 port_	shared/port/SocketAddress.h	/^        uint16_t port_;$/;"	m	class:SocketAddress
+pos	shared/library/hiredis/include/hiredis/read.h	/^    size_t pos; \/* Buffer cursor *\/$/;"	m	struct:redisReader
 pos	shared/library/libevent/include/event2/buffer.h	/^	ev_ssize_t pos;$/;"	m	struct:evbuffer_ptr
-pos_in_chain	shared/library/libevent/include/event2/buffer.h	/^		size_t pos_in_chain;$/;"	m	struct:evbuffer_ptr::__anon22
+pos_in_chain	shared/library/libevent/include/event2/buffer.h	/^		size_t pos_in_chain;$/;"	m	struct:evbuffer_ptr::__anon28
 pos_in_file	shared/library/mysql/include/my_sys.h	/^  my_off_t              pos_in_file;$/;"	m	struct:st_io_cache_share
 pos_in_file	shared/library/mysql/include/my_sys.h	/^  my_off_t pos_in_file;$/;"	m	struct:st_io_cache
 post_read	shared/library/mysql/include/my_sys.h	/^  IO_CACHE_CALLBACK post_read;$/;"	m	struct:st_io_cache
@@ -6787,9 +6942,13 @@ prefix	shared/library/mysql/include/my_sys.h	/^  char *dir,*prefix;$/;"	m	struct
 prev	shared/library/mysql/include/my_dbug.h	/^  struct _db_stack_frame_ *prev; \/* pointer to the previous frame *\/$/;"	m	struct:_db_stack_frame_	typeref:struct:_db_stack_frame_::_db_stack_frame_
 prev	shared/library/mysql/include/my_list.h	/^  struct st_list *prev,*next;$/;"	m	struct:st_list	typeref:struct:st_list::st_list
 primary_number	shared/library/mysql/include/m_ctype.h	/^  uint      primary_number;$/;"	m	struct:charset_info_st
+privdata	shared/library/hiredis/include/hiredis/async.h	/^    void *privdata;$/;"	m	struct:redisCallback
+privdata	shared/library/hiredis/include/hiredis/read.h	/^    void *privdata; \/* user-settable arbitrary field *\/$/;"	m	struct:redisReadTask
+privdata	shared/library/hiredis/include/hiredis/read.h	/^    void *privdata;$/;"	m	struct:redisReader
+process_name_	shared/common/Logger.h	/^        std::string process_name_;$/;"	m	class:Logger
 propagate	shared/library/mysql/include/m_ctype.h	/^  my_bool (*propagate)(const struct charset_info_st *cs, const uchar *str,$/;"	m	struct:my_collation_handler_st
 protocol	shared/library/mysql/include/mysql.h	/^  unsigned int port, protocol;$/;"	m	struct:st_mysql_options
-protocol	shared/library/mysql/include/mysql/plugin_auth_common.h	/^         MYSQL_VIO_PIPE, MYSQL_VIO_MEMORY } protocol;$/;"	m	struct:st_plugin_vio_info	typeref:enum:st_plugin_vio_info::__anon19
+protocol	shared/library/mysql/include/mysql/plugin_auth_common.h	/^         MYSQL_VIO_PIPE, MYSQL_VIO_MEMORY } protocol;$/;"	m	struct:st_plugin_vio_info	typeref:enum:st_plugin_vio_info::__anon25
 protocol_41	shared/library/mysql/include/sql_common.h	201;"	d
 protocol_stage	shared/library/mysql/include/mysql/plugin_trace.h	/^enum protocol_stage {$/;"	g
 protocol_stage_enum	shared/library/mysql/include/mysql/plugin_trace.h	232;"	d
@@ -6822,9 +6981,10 @@ query_	database/Database.h	/^    char* query_;$/;"	m	struct:AsyncQueryResult
 query_buffer_	database/Database.h	/^        FQueue<QueryBuffer*> query_buffer_;$/;"	m	class:Database
 query_thread_	database/Database.h	/^        QueryThread* query_thread_;$/;"	m	class:Database
 questions	shared/library/libevent/include/event2/dns_struct.h	/^	struct evdns_server_question **questions;$/;"	m	struct:evdns_server_request	typeref:struct:evdns_server_request::evdns_server_question
-quot	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^   intmax_t quot;$/;"	m	struct:__anon3
+quot	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^   intmax_t quot;$/;"	m	struct:__anon9
 r_	shared/library/rapidjson/include/rapidjson/reader.h	/^        GenericReader& r_;$/;"	m	struct:GenericReader::ClearStackOnExit
 rand_struct	shared/library/mysql/include/mysql_com.h	/^struct rand_struct {$/;"	s
+read	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        void read() { redisAsyncHandleRead(m_ctx); }$/;"	f	class:RedisQtAdapter
 readCount_	shared/library/rapidjson/include/rapidjson/filereadstream.h	/^    size_t readCount_;$/;"	m	class:FileReadStream
 read_binary_rows	shared/library/mysql/include/sql_common.h	/^  int (*read_binary_rows)(MYSQL_STMT *stmt);$/;"	m	struct:st_mysql_methods
 read_change_user_result	shared/library/mysql/include/sql_common.h	/^  int (*read_change_user_result)(MYSQL *mysql);$/;"	m	struct:st_mysql_methods
@@ -6844,11 +7004,107 @@ read_statistics	shared/library/mysql/include/sql_common.h	/^  const char *(*read
 read_timeout	shared/library/mysql/include/mysql.h	/^  unsigned int connect_timeout, read_timeout, write_timeout;$/;"	m	struct:st_mysql_options
 read_timeout	shared/library/mysql/include/mysql_com.h	/^  unsigned int write_timeout, read_timeout, retry_count;$/;"	m	struct:st_net
 readcb	shared/library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data_cb readcb;$/;"	m	struct:bufferevent
+reader	shared/library/hiredis/include/hiredis/hiredis.h	/^    redisReader *reader; \/* Protocol reader *\/$/;"	m	struct:redisContext
+reading	shared/library/hiredis/include/hiredis/adapters/ae.h	/^    int reading, writing;$/;"	m	struct:redisAeEvents
+reading	shared/library/hiredis/include/hiredis/adapters/libev.h	/^    int reading, writing;$/;"	m	struct:redisLibevEvents
 reading_or_writing	shared/library/mysql/include/mysql_com.h	/^  unsigned char reading_or_writing;$/;"	m	struct:st_net
 rebind_table	shared/library/mysql/include/mysql/psi/psi.h	/^  rebind_table_v1_t rebind_table;$/;"	m	struct:PSI_v1
 rebind_table_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef PSI_table* (*rebind_table_v1_t)$/;"	t
 reconnect	shared/library/mysql/include/mysql.h	/^  my_bool	reconnect;		\/* set to 1 if automatic reconnect *\/$/;"	m	struct:st_mysql
 recv_queue_	shared/network/PacketMgr.h	/^        std::queue<Packet_t> recv_queue_;$/;"	m	class:PacketMgr
+redisAeAddRead	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static void redisAeAddRead(void *privdata) {$/;"	f
+redisAeAddWrite	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static void redisAeAddWrite(void *privdata) {$/;"	f
+redisAeAttach	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static int redisAeAttach(aeEventLoop *loop, redisAsyncContext *ac) {$/;"	f
+redisAeCleanup	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static void redisAeCleanup(void *privdata) {$/;"	f
+redisAeDelRead	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static void redisAeDelRead(void *privdata) {$/;"	f
+redisAeDelWrite	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static void redisAeDelWrite(void *privdata) {$/;"	f
+redisAeEvents	shared/library/hiredis/include/hiredis/adapters/ae.h	/^typedef struct redisAeEvents {$/;"	s
+redisAeEvents	shared/library/hiredis/include/hiredis/adapters/ae.h	/^} redisAeEvents;$/;"	t	typeref:struct:redisAeEvents
+redisAeReadEvent	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static void redisAeReadEvent(aeEventLoop *el, int fd, void *privdata, int mask) {$/;"	f
+redisAeWriteEvent	shared/library/hiredis/include/hiredis/adapters/ae.h	/^static void redisAeWriteEvent(aeEventLoop *el, int fd, void *privdata, int mask) {$/;"	f
+redisAsyncContext	shared/library/hiredis/include/hiredis/async.h	/^typedef struct redisAsyncContext {$/;"	s
+redisAsyncContext	shared/library/hiredis/include/hiredis/async.h	/^} redisAsyncContext;$/;"	t	typeref:struct:redisAsyncContext
+redisCallback	shared/library/hiredis/include/hiredis/async.h	/^typedef struct redisCallback {$/;"	s
+redisCallback	shared/library/hiredis/include/hiredis/async.h	/^} redisCallback;$/;"	t	typeref:struct:redisCallback
+redisCallbackFn	shared/library/hiredis/include/hiredis/async.h	/^typedef void (redisCallbackFn)(struct redisAsyncContext*, void*, void*);$/;"	t
+redisCallbackList	shared/library/hiredis/include/hiredis/async.h	/^typedef struct redisCallbackList {$/;"	s
+redisCallbackList	shared/library/hiredis/include/hiredis/async.h	/^} redisCallbackList;$/;"	t	typeref:struct:redisCallbackList
+redisConnectCallback	shared/library/hiredis/include/hiredis/async.h	/^typedef void (redisConnectCallback)(const struct redisAsyncContext*, int status);$/;"	t
+redisConnectionType	shared/library/hiredis/include/hiredis/hiredis.h	/^enum redisConnectionType {$/;"	g
+redisContext	shared/library/hiredis/include/hiredis/hiredis.h	/^typedef struct redisContext {$/;"	s
+redisContext	shared/library/hiredis/include/hiredis/hiredis.h	/^} redisContext;$/;"	t	typeref:struct:redisContext
+redisDisconnectCallback	shared/library/hiredis/include/hiredis/async.h	/^typedef void (redisDisconnectCallback)(const struct redisAsyncContext*, int status);$/;"	t
+redisIvykisAddRead	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static void redisIvykisAddRead(void *privdata) {$/;"	f
+redisIvykisAddWrite	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static void redisIvykisAddWrite(void *privdata) {$/;"	f
+redisIvykisAttach	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static int redisIvykisAttach(redisAsyncContext *ac) {$/;"	f
+redisIvykisCleanup	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static void redisIvykisCleanup(void *privdata) {$/;"	f
+redisIvykisDelRead	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static void redisIvykisDelRead(void *privdata) {$/;"	f
+redisIvykisDelWrite	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static void redisIvykisDelWrite(void *privdata) {$/;"	f
+redisIvykisEvents	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^typedef struct redisIvykisEvents {$/;"	s
+redisIvykisEvents	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^} redisIvykisEvents;$/;"	t	typeref:struct:redisIvykisEvents
+redisIvykisReadEvent	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static void redisIvykisReadEvent(void *arg) {$/;"	f
+redisIvykisWriteEvent	shared/library/hiredis/include/hiredis/adapters/ivykis.h	/^static void redisIvykisWriteEvent(void *arg) {$/;"	f
+redisLibevAddRead	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static void redisLibevAddRead(void *privdata) {$/;"	f
+redisLibevAddWrite	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static void redisLibevAddWrite(void *privdata) {$/;"	f
+redisLibevAttach	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static int redisLibevAttach(EV_P_ redisAsyncContext *ac) {$/;"	f
+redisLibevCleanup	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static void redisLibevCleanup(void *privdata) {$/;"	f
+redisLibevDelRead	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static void redisLibevDelRead(void *privdata) {$/;"	f
+redisLibevDelWrite	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static void redisLibevDelWrite(void *privdata) {$/;"	f
+redisLibevEvents	shared/library/hiredis/include/hiredis/adapters/libev.h	/^typedef struct redisLibevEvents {$/;"	s
+redisLibevEvents	shared/library/hiredis/include/hiredis/adapters/libev.h	/^} redisLibevEvents;$/;"	t	typeref:struct:redisLibevEvents
+redisLibevReadEvent	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static void redisLibevReadEvent(EV_P_ ev_io *watcher, int revents) {$/;"	f
+redisLibevWriteEvent	shared/library/hiredis/include/hiredis/adapters/libev.h	/^static void redisLibevWriteEvent(EV_P_ ev_io *watcher, int revents) {$/;"	f
+redisLibeventAddRead	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static void redisLibeventAddRead(void *privdata) {$/;"	f
+redisLibeventAddWrite	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static void redisLibeventAddWrite(void *privdata) {$/;"	f
+redisLibeventAttach	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static int redisLibeventAttach(redisAsyncContext *ac, struct event_base *base) {$/;"	f
+redisLibeventCleanup	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static void redisLibeventCleanup(void *privdata) {$/;"	f
+redisLibeventDelRead	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static void redisLibeventDelRead(void *privdata) {$/;"	f
+redisLibeventDelWrite	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static void redisLibeventDelWrite(void *privdata) {$/;"	f
+redisLibeventEvents	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^typedef struct redisLibeventEvents {$/;"	s
+redisLibeventEvents	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^} redisLibeventEvents;$/;"	t	typeref:struct:redisLibeventEvents
+redisLibeventReadEvent	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static void redisLibeventReadEvent(int fd, short event, void *arg) {$/;"	f
+redisLibeventWriteEvent	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^static void redisLibeventWriteEvent(int fd, short event, void *arg) {$/;"	f
+redisLibuvAddRead	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static void redisLibuvAddRead(void *privdata) {$/;"	f
+redisLibuvAddWrite	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static void redisLibuvAddWrite(void *privdata) {$/;"	f
+redisLibuvAttach	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static int redisLibuvAttach(redisAsyncContext* ac, uv_loop_t* loop) {$/;"	f
+redisLibuvCleanup	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static void redisLibuvCleanup(void *privdata) {$/;"	f
+redisLibuvDelRead	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static void redisLibuvDelRead(void *privdata) {$/;"	f
+redisLibuvDelWrite	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static void redisLibuvDelWrite(void *privdata) {$/;"	f
+redisLibuvEvents	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^typedef struct redisLibuvEvents {$/;"	s
+redisLibuvEvents	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^} redisLibuvEvents;$/;"	t	typeref:struct:redisLibuvEvents
+redisLibuvPoll	shared/library/hiredis/include/hiredis/adapters/libuv.h	/^static void redisLibuvPoll(uv_poll_t* handle, int status, int events) {$/;"	f
+redisMacOSAddRead	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static void redisMacOSAddRead(void *privdata) {$/;"	f
+redisMacOSAddWrite	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static void redisMacOSAddWrite(void *privdata) {$/;"	f
+redisMacOSAsyncCallback	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static void redisMacOSAsyncCallback(CFSocketRef __unused s, CFSocketCallBackType callbackType, CFDataRef __unused address, const void __unused *data, void *info) {$/;"	f
+redisMacOSAttach	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static int redisMacOSAttach(redisAsyncContext *redisAsyncCtx, CFRunLoopRef runLoop) {$/;"	f
+redisMacOSCleanup	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static void redisMacOSCleanup(void *privdata) {$/;"	f
+redisMacOSDelRead	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static void redisMacOSDelRead(void *privdata) {$/;"	f
+redisMacOSDelWrite	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^static void redisMacOSDelWrite(void *privdata) {$/;"	f
+redisReadTask	shared/library/hiredis/include/hiredis/read.h	/^typedef struct redisReadTask {$/;"	s
+redisReadTask	shared/library/hiredis/include/hiredis/read.h	/^} redisReadTask;$/;"	t	typeref:struct:redisReadTask
+redisReader	shared/library/hiredis/include/hiredis/read.h	/^typedef struct redisReader {$/;"	s
+redisReader	shared/library/hiredis/include/hiredis/read.h	/^} redisReader;$/;"	t	typeref:struct:redisReader
+redisReply	shared/library/hiredis/include/hiredis/hiredis.h	/^typedef struct redisReply {$/;"	s
+redisReply	shared/library/hiredis/include/hiredis/hiredis.h	/^} redisReply;$/;"	t	typeref:struct:redisReply
+redisReplyObjectFunctions	shared/library/hiredis/include/hiredis/read.h	/^typedef struct redisReplyObjectFunctions {$/;"	s
+redisReplyObjectFunctions	shared/library/hiredis/include/hiredis/read.h	/^} redisReplyObjectFunctions;$/;"	t	typeref:struct:redisReplyObjectFunctions
+redisReplyReaderCreate	shared/library/hiredis/include/hiredis/read.h	104;"	d
+redisReplyReaderFeed	shared/library/hiredis/include/hiredis/read.h	106;"	d
+redisReplyReaderFree	shared/library/hiredis/include/hiredis/read.h	105;"	d
+redisReplyReaderGetError	shared/library/hiredis/include/hiredis/read.h	110;"	d
+redisReplyReaderGetObject	shared/library/hiredis/include/hiredis/read.h	109;"	d
+redisReplyReaderGetReply	shared/library/hiredis/include/hiredis/read.h	107;"	d
+redisReplyReaderSetPrivdata	shared/library/hiredis/include/hiredis/read.h	108;"	d
+redis_source_add_read	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_add_read (gpointer data)$/;"	f
+redis_source_add_write	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_add_write (gpointer data)$/;"	f
+redis_source_check	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_check (GSource *source)$/;"	f
+redis_source_cleanup	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_cleanup (gpointer data)$/;"	f
+redis_source_del_read	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_del_read (gpointer data)$/;"	f
+redis_source_del_write	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_del_write (gpointer data)$/;"	f
+redis_source_dispatch	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_dispatch (GSource      *source,$/;"	f
+redis_source_finalize	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_finalize (GSource *source)$/;"	f
+redis_source_new	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_new (redisAsyncContext *ac)$/;"	f
+redis_source_prepare	shared/library/hiredis/include/hiredis/adapters/glib.h	/^redis_source_prepare (GSource *source,$/;"	f
 refine_statement	shared/library/mysql/include/mysql/psi/psi.h	/^  refine_statement_v1_t refine_statement;$/;"	m	struct:PSI_v1
 refine_statement_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef struct PSI_statement_locker* (*refine_statement_v1_t)$/;"	t	typeref:struct:refine_statement_v1_t
 register_cond	shared/library/mysql/include/mysql/psi/psi.h	/^  register_cond_v1_t register_cond;$/;"	m	struct:PSI_v1
@@ -6873,10 +7129,12 @@ release_sp_share	shared/library/mysql/include/mysql/psi/psi.h	/^  release_sp_sha
 release_sp_share_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef void (*release_sp_share_v1_t)(struct PSI_sp_share *share);$/;"	t
 release_table_share	shared/library/mysql/include/mysql/psi/psi.h	/^  release_table_share_v1_t release_table_share;$/;"	m	struct:PSI_v1
 release_table_share_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef void (*release_table_share_v1_t)(struct PSI_table_share *share);$/;"	t
-rem	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^   intmax_t rem;$/;"	m	struct:__anon3
+rem	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	/^   intmax_t rem;$/;"	m	struct:__anon9
 remain_in_buf	shared/library/mysql/include/mysql_com.h	/^  unsigned long remain_in_buf,length, buf_length, where_b;$/;"	m	struct:st_net
 remote_host	shared/library/libevent/include/event2/http_struct.h	/^	char *remote_host;$/;"	m	struct:evhttp_request
 remote_port	shared/library/libevent/include/event2/http_struct.h	/^	ev_uint16_t remote_port;$/;"	m	struct:evhttp_request
+replies	shared/library/hiredis/include/hiredis/async.h	/^    redisCallbackList replies;$/;"	m	struct:redisAsyncContext
+reply	shared/library/hiredis/include/hiredis/read.h	/^    void *reply; \/* Temporary reply pointer *\/$/;"	m	struct:redisReader
 reply_complete	shared/library/libevent/include/event2/rpc_struct.h	/^	int (*reply_complete)(void *);$/;"	m	struct:evrpc
 reply_free	shared/library/libevent/include/event2/rpc_struct.h	/^	void (*reply_free)(void *);$/;"	m	struct:evrpc
 reply_marshal	shared/library/libevent/include/event2/rpc_struct.h	/^	void (*reply_marshal)(struct evbuffer*, void *);$/;"	m	struct:evrpc
@@ -6899,14 +7157,19 @@ response_code_line	shared/library/libevent/include/event2/http_struct.h	/^	char 
 result	shared/library/mysql/include/mysql.h	/^  MYSQL_DATA     result;               \/* cached result set *\/$/;"	m	struct:st_mysql_stmt
 result_	database/Database.h	/^    QueryResult* result_;$/;"	m	struct:AsyncQueryResult
 result_	database/MySQLDatabase.h	/^        MYSQL_RES* result_;$/;"	m	class:MySQLQueryResult
+result_	database/RedisDatabase.h	/^        redisReply* result_;$/;"	m	class:RedisQueryResult
 retry_count	shared/library/mysql/include/mysql_com.h	/^  unsigned int write_timeout, read_timeout, retry_count;$/;"	m	struct:st_net
 return_status	shared/library/mysql/include/mysql_com.h	/^  unsigned int *return_status;$/;"	m	struct:st_net
+rev	shared/library/hiredis/include/hiredis/adapters/libev.h	/^    ev_io rev, wev;$/;"	m	struct:redisLibevEvents
+rev	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^    struct event rev, wev;$/;"	m	struct:redisLibeventEvents	typeref:struct:redisLibeventEvents::event
+ridx	shared/library/hiredis/include/hiredis/read.h	/^    int ridx; \/* Index of current read task *\/$/;"	m	struct:redisReader
 row	shared/library/mysql/include/mysql.h	/^  MYSQL_ROW	row;			\/* If unbuffered read *\/$/;"	m	struct:st_mysql_res
 row_count	database/Database.h	/^        uint32_t row_count() const { return row_count_; }$/;"	f	class:QueryResult
 row_count	shared/library/mysql/include/mysql.h	/^  my_ulonglong  row_count;$/;"	m	struct:st_mysql_res
 row_count_	database/Database.h	/^        uint32_t row_count_;$/;"	m	class:QueryResult
 row_ptr	shared/library/mysql/include/mysql.h	/^  unsigned char *row_ptr;         \/* for the current data position *\/$/;"	m	struct:st_mysql_bind
 rows	shared/library/mysql/include/mysql.h	/^  my_ulonglong rows;$/;"	m	struct:st_mysql_data
+rstack	shared/library/hiredis/include/hiredis/read.h	/^    redisReadTask rstack[9];$/;"	m	struct:redisReader
 running_	database/Database.h	/^        bool running_ = false;$/;"	m	class:Database
 running_	shared/network/TcpServerBaseThread.h	/^        bool running_ = false;$/;"	m	class:TcpServerBaseThread
 running_	shared/network/TcpWorkerThread.h	/^        bool running_ = false;$/;"	m	class:TcpWorkerThread
@@ -6920,10 +7183,11 @@ s	shared/library/rapidjson/include/rapidjson/reader.h	/^    Stream& s;$/;"	m	cla
 sEnv	shared/port/Env.h	54;"	d
 sFileSystem	shared/port/FileSystem.h	49;"	d
 sLibEvent	shared/network/LibEvent.h	64;"	d
-sLogger	shared/common/Logger.h	68;"	d
-sMaster	database/Master.h	50;"	d
-sMaster	gateway/Master.h	50;"	d
+sLogger	shared/common/Logger.h	75;"	d
+sMaster	database/Master.h	48;"	d
+sMaster	gateway/Master.h	48;"	d
 sMySQLDatabase	database/MySQLDatabase.h	71;"	d
+sRedisDatabase	database/RedisDatabase.h	73;"	d
 sTcpServer	shared/network/TcpServerBase.h	84;"	d
 sThreadPool	shared/thread/ThreadPool.h	73;"	d
 sWorld	gateway/World.h	36;"	d
@@ -6931,6 +7195,10 @@ safe_strdup_root	shared/library/mysql/include/my_sys.h	/^static inline char *saf
 save_char	shared/library/mysql/include/mysql_com.h	/^  char save_char;$/;"	m	struct:st_net
 scan	shared/library/mysql/include/m_ctype.h	/^  size_t        (*scan)(const struct charset_info_st *, const char *b,$/;"	m	struct:my_charset_handler_st
 scramble	shared/library/mysql/include/mysql.h	/^  char	        scramble[SCRAMBLE_LENGTH+1];$/;"	m	struct:st_mysql
+sds	shared/library/hiredis/include/hiredis/sds.h	/^typedef char *sds;$/;"	t
+sdsavail	shared/library/hiredis/include/hiredis/sds.h	/^static inline size_t sdsavail(const sds s) {$/;"	f
+sdshdr	shared/library/hiredis/include/hiredis/sds.h	/^struct sdshdr {$/;"	s
+sdslen	shared/library/hiredis/include/hiredis/sds.h	/^static inline size_t sdslen(const sds s) {$/;"	f
 second	shared/library/mysql/include/mysql_time.h	/^  unsigned int  year, month, day, hour, minute, second;$/;"	m	struct:st_mysql_time
 second_part	shared/library/mysql/include/mysql_time.h	/^  unsigned long second_part;  \/**< microseconds *\/$/;"	m	struct:st_mysql_time
 seed1	shared/library/mysql/include/mysql_com.h	/^  unsigned long seed1,seed2,max_value;$/;"	m	struct:rand_struct
@@ -6944,6 +7212,7 @@ server_recv_queue_	shared/network/TcpServerBase.h	/^        std::queue<Packet_t*
 server_status	shared/library/mysql/include/mysql.h	/^  unsigned int 	server_status;$/;"	m	struct:st_mysql
 server_status	shared/library/mysql/include/mysql.h	/^  unsigned int   server_status;$/;"	m	struct:st_mysql_stmt
 server_version	shared/library/mysql/include/mysql.h	/^  char		*host,*user,*passwd,*unix_socket,*server_version,*host_info;$/;"	m	struct:st_mysql
+setContext	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        int setContext(redisAsyncContext * ac) {$/;"	f	class:RedisQtAdapter
 set_if_bigger	shared/library/mysql/include/my_global.h	174;"	d
 set_if_smaller	shared/library/mysql/include/my_global.h	175;"	d
 set_metadata_lock_status	shared/library/mysql/include/mysql/psi/psi.h	/^  set_metadata_lock_status_v1_t set_metadata_lock_status;$/;"	m	struct:PSI_v1
@@ -7044,6 +7313,7 @@ skip_trailing_space	shared/library/mysql/include/m_string.h	/^static inline cons
 sleep	shared/library/mysql/include/my_global.h	112;"	d
 snprintf	shared/library/mysql/include/m_ctype.h	/^  size_t (*snprintf)(const struct charset_info_st *, char *to, size_t n,$/;"	m	struct:my_charset_handler_st
 socket	shared/library/mysql/include/mysql/plugin_auth_common.h	/^  int socket;     \/**< it's set, if the protocol is SOCKET or TCP *\/$/;"	m	struct:st_plugin_vio_info
+socketRef	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^    CFSocketRef socketRef;$/;"	m	struct:__anon6
 socket_	shared/network/TcpConnection.h	/^        Socket* socket_ = nullptr;$/;"	m	class:TcpConnection
 socket_	shared/port/Socket.h	/^        SOCKET socket_;$/;"	m	class:Socket
 socket_errno	shared/library/mysql/include/my_global.h	521;"	d
@@ -7051,6 +7321,9 @@ socket_errno	shared/library/mysql/include/my_global.h	531;"	d
 socket_len_t	shared/library/mysql/include/my_global.h	/^typedef int       socket_len_t;$/;"	t
 sort	shared/library/mysql/include/m_ctype.h	/^  uint32 sort;$/;"	m	struct:unicase_info_char_st
 sort_order	shared/library/mysql/include/m_ctype.h	/^  const uchar *sort_order;$/;"	m	struct:charset_info_st
+source	shared/library/hiredis/include/hiredis/adapters/glib.h	/^    GSource source;$/;"	m	struct:__anon5
+sourceRef	shared/library/hiredis/include/hiredis/adapters/macosx.h	/^    CFRunLoopSourceRef sourceRef;$/;"	m	struct:__anon6
+source_addr	shared/library/hiredis/include/hiredis/hiredis.h	/^        char *source_addr;$/;"	m	struct:redisContext::__anon1
 source_cache	shared/library/mysql/include/my_sys.h	/^  struct st_io_cache    *source_cache;$/;"	m	struct:st_io_cache_share	typeref:struct:st_io_cache_share::st_io_cache
 spawn_thread	shared/library/mysql/include/mysql/psi/psi.h	/^  spawn_thread_v1_t spawn_thread;$/;"	m	struct:PSI_v1
 spawn_thread_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef int (*spawn_thread_v1_t)(PSI_thread_key key,$/;"	t
@@ -7128,7 +7401,7 @@ stack_	shared/library/rapidjson/include/rapidjson/memorybuffer.h	/^    mutable i
 stack_	shared/library/rapidjson/include/rapidjson/reader.h	/^        internal::Stack<StackAllocator>& stack_;$/;"	m	class:GenericReader::StackStream
 stack_	shared/library/rapidjson/include/rapidjson/reader.h	/^    internal::Stack<StackAllocator> stack_;  \/\/!< A stack for storing decoded string temporarily during non-destructive parsing.$/;"	m	class:GenericReader
 stack_	shared/library/rapidjson/include/rapidjson/stringbuffer.h	/^    mutable internal::Stack<Allocator> stack_;$/;"	m	class:GenericStringBuffer
-start	shared/library/mysql/include/my_xml.h	/^    char *start;$/;"	m	struct:xml_stack_st::__anon21
+start	shared/library/mysql/include/my_xml.h	/^    char *start;$/;"	m	struct:xml_stack_st::__anon27
 start_cond_wait	shared/library/mysql/include/mysql/psi/psi.h	/^  start_cond_wait_v1_t start_cond_wait;$/;"	m	struct:PSI_v1
 start_cond_wait_v1_t	shared/library/mysql/include/mysql/psi/psi.h	/^typedef struct PSI_cond_locker* (*start_cond_wait_v1_t)$/;"	t	typeref:struct:start_cond_wait_v1_t
 start_file_close_wait	shared/library/mysql/include/mysql/psi/psi.h	/^  start_file_close_wait_v1_t start_file_close_wait;$/;"	m	struct:PSI_v1
@@ -7167,7 +7440,7 @@ state	shared/library/mysql/include/mysql.h	/^  enum enum_mysql_stmt_state state;
 state	shared/library/mysql/include/mysql.h	/^  unsigned int      state;      \/* character set state               *\/$/;"	m	struct:character_set
 state_change	shared/library/mysql/include/sql_common.h	/^  struct st_session_track_info state_change;$/;"	m	struct:st_mysql_extension	typeref:struct:st_mysql_extension::st_session_track_info
 state_map	shared/library/mysql/include/m_ctype.h	/^  const uchar *state_map;$/;"	m	struct:charset_info_st
-static_buffer	shared/library/mysql/include/my_xml.h	/^    char static_buffer[128];$/;"	m	struct:xml_stack_st::__anon21
+static_buffer	shared/library/mysql/include/my_xml.h	/^    char static_buffer[128];$/;"	m	struct:xml_stack_st::__anon27
 status	shared/library/mysql/include/mysql.h	/^  enum mysql_status status;$/;"	m	struct:st_mysql	typeref:enum:st_mysql::mysql_status
 status_	shared/common/Status.h	/^        const char* status_;$/;"	m	class:Status
 stmt_command	shared/library/mysql/include/sql_common.h	147;"	d
@@ -7179,6 +7452,7 @@ stop_event_	database/Master.h	/^        static volatile bool stop_event_;$/;"	m	
 stop_event_	gateway/Master.cc	/^volatile bool Master::stop_event_ = false;$/;"	m	class:Master	file:
 stop_event_	gateway/Master.h	/^        static volatile bool stop_event_;$/;"	m	class:Master
 store_param_func	shared/library/mysql/include/mysql.h	/^  void (*store_param_func)(NET *net, struct st_mysql_bind *param);$/;"	m	struct:st_mysql_bind
+str	shared/library/hiredis/include/hiredis/hiredis.h	/^    char *str; \/* Used for both REDIS_REPLY_ERROR and REDIS_REPLY_STRING *\/$/;"	m	struct:redisReply
 str	shared/library/mysql/include/m_string.h	/^  char *str;$/;"	m	struct:st_mysql_lex_string
 str	shared/library/mysql/include/m_string.h	/^  const char *str;$/;"	m	struct:st_mysql_const_lex_string
 str	shared/library/mysql/include/my_sys.h	/^  char *str;$/;"	m	struct:st_dynamic_string
@@ -7207,12 +7481,13 @@ strtoll10	shared/library/mysql/include/m_ctype.h	/^  longlong    (*strtoll10)(co
 strtoull	shared/library/mysql/include/m_string.h	218;"	d
 strtoumax	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	308;"	d
 strxfrm_multiply	shared/library/mysql/include/m_ctype.h	/^  uint      strxfrm_multiply;$/;"	m	struct:charset_info_st
+sub	shared/library/hiredis/include/hiredis/async.h	/^    } sub;$/;"	m	struct:redisAsyncContext	typeref:struct:redisAsyncContext::__anon4
 sub_size	shared/library/mysql/include/my_getopt.h	/^  longlong   sub_size;                  \/**< Unused                          *\/$/;"	m	struct:my_option
-supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 0 };$/;"	e	enum:ASCII::__anon9
-supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:AutoUTF::__anon10
-supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:UTF16::__anon7
-supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:UTF32::__anon8
-supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:UTF8::__anon6
+supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 0 };$/;"	e	enum:ASCII::__anon15
+supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:AutoUTF::__anon16
+supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:UTF16::__anon13
+supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:UTF32::__anon14
+supportUnicode	shared/library/rapidjson/include/rapidjson/encodings.h	/^    enum { supportUnicode = 1 };$/;"	e	enum:UTF8::__anon12
 supported_locktypes	shared/library/libevent/include/event2/thread.h	/^	unsigned supported_locktypes;$/;"	m	struct:evthread_lock_callbacks
 swap_variables	shared/library/mysql/include/my_global.h	172;"	d
 tab	shared/library/mysql/include/m_ctype.h	/^  const uchar *tab;$/;"	m	struct:my_uni_idx_st
@@ -7221,8 +7496,10 @@ tab_to_uni	shared/library/mysql/include/m_ctype.h	/^  const uint16     *tab_to_u
 table	shared/library/mysql/include/mysql.h	/^  char *table;                \/* Table of column if column was a field *\/$/;"	m	struct:st_mysql_field
 table_length	shared/library/mysql/include/mysql.h	/^  unsigned int table_length;$/;"	m	struct:st_mysql_field
 table_map	shared/library/mysql/include/my_global.h	/^typedef ulonglong table_map;          \/* Used for table bits in join *\/$/;"	t
+tail	shared/library/hiredis/include/hiredis/async.h	/^    redisCallback *head, *tail;$/;"	m	struct:redisCallbackList
 tailoring	shared/library/mysql/include/m_ctype.h	/^  const char *tailoring;$/;"	m	struct:charset_info_st
 takeFunc_	shared/library/rapidjson/include/rapidjson/encodedstream.h	/^    TakeFunc takeFunc_;$/;"	m	class:AutoUTFInputStream
+tcp	shared/library/hiredis/include/hiredis/hiredis.h	/^    } tcp;$/;"	m	struct:redisContext	typeref:struct:redisContext::__anon1
 tcp_connections_	shared/network/TcpServerBase.h	/^        TcpConnection* tcp_connections_[SOCKET_HOLDER_SIZE];$/;"	m	class:TcpServerBase
 test_all_bits	shared/library/mysql/include/my_global.h	176;"	d
 thd	shared/library/mysql/include/mysql.h	/^  void *thd;$/;"	m	struct:st_mysql
@@ -7239,6 +7516,7 @@ threads_freed_since_last_check_	shared/thread/ThreadPool.h	/^        uint32_t th
 threads_requested_since_last_check_	shared/thread/ThreadPool.h	/^        uint32_t threads_requested_since_last_check_ = 0;$/;"	m	class:ThreadPool
 threads_to_exit_	shared/thread/ThreadPool.h	/^        uint32_t threads_to_exit_ = 0;$/;"	m	class:ThreadPool
 time_type	shared/library/mysql/include/mysql_time.h	/^  enum enum_mysql_timestamp_type time_type;$/;"	m	struct:st_mysql_time	typeref:enum:st_mysql_time::enum_mysql_timestamp_type
+timeout	shared/library/hiredis/include/hiredis/hiredis.h	/^    struct timeval *timeout;$/;"	m	struct:redisContext	typeref:struct:redisContext::timeval
 timeout_add	shared/library/libevent/include/event2/event_compat.h	188;"	d
 timeout_del	shared/library/libevent/include/event2/event_compat.h	190;"	d
 timeout_initialized	shared/library/libevent/include/event2/event_compat.h	192;"	d
@@ -7267,6 +7545,8 @@ tracing_stop	shared/library/mysql/include/mysql/plugin_trace.h	/^  tracing_stop_
 tracing_stop_callback	shared/library/mysql/include/mysql/plugin_trace.h	/^void (tracing_stop_callback)(struct st_mysql_client_plugin_TRACE *self,$/;"	t
 tv	shared/library/mysql/include/my_global.h	/^  union ft64 tv;$/;"	m	struct:timespec	typeref:union:timespec::ft64
 tv_	shared/port/Env.h	/^        struct timeval tv_;$/;"	m	class:Env	typeref:struct:Env::timeval
+type	shared/library/hiredis/include/hiredis/hiredis.h	/^    int type; \/* REDIS_REPLY_* *\/$/;"	m	struct:redisReply
+type	shared/library/hiredis/include/hiredis/read.h	/^    int type;$/;"	m	struct:redisReadTask
 type	shared/library/libevent/include/event2/dns_struct.h	/^	int type;$/;"	m	struct:evdns_server_question
 type	shared/library/libevent/include/event2/http_struct.h	/^	enum evhttp_cmd_type type;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_cmd_type
 type	shared/library/mysql/include/my_sys.h	/^  enum   file_type	type;$/;"	m	struct:st_my_file_info	typeref:enum:st_my_file_info::file_type
@@ -7282,7 +7562,7 @@ u	shared/library/rapidjson/include/rapidjson/document.h	/^        }u;$/;"	m	unio
 u32toa	shared/library/rapidjson/include/rapidjson/internal/itoa.h	/^inline char* u32toa(uint32_t value, char* buffer) {$/;"	f	namespace:internal
 u64	shared/library/rapidjson/include/rapidjson/document.h	/^        uint64_t u64;$/;"	m	union:GenericValue::Number
 u64toa	shared/library/rapidjson/include/rapidjson/internal/itoa.h	/^inline char* u64toa(uint64_t value, char* buffer) {$/;"	f	namespace:internal
-u_	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^        uint64_t u_;$/;"	m	union:internal::Double::__anon4
+u_	shared/library/rapidjson/include/rapidjson/internal/ieee754.h	/^        uint64_t u_;$/;"	m	union:internal::Double::__anon10
 u_max_value	shared/library/mysql/include/my_getopt.h	/^  void       *u_max_value;              \/**< The user def. max variable value *\/$/;"	m	struct:my_option
 uca	shared/library/mysql/include/m_ctype.h	/^  MY_UCA_INFO *uca; \/* This can be changed in apply_one_rule() *\/$/;"	m	struct:charset_info_st
 uca_info_st	shared/library/mysql/include/m_ctype.h	/^typedef struct uca_info_st$/;"	s
@@ -7340,6 +7620,7 @@ unbuffered_fetch_owner	shared/library/mysql/include/mysql.h	/^  my_bool *unbuffe
 uni_ctype_st	shared/library/mysql/include/m_ctype.h	/^typedef struct uni_ctype_st$/;"	s
 unicase_info_char_st	shared/library/mysql/include/m_ctype.h	/^typedef struct unicase_info_char_st$/;"	s
 unicase_info_st	shared/library/mysql/include/m_ctype.h	/^typedef struct unicase_info_st$/;"	s
+unix_sock	shared/library/hiredis/include/hiredis/hiredis.h	/^    } unix_sock;$/;"	m	struct:redisContext	typeref:struct:redisContext::__anon2
 unix_socket	shared/library/mysql/include/mysql.h	/^  char		*host,*user,*passwd,*unix_socket,*server_version,*host_info;$/;"	m	struct:st_mysql
 unix_socket	shared/library/mysql/include/mysql.h	/^  char *host,*user,*password,*unix_socket,*db;$/;"	m	struct:st_mysql_options
 unlikely	shared/library/mysql/include/my_compiler.h	/^inline bool unlikely(bool expr)$/;"	f
@@ -7394,7 +7675,7 @@ value	shared/library/libevent/include/event2/keyvalq_struct.h	/^	char *value;$/;
 value	shared/library/mysql/include/my_getopt.h	/^  void       *value;                    \/**< A pointer to the variable value *\/$/;"	m	struct:my_option
 value	shared/library/mysql/include/my_xml.h	/^  int  (*value)(struct xml_stack_st *st,const char *val, size_t len);$/;"	m	struct:xml_stack_st
 value	shared/library/rapidjson/include/rapidjson/document.h	/^    GenericValue<Encoding, Allocator> value;    \/\/!< value of member.$/;"	m	struct:GenericMember
-value	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^template <> struct STATIC_ASSERTION_FAILURE<true> { enum { value = 1 }; };$/;"	e	enum:STATIC_ASSERTION_FAILURE::__anon11
+value	shared/library/rapidjson/include/rapidjson/rapidjson.h	/^template <> struct STATIC_ASSERTION_FAILURE<true> { enum { value = 1 }; };$/;"	e	enum:STATIC_ASSERTION_FAILURE::__anon17
 valueCount	shared/library/rapidjson/include/rapidjson/writer.h	/^        size_t valueCount;  \/\/!< number of values in this level$/;"	m	struct:Writer::Level
 value_	database/Field.h	/^        char* value_;$/;"	m	class:Field
 value_	shared/base/FQueue.hpp	/^            T value_;$/;"	m	struct:FQueue::Node
@@ -7413,11 +7694,14 @@ wcstoumax	shared/library/rapidjson/include/rapidjson/msinttypes/inttypes.h	312;"
 weight	shared/library/mysql/include/m_ctype.h	/^  uint16 weight[MY_UCA_MAX_WEIGHT_SIZE];\/* Its weight string, 0-terminated *\/$/;"	m	struct:my_contraction_t
 weights	shared/library/mysql/include/m_ctype.h	/^  uint16  **weights;$/;"	m	struct:my_uca_level_info_st
 well_formed_len	shared/library/mysql/include/m_ctype.h	/^  size_t  (*well_formed_len)(const struct charset_info_st *,$/;"	m	struct:my_charset_handler_st
+wev	shared/library/hiredis/include/hiredis/adapters/libev.h	/^    ev_io rev, wev;$/;"	m	struct:redisLibevEvents
+wev	shared/library/hiredis/include/hiredis/adapters/libevent.h	/^    struct event rev, wev;$/;"	m	struct:redisLibeventEvents	typeref:struct:redisLibeventEvents::
 where_b	shared/library/mysql/include/mysql_com.h	/^  unsigned long remain_in_buf,length, buf_length, where_b;$/;"	m	struct:st_net
 wildcmp	shared/library/mysql/include/m_ctype.h	/^  int     (*wildcmp)(const struct charset_info_st *,$/;"	m	struct:my_collation_handler_st
 with_context	shared/library/mysql/include/m_ctype.h	/^  my_bool with_context;$/;"	m	struct:my_contraction_t
 wm_read	shared/library/libevent/include/event2/bufferevent_struct.h	/^	struct event_watermark wm_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
 wm_write	shared/library/libevent/include/event2/bufferevent_struct.h	/^	struct event_watermark wm_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
+write	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        void write() { redisAsyncHandleWrite(m_ctx); }$/;"	f	class:RedisQtAdapter
 write_buffer	shared/library/mysql/include/my_sys.h	/^  uchar  *write_buffer;$/;"	m	struct:st_io_cache
 write_end	shared/library/mysql/include/my_sys.h	/^  uchar *write_end;$/;"	m	struct:st_io_cache
 write_function	shared/library/mysql/include/my_sys.h	/^  int (*write_function)(struct st_io_cache *,const uchar *,size_t);$/;"	m	struct:st_io_cache
@@ -7427,6 +7711,8 @@ write_pos	shared/library/mysql/include/mysql_com.h	/^  unsigned char *buff,*buff
 write_timeout	shared/library/mysql/include/mysql.h	/^  unsigned int connect_timeout, read_timeout, write_timeout;$/;"	m	struct:st_mysql_options
 write_timeout	shared/library/mysql/include/mysql_com.h	/^  unsigned int write_timeout, read_timeout, retry_count;$/;"	m	struct:st_net
 writecb	shared/library/libevent/include/event2/bufferevent_struct.h	/^	bufferevent_data_cb writecb;$/;"	m	struct:bufferevent
+writing	shared/library/hiredis/include/hiredis/adapters/ae.h	/^    int reading, writing;$/;"	m	struct:redisAeEvents
+writing	shared/library/hiredis/include/hiredis/adapters/libev.h	/^    int reading, writing;$/;"	m	struct:redisLibevEvents
 xml_stack_st	shared/library/mysql/include/my_xml.h	/^typedef struct xml_stack_st$/;"	s
 year	shared/library/mysql/include/mysql_time.h	/^  unsigned int  year, month, day, hour, minute, second;$/;"	m	struct:st_mysql_time
 ~AsyncQuery	database/Database.cc	/^AsyncQuery::~AsyncQuery() {$/;"	f	class:AsyncQuery
@@ -7460,6 +7746,9 @@ year	shared/library/mysql/include/mysql_time.h	/^  unsigned int  year, month, da
 ~QueryThread	database/Database.cc	/^QueryThread::~QueryThread() {$/;"	f	class:QueryThread
 ~QueryWorkerThread	database/QueryWorkerThread.h	/^        virtual ~QueryWorkerThread() {}$/;"	f	class:QueryWorkerThread
 ~RWLock	shared/thread/RWLock.cc	/^RWLock::~RWLock() {$/;"	f	class:RWLock
+~RedisDatabase	database/RedisDatabase.cc	/^RedisDatabase::~RedisDatabase() {$/;"	f	class:RedisDatabase
+~RedisQtAdapter	shared/library/hiredis/include/hiredis/adapters/qt.h	/^        ~RedisQtAdapter() {$/;"	f	class:RedisQtAdapter
+~RedisQueryResult	database/RedisDatabase.cc	/^RedisQueryResult::~RedisQueryResult() {$/;"	f	class:RedisQueryResult
 ~Singleton	shared/base/Singleton.hpp	/^        ~Singleton() {$/;"	f	class:Singleton
 ~Socket	shared/port/Socket.cc	/^Socket::~Socket() {$/;"	f	class:Socket
 ~Stack	shared/library/rapidjson/include/rapidjson/internal/stack.h	/^    ~Stack() {$/;"	f	class:internal::Stack

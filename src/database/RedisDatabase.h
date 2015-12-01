@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  MySQLDatabase.h
+ *       Filename:  RedisDatabase.h
  *
- *    Description:  MySQLDatabase
+ *    Description:  RedisDatabase
  *
  *        Version:  1.0
- *        Created:  11/06/2015 05:31:27 PM
+ *        Created:  11/30/2015 10:16:19 AM
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,21 +16,21 @@
  * =====================================================================================
  */
 
-#ifndef MYSQLDATABASE_H_C0F5KYYR
-#define MYSQLDATABASE_H_C0F5KYYR
+#ifndef REDISDATABASE_H_A2DO91UB
+#define REDISDATABASE_H_A2DO91UB
 
 #include "Database.h"
 
-#include <mysql/mysql.h>
+#include <hiredis/hiredis.h>
 
-struct MySQLDatabaseConnection;
+struct RedisDatabaseConnection;
 
-class MySQLQueryResult;
+class RedisQueryResult;
 
-class MySQLDatabase : public Database, public Singleton<MySQLDatabase> {
+class RedisDatabase : public Database, public Singleton<RedisDatabase> {
     public:
-        MySQLDatabase() = default;
-        virtual ~MySQLDatabase();
+        RedisDatabase() = default;
+        virtual ~RedisDatabase();
 
         bool Initialize(const char* hostname, uint16_t port,
                 const char* username, const char* password,
@@ -43,8 +43,8 @@ class MySQLDatabase : public Database, public Singleton<MySQLDatabase> {
         std::string EscapeString(const char* escape, DatabaseConnection* conn);
 
     protected:
-        bool HandleError(MySQLDatabaseConnection* conn, uint32_t error_number);
-        bool Reconnect(MySQLDatabaseConnection* conn);
+        bool HandleError(RedisDatabaseConnection* conn, uint32_t error_number);
+        bool Reconnect(RedisDatabaseConnection* conn);
 
         void BeginTransaction(DatabaseConnection* conn);
         void EndTransaction(DatabaseConnection* conn);
@@ -53,21 +53,23 @@ class MySQLDatabase : public Database, public Singleton<MySQLDatabase> {
         QueryResult* StoreQueryResult(DatabaseConnection* conn);
 };
 
-struct MySQLDatabaseConnection : public DatabaseConnection {
-    MYSQL* Mysql_;
+struct RedisDatabaseConnection : public DatabaseConnection {
+    redisContext* Redis_;
+    redisReply* Reply_;
 };
 
-class MySQLQueryResult : public QueryResult {
+class RedisQueryResult : public QueryResult {
     public:
-        MySQLQueryResult(MYSQL_RES* res, uint32_t field_count, uint32_t row_count);
-        virtual ~MySQLQueryResult();
+        RedisQueryResult(redisReply* reply, uint32_t field_count, uint32_t row_count);
+        virtual ~RedisQueryResult();
 
         bool NextRow();
 
     protected:
-        MYSQL_RES* result_;
+        uint32_t current_row_count_ = 0;
+        redisReply* result_;
 };
 
-#define sMySQLDatabase MySQLDatabase::getSingleton()
+#define sRedisDatabase RedisDatabase::getSingleton()
 
-#endif /* end of include guard: MYSQLDATABASE_H_C0F5KYYR */
+#endif /* end of include guard: REDISDATABASE_H_A2DO91UB */

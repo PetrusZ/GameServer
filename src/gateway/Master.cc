@@ -96,7 +96,7 @@ void Master::Daemonize() {
 }
 
 bool Master::Run(int argc, char** argv) {
-    std::cout << "Hello Game Server From Master" << std::endl;
+    LOG_STDOUT("Hello Gateway Server From Master");
 
     Daemonize();
     HookSignal();

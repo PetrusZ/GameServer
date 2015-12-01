@@ -24,6 +24,7 @@
 #include "port/FileSystem.h"
 #include <cstdarg>
 #include <cstdio>
+#include <iostream>
 
 Logger::~Logger() {
     if (error_log_) delete error_log_;
@@ -79,7 +80,7 @@ bool Logger::AppendLog(LogLevel level, std::string &log) {
 
 std::string Logger::FormatLogFileName(const std::string &prefix, const std::string &description, bool useDate) {
     std::string file_name;
-    file_name = prefix + "/" + server_name_ + "/";
+    file_name = prefix + "/" + process_name_ + "/";
     file_name += description;
 
     if (useDate) {
@@ -205,6 +206,24 @@ bool Logger::Trace(const char *msg, ...) {
     va_end(ap);
 
     return AppendLog(kTrace, log);
+}
+
+void Logger::StdOut(const char *msg, ...) {
+    va_list ap;
+    va_start(ap, msg);
+    std::string log = ConstructLog(msg, ap);
+    va_end(ap);
+
+    std::cout << log << std::endl;
+}
+
+void Logger::StdErr(const char *msg, ...) {
+    va_list ap;
+    va_start(ap, msg);
+    std::string log = ConstructLog(msg, ap);
+    va_end(ap);
+
+    std::cerr << log << std::endl;
 }
 
 #endif /* end of include guard: LOGGER_CC_AZQLX2MN */
