@@ -25,6 +25,7 @@
 #include "TcpConnection.h"
 #include "common/Common.h"
 #include "base/Singleton.hpp"
+#include "base/FQueue.hpp"
 #include <map>
 #include <queue>
 
@@ -77,8 +78,8 @@ class TcpServerBase : public Singleton <TcpServerBase> {
         std::map<BufferEventStruct*, TcpConnection*> bufevent_conn_map_;
 
         //TODO: 多线程加锁
-        std::queue<Packet_t*> client_recv_queue_;
-        std::queue<Packet_t*> server_recv_queue_;
+        FQueue<Packet_t*> client_recv_queue_;
+        FQueue<Packet_t*> server_recv_queue_;
 };
 
 #define sTcpServer TcpServerBase::getSingleton()

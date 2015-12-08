@@ -34,7 +34,7 @@ class Logger : public Singleton<Logger> {
         Logger(const Logger&) = delete;
         Logger& operator=(const Logger&) = delete;
 
-        void Init(const char* process_name) { process_name_ = process_name; }
+        void Init(const char* process_name, bool is_file_log = true) { process_name_ = process_name; is_file_log_ = is_file_log; }
 
         bool Fatal(const char* msg, ...);
         bool Error(const char* msg, ...);
@@ -69,6 +69,7 @@ class Logger : public Singleton<Logger> {
         WritableFile *debug_log_ = NULL;
         WritableFile *trace_log_ = NULL;
 
+        bool is_file_log_ = true;
         std::string process_name_;
 };
 

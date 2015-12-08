@@ -23,6 +23,10 @@
 RedisDatabase::~RedisDatabase() {
     for (uint32_t i = 0; i < connection_count_; ++i) {
         redisFree(static_cast<RedisDatabaseConnection*>(connections_[i])->Redis_);
+        if (NULL != static_cast<RedisDatabaseConnection*>(connections_[i])->Reply_) {
+            freeReplyObject(static_cast<RedisDatabaseConnection*>(connections_[i])->Reply_);
+        }
+
         delete connections_[i];
     }
     delete[] connections_;
@@ -101,10 +105,6 @@ bool RedisDatabase::HandleError(RedisDatabaseConnection *conn, uint32_t error_nu
 }
 
 bool RedisDatabase::Reconnect(RedisDatabaseConnection *conn) {
-    if (conn->Redis_) {
-        redisFree(conn->Redis_);
-    }
-
     redisContext* redis = redisConnect(hostname_.c_str(), port_);
 
     if (NULL == redis) {
@@ -114,6 +114,10 @@ bool RedisDatabase::Reconnect(RedisDatabaseConnection *conn) {
         LOG_KERROR("RedisDatabase", "Reconnection failed due to [%s] %s", redis->err, redis->errstr);
         redisFree(redis);
         return false;
+    }
+
+    if (conn->Redis_) {
+        redisFree(conn->Redis_);
     }
 
     conn->Redis_ = redis;
@@ -137,8 +141,11 @@ QueryResult* RedisDatabase::StoreQueryResult(DatabaseConnection *conn) {
         row_count = redis_conn->Reply_->elements;
     }
 
+
     RedisQueryResult* result = new RedisQueryResult(redis_conn->Reply_, row_count, field_count);
     result->NextRow();
+
+    redis_conn->Reply_ = NULL;
 
     return result;
 }

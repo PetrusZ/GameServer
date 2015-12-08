@@ -46,7 +46,7 @@ class ConfigFile {
 
     private:
         bool GetValue(const char* key, const char* field, rapidjson::Value& val);
-        bool GetValueNA(rapidjson::Value& val, int argc, va_list& arg_list);
+        bool GetValueVA(rapidjson::Value& val, int argc, va_list& arg_list);
 
         rapidjson::Document document_;
 };

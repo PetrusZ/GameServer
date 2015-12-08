@@ -114,14 +114,13 @@ INSTALL(PROGRAMS ${SCRIPT_LIST} DESTINATION ${EXECUTABLE_OUTPUT_PATH} PERMISSION
 
 ################################################# test #################################################
 
-# set(TEST_CLIENT_SRC_LIST
-    # ${NETWORK_SRC_LIST}
-    # ${PORT_SRC_LIST}
-    # ${COMMON_SRC_LIST}
-    # ${UTIL_SRC_LIST}
-    # ${THREAD_SRC_LIST}
-    # ${DATABASE_SRC_LIST}
-    # test/TcpServerTest.cc
-    # )
-# add_executable(TestClient ${TEST_CLIENT_SRC_LIST})
-# target_link_libraries(TestClient event_core event_pthreads)
+set(TEST_CLIENT_SRC_LIST
+    ${NETWORK_SRC_LIST}
+    ${PORT_SRC_LIST}
+    ${COMMON_SRC_LIST}
+    ${UTIL_SRC_LIST}
+    ${THREAD_SRC_LIST}
+    test/TcpServerTest.cc
+    )
+add_executable(TestClient ${TEST_CLIENT_SRC_LIST})
+target_link_libraries(TestClient event_core event_pthreads)

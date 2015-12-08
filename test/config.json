@@ -6,7 +6,11 @@
         "author":"Petrus",
         "email":"silencly07@gmail.com",
         "is_released":false,
-        "version":0.21
+        "version":0.21,
+        "array":[1, "b", 3.0]
     },
-    "test1":{ "test2":{ "test3":{ "test4":"test5" } } }
+    "test1":{ "test2":{ "test3":{ "test4":"test5" } } },
+    "array":["a", "b", "c", "d"],
+    "key_array":{"a":1, "b":2, "c":3, "d":4},
+    "num_array":[1, 2, 3, 4]
 }

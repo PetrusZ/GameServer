@@ -20,6 +20,7 @@
 #include "common/Common.h"
 #include "rapidjson/filereadstream.h"
 #include "rapidjson/encodedstream.h"
+#include "rapidjson/error/en.h"
 #include <cstdio>
 #include <cstdarg>
 
@@ -42,7 +43,8 @@ bool ConfigFile::LoadFile(const char* file_name) {
         return true;
     }
 
-    LOG_ERROR("Config file(%s) load failed! Json parse error!", file_name);
+    LOG_ERROR("Config file(%s) load failed! Json parse error at offset %u, due to %s", file_name,
+            (unsigned)document_.GetErrorOffset(), rapidjson::GetParseError_En(document_.GetParseError()));
     fclose(fp);
 
     return false;
@@ -71,7 +73,7 @@ std::string ConfigFile::GetStringVA(const char *default_value, int argc, ...) {
     va_list arg_list;
     va_start(arg_list, argc);
 
-    if (GetValueNA(val, argc, arg_list)) {
+    if (GetValueVA(val, argc, arg_list)) {
         va_end(arg_list);
         return val.GetString();
     }
@@ -103,7 +105,7 @@ int ConfigFile::GetIntVA(int default_value, int argc, ...) {
     va_list arg_list;
     va_start(arg_list, argc);
 
-    if (GetValueNA(val, argc, arg_list)) {
+    if (GetValueVA(val, argc, arg_list)) {
         va_end(arg_list);
         return val.GetInt();
     }
@@ -135,7 +137,7 @@ bool ConfigFile::GetBoolVA(bool default_value, int argc, ...) {
     va_list arg_list;
     va_start(arg_list, argc);
 
-    if (GetValueNA(val, argc, arg_list)) {
+    if (GetValueVA(val, argc, arg_list)) {
         va_end(arg_list);
         return val.GetBool();
     }
@@ -167,7 +169,7 @@ float ConfigFile::GetFloatVA(float default_value, int argc, ...) {
     va_list arg_list;
     va_start(arg_list, argc);
 
-    if (GetValueNA(val, argc, arg_list)) {
+    if (GetValueVA(val, argc, arg_list)) {
         va_end(arg_list);
         return val.GetDouble();
     }
@@ -193,7 +195,7 @@ bool ConfigFile::GetValue(const char* key, const char* field, rapidjson::Value& 
     return false;
 }
 
-bool ConfigFile::GetValueNA(rapidjson::Value &val, int argc, va_list& arg_list) {
+bool ConfigFile::GetValueVA(rapidjson::Value &val, int argc, va_list& arg_list) {
     rapidjson::Value::MemberIterator it = document_.MemberEnd();
     while(argc--) {
         char* key = va_arg(arg_list, char*);

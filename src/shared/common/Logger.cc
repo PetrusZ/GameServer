@@ -62,18 +62,28 @@ bool Logger::AppendLog(LogLevel level, std::string &log) {
     if (log.size() <= 0) {
         return true;
     }
-    if (!LogRotate(level)) {
-        return false;
+
+    if (is_file_log_) {
+        if (!LogRotate(level)) {
+            return false;
+        }
+
+        assert(*log_file);
+
+        log += "\n";
+
+        if (!(*log_file)->Append(log)) {
+            return false;
+        }
+        (*log_file)->Flush();
+    } else {
+        std::string file_name = FormatLogFileName("Std", description, true);
+        if (kFatal <= level && level <= kError) {
+            std::cerr << file_name << ": " << log << std::endl;
+        } else if (kInfo <= level && level <= kTrace) {
+            std::cout << file_name << ": " << log << std::endl;
+        }
     }
-
-    assert(*log_file);
-
-    log += "\n";
-
-    if (!(*log_file)->Append(log)) {
-        return false;
-    }
-    (*log_file)->Flush();
 
     return true;
 }

@@ -233,9 +233,8 @@ void TcpServerBase::PushClientPacket(Packet_t* packet) {
 }
 
 Packet_t* TcpServerBase::PopClientPacket() {
-    if (client_recv_queue_.size() > 0) {
-        Packet_t* packet =  client_recv_queue_.front();
-        client_recv_queue_.pop();
+    if (client_recv_queue_.get_size() > 0) {
+        Packet_t* packet =  client_recv_queue_.pop();
         return packet;
     } else {
         return nullptr;
@@ -247,9 +246,8 @@ void TcpServerBase::PushServerPacket(Packet_t* packet) {
 }
 
 Packet_t* TcpServerBase::PopServerPacket() {
-    if (server_recv_queue_.size() > 0) {
-        Packet_t* packet =  server_recv_queue_.front();
-        server_recv_queue_.pop();
+    if (server_recv_queue_.get_size() > 0) {
+        Packet_t* packet =  server_recv_queue_.pop();
         return packet;
     } else {
         return nullptr;
