@@ -120,7 +120,7 @@ set(TEST_CLIENT_SRC_LIST
     ${COMMON_SRC_LIST}
     ${UTIL_SRC_LIST}
     ${THREAD_SRC_LIST}
-    test/TcpServerTest.cc
+    src/test/TcpServerTest.cc
     )
 add_executable(TestClient ${TEST_CLIENT_SRC_LIST})
 target_link_libraries(TestClient event_core event_pthreads)

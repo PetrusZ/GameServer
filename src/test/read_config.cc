@@ -65,11 +65,15 @@ int main(int argc, char *argv[])
     assert(json->AddArray<int>("c", vec, 3, "Test1", "a", "b"));
 
     assert(json->AddFloat("float", 3.14f));
-    assert(json->SetInt("Test1", "a", 1));
+    // assert(json->SetInt("Test1", "a", 1));
     puts(json->PrettyFormat().c_str());
     float value;
     assert(json->GetFloat("float", NULL, value));
     LOG_STDOUT("float %f\n", value);
+
+    std::vector<int> vec2;
+    assert(json->GetArray<int>(vec2, 4, "Test1", "a", "b", "c"));
+    LOG_STDOUT("array int %d\n", vec2[3]);
 
     delete json;
 
