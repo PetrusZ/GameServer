@@ -19,6 +19,7 @@
 #include "port/Socket.h"
 #include "port/SocketAddress.h"
 #include "network/TcpServerBase.h"
+#include "network/TcpServerBaseThread.h"
 #include <string>
 
 #define BUFF_SIZE 4096
@@ -30,12 +31,24 @@
  */
 int main(int argc, char *argv[])
 {
+    sThreadPool.Startup();
+    sThreadPool.ExecuteTask(new TcpServerBaseThread());
+
+    SocketAddress server_addr("127.0.0.1", 19191);
+    for (int i = 0; i < 10000; ++i) {
+        Socket* socket = new Socket();
+        socket->Create(SOCK_STREAM);
+        socket->Connect(server_addr);
+
+        sTcpServer.NewTcpConnection(socket);
+    }
 
     while(true) {
         /*
          *  main loop
          */
         
+        sEnv.Sleep(1000);
     }
 
     return 0;
