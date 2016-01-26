@@ -36,7 +36,7 @@ class Socket {
         // Destructor.
         virtual ~Socket();
 
-        SOCKET GetFd();
+        SOCKET GetFd() const ;
 
         // create socket fd.
         bool Create(const int type);

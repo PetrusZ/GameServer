@@ -71,7 +71,7 @@ Socket* Socket::Accept(SocketAddress *paddr) {
     return new Socket(client_socket);
 }
 
-SOCKET Socket::GetFd() {
+SOCKET Socket::GetFd() const {
     return socket_;
 }
 

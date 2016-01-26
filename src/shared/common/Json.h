@@ -117,6 +117,11 @@ class Json {
         bool AddMember(const char* key, const char* field, rapidjson::Value& name, rapidjson::Value& val);
         bool AddMember(rapidjson::Value& name, rapidjson::Value& val, int argc, va_list& arg_list);
 
+        bool Array2Vector(const rapidjson::Value& array, std::vector<int>& vector);
+        bool Array2Vector(const rapidjson::Value& array, std::vector<std::string>& vector);
+        bool Array2Vector(const rapidjson::Value& array, std::vector<float>& vector);
+        bool Array2Vector(const rapidjson::Value& array, std::vector<bool>& vector);
+
         rapidjson::Document document_;
 };
 
@@ -124,31 +129,13 @@ template <typename type>
 bool Json::GetArray(const char* key, const char* field, std::vector<type>& value) {
     rapidjson::Value val;
     if (GetValue(key, field, val) && val.IsArray()) {
-        std::string type_name;
-        // XXX
-        if (typeid(type) == typeid(int)) {
-            type_name = "int";
-        } else if (typeid(type) == typeid(std::string)) {
-            type_name = "string";
-        } else if (typeid(type) == typeid(float)) {
-            type_name = "float";
-        } else if (typeid(type) == typeid(bool)) {
-            type_name = "bool";
+        if (Array2Vector(val, value)) {
+            return true;
         }
 
-        for (uint32_t i = 0; i < val.Size(); ++i) {
-            if (type_name == "int") {
-                value.push_back(val[i].GetInt());
-            } else if (type_name == "string") {
-                value.push_back(val[i].GetString());
-            } else if (type_name == "float") {
-                value.push_back(val[i].GetDouble());
-            } else if (type_name == "bool") {
-                value.push_back(val[i].GetDouble());
-            }
-        }
-        return true;
+        return false;
     }
+
     return false;
 }
 
@@ -162,29 +149,11 @@ bool Json::GetArray(std::vector<type>& value, int argc, ...) {
     if (GetValue(val, argc, arg_list) && val.IsArray()) {
         va_end(arg_list);
 
-        std::string type_name;
-        if (typeid(type) == typeid(int)) {
-            type_name = "int";
-        } else if (typeid(type) == typeid(std::string)) {
-            type_name = "string";
-        } else if (typeid(type) == typeid(float)) {
-            type_name = "float";
-        } else if (typeid(type) == typeid(bool)) {
-            type_name = "bool";
+        if (Array2Vector(val, value)) {
+            return true;
         }
 
-        for (uint32_t i = 0; i < val.Size(); ++i) {
-            if (type_name == "int") {
-                value.push_back(val[i].GetInt());
-            } else if (type_name == "string") {
-                value.push_back(val[i].GetString());
-            } else if (type_name == "float") {
-                value.push_back(val[i].GetDouble());
-            } else if (type_name == "bool") {
-                value.push_back(val[i].GetDouble());
-            }
-        }
-        return true;
+        return false;
     }
 
     va_end(arg_list);

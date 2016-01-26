@@ -40,12 +40,16 @@ bool TcpServerBaseThread::Run() {
 
     LOG_TRACE("TcpServerBaseThread, Running.");
 
-    Socket* listen_socket = new Socket();
-    listen_socket->Create(SOCK_STREAM);
-    listen_socket->Bind(*listen_addr_);
-    listen_socket->Listen(256);
+    if (listen_addr_ != nullptr) {
+        Socket* listen_socket = new Socket();
+        listen_socket->Create(SOCK_STREAM);
+        listen_socket->Bind(*listen_addr_);
+        listen_socket->Listen(256);
 
-    sTcpServer.AddListenSocket(listen_socket);
+        sTcpServer.AddListenSocket(listen_socket);
+        
+    }
+
     sTcpServer.StartLoop();
 
     return true;

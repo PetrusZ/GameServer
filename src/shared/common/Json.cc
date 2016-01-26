@@ -27,7 +27,7 @@ Json::Json() {
 }
 
 bool Json::Parse(const std::string& json) {
-    Parse(json.c_str());
+    return Parse(json.c_str());
 }
 
 bool Json::Parse(char* json) {
@@ -631,3 +631,68 @@ bool Json::AddMember(rapidjson::Value &name, rapidjson::Value &val, int argc, va
     it->value.AddMember(name, val, document_.GetAllocator());
     return true;
 }
+
+bool Json::Array2Vector(const rapidjson::Value &array, std::vector<int> &vector) {
+    if (array.IsArray()) {
+        for (uint32_t i = 0; i < array.Size(); ++i) {
+            if (array[i].IsInt()) {
+                vector.push_back(array[i].GetInt());
+            } else {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    return false;
+}
+
+bool Json::Array2Vector(const rapidjson::Value &array, std::vector<std::string> &vector) {
+    if (array.IsArray()) {
+        for (uint32_t i = 0; i < array.Size(); ++i) {
+            if (array[i].IsString()) {
+                vector.push_back(array[i].GetString());
+            } else {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    return false;
+}
+
+bool Json::Array2Vector(const rapidjson::Value &array, std::vector<float> &vector) {
+    if (array.IsArray()) {
+        for (uint32_t i = 0; i < array.Size(); ++i) {
+            if (array[i].IsDouble()) {
+                vector.push_back(array[i].GetDouble());
+            } else {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    return false;
+}
+
+bool Json::Array2Vector(const rapidjson::Value &array, std::vector<bool> &vector) {
+    if (array.IsArray()) {
+        for (uint32_t i = 0; i < array.Size(); ++i) {
+            if (array[i].IsBool()) {
+                vector.push_back(array[i].GetBool());
+            } else {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+
+    return false;
+}
+

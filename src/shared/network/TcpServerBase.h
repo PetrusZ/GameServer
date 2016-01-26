@@ -27,6 +27,7 @@
 #include "base/Singleton.hpp"
 #include "base/FQueue.hpp"
 #include <map>
+#include <unordered_map>
 #include <queue>
 
 #define SOCKET_HOLDER_SIZE 30000
@@ -71,8 +72,8 @@ class TcpServerBase : public Singleton <TcpServerBase> {
 
         EventBase* event_base_ = nullptr;
 
-        std::map<SOCKET, Event*> listenfd_event_map_;
-        std::map<SOCKET, Socket*> listenfd_socket_map_;
+        std::unordered_map<SOCKET, Event*> listenfd_event_map_;
+        std::unordered_map<SOCKET, Socket*> listenfd_socket_map_;
 
         TcpConnection* tcp_connections_[SOCKET_HOLDER_SIZE];
         std::map<BufferEventStruct*, TcpConnection*> bufevent_conn_map_;

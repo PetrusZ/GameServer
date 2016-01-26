@@ -24,6 +24,7 @@
 
 class TcpServerBaseThread : public ThreadBase {
     public:
+        TcpServerBaseThread() { }
         TcpServerBaseThread(const std::string& hostname, const uint16_t port);
         TcpServerBaseThread(const uint32_t ip, const uint16_t port);
         virtual ~TcpServerBaseThread();

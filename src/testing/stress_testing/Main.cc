@@ -19,7 +19,7 @@
 #include "port/SocketAddress.h"
 #include "network/TcpServerBase.h"
 #include "network/TcpServerBaseThread.h"
-#include <string>
+#include "common/Common.h"
 
 #include "StressSocketMgr.h"
 
@@ -32,11 +32,12 @@
  */
 int main(int argc, char *argv[])
 {
+    sLogger.Init("StressTesting", false);
     sThreadPool.Startup();
     sThreadPool.ExecuteTask(new TcpServerBaseThread());
 
     SocketAddress server_addr("127.0.0.1", 19191);
-    for (int i = 0; i < 10000; ++i) {
+    for (int i = 0; i < 1000; ++i) {
         Socket* socket = new Socket();
         socket->Create(SOCK_STREAM);
         socket->Connect(server_addr);
@@ -45,12 +46,23 @@ int main(int argc, char *argv[])
         sTcpServer.NewTcpConnection(socket);
     }
 
+    uint32_t i = 0;
     while(true) {
         /*
          *  main loop
          */
         
-        sEnv.Sleep(1000);
+        sStressSocketMgr.Reset();
+        const Socket* socket;
+        char buff[BUFF_SIZE];
+        while(nullptr != (socket = sStressSocketMgr.Next())) {
+            SOCKET fd = socket->GetFd();
+            sprintf(buff, "No.%d, StressTesting write from socket(%d)\n", i, fd);
+            int buff_len = strlen(buff);
+            sTcpServer.SendData(fd, buff, buff_len);
+            ++i;
+        }
+        sEnv.Sleep(1000 * 5);
     }
 
     return 0;

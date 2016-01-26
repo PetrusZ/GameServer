@@ -114,13 +114,27 @@ INSTALL(PROGRAMS ${SCRIPT_LIST} DESTINATION ${EXECUTABLE_OUTPUT_PATH} PERMISSION
 
 ################################################# test #################################################
 
-set(TEST_CLIENT_SRC_LIST
+aux_source_directory(./src/testing/stress_testing STRESS_TESTING_SRC_LIST)
+set(STRESS_TESTING_SRC
     ${NETWORK_SRC_LIST}
     ${PORT_SRC_LIST}
     ${COMMON_SRC_LIST}
     ${UTIL_SRC_LIST}
     ${THREAD_SRC_LIST}
-    src/test/TcpServerTest.cc
+    ${STRESS_TESTING_SRC_LIST}
     )
-add_executable(TestClient ${TEST_CLIENT_SRC_LIST})
-target_link_libraries(TestClient event_core event_pthreads)
+
+set(INCLUDE_DIR_LIST
+    ./src/shared
+    ./src/testing/stress_testing
+    )
+
+set(LIBRARY_DIR_LIST
+    ${PROJECT_SOURCE_DIR}/src/shared/library
+    )
+
+include_directories(${INCLUDE_DIR_LIST})
+link_directories(${LIBRARY_DIR_LIST})
+
+add_executable(StressTesting ${STRESS_TESTING_SRC})
+target_link_libraries(StressTesting event_core event_pthreads)

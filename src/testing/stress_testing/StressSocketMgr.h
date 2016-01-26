@@ -25,12 +25,13 @@
 
 class StressSocketMgr : public Singleton <StressSocketMgr> {
     public:
-        StressSocketMgr();
-        virtual ~StressSocketMgr();
-
         void AddSocket(Socket* socket) { socket_set_.insert(socket); }
 
+        void Reset() { it_ = socket_set_.begin(); }
+        const Socket* Next() { return it_ != socket_set_.end() ? *(it_++) : nullptr; }
+
     private:
+        std::set<Socket*>::const_iterator it_;
         std::set<Socket*> socket_set_;
 };
 

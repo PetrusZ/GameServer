@@ -22,6 +22,7 @@
 
 TcpServerBase::TcpServerBase() {
     memset(tcp_connections_, 0, sizeof(TcpConnection*) * SOCKET_HOLDER_SIZE);
+    sLibEvent.NewEventBase(&event_base_, "select");
 }
 
 TcpServerBase::~TcpServerBase() {

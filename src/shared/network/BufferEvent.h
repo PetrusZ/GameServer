@@ -24,7 +24,7 @@
 class BufferEvent {
     public:
         BufferEvent(struct bufferevent* buffer_event_);
-        virtual ~BufferEvent();
+        ~BufferEvent();
 
         void SetCallback(BufferEventDataCallBack read_callback, BufferEventDataCallBack write_callback, BufferEventEventCallBack event_callback, void* callback_arg);
 
