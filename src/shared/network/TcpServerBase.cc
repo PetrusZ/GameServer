@@ -22,7 +22,12 @@
 
 TcpServerBase::TcpServerBase() {
     memset(tcp_connections_, 0, sizeof(TcpConnection*) * SOCKET_HOLDER_SIZE);
-    sLibEvent.NewEventBase(&event_base_, "select");
+    bool ret = sLibEvent.NewEventBase(&event_base_, "select");
+    if (ret) {
+        LOG_KTRACE("TcpServerBase", "new event_base_ successful");
+    } else {
+        LOG_KERROR("TcpServerBase", "new event_base_ failed");
+    }
 }
 
 TcpServerBase::~TcpServerBase() {
@@ -44,10 +49,6 @@ void TcpServerBase::StartLoop() {
 }
 
 bool TcpServerBase::AddListenSocket(Socket* socket) {
-    if (nullptr == event_base_ && !sLibEvent.NewEventBase(&event_base_, "select")) {
-        return false;
-    }
-
     auto it = listenfd_event_map_.find(socket->GetFd());
     if (it == listenfd_event_map_.end()) {
         Event* listen_event;
@@ -71,10 +72,6 @@ void TcpServerBase::RemoveListenSocket(SOCKET fd) {
 }
 
 bool TcpServerBase::NewTcpConnection(Socket* socket) {
-    if (nullptr == event_base_ && !sLibEvent.NewEventBase(&event_base_, "select")) {
-        return false;
-    }
-
     BufferEvent* buffer_event = nullptr;
     SOCKET fd = socket->GetFd();
     if (event_base_->NewBufferEvent(fd, kThreadSafe, &buffer_event)) {

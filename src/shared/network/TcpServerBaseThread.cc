@@ -50,8 +50,11 @@ bool TcpServerBaseThread::Run() {
         
     }
 
-    sTcpServer.StartLoop();
+    while(true) {
+        sTcpServer.StartLoop();
+    }
 
+    LOG_TRACE("TcpServerBaseThread, Terminate.");
     return true;
 }
 

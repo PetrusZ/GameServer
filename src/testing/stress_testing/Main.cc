@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     sThreadPool.Startup();
     sThreadPool.ExecuteTask(new TcpServerBaseThread());
 
-    SocketAddress server_addr("127.0.0.1", 19191);
+    SocketAddress server_addr("10.1.1.220", 19191);
     for (int i = 0; i < 1000; ++i) {
         Socket* socket = new Socket();
         socket->Create(SOCK_STREAM);
@@ -48,8 +48,9 @@ int main(int argc, char *argv[])
 
     uint32_t i = 0;
     while(true) {
+        
         /*
-         *  main loop
+         * main loop
          */
         
         sStressSocketMgr.Reset();

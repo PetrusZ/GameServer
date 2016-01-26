@@ -22,7 +22,7 @@ main(int argc, char *argv[])
 {
     sMaster.Run(argc, argv);
 
-    delete Master::getSingletonPtr();
+    // delete Master::getSingletonPtr();
 
     return 0;
 }

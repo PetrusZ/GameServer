@@ -111,7 +111,7 @@ bool Master::Run(int argc, char** argv) {
     LOG_TRACE("Process ID: %u", pid);
 
     sThreadPool.Startup();
-    sThreadPool.ExecuteTask(new TcpServerBaseThread("127.0.0.1", 19191));
+    sThreadPool.ExecuteTask(new TcpServerBaseThread("10.1.1.220", 19191));
 
     uint64_t current_time = 0;
     uint64_t prev_time = sEnv.GetRealMSTime();

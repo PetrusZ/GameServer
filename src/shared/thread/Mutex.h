@@ -23,7 +23,7 @@
 class Mutex {
     public:
         Mutex();
-        virtual ~Mutex();
+        ~Mutex();
 
         bool Lock();
         bool TryLock();

@@ -92,9 +92,9 @@ enum EventBaseFlag {
 };
 
 enum EventLoopFlag {
-    kEventLoopFlagNull      = 0,
-    kEventLoopFlagOnce      = EVLOOP_ONCE,
-    kEventLoopFlagNonBlock  = EVLOOP_NONBLOCK
+    kEventLoopFlagNull              = 0,
+    kEventLoopFlagOnce              = EVLOOP_ONCE,
+    kEventLoopFlagNonBlock          = EVLOOP_NONBLOCK
 };
 
 enum EventLoopExitType {

@@ -23,7 +23,7 @@
 #include "EventBase.h"
 #include "port/Socket.h"
 #include "TcpConnection.h"
-#include "common/Common.h"
+#include "thread/Mutex.h"
 #include "base/Singleton.hpp"
 #include "base/FQueue.hpp"
 #include <map>
