@@ -16,11 +16,12 @@
  * =====================================================================================
  */
 #include "thread/ThreadPool.h"
-#include "port/Socket.h"
 #include "port/SocketAddress.h"
 #include "network/TcpServerBase.h"
 #include "network/TcpServerBaseThread.h"
 #include <string>
+
+#include "StressSocketMgr.h"
 
 #define BUFF_SIZE 4096
 
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
         socket->Create(SOCK_STREAM);
         socket->Connect(server_addr);
 
+        sStressSocketMgr.AddSocket(socket);
         sTcpServer.NewTcpConnection(socket);
     }
 
