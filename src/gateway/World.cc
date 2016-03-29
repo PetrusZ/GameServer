@@ -16,9 +16,12 @@
  * =====================================================================================
  */
 #include "World.h"
+#include "thread/ThreadPool.h"
 #include "network/TcpServerBase.h"
 
 void World::Update(uint64_t diff) {
+    sThreadPool.IntegrityCheck();
+
     Packet_t* packet;
     while((packet = sTcpServer.PopClientPacket()) != nullptr) {
         LOG_KINFO("World Update", "Receive fd(%d) length(%d) data: %s", packet->fd_, packet->data_len_, packet->data_);

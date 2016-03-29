@@ -20,7 +20,8 @@
 #include "common/Common.h"
 #include "port/Env.h"
 
-void ThreadPool::Startup() {
+void ThreadPool::Startup(int thread_reserve) {
+    kThreadReserve = thread_reserve;
     for (int i = 0; i < kThreadReserve; ++i) {
         StartThread(NULL);
     }

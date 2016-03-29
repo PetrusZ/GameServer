@@ -29,7 +29,7 @@ class ThreadPool : public Singleton <ThreadPool> {
         // ThreadPool();
         // virtual ~ThreadPool();
 
-        void Startup();
+        void Startup(int thread_reserve);
 
         // shutdown all threads
         void Shutdown();
@@ -57,7 +57,7 @@ class ThreadPool : public Singleton <ThreadPool> {
 
         static void* ThreadProcess(void *arg);
 
-        const int kThreadReserve = 10;
+        int kThreadReserve;
 
         uint32_t threads_requested_since_last_check_ = 0;
         uint32_t threads_freed_since_last_check_ = 0;

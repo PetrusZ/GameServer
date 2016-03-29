@@ -33,6 +33,7 @@ template <typename Type> class Singleton {
             static Type singleton;
             return singleton;
         }
+
 };
 #endif
 

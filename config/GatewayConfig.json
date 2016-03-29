@@ -1,0 +1,10 @@
+{
+    "Server": {
+        "ServerName":"GameSever",
+        "Ip":"10.1.1.220",
+        "Port":19191,
+    }
+    "Daemonize":true
+    "LogLevel":1,
+    "ThreadReserve":4
+}

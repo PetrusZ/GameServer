@@ -216,7 +216,7 @@ void TcpServerBase::EventCallback(BufferEventStruct* buffer_event_struct, Buffer
 }
 
 void TcpServerBase::SendData(SOCKET fd, const void* data, size_t data_len) {
-    //TODO: 逻辑线程处理完毕后，由此函数统一发送给客户端
+    //XXX: 逻辑线程处理完毕后，由此函数统一发送给客户端
     if (tcp_connections_[fd]) {
         tcp_connections_[fd]->WriteData(data, data_len);
         LOG_TRACE("Send data to socket(%d), length(%d)", fd, data_len);

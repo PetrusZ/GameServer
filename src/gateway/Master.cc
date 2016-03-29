@@ -27,6 +27,7 @@
 #include "thread/ThreadPool.h"
 #include "network/TcpServerBase.h"
 #include "network/TcpServerBaseThread.h"
+#include "config/Config.h"
 #include "World.h"
 
 volatile bool Master::stop_event_ = false;
@@ -43,15 +44,15 @@ void Master::Daemonize() {
     //XXX: 获得最大文件描述符数量？
     if (getrlimit(RLIMIT_NOFILE, &rl) < 0) {
         std::cerr << "can't get file limit" << std::endl;
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 
     // Become a session leader to lose controlling TTY.
     if ((pid = fork()) < 0) {
         std::cerr << "can't fork" << std::endl;
-        exit(-1);
+        exit(EXIT_FAILURE);
     } else if (pid != 0) {
-        exit(0);
+        exit(EXIT_SUCCESS);
     }
     setsid();
 
@@ -61,19 +62,19 @@ void Master::Daemonize() {
     sa.sa_flags = 0;
     if (sigaction(SIGHUP, &sa, NULL) < 0) {
         std::cerr << "can't sgnore SIGHUP" << std::endl;
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
     if ((pid = fork()) < 0) {
         std::cerr << "can't fork" << std::endl;
-        exit(-1);
+        exit(EXIT_FAILURE);
     } else if (pid != 0) {
-        exit(0);
+        exit(EXIT_SUCCESS);
     }
 
     /*
     if (chdir("/") < 0) {
         std::cerr << "can't change directory to /" << std::endl;
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
     */
 
@@ -91,14 +92,30 @@ void Master::Daemonize() {
 
     if (fd0 != 0 || fd1 != 1 || fd2 !=2 ) {
         std::cerr << "unexpected file descriptors " << fd0 << " " <<fd1 << " " << fd2 << " " << std::endl;
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 }
 
 bool Master::Run(int argc, char** argv) {
     LOG_STDOUT("Hello Gateway Server From Master");
 
-    Daemonize();
+    /*
+     * load config file
+     */
+    if (!sConfig.LoadFile("GatewayConfig.json")) {
+        LOG_KSTDERR("Config", "LoadFile(GatewayConfig.json) failure!");
+        exit(EXIT_FAILURE);
+    }
+    LOG_KSTDOUT("Config", "LoadFile(GatewayConfig.json) sucess!");
+
+    std::string ip = sConfig.GetStringDefault("Server", "Ip", "127.0.0.1");
+    uint32_t port = sConfig.GetIntDefault("Server", "Port");
+    bool daemonize = sConfig.GetBoolDefault("Daemonize", NULL, true);
+    int thread_reserve = sConfig.GetIntDefault("ThreadReserve", NULL, 4);
+
+    if (daemonize) {
+        Daemonize();
+    }
     HookSignal();
 
     sLogger.Init("Gateway");
@@ -106,12 +123,12 @@ bool Master::Run(int argc, char** argv) {
     uint32_t pid = Common::WritePID("Gateway");
     if (!pid) {
         LOG_ERROR("Encounter ERROR while starting, can't write pid!");
-        return false;
+        exit(EXIT_FAILURE);
     }
     LOG_TRACE("Process ID: %u", pid);
 
-    sThreadPool.Startup();
-    sThreadPool.ExecuteTask(new TcpServerBaseThread("10.1.1.220", 19191));
+    sThreadPool.Startup(thread_reserve);
+    sThreadPool.ExecuteTask(new TcpServerBaseThread(ip, port));
 
     uint64_t current_time = 0;
     uint64_t prev_time = sEnv.GetRealMSTime();

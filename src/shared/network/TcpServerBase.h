@@ -3,7 +3,7 @@
  *
  *       Filename:  TcpServerBase.h
  *
- *    Description:  TcpServerBase
+ *    Description:  currently not thread safe
  *
  *        Version:  1.0
  *        Created:  04/08/2015 06:35:11 PM
@@ -40,6 +40,9 @@ class TcpServerBase : public Singleton <TcpServerBase> {
         bool AddListenSocket(Socket* socket);
         bool NewTcpConnection(Socket* socket);
 
+        /*
+         * 如果没有事件则会退出Loop
+         */
         void StartLoop();
 
         Packet_t* PopClientPacket();

@@ -19,9 +19,10 @@
 #define CONFIG_H_KLOREHKC
 
 #include <string>
+#include "base/Singleton.hpp"
 #include "rapidjson/document.h"
 
-class ConfigFile {
+class ConfigFile : public Singleton<ConfigFile> {
     public:
         ConfigFile() = default;
         virtual ~ConfigFile() = default;
@@ -50,5 +51,7 @@ class ConfigFile {
 
         rapidjson::Document document_;
 };
+
+#define  sConfig ConfigFile::getSingleton()
 
 #endif /* end of include guard: CONFIG_H_KLOREHKC */
